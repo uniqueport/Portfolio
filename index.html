@@ -198,79 +198,40 @@ timely, insight-driven reports that support data-informed decision-making  </p>
   </div>
 </section>
 
-<!-- Achievements - Interactive Highlights UI -->
-<section id="ACHIEVEMENT" class="section" aria-labelledby="ACHIEVEMENT-title">
-  <h3 id="ACHIEVEMENT-title">ACHIEVEMENTS</h3>
-  <div class="entry" style="border-radius:18px; border:1px solid var(--line); background:var(--card); padding:20px;">
-    <ul id="achievements-list" style="list-style:none; padding:0; margin:0;">
-      <li>
-        <button class="achievement-btn" onclick="showHighlight('excellence-award')">
-          Received On-the-Spot Excellence Award during probation for outstanding performance and rapid understanding of processes, achieving ESL (Expected Service Level) within defined SLA (Service Level Agreement) targets
-        </button>
-      </li>
-      <li>
-        <button class="achievement-btn" onclick="showHighlight('client-appreciation')">
-          Appreciated by client for maintaining consistent SLA performance during high-volume operations.
-        </button>
-      </li>
-      <li>
-        <button class="achievement-btn" onclick="showHighlight('onboarding-lead')">
-          Led onboarding sessions and improved team ramp-up time and process adherence.
-        </button>
-      </li>
-    </ul>
-    <!-- Highlight Popup -->
-    <div id="highlight-popup" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); z-index:9999;">
-      <div style="background:#111; border-radius:18px; border:1px solid var(--line); padding:18px 32px; min-width:340px; box-shadow:0 2px 24px rgba(0,0,0,0.25); display:flex; align-items:center; justify-content:space-between;">
-        <span id="highlight-text" style="color:#fff; font-size:1.1em; letter-spacing:1px;"></span>
-        <button onclick="closeHighlight()" style="margin-left:24px; background:#BFFF55; color:#222; border:none; border-radius:18px; padding:7px 20px; font-family:inherit; font-size:1em; cursor:pointer; letter-spacing:1px;">HIGHLIGHTS</button>
+<!-- Achievements Highlight Section (Inline Dropdown Style) -->
+<section id="ACHIEVEMENT" class="section" aria-labelledby="ACHIEVEMENT-title" style="margin-top:32px;">
+  <h3 id="ACHIEVEMENT-title" style="margin-bottom:0;">ACHIEVEMENTS</h3>
+  <div style="border-radius:18px; border:1px solid #232323; background:#111; padding:18px 24px; margin-top:14px;">
+    <div style="display:flex; align-items:center; justify-content:space-between;">
+      <span style="font-size:1.13em; letter-spacing:1px; color:#fff;">2022-2025</span>
+      <button id="showHighlightsBtn"
+        onclick="toggleHighlightsDropdown()"
+        style="background:#BFFF55; color:#222; border:none; border-radius:18px; padding:7px 24px; font-family:inherit; font-size:1em; cursor:pointer; letter-spacing:1px;">
+        HIGHLIGHTS
+      </button>
+    </div>
+    <!-- Inline Dropdown content for achievements -->
+    <div id="highlightDropdown" style="display:none; margin-top:22px;">
+      <div style="margin-bottom:18px; color:#BFFF55; font-size:1.13em; letter-spacing:0.5px;">
+        <strong>ON SPOT AWARD:</strong><br>
+        Received On-the-Spot Excellence Award during probation for outstanding performance and rapid understanding of processes, achieving ESL (Expected Service Level) within defined SLA (Service Level Agreement) targets
+      </div>
+      <div style="margin-bottom:18px; color:#BFFF55; font-size:1.13em; letter-spacing:0.5px;">
+        <strong>CLIENT APPRECIATION:</strong><br>
+        Appreciated by client for maintaining consistent SLA performance during high-volume operations.
+      </div>
+      <div style="background:#222; border-radius:18px; padding:14px 20px; color:#BFFF55; font-size:1.13em; letter-spacing:0.5px;">
+        <strong>SPOC:</strong><br>
+        Led onboarding sessions and improved team ramp-up time and process adherence.
       </div>
     </div>
   </div>
   <script>
-    // Achievement highlight data
-    const highlights = {
-      "excellence-award": "2022-2025: Received On-the-Spot Excellence Award for achieving ESL within SLA targets.",
-      "client-appreciation": "2022-2025: Consistently met SLA targets during high-volume operations, appreciated by client.",
-      "onboarding-lead": "2022-2025: Led onboarding sessions, improving team ramp-up and process adherence."
-    };
-    function showHighlight(key) {
-      document.getElementById('highlight-text').textContent = highlights[key];
-      document.getElementById('highlight-popup').style.display = 'block';
-    }
-    function closeHighlight() {
-      document.getElementById('highlight-popup').style.display = 'none';
-    }
-    // Optional: close popup on outside click
-    window.onclick = function(event) {
-      const popup = document.getElementById('highlight-popup');
-      if (event.target == popup) {
-        closeHighlight();
-      }
+    function toggleHighlightsDropdown() {
+      var dropdown = document.getElementById('highlightDropdown');
+      dropdown.style.display = (dropdown.style.display === 'none' || dropdown.style.display === '') ? 'block' : 'none';
     }
   </script>
-  <style>
-    .achievement-btn {
-      background: none;
-      border: none;
-      color: #BFFF55;
-      font-family: inherit;
-      font-size: 1em;
-      padding: 10px 0;
-      text-align: left;
-      cursor: pointer;
-      transition: color 0.2s;
-      width: 100%;
-      letter-spacing: 0.5px;
-      margin-bottom: 8px;
-    }
-    .achievement-btn:hover, .achievement-btn:focus {
-      color: #fff;
-      background: #222;
-      border-radius: 12px;
-      outline: none;
-    }
-  </style>
 </section>
 
    <!-- Certifications -->
@@ -365,6 +326,7 @@ timely, insight-driven reports that support data-informed decision-making  </p>
   </script>
 </body>
 </html>
+
 
 
 

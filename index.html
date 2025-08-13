@@ -18,7 +18,16 @@
       --shadow:0 10px 30px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
+    html,
+/* === Professional Background with Overlay === */
+body {
+  background: 
+    linear-gradient(rgba(15, 20, 25, 0.85), rgba(15, 20, 25, 0.85)),
+    url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background-size: cover;
+  color: var(--fg-dark);
+}
+
     body{
       margin:0; font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       background:radial-gradient(60vw 60vw at 10% -10%, rgba(200,255,90,.06), transparent 40%),
@@ -97,6 +106,228 @@
 @media (min-width: 601px) {
   .menu-toggle { display: none; }
 }
+
+:root {
+  --bg-dark: #0e0e0e;
+  --bg-light: #f4f4f4;
+  --fg-dark: #e8e8e8;
+  --fg-light: #222;
+  --muted-dark: #a6a6a6;
+  --muted-light: #555;
+  --accent: #c8ff5a;
+  --card-dark: #151515;
+  --card-light: #ffffff;
+  --line-dark: #232323;
+  --line-light: #ccc;
+  --radius: 18px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+body {
+  background: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+h1, h2, h3, p, li, a { text-shadow: 0 1px 3px rgba(0,0,0,0.6); }
+
+.stat, .entry, .brandcard, .year {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stat:hover, .entry:hover, .brandcard:hover, .year:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+}
+
+.fade-in-up { opacity: 0; transform: translateY(20px); }
+.fade-in-up.show { opacity: 1; transform: translateY(0); transition: opacity .8s ease, transform .8s ease; }
+
+
+/* === Updated Theme Adjustments === */
+
+/* Add semi-transparent dark overlay for sections for better readability */
+.section, .hero {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+/* Blend cards with background using transparency */
+.stat, .entry, .brandcard, .year {
+  background: rgba(21, 21, 21, 0.85) !important;
+  border: 1px solid rgba(200, 255, 90, 0.2);
+  box-shadow: var(--shadow);
+}
+
+/* Hover glow effect */
+.stat:hover, .entry:hover, .brandcard:hover, .year:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 15px rgba(200, 255, 90, 0.7), 0 18px 40px rgba(0,0,0,0.45);
+  border-color: var(--accent);
+}
+
+/* Buttons color match */
+button, a[style*="background:#4AEAFF"], .pill {
+  background: var(--accent) !important;
+  color: var(--bg-dark) !important;
+  border: none !important;
+  transition: all 0.3s ease;
+}
+button:hover, a[style*="background:#4AEAFF"]:hover, .pill:hover {
+  background: #b0ff40 !important;
+}
+
+/* Highlight box text readability */
+[id*="Skill"], [id*="Highlight"], [id*="Tracker"], [id*="Converter"], [id*="Award"], [id*="cert"], [id*="spoc"], [id*="clientAppreciation"] {
+  background: rgba(34, 34, 34, 0.95) !important;
+  color: #fff !important;
+}
+
+/* Improve lead paragraph readability */
+.lead {
+  color: #f0f0f0 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Improve section titles visibility */
+h1, h3 {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+
+/* Blend dark sections (Technical Skills, Projects, Achievements, Certifications) */
+#TECHNICAL-SKILLS > div,
+#PROJECTS > div,
+#ACHIEVEMENT > div,
+#CERTIFICATION > div {
+  background: rgba(21, 21, 21, 0.85) !important;
+  border: 1px solid rgba(200, 255, 90, 0.2) !important;
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+}
+
+/* Hover glow effect for these sections */
+#TECHNICAL-SKILLS > div:hover,
+#PROJECTS > div:hover,
+#ACHIEVEMENT > div:hover,
+#CERTIFICATION > div:hover {
+  box-shadow: 0 0 15px rgba(200, 255, 90, 0.7), 0 18px 40px rgba(0,0,0,0.45);
+  border-color: var(--accent) !important;
+  transform: translateY(-4px);
+}
+
+
+/* Lighten dark boxes for better visibility */
+.stat, .entry, .brandcard, .year,
+#TECHNICAL-SKILLS > div,
+#PROJECTS > div,
+#ACHIEVEMENT > div,
+#CERTIFICATION > div {
+  background: rgba(40, 40, 40, 0.85) !important;
+}
+
+/* Navigation link animation */
+.menu a {
+  position: relative;
+  transition: color 0.3s ease;
+}
+.menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent);
+  transition: width 0.3s ease;
+}
+.menu a:hover {
+  color: var(--accent);
+}
+.menu a:hover::after {
+  width: 100%;
+}
+
+
+/* Softer color palette */
+body {
+  background-color: #0b0d10;
+  color: #e0e0e0;
+}
+
+.stat, .entry, .brandcard, .year,
+#TECHNICAL-SKILLS > div,
+#PROJECTS > div,
+#ACHIEVEMENT > div,
+#CERTIFICATION > div {
+  background: rgba(28, 30, 35, 0.85) !important;
+  border: 1px solid rgba(180, 220, 120, 0.25) !important;
+}
+
+button, .pill, a[style*="background:#4AEAFF"] {
+  background: rgba(200, 255, 90, 0.85) !important;
+  color: #111 !important;
+}
+
+button:hover, .pill:hover, a[style*="background:#4AEAFF"]:hover {
+  background: rgba(200, 255, 90, 1) !important;
+}
+
+
+/* === Professional Theme Colors === */
+:root {
+  --accent: #4A90E2; /* Professional Blue */
+  --bg-dark: #0e0e0e;
+  --fg-dark: #e8e8e8;
+  --card-dark: rgba(28, 30, 35, 0.9);
+}
+
+/* Professional background */
+body {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364) fixed;
+  color: var(--fg-dark);
+}
+
+/* Card blending */
+.stat, .entry, .brandcard, .year,
+#TECHNICAL-SKILLS > div,
+#PROJECTS > div,
+#ACHIEVEMENT > div,
+#CERTIFICATION > div {
+  background: var(--card-dark) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  transition: all 0.3s ease;
+}
+
+/* Hover glow effect with blue accent */
+.stat:hover, .entry:hover, .brandcard:hover, .year:hover,
+#TECHNICAL-SKILLS > div:hover,
+#PROJECTS > div:hover,
+#ACHIEVEMENT > div:hover,
+#CERTIFICATION > div:hover {
+  box-shadow: 0 0 15px rgba(74, 144, 226, 0.7), 0 18px 40px rgba(0,0,0,0.45);
+  border-color: var(--accent) !important;
+  transform: translateY(-4px);
+}
+
+/* Button styles */
+button, .pill, a[style*="background"] {
+  background: var(--accent) !important;
+  color: #fff !important;
+  border: none !important;
+  transition: all 0.3s ease;
+}
+button:hover, .pill:hover, a[style*="background"]:hover {
+  background: #357ABD !important;
+}
+
+/* Section headings */
+h1, h3 {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
 </style>
 </head>
 <body>
@@ -107,10 +338,10 @@
 <a href="#SUMMARYS">SUMMARY</a>
 <a href="#EXPERIENCE">EXPERIENCE</a>
 <a href="#CORECOMPETENCIES">CORE COMPETENCIES</a>
-<a href="#TECHNICALSKILLS">TECHNICAL SKILLS</a>
-<a href="#PROJECT">PROJECT</a>
-<a href="#ACHIEVEMENTS">ACHIEVEMENTS</a>
-<a href="#CERTIFICATIONS">CERTIFICATIONS</a>
+<a href="#TECHNICAL-SKILLS">TECHNICAL SKILLS</a>
+<a href="#PROJECTS">PROJECT</a>
+<a href="#ACHIEVEMENT">ACHIEVEMENTS</a>
+<a href="#CERTIFICATION">CERTIFICATIONS</a>
 <a href="#EDUCATION">EDUCATION</a>
 <a href="#contact">CONTACT</a>
 </nav>
@@ -149,7 +380,7 @@ timely, insight-driven reports that support data-informed decision-making  </p>
 <h3 id="EXPERIENCE-title">EXPERIENCE</h3>
 <div class="visually-hidden" id="EXPERIENCE-root"></div>
 <details class="year" open="">
-<summary class="year-header"><strong>2022-2025</strong> <span class="pill">Highlights</span></summary>
+<summary class="year-header"><strong>2022-2025</strong> <button class="pill" onclick="document.getElementById('profSummary').style.display = (document.getElementById('profSummary').style.display === 'none' ? 'block' : 'none')">HIGHLIGHTS</button></summary>
 <!-- Two-column grid for Analyst/Domain -->
 <div class="entries" style="display: grid; grid-template-columns: repeat(2,1fr); gap: 20px;">
 <!-- Analyst Card -->
@@ -166,7 +397,7 @@ timely, insight-driven reports that support data-informed decision-making  </p>
 </div>
 </div>
 <!-- Professional Summary: full width below both columns -->
-<div style="grid-column: 1 / -1; margin-top: 20px;">
+<div style="grid-column: 1 / -1; margin-top: 20px; display:none;" id="profSummary">
 <div class="entry" style="border-radius: 18px; border: 1px solid var(--line); background: var(--card); padding: 20px;">
 <strong style="font-size:1.1em; display:block; margin-bottom:10px;">PROFESSIONAL SUMMARY</strong>
 <ul style="margin:0; padding-left:20px;">
@@ -391,39 +622,70 @@ timely, insight-driven reports that support data-informed decision-making  </p>
 </div>
 </section>
 <!-- Contact -->
+
 <section aria-labelledby="contact-title" class="section" id="contact">
-<h3 id="contact-title">Contact</h3>
-<div class="year">
-<p class="lead" style="margin:0 0 8px; font-size:1.15em; font-weight:bold;">SANTHOSH SURESH</p>
-<div style="margin-bottom:12px;">
-<span>
-        Email:
-        <a href="mailto:santhosh02516@gmail.com" style="color:var(--accent); text-decoration:underline;">
-          santhosh02516@gmail.com
-        </a>
-</span>
-<br/>
-<span>
-        Phone:
-        <a href="tel:9543158080" style="color:var(--accent); text-decoration:underline;">
-          9543158080
-        </a>
-</span>
-<br/>
-<span>
-        LinkedIn:
-        <a href="https://www.linkedin.com/in/santhosh-suresh-1b7577291" rel="noopener" style="color:var(--accent); text-decoration:underline;" target="_blank">
-          santhosh-suresh-1b7577291
-        </a>
-</span>
-</div>
-<div style="display:flex; gap:14px; flex-wrap:wrap">
-<a aria-label="Send Email" class="pill" href="mailto:santhosh02516@gmail.com">Email</a>
-<a aria-label="Call Phone" class="pill" href="tel:9543158080">Call</a>
-<a aria-label="LinkedIn" class="pill" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291" rel="noopener" target="_blank">LinkedIn</a>
-</div>
-</div>
+  <h3 id="contact-title">Contact</h3>
+  <div class="year contact-wrapper" style="display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start;">
+    <!-- Contact Details Card -->
+    <div class="entry contact-card" style="flex:1 1 360px; border-radius:18px; border:1px solid rgba(255,255,255,0.04); background:rgba(20,24,30,0.85); padding:20px;">
+      <p class="lead" style="margin:0 0 8px; font-size:1.15em; font-weight:bold;">SANTHOSH SURESH</p>
+      <div style="margin-bottom:12px; line-height:1.5;">
+        <div>Email: <a href="mailto:santhosh02516@gmail.com" style="color:var(--accent); text-decoration:underline;">santhosh02516@gmail.com</a></div>
+        <div>Phone: <a href="tel:9543158080" style="color:var(--accent); text-decoration:underline;">9543158080</a></div>
+        <div>LinkedIn: <a href="https://www.linkedin.com/in/santhosh-suresh-1b7577291" rel="noopener" style="color:var(--accent); text-decoration:underline;" target="_blank">santhosh-suresh-1b7577291</a></div>
+      </div>
+      <div style="display:flex; gap:10px; margin-top:8px;">
+        <a aria-label="Send Email" class="pill" href="mailto:santhosh02516@gmail.com">EMAIL</a>
+        <a aria-label="Call Phone" class="pill" href="tel:9543158080">CALL</a>
+        <a aria-label="LinkedIn" class="pill" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291" rel="noopener" target="_blank">LINKEDIN</a>
+      </div>
+    </div>
+
+    <!-- Quick Email Draft Form -->
+    <div class="contact-form" style="flex:1 1 420px; border-radius:18px; border:1px solid rgba(255,255,255,0.04); background:rgba(20,24,30,0.85); padding:18px;">
+      <h4 style="margin-top:0; margin-bottom:8px;">Quick Email Draft</h4>
+      <form id="quickEmailForm" style="display:flex; flex-direction:column; gap:10px;">
+        <input id="fromEmail" type="email" name="from" placeholder="From (your email)" required 
+               style="padding:10px; border-radius:12px; border:1px solid rgba(255,255,255,0.04); background:rgba(255,255,255,0.02); color:inherit;">
+        <input id="ccEmail" type="text" name="cc" placeholder="CC (optional)" 
+               style="padding:10px; border-radius:12px; border:1px solid rgba(255,255,255,0.04); background:rgba(255,255,255,0.02); color:inherit;">
+        <input id="bccEmail" type="text" name="bcc" placeholder="BCC (optional)" 
+               style="padding:10px; border-radius:12px; border:1px solid rgba(255,255,255,0.04); background:rgba(255,255,255,0.02); color:inherit;">
+        <input id="subject" type="text" name="subject" placeholder="Subject" required
+               style="padding:10px; border-radius:12px; border:1px solid rgba(255,255,255,0.04); background:rgba(255,255,255,0.02); color:inherit;">
+        <textarea id="body" name="body" placeholder="Body" rows="6" required 
+                  style="padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,0.04); background:rgba(255,255,255,0.02); color:inherit;"></textarea>
+        <button type="submit" style="padding:12px; border-radius:12px; background:var(--accent); color:#fff; border:none; font-weight:600; cursor:pointer;">
+          Send Draft
+        </button>
+        <p style="font-size:0.9rem; color:var(--muted); margin:4px 0 0;">This will open your email client with a draft addressed to <strong>santhosh02516@gmail.com</strong>.</p>
+      </form>
+    </div>
+  </div>
 </section>
+
+<script>
+// Quick Email Draft behavior: open user's default mail client with prefilled draft (mailto) 
+document.getElementById('quickEmailForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const to = 'santhosh02516@gmail.com';
+  const from = document.getElementById('fromEmail').value.trim();
+  const cc = document.getElementById('ccEmail').value.trim();
+  const bcc = document.getElementById('bccEmail').value.trim();
+  const subject = encodeURIComponent(document.getElementById('subject').value.trim());
+  const bodyRaw = document.getElementById('body').value.trim();
+  const body = encodeURIComponent('
+From: ' + from + '
+
+' + bodyRaw);
+  let mailto = `mailto:${to}?subject=${subject}&body=${body}`;
+  if(cc) mailto += `&cc=${encodeURIComponent(cc)}`;
+  if(bcc) mailto += `&bcc=${encodeURIComponent(bcc)}`;
+  // Open mailto in a new window — most browsers will open the default email client
+  window.location.href = mailto;
+});
+</script>
+    
 </main>
 <footer class="wrap" style="border-top:1px solid var(--line); padding-top:20px; margin-top:20px; color:var(--muted)">
     © <span id="year"></span>Santhosh Suresh
@@ -476,5 +738,23 @@ document.addEventListener('keydown', function(e) {
         e.preventDefault();
     }
 });
-</script></body>
+</script><script>
+(function(){
+  const els = document.querySelectorAll('.stat, .entry, .brandcard, .year, h1, h3, p.lead, section ul');
+  els.forEach(el => el.classList.add('fade-in-up'));
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(({isIntersecting, target})=>{
+      if(isIntersecting){
+        target.classList.add('show');
+        io.unobserve(target);
+      }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(el => io.observe(el));
+})();
+</script>
+
+
+
+</body>
 </html>

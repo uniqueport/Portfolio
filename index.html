@@ -167,35 +167,97 @@ timely, insight-driven reports that support data-informed decision-making  </p>
   </div>
 </section>
 
- <!-- Technical Skills -->
-<section id="TECHNICALSKILLS" class="section" aria-labelledby="TECHNICALSKILLS-title">
-  <h3 id="TECHNICALSKILLS-title">TECHNICAL SKILLS</h3>
-  <div class="entry" style="border-radius:18px; border:1px solid var(--line); background:var(--card); padding:20px;">
-    <ul style="list-style:none; padding:0; margin:0;">
-      <li>● <strong>Excel:</strong> VLOOKUP, PivotTables, Macros, Power Query</li>
-      <li>● <strong>Power BI:</strong> DAX, Dashboards, Visualizations</li>
-      <li>● <strong>Power Automate:</strong> Task Automation, Notification Workflows</li>
-      <li>● <strong>SharePoint:</strong> Document Management, Workflow Integration</li>
-      <li>● <strong>Microsoft Suite:</strong> Word, PowerPoint, Outlook</li>
-    </ul>
+<!-- Technical Skills Section (Individual Highlight Buttons, All Content in Dark Bar, Skill Titles in White) -->
+<section id="TECHNICAL-SKILLS" class="section" aria-labelledby="TECHNICAL-SKILLS-title" style="margin-top:32px;">
+  <h3 id="TECHNICAL-SKILLS-title" style="margin-bottom:0;">TECHNICAL SKILLS</h3>
+  <div style="border-radius:18px; border:1px solid #232323; background:#111; padding:18px 24px; margin-top:14px;">
+    <div style="margin-bottom:18px;">
+      <span style="color:#fff; font-size:1.13em; font-weight:bold; letter-spacing:0.5px;">Excel</span>
+      <button onclick="toggleSkillHighlight('excelSkill')" style="background:#BFFF55; color:#222; border:none; border-radius:18px; padding:7px 20px; font-family:inherit; font-size:1em; cursor:pointer; margin-left:12px; letter-spacing:1px;">
+        HIGHLIGHT
+      </button>
+      <div id="excelSkill" style="display:none; margin-top:12px; background:#222; border-radius:18px; padding:12px 18px; color:#fff; font-size:1.13em; letter-spacing:0.5px;">
+        VLOOKUP, PivotTables, Macros, Power Query
+      </div>
+    </div>
+    <div style="margin-bottom:18px;">
+      <span style="color:#fff; font-size:1.13em; font-weight:bold; letter-spacing:0.5px;">Power BI</span>
+      <button onclick="toggleSkillHighlight('powerBISkill')" style="background:#BFFF55; color:#222; border:none; border-radius:18px; padding:7px 20px; font-family:inherit; font-size:1em; cursor:pointer; margin-left:12px; letter-spacing:1px;">
+        HIGHLIGHT
+      </button>
+      <div id="powerBISkill" style="display:none; margin-top:12px; background:#222; border-radius:18px; padding:12px 18px; color:#fff; font-size:1.13em; letter-spacing:0.5px;">
+        DAX, Dashboards, Visualizations
+      </div>
+    </div>
+    <div style="margin-bottom:18px;">
+      <span style="color:#fff; font-size:1.13em; font-weight:bold; letter-spacing:0.5px;">Power Automate</span>
+      <button onclick="toggleSkillHighlight('powerAutomateSkill')" style="background:#BFFF55; color:#222; border:none; border-radius:18px; padding:7px 20px; font-family:inherit; font-size:1em; cursor:pointer; margin-left:12px; letter-spacing:1px;">
+        HIGHLIGHT
+      </button>
+      <div id="powerAutomateSkill" style="display:none; margin-top:12px; background:#222; border-radius:18px; padding:12px 18px; color:#fff; font-size:1.13em; letter-spacing:0.5px;">
+        Task Automation, Notification Workflows
+      </div>
+    </div>
+    <div style="margin-bottom:18px;">
+      <span style="color:#fff; font-size:1.13em; font-weight:bold; letter-spacing:0.5px;">SharePoint</span>
+      <button onclick="toggleSkillHighlight('sharePointSkill')" style="background:#BFFF55; color:#222; border:none; border-radius:18px; padding:7px 20px; font-family:inherit; font-size:1em; cursor:pointer; margin-left:12px; letter-spacing:1px;">
+        HIGHLIGHT
+      </button>
+      <div id="sharePointSkill" style="display:none; margin-top:12px; background:#222; border-radius:18px; padding:12px 18px; color:#fff; font-size:1.13em; letter-spacing:0.5px;">
+        Document Management, Workflow Integration
+      </div>
+    </div>
+    <div style="margin-bottom:0;">
+      <span style="color:#fff; font-size:1.13em; font-weight:bold; letter-spacing:0.5px;">Microsoft Suite</span>
+      <button onclick="toggleSkillHighlight('msSuiteSkill')" style="background:#BFFF55; color:#222; border:none; border-radius:18px; padding:7px 20px; font-family:inherit; font-size:1em; cursor:pointer; margin-left:12px; letter-spacing:1px;">
+        HIGHLIGHT
+      </button>
+      <div id="msSuiteSkill" style="display:none; margin-top:12px; background:#222; border-radius:18px; padding:12px 18px; color:#fff; font-size:1.13em; letter-spacing:0.5px;">
+        Word, PowerPoint, Outlook
+      </div>
+    </div>
   </div>
+  <script>
+    function toggleSkillHighlight(id) {
+      var elem = document.getElementById(id);
+      elem.style.display = (elem.style.display === 'none' || elem.style.display === '') ? 'block' : 'none';
+    }
+  </script>
 </section>
 
-  <!-- Projects -->
-<section id="PROJECT" class="section" aria-labelledby="PROJECT-title">
-  <h3 id="PROJECT-title">PROJECTS</h3>
-  <div class="entry" style="border-radius:18px; border:1px solid var(--line); background:var(--card); padding:20px;">
-    <ul style="list-style:none; padding:0; margin:0;">
-      <li>
-        <strong>Employee Activity Tracker Automation</strong><br>
-        ● Built an Excel macro-based activity tracker to log and monitor employee tasks throughout the day, enabling visibility into work patterns, accurate calculation of extra working hours, and individual performance assessment—reducing manual effort by 50% and increasing reporting accuracy.
-      </li>
-      <li style="margin-top:16px;">
-        <strong>File Converter Macro Tool</strong><br>
-        ● Developed an Excel VBA automation tool that allows opening and converting multiple files across various formats simultaneously with a single click—streamlining document processing, reducing manual effort, and saving 25+ hours per month.
-      </li>
-    </ul>
+<!-- Projects Highlight Section (Individual Highlight Buttons, All Content in Dark Bar, Project Titles in White) -->
+<section id="PROJECTS" class="section" aria-labelledby="PROJECTS-title" style="margin-top:32px;">
+  <h3 id="PROJECTS-title" style="margin-bottom:0;">PROJECTS</h3>
+  <div style="border-radius:18px; border:1px solid #232323; background:#111; padding:18px 24px; margin-top:14px;">
+    <div style="font-size:1.13em; letter-spacing:1px; color:#fff; margin-bottom:18px;">
+      2022-2025
+    </div>
+    <!-- Individual Project Highlight Blocks -->
+    <div style="margin-bottom:18px;">
+      <span style="color:#fff; font-size:1.13em; font-weight:bold; letter-spacing:0.5px;">Employee Activity Tracker Automation</span>
+      <button onclick="toggleProjectHighlight('activityTracker')" style="background:#BFFF55; color:#222; border:none; border-radius:18px; padding:7px 24px; font-family:inherit; font-size:1em; cursor:pointer; margin-left:12px; letter-spacing:1px;">
+        HIGHLIGHT
+      </button>
+      <div id="activityTracker" style="display:none; margin-top:12px; background:#222; border-radius:18px; padding:14px 20px; color:#fff; font-size:1.13em; letter-spacing:0.5px;">
+        Built an Excel macro-based activity tracker to log and monitor employee tasks throughout the day, enabling visibility into work patterns, accurate calculation of extra working hours, and individual performance assessment—reducing manual effort by 50% and increasing reporting accuracy.
+      </div>
+    </div>
+    <div style="margin-bottom:0;">
+      <span style="color:#fff; font-size:1.13em; font-weight:bold; letter-spacing:0.5px;">File Converter Macro Tool</span>
+      <button onclick="toggleProjectHighlight('fileConverter')" style="background:#BFFF55; color:#222; border:none; border-radius:18px; padding:7px 24px; font-family:inherit; font-size:1em; cursor:pointer; margin-left:12px; letter-spacing:1px;">
+        HIGHLIGHT
+      </button>
+      <div id="fileConverter" style="display:none; margin-top:12px; background:#222; border-radius:18px; padding:14px 20px; color:#fff; font-size:1.13em; letter-spacing:0.5px;">
+        Developed an Excel VBA automation tool that allows opening and converting multiple files across various formats simultaneously with a single click—streamlining document processing, reducing manual effort, and saving 25+ hours per month.
+      </div>
+    </div>
   </div>
+  <script>
+    function toggleProjectHighlight(id) {
+      var elem = document.getElementById(id);
+      elem.style.display = (elem.style.display === 'none' || elem.style.display === '') ? 'block' : 'none';
+    }
+  </script>
 </section>
 
 <!-- Achievements Highlight Section (Individual Highlight Buttons, All Content in Dark Bar, Achievement Titles in White) -->
@@ -203,7 +265,7 @@ timely, insight-driven reports that support data-informed decision-making  </p>
   <h3 id="ACHIEVEMENT-title" style="margin-bottom:0;">ACHIEVEMENTS</h3>
   <div style="border-radius:18px; border:1px solid #232323; background:#111; padding:18px 24px; margin-top:14px;">
     <div style="font-size:1.13em; letter-spacing:1px; color:#fff; margin-bottom:18px;">
-      2022-2025
+      2022-2025 @TCS
     </div>
     <!-- Individual Achievement Highlight Blocks -->
     <div style="margin-bottom:18px;">
@@ -333,6 +395,7 @@ timely, insight-driven reports that support data-informed decision-making  </p>
   </script>
 </body>
 </html>
+
 
 
 

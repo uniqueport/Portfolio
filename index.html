@@ -622,16 +622,14 @@ timely, insight-driven reports that support data-informed decision-making  </p>
 </div>
 </section>
 <!-- Contact -->
-
 <section aria-labelledby="contact-title" class="section" id="contact">
   <h3 id="contact-title">Contact</h3>
-  <div class="year contact-wrapper" style="display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start;">
+  
+  <div class="year contact-wrapper" style="display:flex; flex-direction:column; gap:20px; max-width:600px;">
+    
     <!-- Contact Details Card -->
-    <div class="entry contact-card" style="flex:1 1 360px; border-radius:18px; border:1px solid rgba(255,255,255,0.04); background:rgba(20,24,30,0.85); padding:20px;">
+    <div class="entry contact-card" style="border-radius:18px; border:1px solid rgba(255,255,255,0.04); background:rgba(20,24,30,0.85); padding:20px;">
       <p class="lead" style="margin:0 0 8px; font-size:1.15em; font-weight:bold;">SANTHOSH SURESH</p>
-      <div style="margin-bottom:12px; line-height:1.5;">
-        
-      </div>
       <div style="display:flex; gap:10px; margin-top:8px;">
         <a aria-label="Send Email" class="pill" href="mailto:santhosh02516@gmail.com">EMAIL</a>
         <a aria-label="Call Phone" class="pill" href="tel:9543158080">CALL</a>
@@ -639,8 +637,8 @@ timely, insight-driven reports that support data-informed decision-making  </p>
       </div>
     </div>
 
-    <!-- Quick Email Draft Form -->
-    <div class="contact-form" style="flex:1 1 420px; border-radius:18px; border:1px solid rgba(255,255,255,0.04); background:rgba(20,24,30,0.85); padding:18px;">
+    <!-- Quick Email Draft Form BELOW -->
+    <div class="contact-form" style="border-radius:18px; border:1px solid rgba(255,255,255,0.04); background:rgba(20,24,30,0.85); padding:18px;">
       <h4 style="margin-top:0; margin-bottom:8px;">Quick Email Draft</h4>
       <form id="quickEmailForm" style="display:flex; flex-direction:column; gap:10px;">
         <input id="fromEmail" type="email" name="from" placeholder="From (your email)" required 
@@ -656,14 +654,14 @@ timely, insight-driven reports that support data-informed decision-making  </p>
         <button type="submit" style="padding:12px; border-radius:12px; background:var(--accent); color:#fff; border:none; font-weight:600; cursor:pointer;">
           Send Draft
         </button>
-        <p style="font-size:0.9rem; color:var(--muted); margin:4px 0 0;"> By using above feature you can send mail to this id> <strong>santhosh02516@gmail.com(IF not you can send mail by clicking email below contact)</strong>.</p>
+        <p style="font-size:0.9rem; color:var(--muted); margin:4px 0 0;">By using above feature you can send mail to this id <strong>santhosh02516@gmail.com</strong> (If not, you can send mail by clicking EMAIL above).</p>
       </form>
     </div>
   </div>
 </section>
 
 <script>
-// Quick Email Draft behavior: open user's default mail client with prefilled draft (mailto) 
+// Quick Email Draft behavior
 document.getElementById('quickEmailForm').addEventListener('submit', function(e){
   e.preventDefault();
   const to = 'santhosh02516@gmail.com';
@@ -672,17 +670,14 @@ document.getElementById('quickEmailForm').addEventListener('submit', function(e)
   const bcc = document.getElementById('bccEmail').value.trim();
   const subject = encodeURIComponent(document.getElementById('subject').value.trim());
   const bodyRaw = document.getElementById('body').value.trim();
-  const body = encodeURIComponent('
-From: ' + from + '
-
-' + bodyRaw);
+  const body = encodeURIComponent(`From: ${from}\n\n${bodyRaw}`);
   let mailto = `mailto:${to}?subject=${subject}&body=${body}`;
   if(cc) mailto += `&cc=${encodeURIComponent(cc)}`;
   if(bcc) mailto += `&bcc=${encodeURIComponent(bcc)}`;
-  // Open mailto in a new window — most browsers will open the default email client
   window.location.href = mailto;
 });
 </script>
+
     
 </main>
 <footer class="wrap" style="border-top:1px solid var(--line); padding-top:20px; margin-top:20px; color:var(--muted)">
@@ -756,5 +751,6 @@ document.addEventListener('keydown', function(e) {
 
 </body>
 </html>
+
 
 

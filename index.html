@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SANTHOSH SURESH — Resume</title>
-  <meta name="description" content="Resume of Santhosh Suresh: Analyst, Process Optimization, Reporting Automation" />
+  <title>Goals — Replica</title>
+  <meta name="description" content="A clean, single‑file replica inspired by danilodemarco.com/goals.html" />
   <style>
     :root{
-      --bg:#0e0e0e;
-      --fg:#e8e8e8;
-      --muted:#a6a6a6;
-      --accent:#c8ff5a;
-      --card:#151515;
-      --line:#232323;
-      --radius:18px;
+      --bg:#0e0e0e;               /* deep charcoal */
+      --fg:#e8e8e8;               /* off‑white text */
+      --muted:#a6a6a6;            /* secondary text */
+      --accent:#c8ff5a;           /* lime accent */
+      --card:#151515;             /* panels */
+      --line:#232323;             /* hairlines */
+      --radius:18px;              /* rounded corners */
       --shadow:0 10px 30px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
@@ -27,6 +27,8 @@
     }
     a{color:inherit; text-decoration:none}
     .wrap{max-width:1080px; margin-inline:auto; padding:28px 20px}
+
+    /* Header */
     header{position:sticky; top:0; z-index:5; backdrop-filter:saturate(140%) blur(8px); background:linear-gradient(to bottom, rgba(14,14,14,.8), rgba(14,14,14,.2)); border-bottom:1px solid var(--line)}
     .nav{display:flex; align-items:center; justify-content:space-between; gap:14px}
     .brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.2px}
@@ -34,157 +36,209 @@
     .menu{display:flex; gap:20px; flex-wrap:wrap}
     .menu a{opacity:.9}
     .menu a:hover{opacity:1}
+
+    /* Hero */
+    .hero{padding:64px 0 28px}
+    .eyebrow{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; color:var(--muted); font-size:.9rem}
     h1{font-size:clamp(36px, 6vw, 68px); line-height:1.05; margin:16px 0 6px}
     .lead{color:var(--muted); max-width:60ch}
-    .section{margin:32px 0}
-    .section h3{font-size:22px; margin:0 0 10px}
-    .entry{margin-bottom:10px}
+
+    /* Counters */
+    .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:30px 0}
+    .stat{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow)}
+    .stat h2{font-size:40px; margin:0}
+    .stat p{margin:6px 0 0; color:var(--muted)}
+
+    /* Awards */
+    .section{margin:48px 0}
+    .section h3{font-size:28px; margin:0 0 14px}
+    .year{border:1px solid var(--line); border-radius:var(--radius); padding:16px; background:linear-gradient(180deg, rgba(255,255,255,.02), transparent); box-shadow:var(--shadow)}
+    .year + .year{margin-top:12px}
+    .year-header{display:flex; align-items:center; justify-content:space-between; cursor:pointer}
     .pill{font-size:12px; text-transform:uppercase; color:var(--bg); background:var(--accent); border-radius:999px; padding:6px 10px; letter-spacing:.8px}
-    .contact-row{display:flex; flex-wrap:wrap; gap:16px; align-items:center; margin-bottom:12px}
-    .contact-row .icon{font-size:18px; vertical-align:middle; margin-right:6px;}
+    .entries{margin-top:10px; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px}
+    .entry{border:1px solid var(--line); border-radius:14px; padding:12px}
+    .entry small{display:block; color:var(--muted)}
+
+    /* Brands grid */
+    .brands{display:grid; grid-template-columns:repeat(5,1fr); gap:12px}
+    .brandcard{aspect-ratio:5/3; border:1px solid var(--line); border-radius:16px; background:var(--card); display:grid; place-items:center; color:var(--muted); font-weight:600}
+
+    /* Media */
     @media (max-width:920px){
-      .contact-row{flex-direction:column; align-items:flex-start;}
+      .stats{grid-template-columns:1fr}
+      .entries{grid-template-columns:1fr}
+      .brands{grid-template-columns:repeat(2,1fr)}
     }
   </style>
 </head>
 <body>
   <header>
     <div class="wrap nav">
-      <div class="brand"><span class="brand-badge" aria-hidden="true"></span> <span>SANTHOSH SURESH — Resume</span></div>
+      <div class="brand"><span class="brand-badge" aria-hidden="true"></span> <span>Danilo De Marco — Replica</span></div>
       <nav class="menu" aria-label="Primary">
-        <a href="#summary">Summary</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#achievements">Achievements</a>
-        <a href="#certifications">Certifications</a>
-        <a href="#education">Education</a>
+        <a href="#goals">Goals</a>
+        <a href="#awards">Awards</a>
+        <a href="#brands">Brands</a>
+        <a href="#press">Talk about me</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
 
   <main class="wrap">
+    <!-- Hero -->
+    <section id="goals" class="hero" aria-labelledby="goals-title">
+      <span class="eyebrow">Portfolio stats</span>
+      <h1 id="goals-title">Goals</h1>
+      <p class="lead">A minimal, single‑file page inspired by danilodemarco.com/goals.html. Replace the dummy data with your own, or wire it to a CMS/JSON.</p>
 
-    <!-- Name & Contact -->
-    <section class="section" id="contact">
-      <h1>SANTHOSH SURESH</h1>
-      <div class="contact-row">
-        <span>📧 <a href="mailto:santhosh02516@gmail.com">santhosh02516@gmail.com</a></span>
-        <span>📞 <a href="tel:9543158080">9543158080</a></span>
-        <span>🔗 <a href="https://www.linkedin.com/in/santhosh-suresh-1b7577291" target="_blank" rel="noopener">LinkedIn</a></span>
-      </div>
-      <hr style="border:none;border-top:1px solid var(--line);margin:16px 0 24px 0;">
-    </section>
-
-    <!-- Professional Summary -->
-    <section class="section" id="summary">
-      <h3>Professional Summary</h3>
-      <div class="entry">
-        Analyst with 3 years of experience in operational support, process optimization, and reporting automation across IT and business service functions. Adept at transforming raw data into meaningful business insights using Excel, Power BI, and SharePoint, aligned with client-specific requirements. Skilled in streamlining workflows through Power Automate to reduce manual effort and enhance accuracy. Experienced in stakeholder coordination, SOP documentation, and delivering timely, insight-driven reports that support data-informed decision-making.
-      </div>
-    </section>
-
-    <!-- Experience -->
-    <section class="section" id="experience">
-      <h3>Professional Experience</h3>
-      <div class="entry">
-        <strong>Analyst – Tata Consultancy Services (TCS), Chennai | 2022 – Present</strong><br>
-        <em>Domain: BFSI (Banking, Financial Services & Insurance)</em>
-        <ul>
-          <li>Collaborated with global teams to manage skills tracking documentation, align roles to structured frameworks, and support compliance-driven SOP repositories.</li>
-          <li>Maintained and updated structured role descriptions, accountability matrices, and process documentation to aid talent management and internal audits.</li>
-          <li>Supported organizational changes by tracking role/responsibility shifts and assisting with stakeholder communications.</li>
-          <li>Developed Excel-based reconciliation tools and reporting templates to align with skill frameworks and facilitate monthly stakeholder reporting.</li>
-          <li>Automated documentation workflows using Power Automate and Excel Macros, reducing manual effort by 50% and improving data consistency.</li>
-          <li>Organized and tracked deliverables from cross-functional meetings on career planning and audit readiness using Excel, Outlook, and SharePoint.</li>
-          <li>Partnered with legal, compliance, and operations teams to mitigate risks and resolve queries around role documentation and ownership.</li>
-          <li>Led onboarding and training to clarify role expectations, capability frameworks, and process interdependencies for new team members.</li>
-        </ul>
+      <div class="stats" role="list">
+        <div class="stat" role="listitem">
+          <h2 data-counter target="12">0</h2>
+          <p>Fonts designed</p>
+        </div>
+        <div class="stat" role="listitem">
+          <h2 data-counter target="28">0</h2>
+          <p>Awards won</p>
+        </div>
+        <div class="stat" role="listitem">
+          <h2 data-counter target="6">0</h2>
+          <p>Behance badges</p>
+        </div>
       </div>
     </section>
 
-    <!-- Projects -->
-    <section class="section" id="projects">
-      <h3>Projects</h3>
-      <div class="entry">
-        <strong>Employee Activity Tracker Automation</strong>
-        <ul>
-          <li>Built an Excel macro-based activity tracker to log and monitor employee tasks throughout the day, enabling visibility into work patterns, accurate calculation of extra working hours, and individual performance assessment—reducing manual effort by 50% and increasing reporting accuracy.</li>
-        </ul>
-        <strong>File Converter Macro Tool</strong>
-        <ul>
-          <li>Developed an Excel VBA automation tool that allows opening and converting multiple files across various formats simultaneously with a single click—streamlining document processing, reducing manual effort, and saving 25+ hours per month.</li>
-        </ul>
+    <!-- Awards -->
+    <section id="awards" class="section" aria-labelledby="awards-title">
+      <h3 id="awards-title">Awards</h3>
+
+      <!-- Year groups are data‑driven below; these containers are progressive enhancement fallbacks -->
+      <div id="awards-root" class="visually-hidden"></div>
+
+      <!-- Accessible template if JS is disabled -->
+      <details class="year" open>
+        <summary class="year-header"><strong>2024</strong> <span class="pill">Highlights</span></summary>
+        <div class="entries">
+          <div class="entry"><strong>Website</strong><small>CSS Design Awards — Site of the Day</small><small>Agenzia Progetta</small></div>
+          <div class="entry"><strong>Website</strong><small>Orpetron — Website of the Day</small><small>Agenzia Progetta</small></div>
+        </div>
+      </details>
+    </section>
+
+    <!-- Brands -->
+    <section id="brands" class="section" aria-labelledby="brands-title">
+      <h3 id="brands-title">Some brands I worked for</h3>
+      <div class="brands" id="brands-grid">
+        <!-- Logos/images can be swapped in via <img> elements; placeholders here -->
+        <div class="brandcard">Red Bull</div>
+        <div class="brandcard">Mulino Bianco</div>
+        <div class="brandcard">Pan di Stelle</div>
+        <div class="brandcard">Pavesini</div>
+        <div class="brandcard">Banca Stato</div>
+        <div class="brandcard">Pubblicità Progresso</div>
+        <div class="brandcard">Codemotion</div>
+        <div class="brandcard">Talent Garden</div>
+        <div class="brandcard">Urbani Tartufi</div>
+        <div class="brandcard">Wratislavia Cantans</div>
       </div>
     </section>
 
-    <!-- Core Competencies & Technical Skills -->
-    <section class="section" id="skills">
-      <h3>Core Competencies</h3>
-      <div class="entry">
-        Process Coordination | Workflow Optimization | SOP Documentation<br>
-        Excel Automation | Power Automate | KPI Tracking & Dashboards (Excel/Power BI)<br>
-        Cross-functional Collaboration | Stakeholder Engagement | SharePoint Documentation<br>
-        Team Support | Knowledge Sharing | Strong Communication & Adaptability
-      </div>
-      <h3 style="margin-top:20px">Technical Skills</h3>
-      <div class="entry">
-        <ul>
-          <li><strong>Excel:</strong> VLOOKUP, PivotTables, Macros, Power Query</li>
-          <li><strong>Power BI:</strong> DAX, Dashboards, Visualizations</li>
-          <li><strong>Power Automate:</strong> Task Automation, Notification Workflows</li>
-          <li><strong>SharePoint:</strong> Document Management, Workflow Integration</li>
-          <li><strong>Microsoft Suite:</strong> Word, PowerPoint, Outlook</li>
-        </ul>
+    <!-- Press / Talk about me -->
+    <section id="press" class="section" aria-labelledby="press-title">
+      <h3 id="press-title">Talk about me</h3>
+      <div class="entries">
+        <div class="entry"><strong>Book</strong><small>ADI Design Index 2022</small><small>ADI — Associazione per il Disegno Industriale</small></div>
+        <div class="entry"><strong>Book</strong><small>No Plastic Sleeves</small><small>Routledge — 2021</small></div>
+        <div class="entry"><strong>Web magazine</strong><small>World Brand Design Society</small><small>Feature</small></div>
+        <div class="entry"><strong>Website</strong><small>Communication Arts</small><small>Feature</small></div>
       </div>
     </section>
 
-    <!-- Achievements -->
-    <section class="section" id="achievements">
-      <h3>Achievements</h3>
-      <div class="entry">
-        <ul>
-          <li>Received On-the-Spot Excellence Award during probation for outstanding performance and rapid understanding of processes, achieving ESL (Expected Service Level) within defined SLA (Service Level Agreement) targets.</li>
-          <li>Appreciated by client for maintaining consistent SLA performance during high-volume operations.</li>
-          <li>Led onboarding sessions and improved team ramp-up time and process adherence.</li>
-        </ul>
+    <!-- Contact -->
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <h3 id="contact-title">Contact me</h3>
+      <div class="year">
+        <p class="lead" style="margin:0 0 8px">Email: <a href="mailto:hello@example.com">hello@example.com</a></p>
+        <div style="display:flex; gap:14px; flex-wrap:wrap">
+          <a href="#" class="pill" aria-label="Behance">Behance</a>
+          <a href="#" class="pill" aria-label="Dribbble">Dribbble</a>
+          <a href="#" class="pill" aria-label="Awwwards">Awwwards</a>
+          <a href="#" class="pill" aria-label="Instagram">Instagram</a>
+          <a href="#" class="pill" aria-label="LinkedIn">LinkedIn</a>
+        </div>
       </div>
     </section>
-
-    <!-- Certifications -->
-    <section class="section" id="certifications">
-      <h3>Certifications</h3>
-      <div class="entry">
-        <ul>
-          <li>Excel (Udemy)</li>
-          <li>Power BI (Udemy)</li>
-          <li>Power Automate (Udemy)</li>
-          <li>Business Analyst (LinkedIn Learning – IIBA & PMI)</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Education -->
-    <section class="section" id="education">
-      <h3>Education</h3>
-      <div class="entry">
-        <ul>
-          <li>Bachelor’s Degree in Business Administration – Bharathiar University</li>
-          <li>Post Graduate Diploma in Computer Application – Browzone Infotech</li>
-        </ul>
-      </div>
-    </section>
-
   </main>
 
   <footer class="wrap" style="border-top:1px solid var(--line); padding-top:20px; margin-top:20px; color:var(--muted)">
-    © <span id="year"></span> SANTHOSH SURESH — Analyst, Process Optimization
+    © <span id="year"></span> Your Name — Visual & Type Designer
   </footer>
 
   <script>
+    // Simple count‑up animation for stats
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('[data-counter]').forEach(el=>{
+      const target = Number(el.getAttribute('target')||0);
+      if(prefersReduced || target === 0){ el.textContent = target; return; }
+      const duration = 1200; const start = performance.now();
+      const step = (t)=>{
+        const p = Math.min(1, (t-start)/duration);
+        el.textContent = Math.floor(p*target).toLocaleString();
+        if(p<1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+
+    // Data model for awards (edit here)
+    const AWARDS = [
+      { year: 2024, items:[
+        { type:'Website', title:'CSS Design Awards — Site of the Day', client:'Agenzia Progetta' },
+        { type:'Website', title:'Orpetron — Website of the Day', client:'Agenzia Progetta' },
+        { type:'Website', title:'CSS Design Awards — Site of the Day', client:'Danilo De Marco' },
+      ]},
+      { year: 2023, items:[
+        { type:'Website', title:'Digital Design Award — DDAW', client:'Danilo De Marco' },
+        { type:'Social', title:'SCA — Creative of the Week', client:'Pavesini' },
+      ]},
+      { year: 2022, items:[
+        { type:'Website', title:'Awwwards — Site of the Day', client:'July‑01 Font' },
+        { type:'Website', title:'Awwwards — Developer Award', client:'July‑01 Font' },
+        { type:'Poster', title:'Posterheroes — More humanity for more culture', client:'—' },
+      ]}
+    ];
+
+    // Render awards with expandable groups
+    const root = document.getElementById('awards-root');
+    root.innerHTML = '';
+    AWARDS.forEach(group=>{
+      const details = document.createElement('details');
+      details.className = 'year';
+      details.open = group.year === Math.max(...AWARDS.map(a=>a.year));
+      const summary = document.createElement('summary');
+      summary.className = 'year-header';
+      summary.innerHTML = `<strong>${group.year}</strong> <span class="pill">${group.items.length} items</span>`;
+      details.appendChild(summary);
+
+      const entries = document.createElement('div');
+      entries.className = 'entries';
+      group.items.forEach(it=>{
+        const e = document.createElement('div');
+        e.className = 'entry';
+        e.innerHTML = `<strong>${it.type}</strong><small>${it.title}</small><small>${it.client}</small>`;
+        entries.appendChild(e);
+      });
+      details.appendChild(entries);
+      root.appendChild(details);
+    });
+
     // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Utility: visually-hidden for progressive enhancement placeholder
+    const vh = document.createElement('style');
+    vh.textContent = `.visually-hidden{position:absolute!important; width:1px; height:1px; margin:-1px; border:0; padding:0; clip:rect(0 0 0 0); overflow:hidden}`;
+    document.head.appendChild(vh);
   </script>
 </body>
 </html>

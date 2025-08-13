@@ -625,25 +625,21 @@ timely, insight-driven reports that support data-informed decision-making  </p>
 
 <section aria-labelledby="contact-title" class="section" id="contact">
   <h3 id="contact-title">Contact</h3>
-  <div class="contact-wrapper" style="display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start;">
-    <div style="display:flex; gap:10px; margin-top:8px;">
-      <a aria-label="Send Email" class="pill" href="mailto:santhosh02516@gmail.com">EMAIL</a>
-      <a aria-label="Call Phone" class="pill" href="tel:9543158080">CALL</a>
-      <a aria-label="LinkedIn" class="pill" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291" rel="noopener" target="_blank">LINKEDIN</a>
+  <div class="year contact-wrapper" style="display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start;">
+    <!-- Contact Details Card -->
+    <div class="entry contact-card" style="flex:1 1 360px; border-radius:18px; border:1px solid rgba(255,255,255,0.04); background:rgba(20,24,30,0.85); padding:20px;">
+      <p class="lead" style="margin:0 0 8px; font-size:1.15em; font-weight:bold;">SANTHOSH SURESH</p>
+      <div style="margin-bottom:12px; line-height:1.5;">
+        <div>Email: <a href="mailto:santhosh02516@gmail.com" style="color:var(--accent); text-decoration:underline;">santhosh02516@gmail.com</a></div>
+        <div>Phone: <a href="tel:9543158080" style="color:var(--accent); text-decoration:underline;">9543158080</a></div>
+        <div>LinkedIn: <a href="https://www.linkedin.com/in/santhosh-suresh-1b7577291" rel="noopener" style="color:var(--accent); text-decoration:underline;" target="_blank">santhosh-suresh-1b7577291</a></div>
+      </div>
+      <div style="display:flex; gap:10px; margin-top:8px;">
+        <a aria-label="Send Email" class="pill" href="mailto:santhosh02516@gmail.com">EMAIL</a>
+        <a aria-label="Call Phone" class="pill" href="tel:9543158080">CALL</a>
+        <a aria-label="LinkedIn" class="pill" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291" rel="noopener" target="_blank">LINKEDIN</a>
+      </div>
     </div>
-  </div>
-
-  <!-- New Contact Form -->
-  <form action="send_email.php" method="POST" style="margin-top:20px; display:flex; flex-direction:column; gap:10px; max-width:400px;">
-    <input type="text" name="name" placeholder="Your Name" required style="padding:10px; border-radius:12px;">
-    <input type="email" name="email" placeholder="Your Email" required style="padding:10px; border-radius:12px;">
-    <input type="text" name="subject" placeholder="Subject" required style="padding:10px; border-radius:12px;">
-    <textarea name="message" placeholder="Your Message" rows="6" required style="padding:12px; border-radius:12px;"></textarea>
-    <button type="submit" style="padding:12px; border-radius:12px; background:var(--accent); color:#fff; border:none; font-weight:600; cursor:pointer;">Send</button>
-  </form>
-</section>
-
-
 
     <!-- Quick Email Draft Form -->
     <div class="contact-form" style="flex:1 1 420px; border-radius:18px; border:1px solid rgba(255,255,255,0.04); background:rgba(20,24,30,0.85); padding:18px;">
@@ -662,7 +658,7 @@ timely, insight-driven reports that support data-informed decision-making  </p>
         <button type="submit" style="padding:12px; border-radius:12px; background:var(--accent); color:#fff; border:none; font-weight:600; cursor:pointer;">
           Send Draft
         </button>
-        <p style="font-size:0.9rem; color:var(--muted); margin:4px 0 0;">FROM ABOVE YOU CAN DRAFT MAIL TO ME-<strong>santhosh02516@gmail.com</strong>.</p>
+        <p style="font-size:0.9rem; color:var(--muted); margin:4px 0 0;">This will open your email client with a draft addressed to <strong>santhosh02516@gmail.com</strong>.</p>
       </form>
     </div>
   </div>
@@ -692,7 +688,7 @@ From: ' + from + '
     
 </main>
 <footer class="wrap" style="border-top:1px solid var(--line); padding-top:20px; margin-top:20px; color:var(--muted)">
-    © <span id="year"></span>@Santhosh Suresh
+    © <span id="year"></span>Santhosh Suresh
   </footer>
 <script>
     // Simple count‑up animation for stats
@@ -762,8 +758,3 @@ document.addEventListener('keydown', function(e) {
 
 </body>
 </html>
-
-
-
-
-

@@ -7,13 +7,13 @@
   <meta name="description" content="A clean, single‑file replica inspired by danilodemarco.com/goals.html" />
   <style>
     :root{
-      --bg:#0e0e0e;               /* deep charcoal */
-      --fg:#e8e8e8;               /* off‑white text */
-      --muted:#a6a6a6;            /* secondary text */
-      --accent:#c8ff5a;           /* lime accent */
-      --card:#151515;             /* panels */
-      --line:#232323;             /* hairlines */
-      --radius:18px;              /* rounded corners */
+      --bg:#0e0e0e;
+      --fg:#e8e8e8;
+      --muted:#a6a6a6;
+      --accent:#c8ff5a;
+      --card:#151515;
+      --line:#232323;
+      --radius:18px;
       --shadow:0 10px 30px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
@@ -28,7 +28,6 @@
     a{color:inherit; text-decoration:none}
     .wrap{max-width:1080px; margin-inline:auto; padding:28px 20px}
 
-    /* Header */
     header{position:sticky; top:0; z-index:5; backdrop-filter:saturate(140%) blur(8px); background:linear-gradient(to bottom, rgba(14,14,14,.8), rgba(14,14,14,.2)); border-bottom:1px solid var(--line)}
     .nav{display:flex; align-items:center; justify-content:space-between; gap:14px}
     .brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.2px}
@@ -37,19 +36,16 @@
     .menu a{opacity:.9}
     .menu a:hover{opacity:1}
 
-    /* Hero */
     .hero{padding:64px 0 28px}
     .eyebrow{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; color:var(--muted); font-size:.9rem}
     h1{font-size:clamp(36px, 6vw, 68px); line-height:1.05; margin:16px 0 6px}
     .lead{color:var(--muted); max-width:60ch}
 
-    /* Counters */
     .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:30px 0}
     .stat{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow)}
     .stat h2{font-size:40px; margin:0}
     .stat p{margin:6px 0 0; color:var(--muted)}
 
-    /* Awards */
     .section{margin:48px 0}
     .section h3{font-size:28px; margin:0 0 14px}
     .year{border:1px solid var(--line); border-radius:var(--radius); padding:16px; background:linear-gradient(180deg, rgba(255,255,255,.02), transparent); box-shadow:var(--shadow)}
@@ -60,11 +56,9 @@
     .entry{border:1px solid var(--line); border-radius:14px; padding:12px}
     .entry small{display:block; color:var(--muted)}
 
-    /* Brands grid */
     .brands{display:grid; grid-template-columns:repeat(5,1fr); gap:12px}
     .brandcard{aspect-ratio:5/3; border:1px solid var(--line); border-radius:16px; background:var(--card); display:grid; place-items:center; color:var(--muted); font-weight:600}
 
-    /* Media */
     @media (max-width:920px){
       .stats{grid-template-columns:1fr}
       .entries{grid-template-columns:1fr}
@@ -77,14 +71,14 @@
     <div class="wrap nav">
       <div class="brand"><span class="brand-badge" aria-hidden="true"></span> <span>Danilo De Marco — Replica</span></div>
       <nav class="menu" aria-label="Primary">
-        <a href="#goals">SUMMARY</a>
-        <a href="#awards">PROFESSIONAL EXPERIENCE</a>
-        <a href="#brands">CORE COMPETENCIES</a>
-         <a href="#brands">TECHNICAL SKILLS</a>
-        <a href="#brands">PROJECT</a>
-        <a href="#brands">ACHIEVEMENTS </a>
-        <a href="#brands">CERTIFICATIONS</a>
-        <a href="#press">EDUCATION</a>
+        <a href="#SUMMARYS">SUMMARY</a>
+        <a href="#EXPERIENCE">EXPERIENCE</a>
+        <a href="#CORECOMPETENCIES">CORE COMPETENCIES</a>
+        <a href="#TECHNICALSKILLS">TECHNICAL SKILLS</a>
+        <a href="#PROJECT">PROJECT</a>
+        <a href="#ACHIEVEMENTS">ACHIEVEMENTS</a>
+        <a href="#CERTIFICATIONS">CERTIFICATIONS</a>
+        <a href="#EDUCATION">EDUCATION</a>
         <a href="#contact">CONTACT</a>
       </nav>
     </div>
@@ -94,13 +88,12 @@
     <!-- Hero -->
     <section id="SUMMARYS" class="hero" aria-labelledby="SUMMARYS-title">
       <span class="eyebrow">Portfolio stats</span>
-      <h1 id="goals-title">SUMMARYS</h1>
+      <h1 id="goals-title">SUMMARY</h1>
       <p class="lead">Analyst with 3 years of experience in operational support, process optimization, and reporting automation across IT and 
 business service functions. Adept at transforming raw data into meaningful business insights using Excel, Power BI, and 
 SharePoint, aligned with client-specific requirements. Skilled in streamlining workflows through Power Automate to 
 reduce manual effort and enhance accuracy. Experienced in stakeholder coordination, SOP documentation, and delivering 
 timely, insight-driven reports that support data-informed decision-making  </p>
-
       <div class="stats" role="list">
         <div class="stat" role="listitem">
           <h2 data-counter target="3">0</h2>
@@ -121,14 +114,10 @@ timely, insight-driven reports that support data-informed decision-making  </p>
       </div>
     </section>
 
-    <!-- Awards -->
+    <!-- Experience -->
     <section id="EXPERIENCE" class="section" aria-labelledby="EXPERIENCE-title">
       <h3 id="EXPERIENCE-title">EXPERIENCE</h3>
-
-      <!-- Year groups are data‑driven below; these containers are progressive enhancement fallbacks -->
       <div id="EXPERIENCE-root" class="visually-hidden"></div>
-
-      <!-- Accessible template if JS is disabled -->
       <details class="year" open>
         <summary class="year-header"><strong>2022-2025</strong> <span class="pill">Highlights</span></summary>
         <div class="entries">
@@ -154,24 +143,60 @@ team members.  </small></div>
       </details>
     </section>
 
-    <!-- Brands -->
-    <section id="brands" class="section" aria-labelledby="brands-title">
-      <h3 id="brands-title">RECENT EXPERIENCE</h3>
-
-      <div class="brands" id="brands-grid">
-        <!-- Logos/images can be swapped in via <img> elements; placeholders here -->
-        <div class="brandcard">Ta</div>
-      </divz
+    <!-- Core Competencies -->
+    <section id="CORECOMPETENCIES" class="section" aria-labelledby="CORECOMPETENCIES-title">
+      <h3 id="CORECOMPETENCIES-title">CORE COMPETENCIES</h3>
+      <div class="entries">
+        <div class="entry"><strong>Process Optimization</strong><small>Reducing inefficiencies in workflows and systems.</small></div>
+        <div class="entry"><strong>Reporting Automation</strong><small>Automating recurring reports and dashboards for decision-making.</small></div>
+        <div class="entry"><strong>Stakeholder Coordination</strong><small>Managing communications and cross-functional teamwork.</small></div>
+        <div class="entry"><strong>SOP Documentation</strong><small>Ensuring compliance and clarity through process documentation.</small></div>
+      </div>
     </section>
 
-    <!-- Press / Talk about me -->
-    <section id="press" class="section" aria-labelledby="press-title">
-      <h3 id="press-title">Talk about me</h3>
+    <!-- Technical Skills -->
+    <section id="TECHNICALSKILLS" class="section" aria-labelledby="TECHNICALSKILLS-title">
+      <h3 id="TECHNICALSKILLS-title">TECHNICAL SKILLS</h3>
       <div class="entries">
-        <div class="entry"><strong>Book</strong><small>ADI Design Index 2022</small><small>ADI — Associazione per il Disegno Industriale</small></div>
-        <div class="entry"><strong>Book</strong><small>No Plastic Sleeves</small><small>Routledge — 2021</small></div>
-        <div class="entry"><strong>Web magazine</strong><small>World Brand Design Society</small><small>Feature</small></div>
-        <div class="entry"><strong>Website</strong><small>Communication Arts</small><small>Feature</small></div>
+        <div class="entry"><strong>Excel</strong><small>Advanced formulas, macros, and automation</small></div>
+        <div class="entry"><strong>Power BI</strong><small>Data modeling, visualization, and dashboarding</small></div>
+        <div class="entry"><strong>SharePoint</strong><small>Document management, workflow automation</small></div>
+        <div class="entry"><strong>Power Automate</strong><small>Automating business processes and integrations</small></div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="PROJECT" class="section" aria-labelledby="PROJECT-title">
+      <h3 id="PROJECT-title">PROJECT</h3>
+      <div class="entries">
+        <div class="entry"><strong>Skills Matrix Automation</strong><small>Developed an automated Excel tool for tracking skill frameworks and monthly reporting.</small></div>
+        <div class="entry"><strong>SOP Repository Enhancement</strong><small>Optimized SharePoint repository for compliance-driven SOP management.</small></div>
+      </div>
+    </section>
+
+    <!-- Achievements -->
+    <section id="ACHIEVEMENTS" class="section" aria-labelledby="ACHIEVEMENTS-title">
+      <h3 id="ACHIEVEMENTS-title">ACHIEVEMENTS</h3>
+      <div class="entries">
+        <div class="entry"><strong>Reduced Manual Effort</strong><small>Achieved a 50% reduction in manual documentation tasks via automation.</small></div>
+        <div class="entry"><strong>Improved Data Consistency</strong><small>Enhanced reporting accuracy with automated reconciliation tools.</small></div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="CERTIFICATIONS" class="section" aria-labelledby="CERTIFICATIONS-title">
+      <h3 id="CERTIFICATIONS-title">CERTIFICATIONS</h3>
+      <div class="brands" id="brands-grid">
+        <div class="brandcard">Ta</div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="EDUCATION" class="section" aria-labelledby="EDUCATION-title">
+      <h3 id="EDUCATION-title">EDUCATION</h3>
+      <div class="entries">
+        <div class="entry"><strong>Bachelor of Science</strong><small>XYZ University</small><small>2018 – 2021</small></div>
+        <div class="entry"><strong>Relevant Coursework</strong><small>Data Analysis, Business Intelligence, Information Systems</small></div>
       </div>
     </section>
 
@@ -210,48 +235,6 @@ team members.  </small></div>
       requestAnimationFrame(step);
     });
 
-    // Data model for awards (edit here)
-    const AWARDS = [
-      { year: 2024, items:[
-        { type:'Website', title:'CSS Design Awards — Site of the Day', client:'Agenzia Progetta' },
-        { type:'Website', title:'Orpetron — Website of the Day', client:'Agenzia Progetta' },
-        { type:'Website', title:'CSS Design Awards — Site of the Day', client:'Danilo De Marco' },
-      ]},
-      { year: 2023, items:[
-        { type:'Website', title:'Digital Design Award — DDAW', client:'Danilo De Marco' },
-        { type:'Social', title:'SCA — Creative of the Week', client:'Pavesini' },
-      ]},
-      { year: 2022, items:[
-        { type:'Website', title:'Awwwards — Site of the Day', client:'July‑01 Font' },
-        { type:'Website', title:'Awwwards — Developer Award', client:'July‑01 Font' },
-        { type:'Poster', title:'Posterheroes — More humanity for more culture', client:'—' },
-      ]}
-    ];
-
-    // Render awards with expandable groups
-    const root = document.getElementById('awards-root');
-    root.innerHTML = '';
-    AWARDS.forEach(group=>{
-      const details = document.createElement('details');
-      details.className = 'year';
-      details.open = group.year === Math.max(...AWARDS.map(a=>a.year));
-      const summary = document.createElement('summary');
-      summary.className = 'year-header';
-      summary.innerHTML = `<strong>${group.year}</strong> <span class="pill">${group.items.length} items</span>`;
-      details.appendChild(summary);
-
-      const entries = document.createElement('div');
-      entries.className = 'entries';
-      group.items.forEach(it=>{
-        const e = document.createElement('div');
-        e.className = 'entry';
-        e.innerHTML = `<strong>${it.type}</strong><small>${it.title}</small><small>${it.client}</small>`;
-        entries.appendChild(e);
-      });
-      details.appendChild(entries);
-      root.appendChild(details);
-    });
-
     // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -262,8 +245,3 @@ team members.  </small></div>
   </script>
 </body>
 </html>
-
-
-
-
-

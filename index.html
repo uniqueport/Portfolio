@@ -625,10 +625,10 @@ timely, insight-driven reports that support data-informed decision-making  </p>
 <section aria-labelledby="contact-title" class="section" id="contact">
   <h3 id="contact-title">Contact</h3>
   
-  <div class="year contact-wrapper" style="display:flex; flex-direction:column; gap:20px; max-width:600px;">
+  <div class="entry contact-card" style="max-width:600px; border-radius:18px; border:1px solid rgba(255,255,255,0.04); background:rgba(20,24,30,0.85); padding:20px; display:flex; flex-direction:column; gap:20px;">
     
-    <!-- Contact Details Card -->
-    <div class="entry contact-card" style="border-radius:18px; border:1px solid rgba(255,255,255,0.04); background:rgba(20,24,30,0.85); padding:20px;">
+    <!-- Contact Details -->
+    <div>
       <p class="lead" style="margin:0 0 8px; font-size:1.15em; font-weight:bold;">SANTHOSH SURESH</p>
       <div style="display:flex; gap:10px; margin-top:8px;">
         <a aria-label="Send Email" class="pill" href="mailto:santhosh02516@gmail.com">EMAIL</a>
@@ -637,8 +637,8 @@ timely, insight-driven reports that support data-informed decision-making  </p>
       </div>
     </div>
 
-    <!-- Quick Email Draft Form BELOW -->
-    <div class="contact-form" style="border-radius:18px; border:1px solid rgba(255,255,255,0.04); background:rgba(20,24,30,0.85); padding:18px;">
+    <!-- Quick Email Draft -->
+    <div>
       <h4 style="margin-top:0; margin-bottom:8px;">Quick Email Draft</h4>
       <form id="quickEmailForm" style="display:flex; flex-direction:column; gap:10px;">
         <input id="fromEmail" type="email" name="from" placeholder="From (your email)" required 
@@ -657,11 +657,11 @@ timely, insight-driven reports that support data-informed decision-making  </p>
         <p style="font-size:0.9rem; color:var(--muted); margin:4px 0 0;">By using above feature you can send mail to this id <strong>santhosh02516@gmail.com</strong> (If not, you can send mail by clicking EMAIL above).</p>
       </form>
     </div>
+    
   </div>
 </section>
 
 <script>
-// Quick Email Draft behavior
 document.getElementById('quickEmailForm').addEventListener('submit', function(e){
   e.preventDefault();
   const to = 'santhosh02516@gmail.com';
@@ -751,6 +751,7 @@ document.addEventListener('keydown', function(e) {
 
 </body>
 </html>
+
 
 
 

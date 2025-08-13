@@ -119,7 +119,7 @@
 <main class="wrap">
 <!-- Hero -->
 <section aria-labelledby="SUMMARYS-title" class="hero" id="SUMMARYS">
-<h1 id="goals-title">SUMMARY</h1>
+<h1 id="Portfolio-title">SUMMARY</h1>
 <p class="lead">Analyst with 3 years of experience in operational support, process optimization, and reporting automation across IT and 
 business service functions. Adept at transforming raw data into meaningful business insights using Excel, Power BI, and 
 SharePoint, aligned with client-specific requirements. Skilled in streamlining workflows through Power Automate to 
@@ -455,6 +455,26 @@ timely, insight-driven reports that support data-informed decision-making  </p>
 document.querySelector('.menu-toggle').addEventListener('click', function() {
     document.querySelector('header .menu').classList.toggle('show');
 });
+</script><script>
+// Disable right-click context menu
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+// Disable text selection
+document.addEventListener('selectstart', function(e) {
+    e.preventDefault();
+});
+
+// Block common view-source and save shortcuts
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S' || e.key === 'c' || e.key === 'C')) {
+        e.preventDefault();
+    }
+    // Block F12 (DevTools)
+    if (e.keyCode === 123) {
+        e.preventDefault();
+    }
+});
 </script></body>
 </html>
-

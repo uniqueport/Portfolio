@@ -1,0 +1,313 @@
+import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { Github, Linkedin, Mail, ArrowUpRight, ExternalLink, Calendar, Rocket, Target, Award, Briefcase, Code2, Globe, Moon, Sun } from "lucide-react";
+
+// ===== Updated content =====
+const DATA = {
+  name: "Santhosh Suresh",
+  role: "Analyst",
+  blurb:
+    "Analyst with 3 years of experience in operational support, process optimization, and reporting automation. Skilled in transforming raw data into meaningful business insights and streamlining workflows for efficiency.",
+  location: "Erode, Tamil Nadu",
+  email: "santhosh02516@gmail.com",
+  socials: [
+    { label: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/santhosh-suresh-1b7577291" },
+    { label: "Email", icon: Mail, href: "mailto:santhosh02516@gmail.com" },
+  ],
+  projects: [
+    {
+      title: "Employee Activity Tracker Automation",
+      tagline: "Excel Macro-based Employee Tracker",
+      description:
+        "Built an Excel macro-based activity tracker to log and monitor employee tasks, enabling visibility, accurate calculation of extra hours, and individual performance assessment. Reduced manual effort by 50% and increased reporting accuracy.",
+      tech: ["Excel", "VBA", "Macros"],
+      link: "",
+      repo: "",
+    },
+    {
+      title: "File Converter Macro Tool",
+      tagline: "Excel VBA Automation for File Conversion",
+      description:
+        "Developed an Excel VBA tool that allows opening and converting multiple files across formats with a single click—streamlining document processing and saving 25+ hours per month.",
+      tech: ["Excel", "VBA"],
+      link: "",
+      repo: "",
+    },
+  ],
+  goals: [
+    {
+      date: "2025 Q3",
+      title: "Expand Automation Solutions",
+      icon: Rocket,
+      details:
+        "Build more automation tools for business reporting and documentation workflows to further reduce manual effort and enhance data accuracy.",
+      status: "in-progress",
+    },
+    {
+      date: "2025 Q4",
+      title: "Upskill in Data Analytics",
+      icon: Target,
+      details:
+        "Complete advanced Power BI and automation certifications, and lead more data-driven projects.",
+      status: "planned",
+    },
+  ],
+  experience: [
+    {
+      company: "Tata Consultancy Services (TCS), Chennai",
+      role: "Analyst",
+      period: "2022 — Present",
+      bullets: [
+        "Collaborated with global teams to manage skills tracking documentation, support compliance-driven SOP repositories.",
+        "Developed Excel-based reconciliation tools and reporting templates for monthly stakeholder reporting.",
+        "Automated documentation workflows using Power Automate and Excel Macros, reducing manual effort by 50%.",
+        "Organized and tracked deliverables from cross-functional meetings on career planning and audit readiness.",
+        "Led onboarding and training to clarify role expectations and process interdependencies for new team members.",
+      ],
+    },
+  ],
+  skills: [
+    "Process Coordination",
+    "Workflow Optimization",
+    "SOP Documentation",
+    "Excel Automation (VLOOKUP, PivotTables, Macros, Power Query)",
+    "Power BI (DAX, Dashboards, Visualizations)",
+    "Power Automate (Task Automation, Notification Workflows)",
+    "SharePoint (Document Management, Workflow Integration)",
+    "Microsoft Suite (Word, PowerPoint, Outlook)",
+    "Cross-functional Collaboration",
+    "Stakeholder Engagement",
+    "Strong Communication & Adaptability",
+  ],
+  achievements: [
+    "Received On-the-Spot Excellence Award for outstanding performance and rapid understanding of processes.",
+    "Appreciated by client for maintaining consistent SLA performance during high-volume operations.",
+    "Led onboarding sessions and improved team ramp-up time and process adherence.",
+  ],
+  certifications: [
+    "Excel (Udemy)",
+    "Power BI (Udemy)",
+    "Power Automate (Udemy)",
+    "Business Analyst (LinkedIn Learning – IIBA & PMI)",
+  ],
+  education: [
+    "Bachelor’s Degree in Business Administration – Bharathiar University",
+    "Post Graduate Diploma in Computer Application – Browzone Infotech",
+  ],
+};
+// ===== End updated content =====
+
+const Badge = ({ children }) => (
+  <span className="inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-medium">
+    {children}
+  </span>
+);
+
+const Pill = ({ children }) => (
+  <span className="inline-flex items-center rounded-full bg-black/5 dark:bg-white/10 px-2 py-1 text-xs">
+    {children}
+  </span>
+);
+
+const Section = ({ id, title, icon: Icon, children }) => (
+  <section id={id} className="scroll-mt-24">
+    <div className="flex items-center gap-2 mb-4">
+      {Icon && <Icon className="h-5 w-5" />}
+      <h2 className="text-xl sm:text-2xl font-semibold tracking-tight">{title}</h2>
+    </div>
+    {children}
+  </section>
+);
+
+const NavLink = ({ href, children }) => (
+  <a
+    href={href}
+    className="text-sm opacity-80 hover:opacity-100 transition-opacity"
+  >
+    {children}
+  </a>
+);
+
+export default function Portfolio() {
+  const [dark, setDark] = useState(true);
+  const year = new Date().getFullYear();
+
+  return (
+    <div className={dark ? "dark" : ""}>
+      <div className="min-h-screen bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 transition-colors">
+        <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-zinc-950/60 border-b">
+          <div className="mx-auto max-w-6xl px-4">
+            <div className="flex items-center justify-between h-16">
+              <a href="#top" className="font-semibold tracking-tight">{DATA.name}</a>
+              <nav className="hidden sm:flex items-center gap-6">
+                <NavLink href="#projects">Projects</NavLink>
+                <NavLink href="#goals">Goals</NavLink>
+                <NavLink href="#experience">Experience</NavLink>
+                <NavLink href="#skills">Skills</NavLink>
+                <NavLink href="#achievements">Achievements</NavLink>
+                <NavLink href="#certifications">Certifications</NavLink>
+                <NavLink href="#education">Education</NavLink>
+                <NavLink href="#contact">Contact</NavLink>
+              </nav>
+              <button
+                onClick={() => setDark((d) => !d)}
+                className="rounded-2xl border px-3 py-2 text-sm inline-flex items-center gap-2"
+              >
+                {dark ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+                <span className="hidden sm:inline">{dark ? "Dark" : "Light"}</span>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <main id="top" className="mx-auto max-w-6xl px-4 pt-14 pb-24">
+          {/* Home/About */}
+          <Section id="about" title="About" icon={Briefcase}>
+            <h3 className="text-lg font-semibold">{DATA.role} | {DATA.location}</h3>
+            <p>{DATA.blurb}</p>
+            <div className="flex gap-4 mt-2">
+              {DATA.socials.map((s) => (
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-sm hover:underline">
+                  <s.icon className="h-4 w-4" />
+                  {s.label}
+                </a>
+              ))}
+            </div>
+          </Section>
+          
+          {/* Projects */}
+          <Section id="projects" title="Projects" icon={Code2}>
+            {DATA.projects.map((p) => (
+              <div key={p.title} className="mb-6">
+                <h3 className="font-semibold">{p.title}</h3>
+                <p className="italic">{p.tagline}</p>
+                <p>{p.description}</p>
+                <div className="flex gap-2 flex-wrap">
+                  {p.tech.map((t) => <Pill key={t}>{t}</Pill>)}
+                </div>
+                {p.link && (
+                  <a href={p.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs mt-1">
+                    <ExternalLink className="h-3 w-3" /> Live
+                  </a>
+                )}
+                {p.repo && (
+                  <a href={p.repo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs ml-4">
+                    <Github className="h-3 w-3" /> Repo
+                  </a>
+                )}
+              </div>
+            ))}
+          </Section>
+
+          {/* Goals */}
+          <Section id="goals" title="Goals" icon={Target}>
+            {DATA.goals.map((g) => (
+              <div key={g.title} className="mb-4">
+                <div className="flex items-center gap-2">
+                  <Badge>{g.date}</Badge>
+                  {g.icon && <g.icon className="h-4 w-4" />}
+                  <span className="font-semibold">{g.title}</span>
+                  <span className={`text-xs px-2 rounded ${g.status === "in-progress" ? "bg-yellow-200 dark:bg-yellow-900" : "bg-gray-200 dark:bg-gray-700"}`}>{g.status}</span>
+                </div>
+                <div className="ml-6">{g.details}</div>
+              </div>
+            ))}
+          </Section>
+
+          {/* Experience */}
+          <Section id="experience" title="Experience" icon={Briefcase}>
+            {DATA.experience.map((exp) => (
+              <div key={exp.company} className="mb-6">
+                <h3 className="font-semibold">{exp.role} @ {exp.company}</h3>
+                <Badge>{exp.period}</Badge>
+                <ul className="list-disc pl-6 mt-2">
+                  {exp.bullets.map((b, i) => <li key={i}>{b}</li>)}
+                </ul>
+              </div>
+            ))}
+          </Section>
+
+          {/* Skills */}
+          <Section id="skills" title="Skills & Core Competencies" icon={Award}>
+            <ul className="list-disc pl-6">
+              {DATA.skills.map((s, i) => <li key={i}>{s}</li>)}
+            </ul>
+          </Section>
+
+          {/* Achievements */}
+          <Section id="achievements" title="Achievements" icon={Award}>
+            <ul className="list-disc pl-6">
+              {DATA.achievements.map((a, i) => <li key={i}>{a}</li>)}
+            </ul>
+          </Section>
+
+          {/* Certifications */}
+          <Section id="certifications" title="Certifications" icon={Calendar}>
+            <ul className="list-disc pl-6">
+              {DATA.certifications.map((c, i) => <li key={i}>{c}</li>)}
+            </ul>
+          </Section>
+
+          {/* Education */}
+          <Section id="education" title="Education" icon={Globe}>
+            <ul className="list-disc pl-6">
+              {DATA.education.map((e, i) => <li key={i}>{e}</li>)}
+            </ul>
+          </Section>
+
+          {/* Contact */}
+          <Section id="contact" title="Contact" icon={Mail}>
+            <form
+              action="https://formspree.io/f/your-form-id"
+              method="POST"
+              className="rounded-3xl border p-6 flex flex-col gap-4 w-full"
+            >
+              <div>
+                <label className="block text-sm font-medium">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  className="mt-1 block w-full rounded-md border px-3 py-2 bg-transparent"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  className="mt-1 block w-full rounded-md border px-3 py-2 bg-transparent"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium">Message</label>
+                <textarea
+                  name="message"
+                  rows={4}
+                  required
+                  className="mt-1 block w-full rounded-md border px-3 py-2 bg-transparent"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                className="self-start rounded-2xl border px-4 py-2 text-sm hover:-translate-y-0.5 transition-transform"
+              >
+                Send Message
+              </button>
+            </form>
+          </Section>
+        </main>
+
+        <footer className="border-t">
+          <div className="mx-auto max-w-6xl px-4 py-8 text-sm flex flex-col sm:flex-row items-center justify-between gap-2">
+            <span>© {year} {DATA.name}</span>
+            <div className="flex items-center gap-4 opacity-75">
+              <a href="#top" className="hover:opacity-100">Back to top</a>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  );
+}

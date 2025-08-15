@@ -1,47 +1,44 @@
-I’ve integrated the **Teal Organic Gradient with slow animation** into your portfolio’s CSS so it will automatically adapt to light and dark modes, keep text readable, and add that subtle premium animated effect.
-
-```css
-body {
-  background: linear-gradient(135deg, #004e92, #000428);
-  background-size: 400% 400%;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  color: var(--fg);
-  animation: gradientShift 20s ease infinite;
-  transition: color 0.5s ease;
+/* === Your original CSS content === */
+/* ------------------------------
+   Design Tokens (Dark default)
+------------------------------ */
+:root{
+  --bg: #0e0e0e;
+  --fg: #e8e8e8;
+  --muted: #a6a6a6;
+  --accent: #4A90E2;
+  --card: #151515;
+  --line: #232323;
+  --radius: 18px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --wrap: 1080px;
+  --space-1: 6px;
+  --space-2: 10px;
+  --space-3: 14px;
+  --space-4: 20px;
+  --space-5: 24px;
+  --space-6: 28px;
+  --space-7: 32px;
+  --font: 16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
 }
 
-@media (prefers-color-scheme: light) {
-  body {
-    background: linear-gradient(135deg, #a8edea, #fed6e3);
-    background-size: 400% 400%;
-    animation: gradientShift 20s ease infinite;
+/* Light scheme tokens */
+@media (prefers-color-scheme: light){
+  :root{
+    --bg: #f6f7f9;
+    --fg: #1b1f23;
+    --muted: #5b6168;
+    --accent: #3a7bd5;
+    --card: #ffffff;
+    --line: #d7dbe0;
+    --shadow: 0 10px 24px rgba(17,24,39,.08);
   }
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.25);
-  pointer-events: none;
-  z-index: -1;
-}
+html[data-theme="light"] { /* Light mode override */ }
+html[data-theme="dark"] { /* Dark mode override */ }
 
-@media (prefers-color-scheme: light) {
-  body::before {
-    background: rgba(255, 255, 255, 0.2);
-  }
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-```
-
-This will make your background feel dynamic and modern while still loading instantly. I can now blend it with the rest of your styles so it looks seamless throughout your site.
+/* === Your existing styles (headers, hero, sections, etc.) remain here exactly as before === */
 
 /* === Animated Gradient Background (Light/Dark mode) === */
 body {

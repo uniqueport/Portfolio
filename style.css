@@ -1,86 +1,38 @@
-/* === Your original CSS content === */
-/* ------------------------------
-   Design Tokens (Dark default)
------------------------------- */
-:root{
-  --bg: #0e0e0e;
-  --fg: #e8e8e8;
-  --muted: #a6a6a6;
-  --accent: #4A90E2;
-  --card: #151515;
-  --line: #232323;
-  --radius: 18px;
-  --shadow: 0 10px 30px rgba(0,0,0,.35);
-  --wrap: 1080px;
-  --space-1: 6px;
-  --space-2: 10px;
-  --space-3: 14px;
-  --space-4: 20px;
-  --space-5: 24px;
-  --space-6: 28px;
-  --space-7: 32px;
-  --font: 16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-}
-
-/* Light scheme tokens */
-@media (prefers-color-scheme: light){
-  :root{
-    --bg: #f6f7f9;
-    --fg: #1b1f23;
-    --muted: #5b6168;
-    --accent: #3a7bd5;
-    --card: #ffffff;
-    --line: #d7dbe0;
-    --shadow: 0 10px 24px rgba(17,24,39,.08);
+<style>
+  /* your existing CSS */
+  :root {
+    --bg: #0e0e0e;
+    --fg: #e8e8e8;
   }
-}
 
-html[data-theme="light"] { /* Light mode override */ }
-html[data-theme="dark"] { /* Dark mode override */ }
+  /* ... other styles ... */
 
-/* === Your existing styles (headers, hero, sections, etc.) remain here exactly as before === */
-
-/* === Animated Gradient Background (Light/Dark mode) === */
-body {
-  background: linear-gradient(135deg, #004e92, #000428);
-  background-size: 400% 400%;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  color: var(--fg);
-  animation: gradientShift 20s ease infinite, bgFadeIn 1.2s ease forwards;
-  transition: color 0.5s ease;
-}
-
-@media (prefers-color-scheme: light) {
+  /* New animated background */
   body {
-    background: linear-gradient(135deg, #a8edea, #fed6e3);
-    background-size: 400% 400%;
-    animation: gradientShift 20s ease infinite, bgFadeIn 1.2s ease forwards;
+    margin: 0;
+    font: var(--font);
+    color: var(--fg);
+    background:
+      radial-gradient(60vw 60vw at 10% -10%, rgba(74,144,226,.10), transparent 40%),
+      radial-gradient(70vw 70vw at 110% 10%, rgba(74,144,226,.08), transparent 40%),
+      var(--bg);
+    background-attachment: fixed;
+    position: relative;
+    overflow-x: hidden;
   }
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.25);
-  pointer-events: none;
-  z-index: -1;
-}
-
-@media (prefers-color-scheme: light) {
   body::before {
-    background: rgba(255, 255, 255, 0.2);
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(74,144,226,0.15), rgba(255,255,255,0.05), rgba(74,144,226,0.15));
+    background-size: 400% 400%;
+    animation: bgMove 15s ease infinite;
+    pointer-events: none;
+    z-index: -1;
   }
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes bgFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+  @keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+</style>

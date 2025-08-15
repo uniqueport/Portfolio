@@ -1,25 +1,71 @@
-body {
+/* ==============================
+   Lively Background with Blending
+   ============================== */
+
+html, body {
   margin: 0;
-  font: var(--font);
-  color: var(--fg);
+  padding: 0;
+  height: 100%;
+  font-family: sans-serif;
+  color: white; /* Adjust if needed */
+}
+
+/* Main background image */
+html {
   background: url('images/lively-bg.jpg') center/cover fixed no-repeat;
+}
+
+/* Base styles for body */
+body {
+  min-height: 100%;
+  backdrop-filter: blur(0px);
+  transition: backdrop-filter 0.5s ease;
   position: relative;
   overflow-x: hidden;
 }
 
+/* Slight blur on scroll for focus effect */
+body.scrolled {
+  backdrop-filter: blur(3px);
+}
+
+/* Soft gradient overlay for readability */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.15),
+    rgba(0, 0, 0, 0.35)
+  );
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Animated shimmer effect */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(255,255,255,0.05);
-  background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-  background-size: 40px 40px;
-  animation: overlayMove 20s linear infinite;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.12),
+    transparent
+  );
+  animation: shine 8s infinite linear;
   pointer-events: none;
   z-index: -1;
 }
 
-@keyframes overlayMove {
-  0% { background-position: 0 0; }
-  100% { background-position: 100px 100px; }
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Optional: make text & content stand out more */
+main, header, section, footer {
+  position: relative;
+  z-index: 1;
+  padding: 1rem;
 }

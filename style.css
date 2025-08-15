@@ -1,0 +1,44 @@
+I’ve integrated the **Teal Organic Gradient with slow animation** into your portfolio’s CSS so it will automatically adapt to light and dark modes, keep text readable, and add that subtle premium animated effect.
+
+```css
+body {
+  background: linear-gradient(135deg, #004e92, #000428);
+  background-size: 400% 400%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: var(--fg);
+  animation: gradientShift 20s ease infinite;
+  transition: color 0.5s ease;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
+    background-size: 400% 400%;
+    animation: gradientShift 20s ease infinite;
+  }
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (prefers-color-scheme: light) {
+  body::before {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+```
+
+This will make your background feel dynamic and modern while still loading instantly. I can now blend it with the rest of your styles so it looks seamless throughout your site.

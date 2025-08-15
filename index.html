@@ -533,18 +533,10 @@
     const mql = window.matchMedia('(prefers-color-scheme: dark)');
     mql.addEventListener?.('change', () => { if((localStorage.getItem(THEME_KEY)||'system')==='system') applyTheme('system'); });
   })();
-  <script>
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    document.body.classList.add('scrolled');
-  } else {
-    document.body.classList.remove('scrolled');
-  }
-});
-</script>
 
 </script>
 </body>
 </html>
 <link rel="stylesheet" href="style.css">
+
 

@@ -350,21 +350,25 @@
     els.forEach(el => io.observe(el));
   })();
 
-  // Mailto builder
-  document.getElementById('quickEmailForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    const to='santhosh02516@gmail.com';
-    const from=document.getElementById('fromEmail').value.trim();
-    const cc=document.getElementById('ccEmail').value.trim();
-    const bcc=document.getElementById('bccEmail').value.trim();
-    const subject=encodeURIComponent(document.getElementById('subject').value.trim());
-    const bodyRaw=document.getElementById('body').value.trim();
-    const body=encodeURIComponent(`From: ${from}\n\n${bodyRaw}`);
-    let mailto=`mailto:${to}?subject=${subject}&body=${body}`;
-    if(cc) mailto+=`&cc=${encodeURIComponent(cc)}`;
-    if(bcc) mailto+=`&bcc=${encodeURIComponent(bcc)}`;
-    window.location.href=mailto;
-  });
+// Mailto builder
+document.getElementById('quickEmailForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const to = 'santhosh02516@gmail.com';
+  const cc = document.getElementById('ccEmail').value.trim();
+  const bcc = document.getElementById('bccEmail').value.trim();
+  const subject = encodeURIComponent(document.getElementById('subject').value.trim());
+  const bodyRaw = document.getElementById('body').value.trim();
+  const body = encodeURIComponent(bodyRaw);
+
+  let mailto = `mailto:${to}?subject=${subject}&body=${body}`;
+  if (cc) mailto += `&cc=${encodeURIComponent(cc)}`;
+  if (bcc) mailto += `&bcc=${encodeURIComponent(bcc)}`;
+
+  window.location.href = mailto;
+});
+
 </script>
 </body>
 </html>
+

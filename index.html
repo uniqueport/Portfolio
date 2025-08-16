@@ -357,9 +357,15 @@ document.getElementById('quickEmailForm').addEventListener('submit', function(e)
   const to = 'santhosh02516@gmail.com';
   const cc = document.getElementById('ccEmail').value.trim();
   const bcc = document.getElementById('bccEmail').value.trim();
-  const subject = encodeURIComponent(document.getElementById('subject').value.trim());
+
+  // Get subject, strip out any email addresses
+  let subjectRaw = document.getElementById('subject').value.trim();
+  subjectRaw = subjectRaw.replace(/\S+@\S+\.\S+/g, ''); // remove email addresses
+  const subject = encodeURIComponent(subjectRaw);
+
+  // Encode body with proper line breaks
   const bodyRaw = document.getElementById('body').value.trim();
-  const body = encodeURIComponent(bodyRaw);
+  const body = encodeURIComponent(bodyRaw).replace(/%0A/g, '%0D%0A');
 
   let mailto = `mailto:${to}?subject=${subject}&body=${body}`;
   if (cc) mailto += `&cc=${encodeURIComponent(cc)}`;
@@ -368,7 +374,9 @@ document.getElementById('quickEmailForm').addEventListener('submit', function(e)
   window.location.href = mailto;
 });
 
+
 </script>
 </body>
 </html>
+
 

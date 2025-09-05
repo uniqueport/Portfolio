@@ -513,9 +513,40 @@ function closeLightbox(){
   </section>
 
 <!-- Contact -->
-    <section id="contact" class="section"> <h3 class="reveal">Contact</h3> <div class="entry contact-card reveal" style="max-width:600px; display:flex; flex-direction:column; gap:20px;"> <div> <p class="lead" style="margin:0 0 8px; font-size:1.05em; font-weight:bold;">SANTHOSH SURESH</p> <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap"> <a class="pill" aria-label="Send Email" href="mailto:santhosh02516@gmail.com">EMAIL</a> <a class="pill" aria-label="Call Phone" href="tel:9543158080">CALL</a> <a class="pill" aria-label="LinkedIn" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291" rel="noopener" target="_blank">LINKEDIN</a> </div> </div> <div> <h4 style="margin:0 0 8px">Quick Email Draft</h4> <form id="quickEmailForm" style="display:flex; flex-direction:column; gap:10px;"> <input id="fromEmail" type="email"  <input id="ccEmail" type="text" name="cc" placeholder="CC (optional)" style="padding:10px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;"> <input id="bccEmail" type="text" name="bcc" placeholder="BCC (optional)" style="padding:10px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;"> <input id="subject" type="text" name="subject" placeholder="Subject" required style="padding:10px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;"> <textarea id="body" name="body" placeholder="Body" rows="6" required style="padding:12px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;"></textarea> <button type="submit" class="btn" style="align-self:flex-start; background:var(--accent); color:#fff; border:none">Send Draft</button> <p style="font-size:.9rem; color:var(--muted); margin:4px 0 0;">By using above feature you can send mail to this id <strong>santhosh02516@gmail.com</strong> (If not, you can send mail by clicking EMAIL above).</p> </form> </div> </div> </section> </main>
+<section id="contact" class="section">
+  <h3 class="reveal">Contact</h3>
+  <div class="entry contact-card reveal" style="max-width:600px; display:flex; flex-direction:column; gap:20px;">
+    <div>
+      <p class="lead" style="margin:0 0 8px; font-size:1.05em; font-weight:bold;">SANTHOSH SURESH</p>
+      <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap">
+        <a class="pill" aria-label="Send Email" href="mailto:santhosh02516@gmail.com">EMAIL</a>
+        <a class="pill" aria-label="Call Phone" href="tel:9543158080">CALL</a>
+        <a class="pill" aria-label="LinkedIn" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291" rel="noopener" target="_blank">LINKEDIN</a>
+      </div>
+    </div>
 
-</main>
+    <div>
+      <h4 style="margin:0 0 8px">Quick Email Draft</h4>
+      <form id="quickEmailForm" style="display:flex; flex-direction:column; gap:10px;">
+        <input id="fromEmail" type="email" name="from" placeholder="Your Email" required
+               style="padding:10px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;">
+        <input id="ccEmail" type="text" name="cc" placeholder="CC (optional)"
+               style="padding:10px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;">
+        <input id="bccEmail" type="text" name="bcc" placeholder="BCC (optional)"
+               style="padding:10px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;">
+        <input id="subject" type="text" name="subject" placeholder="Subject" required
+               style="padding:10px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;">
+        <textarea id="body" name="body" placeholder="Body" rows="6" required
+                  style="padding:12px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;"></textarea>
+        <button type="submit" class="btn" style="align-self:flex-start; background:var(--accent); color:#fff; border:none">Send Draft</button>
+        <p style="font-size:.9rem; color:var(--muted); margin:4px 0 0;">
+          By using above feature you can send mail to this id <strong>santhosh02516@gmail.com</strong> (If not, you can send mail by clicking EMAIL above).
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
 
 <footer class="wrap">© <span id="year"></span> Santhosh Suresh</footer>
 
@@ -625,6 +656,7 @@ function closeLightbox(){
 </body>
 </html>
 <link rel="stylesheet" href="style.css">
+
 
 
 

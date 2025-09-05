@@ -212,8 +212,13 @@
     </div>
   </section>
 
-<!-- Experience -->
-<section id="EXPERIENCE" class="section">
+<!-- Highlight Button -->
+<button id="showExperienceBtn" class="btn" style="margin-bottom:20px;">
+  Highlight Process Associate at TCS with 3 YOE in BFSI
+</button>
+
+<!-- Experience (hidden by default) -->
+<section id="EXPERIENCE" class="section" style="display:none;">
   <h3 id="EXPERIENCE-title" class="reveal">EXPERIENCE</h3>
 
   <!-- Analyst -->
@@ -251,6 +256,16 @@
     </div>
   </div>
 </section>
+
+<script>
+// Show experience on button click
+document.getElementById('showExperienceBtn').addEventListener('click', function() {
+  const expSection = document.getElementById('EXPERIENCE');
+  expSection.style.display = 'block'; // show section
+  expSection.scrollIntoView({ behavior: 'smooth' }); // optional: scroll to section
+});
+</script>
+
 
 
   <!-- Core Competencies -->
@@ -670,6 +685,7 @@ function sendMail(event) {
 </body>
 </html>
 <link rel="stylesheet" href="style.css">
+
 
 
 

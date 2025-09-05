@@ -1,0 +1,14 @@
+// Certificate Lightbox
+const lightbox = document.createElement("div");
+lightbox.className = "lightbox";
+lightbox.innerHTML = '<span class="close">&times;</span><img src="" alt="Certificate">';
+document.body.appendChild(lightbox);
+const lightboxImg = lightbox.querySelector("img");
+
+function openLightbox(img) {
+  lightboxImg.src = img.src;
+  lightbox.classList.add("show");
+}
+
+lightbox.querySelector(".close").addEventListener("click", ()=>lightbox.classList.remove("show"));
+lightbox.addEventListener("click", e=>{ if(e.target===lightbox) lightbox.classList.remove("show"); });

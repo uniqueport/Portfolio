@@ -364,13 +364,17 @@
   <h3 class="reveal">CERTIFICATIONS</h3>
   <div class="entry reveal" style="background:transparent; border:none; padding:0">
 
+<!-- Certifications -->
+<section id="CERTIFICATION" class="section">
+  <h3 class="reveal">CERTIFICATIONS</h3>
+  <div class="entry reveal" style="background:transparent; border:none; padding:0">
+
     <!-- Excel -->
     <div class="entry" style="margin-bottom:20px">
       <span style="font-weight:700">Microsoft Excel Advanced</span>
-      <a class="pill" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291/details/certifications/1749600558477/single-media-viewer/" target="_blank" rel="noopener">VIEW</a>
-      <button class="pill" type="button" onclick="toggleById('certExcel')">HIGHLIGHT</button>
+      <button class="pill" type="button" onclick="toggleById('certExcel')">VIEW</button>
       <div id="certExcel" style="display:none; margin-top:12px;" class="entry">
-        Demonstrates expertise in advanced Excel functions, macros, automation, and business reporting.
+        <p>Demonstrates expertise in advanced Excel functions, macros, automation, and business reporting.</p>
         <div class="cert-gallery">
           <img src="assets/EXCEL.jpg" alt="Excel Certificate" onclick="openLightbox(this)">
         </div>
@@ -380,10 +384,9 @@
     <!-- Power BI -->
     <div class="entry" style="margin-bottom:20px">
       <span style="font-weight:700">Power BI</span>
-      <a class="pill" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291/details/certifications/1749362315534/single-media-viewer/" target="_blank" rel="noopener">VIEW</a>
-      <button class="pill" type="button" onclick="toggleById('certPowerBI')">HIGHLIGHT</button>
+      <button class="pill" type="button" onclick="toggleById('certPowerBI')">VIEW</button>
       <div id="certPowerBI" style="display:none; margin-top:12px;" class="entry">
-        Validates skills in Power BI, data visualization, and turning data into actionable insights.
+        <p>Validates skills in Power BI, data visualization, and turning data into actionable insights.</p>
         <div class="cert-gallery">
           <img src="assets/POWER BI.jpg" alt="Power BI Certificate" onclick="openLightbox(this)">
         </div>
@@ -393,10 +396,9 @@
     <!-- Power Automate -->
     <div class="entry" style="margin-bottom:20px">
       <span style="font-weight:700">Power Automate Fundamentals</span>
-      <a class="pill" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291/details/certifications/1749520882508/single-media-viewer/" target="_blank" rel="noopener">VIEW</a>
-      <button class="pill" type="button" onclick="toggleById('certPowerAutomate')">HIGHLIGHT</button>
+      <button class="pill" type="button" onclick="toggleById('certPowerAutomate')">VIEW</button>
       <div id="certPowerAutomate" style="display:none; margin-top:12px;" class="entry">
-        Certified in automating repetitive tasks and workflows using Microsoft Power Automate.
+        <p>Certified in automating repetitive tasks and workflows using Microsoft Power Automate.</p>
         <div class="cert-gallery">
           <img src="assets/Power automate.jpg" alt="Power Automate Certificate" onclick="openLightbox(this)">
         </div>
@@ -406,9 +408,9 @@
     <!-- PGDCA -->
     <div class="entry" style="margin-bottom:20px">
       <span style="font-weight:700">Post Graduate Diploma in Computer Application (PGDCA)</span>
-      <button class="pill" type="button" onclick="toggleById('certPGDCA')">HIGHLIGHT</button>
+      <button class="pill" type="button" onclick="toggleById('certPGDCA')">VIEW</button>
       <div id="certPGDCA" style="display:none; margin-top:12px;" class="entry">
-        Completed PGDCA covering computer applications, databases, and programming fundamentals.
+        <p>Completed PGDCA covering computer applications, databases, and programming fundamentals.</p>
         <div class="cert-gallery">
           <img src="assets/PGDCA.jpg" alt="PGDCA Certificate" onclick="openLightbox(this)">
         </div>
@@ -418,12 +420,11 @@
     <!-- EY Audit PDF -->
     <div class="entry">
       <span style="font-weight:700">EY Audit Job Simulation</span>
-      <a class="pill" href="assets/EY-Audit job simulation.pdf" target="_blank">VIEW</a>
-      <button class="pill" type="button" onclick="toggleById('certEY')">HIGHLIGHT</button>
+      <button class="pill" type="button" onclick="toggleById('certEY')">VIEW</button>
       <div id="certEY" style="display:none; margin-top:12px;" class="entry">
-        Completed EY Audit simulation showcasing real-world casework and financial audit skills.
+        <p>Completed EY Audit simulation showcasing real-world casework and financial audit skills.</p>
         <div class="cert-gallery">
-          <img src="https://img.icons8.com/ios-filled/200/ffffff/pdf.png" alt="EY Audit PDF" onclick="window.open('assets/EY-Audit job simulation.pdf','_blank')">
+          <img src="assets/pdf-placeholder.png" alt="EY Audit Certificate" onclick="window.open('assets/EY-Audit job simulation.pdf','_blank')">
         </div>
       </div>
     </div>
@@ -431,6 +432,60 @@
   </div>
 </section>
 
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox">
+  <span class="close" onclick="closeLightbox()">&times;</span>
+  <img id="lightbox-img" src="" alt="Certificate">
+</div>
+
+<style>
+.cert-gallery img {
+  max-width: 220px;
+  border-radius: 12px;
+  margin-top: 10px;
+  cursor: zoom-in;
+  transition: transform .3s ease;
+}
+.cert-gallery img:hover {
+  transform: scale(1.05);
+}
+
+/* Lightbox */
+.lightbox {
+  display:none;
+  position:fixed;
+  z-index:9999;
+  padding-top:60px;
+  left:0; top:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.9);
+}
+.lightbox img {
+  display:block;
+  max-width:80%;
+  max-height:80%;
+  margin:auto;
+  border-radius:12px;
+  box-shadow:0 0 25px rgba(0,0,0,.6);
+}
+.lightbox .close {
+  position:absolute;
+  top:20px; right:40px;
+  font-size:40px; font-weight:bold;
+  color:white;
+  cursor:pointer;
+}
+</style>
+
+<script>
+function openLightbox(el){
+  document.getElementById("lightbox").style.display = "block";
+  document.getElementById("lightbox-img").src = el.src;
+}
+function closeLightbox(){
+  document.getElementById("lightbox").style.display = "none";
+}
+</script>
 
   <!-- Education -->
   <section id="EDUCATION" class="section">
@@ -585,5 +640,6 @@
 </body>
 </html>
 <link rel="stylesheet" href="style.css">
+
 
 

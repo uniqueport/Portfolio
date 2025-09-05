@@ -266,49 +266,61 @@
     </div>
   </section>
 
-  <!-- Technical Skills -->
-  <section id="TECHNICAL-SKILLS" class="section">
-    <h3 class="reveal">TECHNICAL SKILLS</h3>
-    <div class="entry reveal" style="background:transparent; border:none; padding:0">
-      <div class="entry" style="margin-bottom:12px">
-        <span style="font-weight:700">Excel</span>
-        <button class="pill" type="button" onclick="toggleById('excelSkill')">HIGHLIGHT</button>
-        <div id="excelSkill" style="display:none; margin-top:12px;" class="entry">
-          (Advanced): VLOOKUP, XLOOKUP, HLOOKUP, INDEX-MATCH, SUBSTITUTE, TRIM, COUNTA, 
-COUNTIF/COUNTIFS, IF/IFS, FILTER, PivotTables, Pivot Charts, Power Query, Macros.
-        </div>
-      </div>
-      <div class="entry" style="margin-bottom:12px">
-        <span style="font-weight:700">Data Visualization</span>
-        <button class="pill" type="button" onclick="toggleById('Data Visualization')">HIGHLIGHT</button>
-        <div id="powerBISkill" style="display:none; margin-top:12px;" class="entry">
-         Power BI (DAX, KPIs, Dashboards, Visualizations), Excel-based Dashboards. 
-        </div>
-      </div>
-      <div class="entry" style="margin-bottom:12px">
-        <span style="font-weight:700">Automation & Tools</span>
-        <button class="pill" type="button" onclick="toggleById('Automation & Tools')">HIGHLIGHT</button>
-        <div id="powerAutomateSkill" style="display:none; margin-top:12px;" class="entry">
-         Power Automate (Task Automation, Notifications), SharePoint (Document Management, Workflow 
-Integration), Salesforce (Task Tracking, Reporting).
-        </div>
-      </div>
-      <div class="entry" style="margin-bottom:12px">
-        <span style="font-weight:700">Databases</span>
-        <button class="pill" type="button" onclick="toggleById('Databases')">HIGHLIGHT</button>
-        <div id="sharePointSkill" style="display:none; margin-top:12px;" class="entry">
-         SQL (Data Cleaning, Transformation). 
-        </div>
-      </div>
-      <div class="entry">
-        <span style="font-weight:700">Other Tools/span>
-        <button class="pill" type="button" onclick="toggleById('Other Tools')">HIGHLIGHT</button>
-        <div id="msSuiteSkill" style="display:none; margin-top:12px;" class="entry">
-       FileZilla (FTP), Microsoft Word, PowerPoint, Outlook. 
-        </div>
+<!-- Technical Skills -->
+<section id="TECHNICAL-SKILLS" class="section">
+  <h3 class="reveal">TECHNICAL SKILLS</h3>
+  <div class="entry reveal" style="background:transparent; border:none; padding:0">
+
+    <!-- Excel -->
+    <div class="entry" style="margin-bottom:12px">
+      <span style="font-weight:700">Excel</span>
+      <button class="pill" type="button" onclick="toggleById('excelSkill')">HIGHLIGHT</button>
+      <div id="excelSkill" style="display:none; margin-top:12px;" class="entry">
+        (Advanced): VLOOKUP, XLOOKUP, HLOOKUP, INDEX-MATCH, SUBSTITUTE, TRIM, COUNTA, 
+        COUNTIF/COUNTIFS, IF/IFS, FILTER, PivotTables, Pivot Charts, Power Query, Macros.
       </div>
     </div>
-  </section>
+
+    <!-- Data Visualization -->
+    <div class="entry" style="margin-bottom:12px">
+      <span style="font-weight:700">Data Visualization</span>
+      <button class="pill" type="button" onclick="toggleById('dataVisSkill')">HIGHLIGHT</button>
+      <div id="dataVisSkill" style="display:none; margin-top:12px;" class="entry">
+        Power BI (DAX, KPIs, Dashboards, Visualizations), Excel-based Dashboards. 
+      </div>
+    </div>
+
+    <!-- Automation & Tools -->
+    <div class="entry" style="margin-bottom:12px">
+      <span style="font-weight:700">Automation & Tools</span>
+      <button class="pill" type="button" onclick="toggleById('automationSkill')">HIGHLIGHT</button>
+      <div id="automationSkill" style="display:none; margin-top:12px;" class="entry">
+        Power Automate (Task Automation, Notifications), SharePoint (Document Management, Workflow 
+        Integration), Salesforce (Task Tracking, Reporting).
+      </div>
+    </div>
+
+    <!-- Databases -->
+    <div class="entry" style="margin-bottom:12px">
+      <span style="font-weight:700">Databases</span>
+      <button class="pill" type="button" onclick="toggleById('dbSkill')">HIGHLIGHT</button>
+      <div id="dbSkill" style="display:none; margin-top:12px;" class="entry">
+        SQL (Data Cleaning, Transformation). 
+      </div>
+    </div>
+
+    <!-- Other Tools -->
+    <div class="entry">
+      <span style="font-weight:700">Other Tools</span>
+      <button class="pill" type="button" onclick="toggleById('otherToolsSkill')">HIGHLIGHT</button>
+      <div id="otherToolsSkill" style="display:none; margin-top:12px;" class="entry">
+        FileZilla (FTP), Microsoft Word, PowerPoint, Outlook. 
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
   <!-- Projects -->
   <section id="PROJECTS" class="section">
@@ -642,6 +654,7 @@ function closeLightbox(){
 </body>
 </html>
 <link rel="stylesheet" href="style.css">
+
 
 
 

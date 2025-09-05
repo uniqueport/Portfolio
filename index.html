@@ -353,36 +353,78 @@
     </div>
   </section>
 
-  <!-- Certifications -->
-  <section id="CERTIFICATION" class="section">
-    <h3 class="reveal">CERTIFICATIONS</h3>
-    <div class="entry reveal" style="background:transparent; border:none; padding:0">
-      <div class="entry" style="margin-bottom:12px">
-        <span style="font-weight:700">Microsoft Excel Advanced</span>
-        <a class="pill" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291/details/certifications/1749600558477/single-media-viewer/?profileId=ACoAAEa9s1sBaMrb4bKlKPkIeAtUj90Ye_c6BUY" target="_blank" rel="noopener">VIEW</a>
-        <button class="pill" type="button" onclick="toggleById('certExcel')">HIGHLIGHT</button>
-        <div id="certExcel" style="display:none; margin-top:12px;" class="entry">
-          Demonstrates expertise in advanced Excel functions, macros, automation, and business reporting.
-        </div>
-      </div>
-      <div class="entry" style="margin-bottom:12px">
-        <span style="font-weight:700">Power BI</span>
-        <a class="pill" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291/details/certifications/1749362315534/single-media-viewer/?profileId=ACoAAEa9s1sBaMrb4bKlKPkIeAtUj90Ye_c6BUY" target="_blank" rel="noopener">VIEW</a>
-        <button class="pill" type="button" onclick="toggleById('certPowerBI')">HIGHLIGHT</button>
-        <div id="certPowerBI" style="display:none; margin-top:12px;" class="entry">
-          Validates skills in Power BI, data visualization, and turning data into actionable insights for business decision-making.
-        </div>
-      </div>
-      <div class="entry">
-        <span style="font-weight:700">Power Automate Fundamentals</span>
-        <a class="pill" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291/details/certifications/1749520882508/single-media-viewer/?profileId=ACoAAEa9s1sBaMrb4bKlKPkIeAtUj90Ye_c6BUY" target="_blank" rel="noopener">VIEW</a>
-        <button class="pill" type="button" onclick="toggleById('certPowerAutomate')">HIGHLIGHT</button>
-        <div id="certPowerAutomate" style="display:none; margin-top:12px;" class="entry">
-          Certified in automating repetitive tasks and workflows using Microsoft Power Automate.
+ <!-- Certifications -->
+<section id="CERTIFICATION" class="section">
+  <h3 class="reveal">CERTIFICATIONS</h3>
+  <div class="entry reveal" style="background:transparent; border:none; padding:0">
+
+    <!-- Excel -->
+    <div class="entry" style="margin-bottom:20px">
+      <span style="font-weight:700">Microsoft Excel Advanced</span>
+      <a class="pill" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291/details/certifications/1749600558477/single-media-viewer/" target="_blank" rel="noopener">VIEW</a>
+      <button class="pill" type="button" onclick="toggleById('certExcel')">HIGHLIGHT</button>
+      <div id="certExcel" style="display:none; margin-top:12px;" class="entry">
+        Demonstrates expertise in advanced Excel functions, macros, automation, and business reporting.
+        <div class="cert-gallery">
+          <img src="assets/EXCEL.jpg" alt="Excel Certificate" onclick="openLightbox(this)">
         </div>
       </div>
     </div>
-  </section>
+
+    <!-- Power BI -->
+    <div class="entry" style="margin-bottom:20px">
+      <span style="font-weight:700">Power BI</span>
+      <a class="pill" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291/details/certifications/1749362315534/single-media-viewer/" target="_blank" rel="noopener">VIEW</a>
+      <button class="pill" type="button" onclick="toggleById('certPowerBI')">HIGHLIGHT</button>
+      <div id="certPowerBI" style="display:none; margin-top:12px;" class="entry">
+        Validates skills in Power BI, data visualization, and turning data into actionable insights.
+        <div class="cert-gallery">
+          <img src="assets/POWER BI.jpg" alt="Power BI Certificate" onclick="openLightbox(this)">
+        </div>
+      </div>
+    </div>
+
+    <!-- Power Automate -->
+    <div class="entry" style="margin-bottom:20px">
+      <span style="font-weight:700">Power Automate Fundamentals</span>
+      <a class="pill" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291/details/certifications/1749520882508/single-media-viewer/" target="_blank" rel="noopener">VIEW</a>
+      <button class="pill" type="button" onclick="toggleById('certPowerAutomate')">HIGHLIGHT</button>
+      <div id="certPowerAutomate" style="display:none; margin-top:12px;" class="entry">
+        Certified in automating repetitive tasks and workflows using Microsoft Power Automate.
+        <div class="cert-gallery">
+          <img src="assets/Power automate.jpg" alt="Power Automate Certificate" onclick="openLightbox(this)">
+        </div>
+      </div>
+    </div>
+
+    <!-- PGDCA -->
+    <div class="entry" style="margin-bottom:20px">
+      <span style="font-weight:700">Post Graduate Diploma in Computer Application (PGDCA)</span>
+      <button class="pill" type="button" onclick="toggleById('certPGDCA')">HIGHLIGHT</button>
+      <div id="certPGDCA" style="display:none; margin-top:12px;" class="entry">
+        Completed PGDCA covering computer applications, databases, and programming fundamentals.
+        <div class="cert-gallery">
+          <img src="assets/PGDCA.jpg" alt="PGDCA Certificate" onclick="openLightbox(this)">
+        </div>
+      </div>
+    </div>
+
+    <!-- EY Audit PDF -->
+    <div class="entry">
+      <span style="font-weight:700">EY Audit Job Simulation</span>
+      <a class="pill" href="assets/EY-Audit job simulation.pdf" target="_blank">VIEW</a>
+      <button class="pill" type="button" onclick="toggleById('certEY')">HIGHLIGHT</button>
+      <div id="certEY" style="display:none; margin-top:12px;" class="entry">
+        Completed EY Audit simulation showcasing real-world casework and financial audit skills.
+        <div class="cert-gallery">
+          <img src="https://img.icons8.com/ios-filled/200/ffffff/pdf.png" alt="EY Audit PDF" onclick="window.open('assets/EY-Audit job simulation.pdf','_blank')">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
   <!-- Education -->
   <section id="EDUCATION" class="section">
@@ -537,3 +579,4 @@
 </body>
 </html>
 <link rel="stylesheet" href="style.css">
+

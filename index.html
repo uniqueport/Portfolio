@@ -1,216 +1,539 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Santhosh S — Portfolio</title>
-  <meta name="description" content="Portfolio of Santhosh S | Analyst with 3 years in BFSI domain. Skilled in Excel, Power BI, SQL, workflow automation and process improvement." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Santhosh Suresh Portfolio</title>
+  <meta name="description" content="Portfolio" />
   <style>
-    :root {
-      --bg: #0f1113;
-      --text: #eef2f6;
-      --muted: #9aa3ad;
-      --accent: #5eead4;
-      --card: #1b1e23;
-      --max-width: 1100px;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; font-family: Arial, sans-serif;
-      background: var(--bg); color: var(--text);
-      line-height: 1.6;
-    }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    /* ------------------------------
+       Design Tokens (Dark default)
+    ------------------------------ */
+    :root{
+      /* base */
+      --bg: #0e0e0e;
+      --fg: #e8e8e8;
+      --muted: #a6a6a6;
+      --accent: #4A90E2; /* professional blue */
+      --card: #151515;
+      --line: #232323;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
 
-    header {
-      background: #111; padding: 1rem; text-align: center;
-    }
-    header h1 { margin: 0; font-size: 1.8rem; }
-    header nav { margin-top: .5rem; }
-    header nav a { margin: 0 .5rem; }
+      /* layout */
+      --wrap: 1080px;
+      --space-1: 6px;
+      --space-2: 10px;
+      --space-3: 14px;
+      --space-4: 20px;
+      --space-5: 24px;
+      --space-6: 28px;
+      --space-7: 32px;
 
-    main { max-width: var(--max-width); margin: auto; padding: 1rem; }
-    section { margin: 2rem 0; }
-    h2 { border-bottom: 2px solid var(--accent); padding-bottom: .3rem; }
+      --font: 16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+    }
 
-    ul { padding-left: 1.2rem; }
+    /* Light scheme tokens (system) */
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg: #f6f7f9;
+        --fg: #1b1f23;
+        --muted: #5b6168;
+        --accent: #3a7bd5; /* slightly deeper for contrast */
+        --card: #ffffff;
+        --line: #d7dbe0;
+        --shadow: 0 10px 24px rgba(17,24,39,.08);
+      }
+    }
 
-    /* carousel */
-    .carousel {
-      position: relative; overflow: hidden;
-      background: var(--card); border-radius: 8px; padding: 1rem;
+    /* Manual override via [data-theme] */
+    html[data-theme="light"]{
+      --bg: #f6f7f9;
+      --fg: #1b1f23;
+      --muted: #5b6168;
+      --accent: #3a7bd5;
+      --card: #ffffff;
+      --line: #d7dbe0;
+      --shadow: 0 10px 24px rgba(17,24,39,.08);
     }
-    .carousel-track {
-      display: flex; transition: transform .5s ease;
+    html[data-theme="dark"]{
+      --bg: #0e0e0e;
+      --fg: #e8e8e8;
+      --muted: #a6a6a6;
+      --accent: #4A90E2;
+      --card: #151515;
+      --line: #232323;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
-    .carousel-slide {
-      min-width: 100%; text-align: center;
-    }
-    .carousel-slide img {
-      max-width: 100%; height: auto; border-radius: 8px;
-    }
-    .carousel-controls {
-      position: absolute; top: 50%; width: 100%;
-      display: flex; justify-content: space-between;
-      transform: translateY(-50%);
-    }
-    .carousel-controls button {
-      background: rgba(0,0,0,0.5); border: none; color: #fff;
-      font-size: 1.5rem; padding: .5rem 1rem; cursor: pointer;
-    }
-    .carousel-dots {
-      text-align: center; margin-top: .5rem;
-    }
-    .carousel-dots button {
-      width: 10px; height: 10px; margin: 0 4px; border-radius: 50%;
-      border: none; background: var(--muted); cursor: pointer;
-    }
-    .carousel-dots button.active { background: var(--accent); }
 
-    footer {
-      text-align: center; padding: 1rem; background: #111; color: var(--muted);
+    /* ------------------------------
+       Base Styles
+    ------------------------------ */
+    *{box-sizing:border-box}
+    body{
+      margin:0; font:var(--font); color:var(--fg);
+      background:
+        radial-gradient(60vw 60vw at 10% -10%, rgba(74,144,226,.10), transparent 40%),
+        radial-gradient(70vw 70vw at 110% 10%, rgba(74,144,226,.08), transparent 40%),
+        var(--bg);
+      background-attachment: fixed;
     }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--wrap); margin-inline:auto; padding:var(--space-6) var(--space-4)}
+
+    /* Header */
+    header{position:sticky; top:0; z-index:10; backdrop-filter:saturate(140%) blur(8px); background:linear-gradient(to bottom, color-mix(in srgb, var(--bg), transparent 40%), color-mix(in srgb, var(--bg), transparent 10%)); border-bottom:1px solid var(--line)}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:var(--space-3)}
+    .brand{display:flex; align-items:center; gap:var(--space-2); font-weight:700; letter-spacing:.2px}
+    .brand-badge{width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent), white 20%)); box-shadow:0 2px 12px color-mix(in srgb, var(--accent), black 70%)}
+    .menu{display:flex; gap:var(--space-4); flex-wrap:wrap}
+    .menu a{opacity:.9; position:relative}
+    .menu a:hover{opacity:1}
+    .menu a::after{content:""; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:var(--accent); transition:width .25s ease}
+    .menu a:hover::after{width:100%}
+
+    .actions{display:flex; gap:var(--space-2); align-items:center}
+    .btn{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line); background:var(--card); color:var(--fg); padding:8px 12px; border-radius:999px; cursor:pointer; box-shadow:var(--shadow); transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
+    .btn:hover{transform:translateY(-2px); box-shadow:0 18px 40px rgba(0,0,0,.25); border-color:color-mix(in srgb, var(--accent), var(--line))}
+    .btn-ghost{background:transparent}
+
+    .menu-toggle{display:none; background:none; border:1px solid var(--line); color:var(--fg); font-size:1.15rem; border-radius:12px; padding:6px 10px; cursor:pointer}
+
+    /* Hero + Sections */
+    .hero{padding:64px 0 28px}
+    .eyebrow{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; color:var(--muted); font-size:.9rem}
+    h1{font-size:clamp(36px, 6vw, 68px); line-height:1.05; margin:16px 0 6px}
+    h3{font-size:28px; margin:0 0 14px}
+    .lead{color:var(--muted); max-width:65ch}
+
+    .section, .hero{background:color-mix(in srgb, var(--bg), transparent 65%); border-radius:var(--radius); padding:var(--space-5)}
+
+    /* Cards / Grids */
+    .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--space-3); margin:30px 0}
+    .stat{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease}
+    .stat:hover{transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.45)}
+    .stat h2{font-size:40px; margin:0}
+    .stat p{margin:6px 0 0; color:var(--muted)}
+
+    .year{border:1px solid var(--line); border-radius:var(--radius); padding:16px; background:linear-gradient(180deg, color-mix(in srgb, var(--card), transparent 0%), transparent); box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease}
+    .year:hover{transform:translateY(-4px); box-shadow:0 18px 40px rgba(0,0,0,0.45)}
+    .year + .year{margin-top:12px}
+    .year-header{display:flex; align-items:center; justify-content:space-between; cursor:pointer}
+
+    .pill{font-size:12px; text-transform:uppercase; color:var(--bg); background:var(--accent); border-radius:999px; padding:6px 10px; letter-spacing:.8px; border:none; cursor:pointer; transition:filter .2s ease}
+    .pill:hover{filter:brightness(0.95)}
+
+    .entries{margin-top:10px; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px}
+    .entry{border:1px solid var(--line); border-radius:14px; padding:16px; background:var(--card); transition:transform .25s ease, box-shadow .25s ease}
+    .entry:hover{transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.45)}
+    .entry small{display:block; color:var(--muted)}
+
+    .brands{display:grid; grid-template-columns:repeat(5,1fr); gap:12px}
+    .brandcard{aspect-ratio:5/3; border:1px solid var(--line); border-radius:16px; background:var(--card); display:grid; place-items:center; color:var(--muted); font-weight:600; transition:transform .25s ease, box-shadow .25s ease}
+    .brandcard:hover{transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.45)}
+
+    /* Scroll-in animations, respecting reduced motion */
+    .reveal{opacity:0; transform:translateY(18px)}
+    .reveal.show{opacity:1; transform:none; transition:opacity .6s ease, transform .6s ease}
+
+    /* Footer */
+    footer{border-top:1px solid var(--line); padding-top:var(--space-4); margin-top:var(--space-4); color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .stats{grid-template-columns:repeat(2,1fr)}
+      .entries{grid-template-columns:1fr}
+      .brands{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width: 600px){
+      h1{font-size:clamp(28px, 8vw, 48px)}
+      h3{font-size:22px}
+      .lead{font-size:.95rem}
+      .stats{grid-template-columns:1fr}
+      .entries{grid-template-columns:1fr}
+      .brands{grid-template-columns:1fr}
+      .menu{display:none; position:absolute; left:0; right:0; top:60px; flex-direction:column; background:var(--card); padding:10px 20px; border-top:1px solid var(--line)}
+      .menu.show{display:flex}
+      .menu a{padding:10px 0}
+      .menu-toggle{display:inline-block}
+    }
+
+    /* Focus styles for accessibility */
+    :where(a,button,[role="button"]) {outline:none}
+    :where(a,button,[role="button"]):focus-visible{box-shadow:0 0 0 3px color-mix(in srgb, var(--accent), transparent 60%); border-radius:10px}
   </style>
 </head>
 <body>
 <header>
-  <h1>SANTHOSH SURESH</h1>
-  <nav>
-    <a href="mailto:santhosh02516@gmail.com">Email</a> |
-    <a href="tel:+919543158080">Phone</a> |
-    <a href="https://linkedin.com/in/santhosh-suresh-1b7577291" target="_blank">LinkedIn</a>
-  </nav>
+  <div class="wrap nav">
+    <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+    <div class="brand"><span aria-hidden="true" class="brand-badge"></span><span>SANTHOSH SURESH</span></div>
+    <nav aria-label="Primary" class="menu">
+      <a href="#SUMMARYS">SUMMARY</a>
+      <a href="#EXPERIENCE">EXPERIENCE</a>
+      <a href="#CORECOMPETENCIES">CORE COMPETENCIES</a>
+      <a href="#TECHNICAL-SKILLS">TECHNICAL SKILLS</a>
+      <a href="#PROJECTS">PROJECTS</a>
+      <a href="#ACHIEVEMENT">ACHIEVEMENTS</a>
+      <a href="#CERTIFICATION">CERTIFICATIONS</a>
+      <a href="#EDUCATION">EDUCATION</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+    <div class="actions">
+      <button id="themeToggle" class="btn btn-ghost" aria-label="Toggle color theme" title="Toggle theme">🌙</button>
+    </div>
+  </div>
 </header>
 
-<main>
-  <section>
-    <h2>Professional Summary</h2>
-    <p>Detail-oriented Analyst with 3 years of experience in the BFSI domain, specializing in process excellence, workflow automation, and business reporting. Proficient in Advanced Excel, Power BI, SQL, and automation tools, with proven success in enhancing SLA/ESL compliance, streamlining operations, and enabling data-driven decision-making. Experienced in knowledge management, stakeholder collaboration, and global reporting delivery. Recognized for driving process improvements, mentoring new joiners, and ensuring audit readiness. Seeking to contribute analytical expertise and process optimization skills to a dynamic environment.</p>
-  </section>
+<main class="wrap">
+  <!-- Hero -->
+  <section id="SUMMARYS" class="hero">
+    <span class="eyebrow">About</span>
+    <h1 id="Portfolio-title" class="reveal">SUMMARY</h1>
+    <p class="lead reveal">Analyst with 3 years of experience in operational support, process optimization, and reporting automation across IT and business service functions. Adept at transforming raw data into meaningful business insights using Excel, Power BI, and SharePoint, aligned with client-specific requirements. Skilled in streamlining workflows through Power Automate to reduce manual effort and enhance accuracy. Experienced in stakeholder coordination, SOP documentation, and delivering timely, insight-driven reports that support data-informed decision-making.</p>
 
-  <section>
-    <h2>Professional Experience</h2>
-    <h3>Tata Consultancy Services (TCS) – BFSI Domain</h3>
-    <h4>Analyst | Oct 2023 – Sep 2025</h4>
-    <ul>
-      <li>Delivered 98% SLA/ESL/MSL compliance by ensuring accurate and timely client reporting.</li>
-      <li>Extracted and transformed raw CSV data from FTP using SQL scripts and automation tools.</li>
-      <li>Designed Excel dashboards and Power BI reports for senior management.</li>
-      <li>Authored SOPs and knowledge repositories ensuring compliance and audit readiness.</li>
-      <li>Acted as SME, mentoring new joiners and leading quality reviews.</li>
-    </ul>
-    <h4>Analyst Trainee | Oct 2022 – Sep 2023</h4>
-    <ul>
-      <li>Trained in BFSI processes, compliance requirements, and SLA/ESL standards.</li>
-      <li>Supported senior analysts with Excel trackers and SLA monitoring.</li>
-      <li>Built foundations in data reporting and automation.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Process Improvements & Projects</h2>
-    <ul>
-      <li><strong>Employee Activity Tracker Automation:</strong> Macro-based tracker, reduced manual effort by 50%.</li>
-      <li><strong>File Converter Macro Tool:</strong> Excel VBA bulk conversion tool, saved 25+ hours/month.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Technical Skills</h2>
-    <ul>
-      <li><strong>Excel:</strong> Advanced formulas, PivotTables, Power Query, Macros.</li>
-      <li><strong>Power BI:</strong> DAX, KPIs, Dashboards.</li>
-      <li><strong>Automation & Tools:</strong> Power Automate, SharePoint, Salesforce.</li>
-      <li><strong>Databases:</strong> SQL (cleaning, transformation).</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Certificates & Honors</h2>
-    <div class="carousel" id="carousel">
-      <div class="carousel-track" id="carouselTrack">
-        <div class="carousel-slide"><img src="assets/EXCEL.jpg" alt="Advanced Excel Certificate"></div>
-        <div class="carousel-slide"><img src="assets/PGDCA.jpg" alt="PGDCA Certificate"></div>
-        <div class="carousel-slide"><img src="assets/Power_automate.jpg" alt="Power Automate"></div>
-        <div class="carousel-slide"><img src="assets/POWER_BI.jpg" alt="Power BI"></div>
-        <div class="carousel-slide"><img src="assets/POWER_BI.jpg" alt="EY-Audit job simulation"></div>
+    <div class="stats" role="list">
+      <div class="stat reveal" role="listitem">
+        <h2 data-counter target="3">0</h2>
+        <p>Years of Experience</p>
       </div>
-      <div class="carousel-controls">
-        <button id="prevBtn">◀</button>
-        <button id="nextBtn">▶</button>
+      <div class="stat reveal" role="listitem">
+        <h2 data-counter target="3">0</h2>
+        <p>Certification</p>
       </div>
-      <div class="carousel-dots" id="carouselDots"></div>
+      <div class="stat reveal" role="listitem">
+        <h2 data-counter target="2">0</h2>
+        <p>Project</p>
+      </div>
+      <div class="stat reveal" role="listitem">
+        <h2 data-counter target="2">0</h2>
+        <p>Degrees</p>
+      </div>
     </div>
   </section>
 
-  <section>
-    <h2>Achievements</h2>
-    <ul>
-      <li>On-the-Spot Excellence Award for consistently meeting SLA targets.</li>
-      <li>Appreciated by client leadership for accuracy of global reporting.</li>
-      <li>Reduced ramp-up time by 30% via onboarding & mentoring.</li>
-    </ul>
+  <!-- Experience -->
+  <section id="EXPERIENCE" class="section">
+    <h3 id="EXPERIENCE-title" class="reveal">EXPERIENCE</h3>
+    <details class="year reveal" open>
+      <summary class="year-header"><strong>2022–2025</strong> <button class="pill" type="button" onclick="toggleById('profSummary')">HIGHLIGHTS</button></summary>
+      <div class="entries" style="gap: 20px;">
+        <div class="entry">
+          <strong style="font-size:1.1em;">Analyst</strong>
+          <div><small>Tata Consultancy Services (TCS)</small></div>
+          <div><small>Chennai | 2022 – Present</small></div>
+        </div>
+        <div class="entry">
+          <strong style="font-size:1.1em;">Domain</strong>
+          <div><small>BFSI</small></div>
+          <div><small>(Banking, Financial Services &amp; Insurance)</small></div>
+        </div>
+      </div>
+      <div id="profSummary" style="display:none; margin-top: 20px;">
+        <div class="entry">
+          <strong style="font-size:1.05em; display:block; margin-bottom:10px;">PROFESSIONAL SUMMARY</strong>
+          <ul style="margin:0; padding-left:20px;">
+            <li>Collaborated with global teams to manage skills tracking documentation, align roles to structured frameworks, and support compliance-driven SOP repositories.</li>
+            <li>Maintained and updated structured role descriptions, accountability matrices, and process documentation to aid talent management and internal audits.</li>
+            <li>Supported organizational changes by tracking role/responsibility shifts and assisting with stakeholder communications.</li>
+            <li>Developed Excel-based reconciliation tools and reporting templates to align with skill frameworks and facilitate monthly stakeholder reporting.</li>
+            <li>Automated documentation workflows using Power Automate and Excel Macros, reducing manual effort by 50% and improving data consistency.</li>
+            <li>Organized and tracked deliverables from cross-functional meetings on career planning and audit readiness using Excel, Outlook, and SharePoint.</li>
+            <li>Partnered with legal, compliance, and operations teams to mitigate risks and resolve queries around role documentation and ownership.</li>
+            <li>Led onboarding and training to clarify role expectations, capability frameworks, and process interdependencies for new team members.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
   </section>
 
-  <section>
-    <h2>Education</h2>
-    <ul>
-      <li>Bachelor’s Degree in Business Administration – Bharathiar University</li>
-      <li>Post Graduate Diploma in Computer Application – Browzone Infotech</li>
-      <li>Business Analyst (IIBA & PMI aligned) – LinkedIn Learning</li>
-      <li>EY Audit Job Simulation – Forage (<a href="assets/EY-Audit_job_simulation.pdf" target="_blank">PDF</a>)</li>
-    </ul>
+  <!-- Core Competencies -->
+  <section id="CORECOMPETENCIES" class="section">
+    <h3 class="reveal">CORE COMPETENCIES</h3>
+    <div class="entry reveal">
+      <ul style="list-style:none; padding:0; margin:0;">
+        <li><strong>Process Coordination</strong> | <strong>Workflow Optimization</strong> | <strong>SOP Documentation</strong></li>
+        <li>● <strong>Excel Automation</strong> | <strong>Power Automate</strong> | <strong>KPI Tracking &amp; Dashboards (Excel/Power BI)</strong></li>
+        <li>● <strong>Cross-functional Collaboration</strong> | <strong>Stakeholder Engagement</strong> | <strong>SharePoint Documentation</strong></li>
+        <li>● <strong>Team Support</strong> | <strong>Knowledge Sharing</strong> | <strong>Strong Communication &amp; Adaptability</strong></li>
+      </ul>
+    </div>
   </section>
 
-  <section>
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:santhosh02516@gmail.com">santhosh02516@gmail.com</a></p>
-    <p>Phone: <a href="tel:+919543158080">+91 95431 58080</a></p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/santhosh-suresh-1b7577291" target="_blank">linkedin.com/in/santhosh-suresh-1b7577291</a></p>
+  <!-- Technical Skills -->
+  <section id="TECHNICAL-SKILLS" class="section">
+    <h3 class="reveal">TECHNICAL SKILLS</h3>
+    <div class="entry reveal" style="background:transparent; border:none; padding:0">
+      <div class="entry" style="margin-bottom:12px">
+        <span style="font-weight:700">Excel</span>
+        <button class="pill" type="button" onclick="toggleById('excelSkill')">HIGHLIGHT</button>
+        <div id="excelSkill" style="display:none; margin-top:12px;" class="entry">
+          VLOOKUP, PivotTables, Macros, Power Query
+        </div>
+      </div>
+      <div class="entry" style="margin-bottom:12px">
+        <span style="font-weight:700">Power BI</span>
+        <button class="pill" type="button" onclick="toggleById('powerBISkill')">HIGHLIGHT</button>
+        <div id="powerBISkill" style="display:none; margin-top:12px;" class="entry">
+          DAX, Dashboards, Visualizations
+        </div>
+      </div>
+      <div class="entry" style="margin-bottom:12px">
+        <span style="font-weight:700">Power Automate</span>
+        <button class="pill" type="button" onclick="toggleById('powerAutomateSkill')">HIGHLIGHT</button>
+        <div id="powerAutomateSkill" style="display:none; margin-top:12px;" class="entry">
+          Task Automation, Notification Workflows
+        </div>
+      </div>
+      <div class="entry" style="margin-bottom:12px">
+        <span style="font-weight:700">SharePoint</span>
+        <button class="pill" type="button" onclick="toggleById('sharePointSkill')">HIGHLIGHT</button>
+        <div id="sharePointSkill" style="display:none; margin-top:12px;" class="entry">
+          Document Management, Workflow Integration
+        </div>
+      </div>
+      <div class="entry">
+        <span style="font-weight:700">Microsoft Suite</span>
+        <button class="pill" type="button" onclick="toggleById('msSuiteSkill')">HIGHLIGHT</button>
+        <div id="msSuiteSkill" style="display:none; margin-top:12px;" class="entry">
+          Word, PowerPoint, Outlook
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="PROJECTS" class="section">
+    <h3 class="reveal">PROJECTS</h3>
+    <div class="entry reveal" style="background:transparent; border:none; padding:0">
+      <div style="font-size:1.05em; letter-spacing:.5px; color:var(--muted); margin-bottom:12px;">2022–2025</div>
+      <div class="entry" style="margin-bottom:12px">
+        <span style="font-weight:700">Employee Activity Tracker Automation</span>
+        <button class="pill" type="button" onclick="toggleById('activityTracker')">HIGHLIGHT</button>
+        <div id="activityTracker" style="display:none; margin-top:12px;" class="entry">
+          Built an Excel macro-based activity tracker to log and monitor employee tasks throughout the day, enabling visibility into work patterns, accurate calculation of extra working hours, and individual performance assessment—reducing manual effort by 50% and increasing reporting accuracy.
+        </div>
+      </div>
+      <div class="entry">
+        <span style="font-weight:700">File Converter Macro Tool</span>
+        <button class="pill" type="button" onclick="toggleById('fileConverter')">HIGHLIGHT</button>
+        <div id="fileConverter" style="display:none; margin-top:12px;" class="entry">
+          Developed an Excel VBA automation tool that allows opening and converting multiple files across various formats simultaneously with a single click—streamlining document processing, reducing manual effort, and saving 25+ hours per month.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements -->
+  <section id="ACHIEVEMENT" class="section">
+    <h3 class="reveal">ACHIEVEMENTS</h3>
+    <div class="entry reveal" style="background:transparent; border:none; padding:0">
+      <div style="font-size:1.05em; letter-spacing:.5px; color:var(--muted); margin-bottom:12px;">2022–2025 @TCS</div>
+      <div class="entry" style="margin-bottom:12px">
+        <span style="font-weight:700">ON SPOT AWARD</span>
+        <button class="pill" type="button" onclick="toggleById('spotAward')">HIGHLIGHT</button>
+        <div id="spotAward" style="display:none; margin-top:12px;" class="entry">
+          Received On-the-Spot Excellence Award during probation for outstanding performance and rapid understanding of processes, achieving ESL within defined SLA targets.
+        </div>
+      </div>
+      <div class="entry" style="margin-bottom:12px">
+        <span style="font-weight:700">CLIENT APPRECIATION</span>
+        <button class="pill" type="button" onclick="toggleById('clientAppreciation')">HIGHLIGHT</button>
+        <div id="clientAppreciation" style="display:none; margin-top:12px;" class="entry">
+          Appreciated by client for maintaining consistent SLA performance during high-volume operations.
+        </div>
+      </div>
+      <div class="entry">
+        <span style="font-weight:700">SPOC</span>
+        <button class="pill" type="button" onclick="toggleById('spoc')">HIGHLIGHT</button>
+        <div id="spoc" style="display:none; margin-top:12px;" class="entry">
+          Led onboarding sessions and improved team ramp-up time and process adherence.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section id="CERTIFICATION" class="section">
+    <h3 class="reveal">CERTIFICATIONS</h3>
+    <div class="entry reveal" style="background:transparent; border:none; padding:0">
+      <div class="entry" style="margin-bottom:12px">
+        <span style="font-weight:700">Microsoft Excel Advanced</span>
+        <a class="pill" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291/details/certifications/1749600558477/single-media-viewer/?profileId=ACoAAEa9s1sBaMrb4bKlKPkIeAtUj90Ye_c6BUY" target="_blank" rel="noopener">VIEW</a>
+        <button class="pill" type="button" onclick="toggleById('certExcel')">HIGHLIGHT</button>
+        <div id="certExcel" style="display:none; margin-top:12px;" class="entry">
+          Demonstrates expertise in advanced Excel functions, macros, automation, and business reporting.
+        </div>
+      </div>
+      <div class="entry" style="margin-bottom:12px">
+        <span style="font-weight:700">Power BI</span>
+        <a class="pill" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291/details/certifications/1749362315534/single-media-viewer/?profileId=ACoAAEa9s1sBaMrb4bKlKPkIeAtUj90Ye_c6BUY" target="_blank" rel="noopener">VIEW</a>
+        <button class="pill" type="button" onclick="toggleById('certPowerBI')">HIGHLIGHT</button>
+        <div id="certPowerBI" style="display:none; margin-top:12px;" class="entry">
+          Validates skills in Power BI, data visualization, and turning data into actionable insights for business decision-making.
+        </div>
+      </div>
+      <div class="entry">
+        <span style="font-weight:700">Power Automate Fundamentals</span>
+        <a class="pill" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291/details/certifications/1749520882508/single-media-viewer/?profileId=ACoAAEa9s1sBaMrb4bKlKPkIeAtUj90Ye_c6BUY" target="_blank" rel="noopener">VIEW</a>
+        <button class="pill" type="button" onclick="toggleById('certPowerAutomate')">HIGHLIGHT</button>
+        <div id="certPowerAutomate" style="display:none; margin-top:12px;" class="entry">
+          Certified in automating repetitive tasks and workflows using Microsoft Power Automate.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="EDUCATION" class="section">
+    <h3 class="reveal">EDUCATION</h3>
+    <div class="entry reveal">
+      <ul style="list-style:none; padding:0; margin:0;">
+        <li>● <strong>Bachelor’s Degree in Business Administration</strong> – Bharathiar University</li>
+        <li>● <strong>Post Graduate Diploma in Computer Application</strong> – Browzone Infotech</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <h3 class="reveal">Contact</h3>
+    <div class="entry contact-card reveal" style="max-width:600px; display:flex; flex-direction:column; gap:20px;">
+      <div>
+        <p class="lead" style="margin:0 0 8px; font-size:1.05em; font-weight:bold;">SANTHOSH SURESH</p>
+        <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap">
+          <a class="pill" aria-label="Send Email" href="mailto:santhosh02516@gmail.com">EMAIL</a>
+          <a class="pill" aria-label="Call Phone" href="tel:9543158080">CALL</a>
+          <a class="pill" aria-label="LinkedIn" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291" rel="noopener" target="_blank">LINKEDIN</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="margin:0 0 8px">Quick Email Draft</h4>
+        <form id="quickEmailForm" style="display:flex; flex-direction:column; gap:10px;">
+          <input id="fromEmail" type="email" name="from" placeholder="From (your email)" required
+                 style="padding:10px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;">
+          <input id="ccEmail" type="text" name="cc" placeholder="CC (optional)"
+                 style="padding:10px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;">
+          <input id="bccEmail" type="text" name="bcc" placeholder="BCC (optional)"
+                 style="padding:10px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;">
+          <input id="subject" type="text" name="subject" placeholder="Subject" required
+                 style="padding:10px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;">
+          <textarea id="body" name="body" placeholder="Body" rows="6" required
+                    style="padding:12px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;"></textarea>
+          <button type="submit" class="btn" style="align-self:flex-start; background:var(--accent); color:#fff; border:none">Send Draft</button>
+          <p style="font-size:.9rem; color:var(--muted); margin:4px 0 0;">By using above feature you can send mail to this id <strong>santhosh02516@gmail.com</strong> (If not, you can send mail by clicking EMAIL above).</p>
+        </form>
+      </div>
+    </div>
   </section>
 </main>
 
-<footer>
-  <p>&copy; <span id="year"></span> Santhosh S — Portfolio</p>
-</footer>
+<footer class="wrap">© <span id="year"></span> Santhosh Suresh</footer>
 
 <script>
-  const track = document.getElementById('carouselTrack');
-  const slides = Array.from(track.children);
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const dotsContainer = document.getElementById('carouselDots');
-  let index = 0;
+  // Helper: toggle show/hide blocks by id
+  function toggleById(id){
+    const el = document.getElementById(id);
+    const show = el.style.display === 'none' || !el.style.display;
+    el.style.display = show ? 'block' : 'none';
+  }
 
-  function updateSlide() {
-    track.style.transform = `translateX(-${index * 100}%)`;
-    Array.from(dotsContainer.children).forEach((dot, i) => {
-      dot.classList.toggle('active', i === index);
+  // Count-up animation for stats (respects reduced motion)
+  (function(){
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('[data-counter]').forEach(el=>{
+      const target = Number(el.getAttribute('target')||0);
+      if(prefersReduced || target === 0){ el.textContent = target; return; }
+      const duration = 1200; const start = performance.now();
+      const step = (t)=>{
+        const p = Math.min(1, (t-start)/duration);
+        el.textContent = Math.floor(p*target).toLocaleString();
+        if(p<1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
     });
-  }
+  })();
 
-  function goToSlide(i) {
-    index = (i + slides.length) % slides.length;
-    updateSlide();
-  }
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-  prevBtn.addEventListener('click', () => goToSlide(index - 1));
-  nextBtn.addEventListener('click', () => goToSlide(index + 1));
-
-  // dots
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.addEventListener('click', () => goToSlide(i));
-    dotsContainer.appendChild(dot);
+  // Mobile menu
+  document.querySelector('.menu-toggle').addEventListener('click',()=>{
+    document.querySelector('header .menu').classList.toggle('show');
   });
 
-  // autoplay
-  setInterval(() => goToSlide(index + 1), 4000);
+  // Scroll-in reveal
+  (function(){
+    const els = document.querySelectorAll('.reveal, .stat, .entry, .brandcard, .year, section ul');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce){ els.forEach(el=>el.classList.add('show')); return; }
+    els.forEach(el => el.classList.add('reveal'));
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(({isIntersecting, target})=>{
+        if(isIntersecting){ target.classList.add('show'); io.unobserve(target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+  })();
 
-  updateSlide();
-  document.getElementById('year').textContent = new Date().getFullYear();
+  // Quick email draft builder
+  document.getElementById('quickEmailForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const to = 'santhosh02516@gmail.com';
+    const from = document.getElementById('fromEmail').value.trim();
+    const cc = document.getElementById('ccEmail').value.trim();
+    const bcc = document.getElementById('bccEmail').value.trim();
+    const subject = encodeURIComponent(document.getElementById('subject').value.trim());
+    const bodyRaw = document.getElementById('body').value.trim();
+    const body = encodeURIComponent(`From: ${from}\n\n${bodyRaw}`);
+    let mailto = `mailto:${to}?subject=${subject}&body=${body}`;
+    if(cc) mailto += `&cc=${encodeURIComponent(cc)}`;
+    if(bcc) mailto += `&bcc=${encodeURIComponent(bcc)}`;
+    window.location.href = mailto;
+  });
+
+  // ------------------------------
+  // Theme: system + manual toggle
+  // ------------------------------
+  (function(){
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const THEME_KEY = 'theme-preference'; // 'light' | 'dark' | 'system'
+
+    // Apply preferred theme on load
+    const saved = localStorage.getItem(THEME_KEY) || 'system';
+    applyTheme(saved);
+
+    // Update icon
+    updateIcon();
+
+    btn.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') || 'system';
+      // cycle: system -> light -> dark -> system
+      const next = current === 'system' ? 'light' : current === 'light' ? 'dark' : 'system';
+      localStorage.setItem(THEME_KEY, next);
+      applyTheme(next);
+      updateIcon();
+    });
+
+    function applyTheme(mode){
+      if(mode === 'system') root.setAttribute('data-theme', 'system');
+      else if(mode === 'light') root.setAttribute('data-theme', 'light');
+      else root.setAttribute('data-theme', 'dark');
+    }
+    function updateIcon(){
+      const mode = root.getAttribute('data-theme');
+      btn.textContent = mode === 'light' ? '☀️' : mode === 'dark' ? '🌙' : '🖥️';
+      btn.title = `Theme: ${mode}`;
+      btn.setAttribute('aria-label', `Theme: ${mode}`);
+    }
+
+    // If user uses system and their OS theme changes, reflect it
+    const mql = window.matchMedia('(prefers-color-scheme: dark)');
+    mql.addEventListener?.('change', () => { if((localStorage.getItem(THEME_KEY)||'system')==='system') applyTheme('system'); });
+  })();
 </script>
 </body>
 </html>
-
+<link rel="stylesheet" href="style.css">

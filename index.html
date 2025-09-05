@@ -4,179 +4,212 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Santhosh S — Portfolio</title>
-  <meta name="description" content="Santhosh S | Analyst - Process excellence, workflow automation, Power BI & Advanced Excel. Portfolio with sliding certificates." />
-  <meta name="author" content="Santhosh S" />
-  <link rel="stylesheet" href="css/styles.css" />
-  <!-- Open Graph for social preview -->
-  <meta property="og:title" content="Santhosh S — Analyst Portfolio" />
-  <meta property="og:description" content="Process excellence, automation, Power BI & Advanced Excel." />
+  <meta name="description" content="Portfolio of Santhosh S | Analyst with 3 years in BFSI domain. Skilled in Excel, Power BI, SQL, workflow automation and process improvement." />
+  <style>
+    :root {
+      --bg: #0f1113;
+      --text: #eef2f6;
+      --muted: #9aa3ad;
+      --accent: #5eead4;
+      --card: #1b1e23;
+      --max-width: 1100px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: Arial, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      background: #111; padding: 1rem; text-align: center;
+    }
+    header h1 { margin: 0; font-size: 1.8rem; }
+    header nav { margin-top: .5rem; }
+    header nav a { margin: 0 .5rem; }
+
+    main { max-width: var(--max-width); margin: auto; padding: 1rem; }
+    section { margin: 2rem 0; }
+    h2 { border-bottom: 2px solid var(--accent); padding-bottom: .3rem; }
+
+    ul { padding-left: 1.2rem; }
+
+    /* carousel */
+    .carousel {
+      position: relative; overflow: hidden;
+      background: var(--card); border-radius: 8px; padding: 1rem;
+    }
+    .carousel-track {
+      display: flex; transition: transform .5s ease;
+    }
+    .carousel-slide {
+      min-width: 100%; text-align: center;
+    }
+    .carousel-slide img {
+      max-width: 100%; height: auto; border-radius: 8px;
+    }
+    .carousel-controls {
+      position: absolute; top: 50%; width: 100%;
+      display: flex; justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    .carousel-controls button {
+      background: rgba(0,0,0,0.5); border: none; color: #fff;
+      font-size: 1.5rem; padding: .5rem 1rem; cursor: pointer;
+    }
+    .carousel-dots {
+      text-align: center; margin-top: .5rem;
+    }
+    .carousel-dots button {
+      width: 10px; height: 10px; margin: 0 4px; border-radius: 50%;
+      border: none; background: var(--muted); cursor: pointer;
+    }
+    .carousel-dots button.active { background: var(--accent); }
+
+    footer {
+      text-align: center; padding: 1rem; background: #111; color: var(--muted);
+    }
+  </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+<header>
+  <h1>SANTHOSH SURESH</h1>
+  <nav>
+    <a href="mailto:santhosh02516@gmail.com">Email</a> |
+    <a href="tel:+919543158080">Phone</a> |
+    <a href="https://linkedin.com/in/santhosh-suresh-1b7577291" target="_blank">LinkedIn</a>
+  </nav>
+</header>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <h1 class="site-title">SANTHOSH SURESH</h1>
-        <p class="subtitle">Analyst — Process Excellence & Reporting</p>
+<main>
+  <section>
+    <h2>Professional Summary</h2>
+    <p>Detail-oriented Analyst with 3 years of experience in the BFSI domain, specializing in process excellence, workflow automation, and business reporting. Proficient in Advanced Excel, Power BI, SQL, and automation tools, with proven success in enhancing SLA/ESL compliance, streamlining operations, and enabling data-driven decision-making. Experienced in knowledge management, stakeholder collaboration, and global reporting delivery. Recognized for driving process improvements, mentoring new joiners, and ensuring audit readiness. Seeking to contribute analytical expertise and process optimization skills to a dynamic environment.</p>
+  </section>
+
+  <section>
+    <h2>Professional Experience</h2>
+    <h3>Tata Consultancy Services (TCS) – BFSI Domain</h3>
+    <h4>Analyst | Oct 2023 – Sep 2025</h4>
+    <ul>
+      <li>Delivered 98% SLA/ESL/MSL compliance by ensuring accurate and timely client reporting.</li>
+      <li>Extracted and transformed raw CSV data from FTP using SQL scripts and automation tools.</li>
+      <li>Designed Excel dashboards and Power BI reports for senior management.</li>
+      <li>Authored SOPs and knowledge repositories ensuring compliance and audit readiness.</li>
+      <li>Acted as SME, mentoring new joiners and leading quality reviews.</li>
+    </ul>
+    <h4>Analyst Trainee | Oct 2022 – Sep 2023</h4>
+    <ul>
+      <li>Trained in BFSI processes, compliance requirements, and SLA/ESL standards.</li>
+      <li>Supported senior analysts with Excel trackers and SLA monitoring.</li>
+      <li>Built foundations in data reporting and automation.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Process Improvements & Projects</h2>
+    <ul>
+      <li><strong>Employee Activity Tracker Automation:</strong> Macro-based tracker, reduced manual effort by 50%.</li>
+      <li><strong>File Converter Macro Tool:</strong> Excel VBA bulk conversion tool, saved 25+ hours/month.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Technical Skills</h2>
+    <ul>
+      <li><strong>Excel:</strong> Advanced formulas, PivotTables, Power Query, Macros.</li>
+      <li><strong>Power BI:</strong> DAX, KPIs, Dashboards.</li>
+      <li><strong>Automation & Tools:</strong> Power Automate, SharePoint, Salesforce.</li>
+      <li><strong>Databases:</strong> SQL (cleaning, transformation).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Certificates & Honors</h2>
+    <div class="carousel" id="carousel">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide"><img src="assets/EXCEL.jpg" alt="Advanced Excel Certificate"></div>
+        <div class="carousel-slide"><img src="assets/PGDCA.jpg" alt="PGDCA Certificate"></div>
+        <div class="carousel-slide"><img src="assets/Power_automate.jpg" alt="Power Automate Certificate"></div>
+        <div class="carousel-slide"><img src="assets/POWER_BI.jpg" alt="Power BI Certificate"></div>
+        <div class="carousel-slide"><img src="assets/TAB_FILE_CONVERTER.png" alt="File Converter Tool"></div>
       </div>
-      <nav class="header-contact" aria-label="Contact and social">
-        <a href="mailto:santhosh02516@gmail.com">santhosh02516@gmail.com</a>
-        <a href="tel:+919543158080">+91 95431 58080</a>
-        <a href="https://linkedin.com/in/santhosh-suresh-1b7577291" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      </nav>
+      <div class="carousel-controls">
+        <button id="prevBtn">◀</button>
+        <button id="nextBtn">▶</button>
+      </div>
+      <div class="carousel-dots" id="carouselDots"></div>
     </div>
-  </header>
+  </section>
 
-  <main id="main">
-    <section class="hero container" aria-labelledby="summary-title">
-      <div>
-        <h2 id="summary-title">Professional Summary</h2>
-        <p class="lead">
-          Detail-oriented Analyst with 3 years in BFSI — process excellence, workflow automation,
-          business reporting. Skilled in Advanced Excel, Power BI, SQL, Power Automate and knowledge management.
-        </p>
-        <a class="cta" href="#contact">Contact me</a>
-      </div>
-      <div class="hero-quick">
-        <dl>
-          <dt>Location</dt><dd>Chennai, India</dd>
-          <dt>Role</dt><dd>Analyst (TCS) — Oct 2023 – Sep 2025</dd>
-          <dt>Education</dt><dd>BBA, PGDCA</dd>
-        </dl>
-      </div>
-    </section>
+  <section>
+    <h2>Achievements</h2>
+    <ul>
+      <li>On-the-Spot Excellence Award for consistently meeting SLA targets.</li>
+      <li>Appreciated by client leadership for accuracy of global reporting.</li>
+      <li>Reduced ramp-up time by 30% via onboarding & mentoring.</li>
+    </ul>
+  </section>
 
-    <section id="experience" class="container cards" aria-labelledby="exp-title">
-      <h2 id="exp-title">Professional Experience</h2>
-      <article class="card">
-        <h3>Tata Consultancy Services (TCS) — Analyst</h3>
-        <time datetime="2023-10">Oct 2023</time> — <time datetime="2025-09">Sep 2025</time>
-        <ul>
-          <li>Delivered 98% SLA/ESL compliance with accurate client reporting.</li>
-          <li>Transformed raw CSV from FTP using SQL and automation; prepared business-ready datasets.</li>
-          <li>Built Excel dashboards (Power Query, PivotTables) & Power BI reports (DAX, KPIs).</li>
-          <li>Maintained SOPs and knowledge repositories; mentored new joiners.</li>
-        </ul>
-      </article>
+  <section>
+    <h2>Education</h2>
+    <ul>
+      <li>Bachelor’s Degree in Business Administration – Bharathiar University</li>
+      <li>Post Graduate Diploma in Computer Application – Browzone Infotech</li>
+      <li>Business Analyst (IIBA & PMI aligned) – LinkedIn Learning</li>
+      <li>EY Audit Job Simulation – Forage (<a href="assets/EY-Audit_job_simulation.pdf" target="_blank">PDF</a>)</li>
+    </ul>
+  </section>
 
-      <article class="card">
-        <h3>Analyst Trainee — TCS</h3>
-        <time datetime="2022-10">Oct 2022</time> — <time datetime="2023-09">Sep 2023</time>
-        <ul>
-          <li>Supported SLA monitoring, Excel trackers, and report validation.</li>
-          <li>Established foundational reporting, automation and documentation skills.</li>
-        </ul>
-      </article>
-    </section>
+  <section>
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:santhosh02516@gmail.com">santhosh02516@gmail.com</a></p>
+    <p>Phone: <a href="tel:+919543158080">+91 95431 58080</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/santhosh-suresh-1b7577291" target="_blank">linkedin.com/in/santhosh-suresh-1b7577291</a></p>
+  </section>
+</main>
 
-    <section id="projects" class="container" aria-labelledby="projects-title">
-      <h2 id="projects-title">Process Improvements & Key Projects</h2>
-      <ul class="projects-list">
-        <li>
-          <strong>Employee Activity Tracker Automation</strong>
-          <p>Excel macro-based tracker to log employee tasks; reduced manual effort by 50% and improved accuracy.</p>
-        </li>
-        <li>
-          <strong>File Converter Macro Tool</strong>
-          <p>Excel VBA bulk converter to change file formats with one click — saved 25+ hours/month.</p>
-        </li>
-      </ul>
-    </section>
+<footer>
+  <p>&copy; <span id="year"></span> Santhosh S — Portfolio</p>
+</footer>
 
-    <section id="skills" class="container cards" aria-labelledby="skills-title">
-      <h2 id="skills-title">Technical Skills</h2>
-      <div class="skill-grid">
-        <div><h4>Excel</h4><p>VLOOKUP, XLOOKUP, INDEX-MATCH, Power Query, PivotTables, Macros</p></div>
-        <div><h4>Power BI</h4><p>DAX, KPIs, Dashboards</p></div>
-        <div><h4>Automation</h4><p>Power Automate, SharePoint integration, FileZilla</p></div>
-        <div><h4>SQL</h4><p>Data cleaning and transformation</p></div>
-      </div>
-    </section>
+<script>
+  const track = document.getElementById('carouselTrack');
+  const slides = Array.from(track.children);
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const dotsContainer = document.getElementById('carouselDots');
+  let index = 0;
 
-    <!-- Certificates / Awards Slider -->
-    <section id="certificates" class="container" aria-labelledby="cert-title">
-      <h2 id="cert-title">Certificates & Honors</h2>
+  function updateSlide() {
+    track.style.transform = `translateX(-${index * 100}%)`;
+    Array.from(dotsContainer.children).forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+  }
 
-      <div class="carousel" id="certificateCarousel" aria-roledescription="carousel" aria-label="Certificates carousel">
-        <div class="carousel-viewport" tabindex="0">
-          <ul class="carousel-track" id="carouselTrack">
-            <!-- slides: add one <li> per certificate -->
-            <li class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Slide 1 of 5">
-              <img data-src="assets/EXCEL.jpg" alt="Advanced Excel certificate — Udemy" class="carousel-img lazy" loading="lazy" />
-              <figcaption>Advanced Excel — Udemy (22 hours) • June 11, 2025</figcaption>
-            </li>
+  function goToSlide(i) {
+    index = (i + slides.length) % slides.length;
+    updateSlide();
+  }
 
-            <li class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Slide 2 of 5">
-              <img data-src="assets/PGDCA.jpg" alt="PGDCA Certificate Browzone Infotech" class="carousel-img lazy" loading="lazy" />
-              <figcaption>Post Graduate Diploma in Computer Application (PGDCA) — Browzone Infotech</figcaption>
-            </li>
+  prevBtn.addEventListener('click', () => goToSlide(index - 1));
+  nextBtn.addEventListener('click', () => goToSlide(index + 1));
 
-            <li class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Slide 3 of 5">
-              <img data-src="assets/Power automate.jpg" alt="Power Automate certificate — Udemy" class="carousel-img lazy" loading="lazy" />
-              <figcaption>Power Automate — Udemy (13 hours) • June 10, 2025</figcaption>
-            </li>
+  // dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  });
 
-            <li class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Slide 4 of 5">
-              <img data-src="assets/POWER BI.jpg" alt="Power BI certificate — Udemy" class="carousel-img lazy" loading="lazy" />
-              <figcaption>Power BI — Udemy (7 hours) • June 8, 2025</figcaption>
-            </li>
+  // autoplay
+  setInterval(() => goToSlide(index + 1), 4000);
 
-            <li class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Slide 5 of 5">
-              <img data-src="assets/TAB_FILE_CONVERTER.png" alt="Tab File Converter Tool screenshot" class="carousel-img lazy" loading="lazy" />
-              <figcaption>File Converter Macro Tool (Screenshot)</figcaption>
-            </li>
-
-          </ul>
-        </div>
-
-        <div class="carousel-controls">
-          <button id="prevBtn" class="btn-icon" aria-label="Previous certificate">◀</button>
-          <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Certificate slides"></div>
-          <button id="nextBtn" class="btn-icon" aria-label="Next certificate">▶</button>
-        </div>
-
-        <div class="carousel-actions">
-          <a id="openAllBtn" class="btn ghost" href="#" onclick="return false">Open All (pdfs/images)</a>
-        </div>
-      </div>
-      <p class="hint">Use ← → keys or swipe on mobile. Click a slide to open image/full file.</p>
-    </section>
-
-    <section id="achievements" class="container" aria-labelledby="achieve-title">
-      <h2 id="achieve-title">Achievements</h2>
-      <ul>
-        <li>On-the-Spot Excellence Award for meeting ESL & SLA targets.</li>
-        <li>Appreciated by client leadership for global reporting accuracy.</li>
-        <li>Reduced ramp-up time by 30% through onboarding & mentoring.</li>
-      </ul>
-    </section>
-
-    <section id="education" class="container cards" aria-labelledby="edu-title">
-      <h2 id="edu-title">Education & Certifications</h2>
-      <ul>
-        <li>Bachelor’s Degree in Business Administration — Bharathiar University</li>
-        <li>PGDCA — Browzone Infotech</li>
-        <li>Business Analyst (IIBA & PMI aligned) — LinkedIn Learning</li>
-        <li>EY Audit Job Simulation — Forage (PDF certificate in assets/)</li>
-      </ul>
-      <p><a href="assets/EY-Audit job simulation.pdf" target="_blank" rel="noopener noreferrer">Open EY Audit Job Simulation (PDF)</a></p>
-    </section>
-
-    <section id="contact" class="container contact" aria-labelledby="contact-title">
-      <h2 id="contact-title">Contact</h2>
-      <address>
-        <strong>Email:</strong> <a href="mailto:santhosh02516@gmail.com">santhosh02516@gmail.com</a><br/>
-        <strong>Phone:</strong> <a href="tel:+919543158080">+91 95431 58080</a><br/>
-        <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/santhosh-suresh-1b7577291" target="_blank" rel="noopener noreferrer">linkedin.com/in/santhosh-suresh-1b7577291</a>
-      </address>
-    </section>
-
-    <footer class="site-footer container" role="contentinfo">
-      <p>&copy; <span id="year"></span> Santhosh S — Built for accessibility & performance.</p>
-    </footer>
-  </main>
-
-  <script src="js/script.js" defer></script>
+  updateSlide();
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>

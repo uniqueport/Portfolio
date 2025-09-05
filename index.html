@@ -527,7 +527,7 @@ function closeLightbox(){
 
     <div>
       <h4 style="margin:0 0 8px">Quick Email Draft</h4>
-      <form id="quickEmailForm" style="display:flex; flex-direction:column; gap:10px;">
+      <form id="quickEmailForm" style="display:flex; flex-direction:column; gap:10px;" onsubmit="sendMail(event)">
         <input id="ccEmail" type="text" name="cc" placeholder="CC (optional)"
                style="padding:10px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;">
         <input id="bccEmail" type="text" name="bcc" placeholder="BCC (optional)"
@@ -544,6 +544,22 @@ function closeLightbox(){
     </div>
   </div>
 </section>
+
+<script>
+function sendMail(event) {
+  event.preventDefault(); // prevent actual form submission
+  const subject = encodeURIComponent(document.getElementById('subject').value);
+  const body = encodeURIComponent(document.getElementById('body').value);
+  const cc = encodeURIComponent(document.getElementById('ccEmail').value);
+  const bcc = encodeURIComponent(document.getElementById('bccEmail').value);
+
+  let mailtoLink = `mailto:santhosh02516@gmail.com?subject=${subject}&body=${body}`;
+  if (cc) mailtoLink += `&cc=${cc}`;
+  if (bcc) mailtoLink += `&bcc=${bcc}`;
+
+  window.location.href = mailtoLink; // opens default mail client
+}
+</script>
 
 
 <footer class="wrap">© <span id="year"></span> Santhosh Suresh</footer>
@@ -654,6 +670,7 @@ function closeLightbox(){
 </body>
 </html>
 <link rel="stylesheet" href="style.css">
+
 
 
 

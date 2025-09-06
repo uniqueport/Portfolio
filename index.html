@@ -675,9 +675,15 @@ function sendMail(event) {
     mql.addEventListener?.('change', () => { if((localStorage.getItem(THEME_KEY)||'system')==='system') applyTheme('system'); });
   })();
 </script>
+    <!-- Insert these three lines immediately after the opening <body> tag in your existing HTML (no other edits). -->
+<div id="enhancer-bg" aria-hidden="true"></div>
+<div id="section-modal" aria-hidden="true"></div>
+<link rel="stylesheet" href="enhancements.css">
+<script src="enhancements.js" defer></script>
 </body>
 </html>
 <link rel="stylesheet" href="style.css">
+
 
 
 

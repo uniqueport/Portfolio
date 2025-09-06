@@ -1,129 +1,195 @@
 /* enhancements.css
-   Animated background, 3D title styles, and modal viewer styles
-   Save as enhancements.css in the same folder as your HTML
+   UX/UI polished visual (uxuiflow-inspired)
+   Save/replace as enhancements.css in the same folder as your HTML
 */
 
+/* Palette */
+:root{
+  --bg-900: #071227;
+  --bg-800: #0b2b44;
+  --glass-01: rgba(255,255,255,0.03);
+  --glass-02: rgba(255,255,255,0.02);
+  --muted: rgba(230,240,250,0.65);
+  --accent: #4A90E2;
+  --accent-2: #6bd3ff;
+  --card: rgba(255,255,255,0.03);
+  --soft-shadow: 0 12px 40px rgba(2,6,12,0.55);
+  --soft-shadow-2: 0 6px 22px rgba(2,6,12,0.45);
+  --radius: 16px;
+  --glass-border: rgba(255,255,255,0.04);
+  --trans-dur: 280ms;
+}
+
+/* Global reset for enhancer area */
 #enhancer-bg{
   position:fixed;
   inset:0;
-  z-index:0; /* behind page content */
-  pointer-events:none;
-  background:
-    radial-gradient(40rem 30rem at 10% 10%, rgba(58,123,213,0.12), transparent 18%),
-    radial-gradient(30rem 30rem at 90% 80%, rgba(74,144,226,0.09), transparent 20%),
-    linear-gradient(180deg, rgba(8,10,20,0.6), rgba(12,18,30,0.55));
-  backdrop-filter: blur(8px) saturate(110%);
-  overflow:hidden;
-}
-
-/* subtle animated shifting layer */
-#enhancer-bg::before{
-  content: "";
-  position:absolute; inset:-15%;
-  background: linear-gradient(60deg, rgba(58,123,213,0.06), rgba(72,61,164,0.06), rgba(42,201,171,0.04));
-  filter: blur(40px) contrast(1.05);
-  transform: translate3d(0,0,0);
-  animation: bgShift 20s ease-in-out infinite;
-  opacity:0.95;
-}
-@keyframes bgShift {
-  0%{ transform: translate3d(-5%, -3%, 0) scale(1.02) }
-  50%{ transform: translate3d(5%, 3%, 0) scale(1) }
-  100%{ transform: translate3d(-5%, -3%, 0) scale(1.02) }
-}
-
-/* particles canvas (injected by JS) */
-#enhancer-canvas {
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
   z-index:0;
   pointer-events:none;
-  opacity:0.75;
+  background:
+    radial-gradient(40rem 30rem at 8% 12%, rgba(74,144,226,0.12), transparent 14%),
+    radial-gradient(30rem 24rem at 92% 82%, rgba(107,211,255,0.06), transparent 20%),
+    linear-gradient(180deg, var(--bg-900) 0%, var(--bg-800) 100%);
+  overflow:hidden;
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  backdrop-filter: blur(6px) saturate(120%);
 }
 
-/* Put your page content above the enhancer */
+/* subtle animated hue shift layers */
+#enhancer-bg::before{
+  content:"";
+  position:absolute; inset:-18%;
+  background: linear-gradient(45deg, rgba(74,144,226,0.06), rgba(107,211,255,0.04), rgba(58,123,213,0.04));
+  filter: blur(36px) contrast(1.02);
+  transform: translate3d(0,0,0);
+  animation: enhancerShift 26s linear infinite;
+  opacity:0.98;
+}
+@keyframes enhancerShift {
+  0% { transform: translate(-4%, -3%) scale(1.02); }
+  50% { transform: translate(4%, 3%) scale(1); }
+  100% { transform: translate(-4%, -3%) scale(1.02); }
+}
+
+/* micro grain overlay for texture */
+#enhancer-bg::after{
+  content:"";
+  position:absolute; inset:0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8'><rect width='8' height='8' fill='rgba(255,255,255,0.01)'/></svg>");
+  opacity:0.03;
+  mix-blend-mode: overlay;
+  pointer-events:none;
+}
+
+/* particles canvas (created by JS) */
+#enhancer-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; opacity:0.82; }
+
+/* Ensure content sits above enhancer */
 body > *:not(#enhancer-bg):not(#section-modal){
-  position:relative;
-  z-index:1;
+  position:relative; z-index:1;
 }
 
-/* Headings 3D appearance (for h1 and h3) */
+/* Typography polish for headings similar to uxuiflow */
+h1, h2, h3 {
+  letter-spacing: -0.6px;
+  color: #f5fbff;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Slightly larger hero scale for the main H1 */
+#Portfolio-title {
+  font-weight:700;
+  font-size: clamp(36px, 6vw, 72px);
+  line-height: 1.02;
+  margin-bottom: 8px;
+}
+
+/* Title-card wrapper style — glassy, subtle border */
+.title-card {
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.018), rgba(255,255,255,0.01));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--soft-shadow-2);
+  transition: transform var(--trans-dur) cubic-bezier(.2,.9,.3,1), box-shadow var(--trans-dur);
+}
+
+/* 3D tilt baseline & pointer cues */
 h1.reveal, h3.reveal, h1, h3 {
   transform-style: preserve-3d;
-  transition: transform 300ms cubic-bezier(.2,.9,.3,1), box-shadow 300ms ease;
+  transition: transform 260ms cubic-bezier(.2,.9,.3,1), box-shadow 260ms ease;
   will-change: transform;
-  cursor:default;
-  perspective: 1000px;
-  -webkit-user-select: text;
+  cursor: default;
+  perspective: 1200px;
   user-select: text;
 }
-
-/* visual highlight that follows tilt */
-.title-card {
-  transform-origin: center;
-  border-radius: 12px;
-  padding: 6px 12px;
-  display:inline-block;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  box-shadow: 0 8px 30px rgba(2,6,12,0.4);
+h1.reveal:hover .title-card, h3.reveal:hover .title-card, h1:hover .title-card, h3:hover .title-card {
+  transform: translateZ(10px);
 }
 
-/* pointer indicates click opens single-page view */
-h1.reveal:hover, h3.reveal:hover, h1:hover, h3:hover { cursor:pointer; }
+/* interactive focus ring for accessibility */
+:where(.title-card, .pill, .btn):focus-visible{
+  outline: none;
+  box-shadow: 0 6px 36px rgba(74,144,226,0.16), 0 0 0 4px rgba(74,144,226,0.06);
+  border-color: rgba(74,144,226,0.18);
+}
 
-/* Modal (single-page viewer) */
+/* Cards, entries tuned like uxuiflow (soft glass card) */
+.entry, .stat, .brandcard, .year {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.03);
+  border-radius: var(--radius);
+  box-shadow: var(--soft-shadow);
+  transition: transform 290ms cubic-bezier(.2,.9,.3,1), box-shadow 290ms ease;
+}
+.entry:hover, .stat:hover, .brandcard:hover, .year:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 28px 80px rgba(2,6,12,0.6);
+}
+
+/* Pills/button refinement */
+.pill, .btn {
+  transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-weight: 700;
+  letter-spacing: .8px;
+}
+.pill:hover, .btn:hover { transform: translateY(-4px); }
+
+/* Modal: refined presentation */
 #section-modal {
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  background: linear-gradient(180deg, rgba(8,10,20,0.85), rgba(8,10,20,0.9));
-  padding:48px;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  position: fixed; inset: 0; z-index: 9999;
+  display: none; align-items: center; justify-content: center;
+  background: linear-gradient(180deg, rgba(6,10,18,0.76), rgba(6,10,18,0.86));
+  -webkit-backdrop-filter: blur(8px) saturate(115%); backdrop-filter: blur(8px) saturate(115%);
+  padding: 40px;
 }
-#section-modal[aria-hidden="false"]{ display:flex; }
+#section-modal[aria-hidden="false"] { display:flex; }
 
-/* The 3D card in modal */
-#section-modal .modal-card{
-  width:min(1100px, 96%);
-  max-height:92%;
-  overflow:auto;
-  border-radius:20px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  padding:28px;
-  box-shadow: 0 30px 80px rgba(2,6,12,0.7);
-  transform-style: preserve-3d;
-  transition: transform 400ms cubic-bezier(.2,.9,.3,1);
-  will-change: transform;
-  perspective:1200px;
-  position:relative;
-  border:1px solid rgba(255,255,255,0.03);
+/* modal card entrance animation */
+#section-modal .modal-card {
+  width: min(1100px, 94%);
+  max-height: 92%;
+  overflow: auto;
+  border-radius: 20px;
+  padding: 28px;
+  transform-origin: center;
+  transform: translateY(18px) scale(0.98);
+  opacity: 0;
+  transition: transform 360ms cubic-bezier(.2,.9,.3,1), opacity 360ms ease;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+#section-modal[aria-hidden="false"] .modal-card {
+  transform: translateY(0) scale(1);
+  opacity: 1;
 }
 
-/* modal close button */
+/* modal title style */
+#section-modal .modal-title {
+  font-size: clamp(20px, 2.2vw, 28px);
+  margin: 0 0 14px;
+  color: #f7fbff;
+}
+
+/* close button look */
 #section-modal .close-btn {
   position:absolute;
-  right:16px; top:12px;
-  background:transparent;
-  border:none;
-  font-size:20px;
-  color:var(--fg, #fff);
-  cursor:pointer;
-  padding:8px;
-  border-radius:8px;
+  right:18px; top:12px;
+  background:transparent; border:none; color:var(--muted); font-size:18px; padding:8px; border-radius:8px;
 }
-#section-modal .close-btn:hover { background:rgba(255,255,255,0.02); }
-
-/* small helper for section title inside modal */
-#section-modal .modal-title { margin-top:0; margin-bottom:12px; display:inline-block; }
+#section-modal .close-btn:hover { color:#fff; background: rgba(255,255,255,0.02); }
 
 /* responsive tweaks */
-@media (max-width: 700px){
-  #section-modal{ padding:18px; }
-  #section-modal .modal-card{ padding:18px; border-radius:14px; }
+@media (max-width: 920px){
+  .stats{ grid-template-columns: repeat(2,1fr); }
+  .entries{ grid-template-columns: 1fr; }
+}
+@media (max-width: 600px){
+  #Portfolio-title{ font-size: clamp(28px, 9vw, 46px); }
+  #section-modal { padding: 20px; }
+  #section-modal .modal-card{ padding: 18px; border-radius: 14px; }
 }

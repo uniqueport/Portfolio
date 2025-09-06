@@ -1,138 +1,248 @@
-// Certificate Lightbox
-const lightbox = document.createElement("div");
-lightbox.className = "lightbox";
-lightbox.innerHTML = '<span class="close">&times;</span><img src="" alt="Certificate">';
-document.body.appendChild(lightbox);
-const lightboxImg = lightbox.querySelector("img");
+// enhancements.js
+// Save as enhancements.js in the same folder as your HTML
+// 1) Block right-click and some dev/view-source shortcuts
+// 2) Add 3D tilt to headings (h1, h3) + click-to-open single-page modal viewer
+// 3) Lightweight particles canvas + low CPU footprint
 
-function openLightbox(img) {
-  lightboxImg.src = img.src;
-  lightbox.classList.add("show");
-}
+(function () {
+  // ---------- 1) RIGHT-CLICK + SHORTCUT BLOCK ----------
+  document.addEventListener('contextmenu', function (e) {
+    // prevent right click
+    e.preventDefault();
+  }, {passive:false});
 
-lightbox.querySelector(".close").addEventListener("click", ()=>lightbox.classList.remove("show"));
-lightbox.addEventListener("click", e=>{ if(e.target===lightbox) lightbox.classList.remove("show"); });
-/* Background: animated gradient + blurred shapes */
-#enhancer-bg{
-  position:fixed;
-  inset:0;
-  z-index:0; /* behind page content */
-  pointer-events:none;
-  background:
-    radial-gradient(40rem 30rem at 10% 10%, rgba(58,123,213,0.12), transparent 18%),
-    radial-gradient(30rem 30rem at 90% 80%, rgba(74,144,226,0.09), transparent 20%),
-    linear-gradient(180deg, rgba(8,10,20,0.6), rgba(12,18,30,0.55));
-  backdrop-filter: blur(8px) saturate(110%);
-  overflow:hidden;
-}
-/* subtle animated shifting layer */
-#enhancer-bg::before{
-  content: "";
-  position:absolute; inset:-15%;
-  background: linear-gradient(60deg, rgba(58,123,213,0.06), rgba(72,61,164,0.06), rgba(42,201,171,0.04));
-  filter: blur(40px) contrast(1.05);
-  transform: translate3d(0,0,0);
-  animation: bgShift 20s ease-in-out infinite;
-  opacity:0.95;
-}
-@keyframes bgShift {
-  0%{ transform: translate3d(-5%, -3%, 0) scale(1.02) }
-  50%{ transform: translate3d(5%, 3%, 0) scale(1) }
-  100%{ transform: translate3d(-5%, -3%, 0) scale(1.02) }
-}
+  document.addEventListener('keydown', function (e) {
+    const tag = e.target && e.target.tagName ? e.target.tagName.toLowerCase() : null;
+    const editable = e.target && (e.target.isContentEditable || tag === 'input' || tag === 'textarea' || tag === 'select');
+    if (editable) return;
 
-/* particles canvas (injected by JS) */
-#enhancer-canvas {
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  z-index:0;
-  pointer-events:none;
-  opacity:0.75;
-}
+    // Block F12, Ctrl+Shift+I/J/C, Ctrl+U, Ctrl+S
+    if (e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && /[ijc]/i.test(e.key)) ||
+        (e.ctrlKey && /[us]/i.test(e.key))) {
+      e.preventDefault(); e.stopPropagation(); return false;
+    }
+  }, {passive:false});
 
-/* Put your page content above the enhancer */
-body > *:not(#enhancer-bg):not(#section-modal){
-  position:relative;
-  z-index:1;
-}
 
-/* Headings 3D appearance (for h1 and h3) */
-h1.reveal, h3.reveal, h1, h3 {
-  transform-style: preserve-3d;
-  transition: transform 300ms cubic-bezier(.2,.9,.3,1), box-shadow 300ms ease;
-  will-change: transform;
-  cursor:default;
-  perspective: 1000px;
-  -webkit-user-select: text;
-  user-select: text;
-}
+  // ---------- 2) 3D TITLES + SINGLE-PAGE VIEWER ----------
+  function createModal() {
+    const container = document.createElement('div');
+    container.id = 'section-modal';
+    container.setAttribute('aria-hidden', 'true');
 
-/* visual highlight that follows tilt */
-.title-card {
-  transform-origin: center;
-  border-radius: 12px;
-  padding: 6px 12px;
-  display:inline-block;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  box-shadow: 0 8px 30px rgba(2,6,12,0.4);
-}
+    const card = document.createElement('div');
+    card.className = 'modal-card';
+    card.setAttribute('role', 'dialog');
+    card.setAttribute('aria-modal', 'true');
 
-/* pointer indicates click opens single-page view */
-h1.reveal:hover, h3.reveal:hover, h1:hover, h3:hover { cursor:pointer; }
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'close-btn';
+    closeBtn.innerHTML = '✕';
+    closeBtn.addEventListener('click', close);
+    closeBtn.addEventListener('keyup', (e) => { if (e.key === 'Escape') close(); });
 
-/* Modal (single-page viewer) */
-#section-modal {
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  background: linear-gradient(180deg, rgba(8,10,20,0.85), rgba(8,10,20,0.9));
-  padding:48px;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-}
-#section-modal[aria-hidden="false"]{ display:flex; }
+    card.appendChild(closeBtn);
+    container.appendChild(card);
 
-/* The 3D card in modal */
-#section-modal .modal-card{
-  width:min(1100px, 96%);
-  max-height:92%;
-  overflow:auto;
-  border-radius:20px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  padding:28px;
-  box-shadow: 0 30px 80px rgba(2,6,12,0.7);
-  transform-style: preserve-3d;
-  transition: transform 400ms cubic-bezier(.2,.9,.3,1);
-  will-change: transform;
-  perspective:1200px;
-  position:relative;
-  border:1px solid rgba(255,255,255,0.03);
-}
+    let raf = null;
+    function attachTilt(el) {
+      const maxTilt = 10;
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width;
+        const py = (e.clientY - rect.top) / rect.height;
+        const rotY = (px - 0.5) * (maxTilt * 2);
+        const rotX = (0.5 - py) * (maxTilt * 2);
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          el.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(0)`;
+        });
+      });
+      el.addEventListener('mouseleave', () => {
+        cancelAnimationFrame(raf);
+        el.style.transform = '';
+      });
+    }
 
-/* modal close button */
-#section-modal .close-btn {
-  position:absolute;
-  right:16px; top:12px;
-  background:transparent;
-  border:none;
-  font-size:20px;
-  color:var(--fg, #fff);
-  cursor:pointer;
-  padding:8px;
-  border-radius:8px;
-}
-#section-modal .close-btn:hover { background:rgba(255,255,255,0.02); }
+    function open(node, titleText) {
+      // remove previous content except close button
+      Array.from(card.children).forEach(child => {
+        if (!child.classList.contains('close-btn')) child.remove();
+      });
 
-/* small helper for section title inside modal */
-#section-modal .modal-title { margin-top:0; margin-bottom:12px; display:inline-block; }
+      const heading = document.createElement('h2');
+      heading.className = 'modal-title';
+      heading.textContent = titleText;
+      card.appendChild(heading);
 
-/* responsive tweaks */
-@media (max-width: 700px){
-  #section-modal{ padding:18px; }
-  #section-modal .modal-card{ padding:18px; border-radius:14px; }
-}
+      const contentWrap = document.createElement('div');
+      contentWrap.className = 'modal-content';
+      contentWrap.style.maxHeight = 'calc(100vh - 140px)';
+      contentWrap.style.overflow = 'auto';
+      contentWrap.appendChild(node);
+      card.appendChild(contentWrap);
+
+      attachTilt(card);
+      container.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+
+    function close() {
+      container.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      const content = card.querySelector('.modal-content');
+      if (content) content.remove();
+      card.style.transform = '';
+    }
+
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && container.getAttribute('aria-hidden') === 'false') close(); });
+    container.addEventListener('click', (e) => { if (e.target === container) close(); });
+
+    return { container, open, close };
+  }
+
+  const modal = createModal();
+  document.body.appendChild(modal.container);
+
+  // Titles selection and interaction
+  const titleSelectors = 'h1, h3';
+  const titles = Array.from(document.querySelectorAll(titleSelectors));
+
+  titles.forEach((title) => {
+    // wrap inner content with title-card if not already
+    if (!title.querySelector('.title-card')) {
+      const wrapper = document.createElement('span');
+      wrapper.className = 'title-card';
+      while (title.firstChild) wrapper.appendChild(title.firstChild);
+      title.appendChild(wrapper);
+    }
+
+    title.style.cursor = 'pointer';
+
+    let rect = null;
+    let rafId = null;
+    const maxTilt = 12;
+
+    function onMouseMove(e) {
+      rect = rect || title.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+      const rotY = (px - 0.5) * (maxTilt * 2);
+      const rotX = (0.5 - py) * (maxTilt * 2);
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        title.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(8px)`;
+        title.style.boxShadow = `${-rotY/2}px ${rotX/2}px 30px rgba(0,0,0,0.45)`;
+      });
+    }
+    function onMouseLeave() {
+      cancelAnimationFrame(rafId);
+      title.style.transform = '';
+      title.style.boxShadow = '';
+      rect = null;
+    }
+
+    title.addEventListener('mousemove', onMouseMove);
+    title.addEventListener('mouseleave', onMouseLeave);
+
+    title.addEventListener('click', function () {
+      let section = title.closest('section') || title.parentElement;
+      const clone = section.cloneNode(true);
+      // remove ids inside clone to avoid collisions
+      clone.querySelectorAll('[id]').forEach(n => n.removeAttribute('id'));
+      modal.open(clone, title.innerText || title.textContent);
+    });
+  });
+
+
+  // ---------- 3) LIGHTWEIGHT PARTICLES ----------
+  const enhancerBg = document.getElementById('enhancer-bg');
+  if (enhancerBg) {
+    const canvas = document.createElement('canvas');
+    canvas.id = 'enhancer-canvas';
+    enhancerBg.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+
+    let particles = [];
+    const COUNT = Math.min(Math.max(18, Math.floor((window.innerWidth * window.innerHeight) / 80000)), 60);
+    let width = 0, height = 0, lastTime = 0;
+
+    function resize() {
+      const dpr = window.devicePixelRatio || 1;
+      width = canvas.width = Math.floor(enhancerBg.clientWidth * dpr);
+      height = canvas.height = Math.floor(enhancerBg.clientHeight * dpr);
+      canvas.style.width = enhancerBg.clientWidth + 'px';
+      canvas.style.height = enhancerBg.clientHeight + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      initParticles();
+    }
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < COUNT; i++) {
+        particles.push({
+          x: Math.random() * enhancerBg.clientWidth,
+          y: Math.random() * enhancerBg.clientHeight,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          r: 0.6 + Math.random() * 1.8,
+          alpha: 0.04 + Math.random() * 0.08
+        });
+      }
+    }
+    function step(t) {
+      if (!lastTime) lastTime = t;
+      const dt = Math.min(40, t - lastTime);
+      lastTime = t;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx * (dt / 16);
+        p.y += p.vy * (dt / 16);
+        if (p.x < -10) p.x = enhancerBg.clientWidth + 10;
+        if (p.x > enhancerBg.clientWidth + 10) p.x = -10;
+        if (p.y < -10) p.y = enhancerBg.clientHeight + 10;
+        if (p.y > enhancerBg.clientHeight + 10) p.y = -10;
+
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(200,220,235,${p.alpha})`;
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.closePath();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const q = particles[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < 120 * 120) {
+            const dist = Math.sqrt(d2);
+            const alpha = Math.max(0, (1 - dist / 120) * 0.06);
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(160,190,210,${alpha})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.stroke();
+            ctx.closePath();
+          }
+        }
+      }
+
+      if (!document.hidden) {
+        requestAnimationFrame(step);
+      } else {
+        lastTime = 0;
+      }
+    }
+
+    resize();
+    requestAnimationFrame(step);
+    let resizeTimer;
+    window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 250); });
+  }
+
+  // End of IIFE
+})();

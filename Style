@@ -1,30 +1,8 @@
-.cert-gallery {
-  margin-top:12px; display:flex; gap:12px; flex-wrap:wrap;
-}
-.cert-gallery img {
-  max-width:200px; border-radius:12px; cursor:pointer;
-  border:1px solid var(--line);
-  transition:transform .25s ease, box-shadow .25s ease;
-}
-.cert-gallery img:hover {
-  transform:scale(1.05);
-  box-shadow:0 10px 25px rgba(0,0,0,.4);
-}
+/* enhancements.css
+   Animated background, 3D title styles, and modal viewer styles
+   Save as enhancements.css in the same folder as your HTML
+*/
 
-/* Lightbox */
-.lightbox {
-  display:none; position:fixed; inset:0; background:rgba(0,0,0,.9);
-  justify-content:center; align-items:center; z-index:1000;
-}
-.lightbox img {
-  max-width:90%; max-height:90%; border-radius:12px;
-}
-.lightbox.show {display:flex;}
-.lightbox .close {
-  position:absolute; top:20px; right:30px;
-  font-size:32px; color:#fff; cursor:pointer;
-}
-/* Background: animated gradient + blurred shapes */
 #enhancer-bg{
   position:fixed;
   inset:0;
@@ -37,6 +15,7 @@
   backdrop-filter: blur(8px) saturate(110%);
   overflow:hidden;
 }
+
 /* subtle animated shifting layer */
 #enhancer-bg::before{
   content: "";

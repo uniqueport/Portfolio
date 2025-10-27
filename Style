@@ -177,3 +177,73 @@ h1, h2, h3 {
   .experience-tile { width: 160px; }
   .poster { height: 200px; }
 }
+.continue-watching {
+  color: white;
+  padding: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.continue-watching h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.watch-card {
+  background: #000;
+  width: 260px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+.thumbnail {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbnail img {
+  width: 80%;
+  height: auto;
+  object-fit: contain;
+}
+
+.play-overlay {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  font-size: 1.4rem;
+  color: white;
+  background: rgba(0,0,0,0.6);
+  border-radius: 50%;
+  padding: 6px 10px;
+}
+
+.details {
+  padding: 10px;
+}
+
+.details h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.details p {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin: 2px 0 10px 0;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px 10px;
+  color: #aaa;
+  font-size: 1rem;
+}

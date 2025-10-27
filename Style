@@ -1,4 +1,7 @@
-/* enhancements.css — refined version */
+/* =========================================================
+   enhancements.css — refined + Netflix-style Experience
+   Author: Santhosh Suresh
+   ========================================================= */
 
 /* === Base Theme Colors === */
 :root {
@@ -73,79 +76,76 @@ h1, h2, h3 {
   box-shadow: 0 0 0 3px rgba(74,144,226,0.35);
 }
 
-/* === Netflix-style "Continue Watching" Section === */
+/* =========================================================
+   Netflix-style "Continue Watching" (TCS Edition)
+   ========================================================= */
 .continue-watching {
-  padding: 40px 60px;
+  color: white;
+  padding: 20px 40px;
+  font-family: 'Montserrat', sans-serif;
 }
 .continue-watching h2 {
-  color: #fff;
+  font-size: 1.6rem;
+  margin-bottom: 15px;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.8rem;
   letter-spacing: 1px;
-  margin-bottom: 20px;
 }
+
 .carousel {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   overflow-x: auto;
   scrollbar-width: thin;
   padding-bottom: 10px;
 }
 
-/* === Experience Tile (Poster Card) === */
-.experience-tile {
+/* === Card Box === */
+.watch-card {
   background: #000;
-  color: #fff;
-  width: 190px;
+  width: 260px;
   border-radius: 8px;
   overflow: hidden;
-  font-family: 'Montserrat', sans-serif;
   position: relative;
-  margin: 10px;
-  transition: transform .3s ease, box-shadow .3s ease;
+  box-shadow: 0 0 15px rgba(255,255,255,0.08);
+  transition: all 0.3s ease;
 }
-.experience-tile:hover {
+.watch-card:hover {
   transform: scale(1.05);
   box-shadow: 0 0 25px rgba(229,9,20,0.5);
 }
-.poster {
+
+/* === Poster Thumbnail === */
+.thumbnail {
   position: relative;
   width: 100%;
-  height: 270px;
-  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.poster img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  background-color: #000;
+.thumbnail img {
+  width: 75%;
+  height: auto;
+  object-fit: contain;
 }
 
-/* === Play Overlay === */
-.overlay {
+/* === Play Button Overlay === */
+.play-overlay {
   position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity .3s ease;
-}
-.poster:hover .overlay {
-  opacity: 1;
-}
-.play-btn {
-  background: rgba(255,255,255,0.9);
-  color: #000;
+  left: 10px;
+  bottom: 10px;
+  font-size: 1.4rem;
+  color: white;
+  background: rgba(0,0,0,0.6);
   border-radius: 50%;
-  width: 55px;
-  height: 55px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;
+  padding: 6px 10px;
+  transition: all 0.3s ease;
+}
+.play-overlay:hover {
+  background: rgba(229,9,20,0.9);
+  color: #fff;
+  transform: scale(1.1);
 }
 
 /* === Card Details === */
@@ -160,90 +160,43 @@ h1, h2, h3 {
   color: #fff;
 }
 .details p {
-  font-size: 0.8rem;
-  color: #bbb;
-  margin-bottom: 5px;
-}
-.bottom-icons {
-  display: flex;
-  justify-content: space-between;
-  font-size: 1.1rem;
-  opacity: 0.8;
-}
-
-/* === Responsive === */
-@media (max-width: 600px) {
-  .continue-watching { padding: 20px; }
-  .experience-tile { width: 160px; }
-  .poster { height: 200px; }
-}
-.continue-watching {
-  color: white;
-  padding: 20px;
-  font-family: 'Montserrat', sans-serif;
-}
-
-.continue-watching h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
-
-.watch-card {
-  background: #000;
-  width: 260px;
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 0 15px rgba(255,255,255,0.1);
-}
-
-.thumbnail {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: #111;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.thumbnail img {
-  width: 80%;
-  height: auto;
-  object-fit: contain;
-}
-
-.play-overlay {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  font-size: 1.4rem;
-  color: white;
-  background: rgba(0,0,0,0.6);
-  border-radius: 50%;
-  padding: 6px 10px;
-}
-
-.details {
-  padding: 10px;
-}
-
-.details h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  margin: 0;
-}
-
-.details p {
   font-size: 0.9rem;
   color: #ccc;
-  margin: 2px 0 10px 0;
+  margin-bottom: 8px;
 }
 
+/* === Bottom Controls (Info + Dots) === */
 .controls {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0 10px 10px;
   color: #aaa;
-  font-size: 1rem;
+  font-size: 1.1rem;
+}
+.controls i {
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+.controls i:hover {
+  opacity: 1;
+}
+
+/* === Responsive Layout === */
+@media (max-width: 768px) {
+  .continue-watching {
+    padding: 20px;
+  }
+  .watch-card {
+    width: 200px;
+  }
+  .thumbnail {
+    aspect-ratio: 3 / 2;
+  }
+  .details h3 {
+    font-size: 0.9rem;
+  }
+  .details p {
+    font-size: 0.8rem;
+  }
 }

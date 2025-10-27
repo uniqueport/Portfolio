@@ -1,21 +1,28 @@
-// enhancements.js (uxuiflow-inspired interaction polish)
-// Save/replace as enhancements.js in the same folder as your HTML
+// enhancements.js — cinematic UX/UI flow (final optimized build)
+// Place this in the same folder as your HTML and link as <script src="enhancements.js"></script>
 
 (function () {
+  // Prevent duplicate binding if reloaded dynamically
+  if (window.__UXUIFLOW_BOUND__) return;
+  window.__UXUIFLOW_BOUND__ = true;
+
   // ---------- 1) RIGHT-CLICK + KEY SHORTCUTS ----------
   document.addEventListener('contextmenu', function (e) {
-    e.preventDefault(); // block right-click globally (deterrent)
+    e.preventDefault(); // block right-click globally
   }, { passive: false });
 
   document.addEventListener('keydown', function (e) {
     const tag = e.target && e.target.tagName ? e.target.tagName.toLowerCase() : null;
     const editable = e.target && (e.target.isContentEditable || tag === 'input' || tag === 'textarea' || tag === 'select');
-    if (editable) return; // allow typing naturally
+    if (editable) return; // allow natural typing
 
-    if (e.key === 'F12' ||
-        (e.ctrlKey && e.shiftKey && /[ijc]/i.test(e.key)) ||
-        (e.ctrlKey && /[us]/i.test(e.key))) {
-      e.preventDefault(); e.stopPropagation();
+    if (
+      e.key === 'F12' ||
+      (e.ctrlKey && e.shiftKey && /[ijc]/i.test(e.key)) ||
+      (e.ctrlKey && /[us]/i.test(e.key))
+    ) {
+      e.preventDefault();
+      e.stopPropagation();
       return false;
     }
   }, { passive: false });
@@ -27,7 +34,6 @@
     container.id = 'section-modal';
     container.setAttribute('aria-hidden', 'true');
 
-    // only add card if not existing
     let card = container.querySelector('.modal-card');
     if (!card) {
       card = document.createElement('div');
@@ -45,7 +51,6 @@
     }
 
     function open(node, titleText) {
-      // clear previous content except close button
       const closeBtn = card.querySelector('.close-btn');
       Array.from(card.children).forEach(child => { if (child !== closeBtn) child.remove(); });
 
@@ -63,7 +68,6 @@
 
       container.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
-      // animated focus
       closeBtn.focus();
     }
 
@@ -75,11 +79,11 @@
       card.style.transform = '';
     }
 
-    // keyboard & outside click
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && container.getAttribute('aria-hidden') === 'false') close(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && container.getAttribute('aria-hidden') === 'false') close();
+    });
     container.addEventListener('click', (e) => { if (e.target === container) close(); });
 
-    // attach to DOM if new
     if (!document.getElementById('section-modal')) document.body.appendChild(container);
     return { container, open, close };
   }
@@ -89,53 +93,51 @@
 
   // ---------- 3) TITLES: WRAP + SMOOTH 3D TILT ----------
   const titles = Array.from(document.querySelectorAll('h1, h3'));
-  const TILT = 7; // reduced tilt for refined look
+  const TILT = 7;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  titles.forEach(title => {
-    // wrap text in title-card if not already
-    if (!title.querySelector('.title-card')) {
-      const wrapper = document.createElement('span');
-      wrapper.className = 'title-card';
-      while (title.firstChild) wrapper.appendChild(title.firstChild);
-      title.appendChild(wrapper);
-    }
+  if (!reducedMotion) {
+    titles.forEach(title => {
+      if (!title.querySelector('.title-card')) {
+        const wrapper = document.createElement('span');
+        wrapper.className = 'title-card';
+        while (title.firstChild) wrapper.appendChild(title.firstChild);
+        title.appendChild(wrapper);
+      }
 
-    // pointer & hover
-    title.style.cursor = 'pointer';
+      title.style.cursor = 'pointer';
 
-    // mouse-based tilt (requestAnimationFrame throttled)
-    let rect = null, raf = null;
-    const onMove = (e) => {
-      rect = rect || title.getBoundingClientRect();
-      const px = (e.clientX - rect.left) / rect.width;
-      const py = (e.clientY - rect.top) / rect.height;
-      const rotY = (px - 0.5) * (TILT * 2);
-      const rotX = (0.5 - py) * (TILT * 2);
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        title.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(6px)`;
-        title.style.boxShadow = `${-rotY/2}px ${rotX/2}px 22px rgba(0,0,0,0.35)`;
+      let rect = null, raf = null;
+      const onMove = (e) => {
+        rect = rect || title.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width;
+        const py = (e.clientY - rect.top) / rect.height;
+        const rotY = (px - 0.5) * (TILT * 2);
+        const rotX = (0.5 - py) * (TILT * 2);
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          title.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(6px)`;
+          title.style.boxShadow = `${-rotY / 2}px ${rotX / 2}px 22px rgba(0,0,0,0.35)`;
+        });
+      };
+      const onLeave = () => {
+        cancelAnimationFrame(raf);
+        title.style.transform = '';
+        title.style.boxShadow = '';
+        rect = null;
+      };
+
+      title.addEventListener('mousemove', onMove);
+      title.addEventListener('mouseleave', onLeave);
+
+      title.addEventListener('click', () => {
+        let section = title.closest('section') || title.parentElement;
+        const clone = section.cloneNode(true);
+        clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+        modal.open(clone, (title.innerText || title.textContent).trim());
       });
-    };
-    const onLeave = () => {
-      cancelAnimationFrame(raf);
-      title.style.transform = '';
-      title.style.boxShadow = '';
-      rect = null;
-    };
-
-    title.addEventListener('mousemove', onMove);
-    title.addEventListener('mouseleave', onLeave);
-
-    // click opens modal with cloned section
-    title.addEventListener('click', () => {
-      let section = title.closest('section') || title.parentElement;
-      const clone = section.cloneNode(true);
-      // remove internal ids to avoid conflicts
-      clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
-      modal.open(clone, (title.innerText || title.textContent).trim());
     });
-  });
+  }
 
 
   // ---------- 4) LIGHTWEIGHT PARTICLES (REFINED) ----------
@@ -147,7 +149,7 @@
     const ctx = canvas.getContext('2d');
 
     let particles = [];
-    const COUNT = Math.min(Math.max(14, Math.floor((window.innerWidth * window.innerHeight) / 150000)), 36); // fewer particles for polished look
+    const COUNT = Math.min(Math.max(14, Math.floor((window.innerWidth * window.innerHeight) / 150000)), 36);
     let last = 0;
 
     function resize() {
@@ -196,7 +198,6 @@
         ctx.fill();
         ctx.closePath();
 
-        // subtle connecting lines
         for (let j = i + 1; j < particles.length; j++) {
           const q = particles[j];
           const dx = p.x - q.x;
@@ -222,11 +223,13 @@
 
     resize();
     requestAnimationFrame(frame);
-    let rt; window.addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(resize, 220); });
+    let rt;
+    window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(resize, 220); });
+  } else {
+    console.warn("enhancements.js: #enhancer-bg not found; particle layer skipped.");
   }
 
   // ---------- 5) SMALL PERFORMANCE & ACCESSIBILITY NOTES ----------
-  // Titles and modal interactions respect reduced-motion preference via CSS transitions.
-  // Right-click blocking is in place (deterrent), inputs are not blocked.
-
+  // Respects reduced-motion preference (3D tilt disabled if user prefers reduced motion)
+  // Inputs remain fully functional even with right-click and shortcut blocks
 })();

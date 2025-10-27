@@ -1,697 +1,409 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="system">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Santhosh Suresh Portfolio</title>
-  <meta name="description" content="Portfolio" />
+  <!-- Netflix font style for logo -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* ------------------------------
-       Design Tokens (Dark default)
-    ------------------------------ */
-    :root{
-      /* base */
-      --bg: #0e0e0e;
-      --fg: #e8e8e8;
-      --muted: #a6a6a6;
-      --accent: #4A90E2; /* professional blue */
-      --card: #151515;
-      --line: #232323;
-      --radius: 18px;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-
-      /* layout */
-      --wrap: 1080px;
-      --space-1: 6px;
-      --space-2: 10px;
-      --space-3: 14px;
-      --space-4: 20px;
-      --space-5: 24px;
-      --space-6: 28px;
-      --space-7: 32px;
-
-      --font: 16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+    :root {
+      --bg: #141414;
+      --fg: #fff;
+      --muted: #b3b3b3;
+      --accent: #E50914;
+      --card: #181818;
+      --line: #222;
+      --radius: 10px;
+      --shadow: 0 4px 24px rgba(0,0,0,.7);
+      --font: 16px/1.5 'Montserrat', 'Roboto', Arial, sans-serif;
+      --cover-h: 400px;
     }
-
-    /* Light scheme tokens (system) */
-    @media (prefers-color-scheme: light){
-      :root{
-        --bg: #f6f7f9;
-        --fg: #1b1f23;
-        --muted: #5b6168;
-        --accent: #3a7bd5; /* slightly deeper for contrast */
-        --card: #ffffff;
-        --line: #d7dbe0;
-        --shadow: 0 10px 24px rgba(17,24,39,.08);
-      }
+    html, body { background: var(--bg); color: var(--fg); font: var(--font); margin: 0; min-height: 100vh;}
+    a { color: var(--accent); text-decoration: none; }
+    header { background:rgba(20,20,20,0.95); padding:0; position:sticky; top:0; z-index:100; box-shadow:var(--shadow);}
+    .nav { max-width: 1400px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:20px 40px;}
+    .brand { height:48px; display:flex; align-items:center; }
+    .switch-profile-btn { background:var(--card); color:var(--accent); border:1.5px solid var(--accent); padding:8px 18px; border-radius:999px; font-weight:600; margin-left:10px; cursor:pointer; transition:background .2s, color .2s;}
+    .switch-profile-btn:hover { background:var(--accent); color:var(--fg);}
+    .menu { display:flex; gap:32px; }
+    .menu a { color:var(--fg); font-weight:600; letter-spacing:1px; font-size:1.05rem; opacity:.85; position:relative; transition:.2s;}
+    .menu a.selected, .menu a:hover { color:var(--accent); opacity:1;}
+    .menu a.selected::after, .menu a:hover::after { content:""; display:block; height:3px; background:var(--accent); width:100%; position:absolute; left:0; bottom:-6px; border-radius:2px;}
+    .actions { display:flex; gap:18px;}
+    .btn { background:var(--accent); color:var(--fg); border:none; border-radius:999px; padding:10px 22px; font-weight:700; cursor:pointer; transition:background .2s;}
+    .btn:hover { background:#b0060f;}
+    .cover { width:100%; height:var(--cover-h); background:linear-gradient(120deg, #181818 60%, var(--accent) 110%); display:flex; align-items:center; padding:0 40px; position:relative;}
+    .cover-content { max-width:700px; z-index:2;}
+    .cover-title { font-size:clamp(2.5rem, 6vw, 4.5rem); font-weight:700; margin-bottom:18px;}
+    .cover-lead { color:var(--muted); font-size:1.25rem; margin-bottom:32px;}
+    .cover-img { position:absolute; right:5vw; bottom:0; height:280px; opacity:0.15; pointer-events:none;}
+    .section-row { margin:60px auto 0; max-width:1400px; }
+    .row-title { color:var(--fg); font-size:1.5rem; font-weight:700; margin-bottom:18px; letter-spacing:1px;}
+    .carousel { display:flex; overflow-x:auto; gap:32px; padding-bottom:10px; scroll-behavior:smooth;}
+    .carousel::-webkit-scrollbar { height:8px; background:var(--card);}
+    .carousel::-webkit-scrollbar-thumb { background:var(--accent); border-radius:8px;}
+    .card { background:var(--card); border-radius:var(--radius); min-width:310px; max-width:310px; flex:0 0 310px; box-shadow:var(--shadow); color:var(--fg); transition:transform .2s, box-shadow .2s; border:1.5px solid var(--line);}
+    .card:hover { transform:scale(1.06); box-shadow:0 8px 32px rgba(229,9,20,.18);}
+    .card-img { width:100%; height:140px; object-fit:cover; border-radius:var(--radius) var(--radius) 0 0; background:#222;}
+    .card-content { padding:18px; }
+    .card-title { font-size:1.1rem; font-weight:700; margin-bottom:8px;}
+    .card-meta { color:var(--accent); font-size:.98rem; margin-bottom:10px;}
+    .card-desc { color:var(--muted); font-size:.98rem; margin-bottom:8px;}
+    @media (max-width:900px){
+      .nav, .cover, .section-row {padding:20px;}
+      .cover-img {display:none;}
+      .card, .carousel {min-width:220px; max-width:220px;}
     }
-
-    /* Manual override via [data-theme] */
-    html[data-theme="light"]{
-      --bg: #f6f7f9;
-      --fg: #1b1f23;
-      --muted: #5b6168;
-      --accent: #3a7bd5;
-      --card: #ffffff;
-      --line: #d7dbe0;
-      --shadow: 0 10px 24px rgba(17,24,39,.08);
+    @media (max-width:600px){
+      .nav {flex-direction:column; gap:10px;}
+      .menu {gap:16px; font-size:.98rem;}
+      .cover {padding:10px;}
+      .cover-title {font-size:2rem;}
+      .card, .carousel {min-width:100vw; max-width:100vw;}
+      .section-row {padding:8px;}
     }
-    html[data-theme="dark"]{
-      --bg: #0e0e0e;
-      --fg: #e8e8e8;
-      --muted: #a6a6a6;
-      --accent: #4A90E2;
-      --card: #151515;
-      --line: #232323;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    footer {text-align:center; color:var(--muted); background:var(--card); padding:24px 0; margin-top:60px;}
+    .theme-toggle { background:var(--card); color:var(--accent); border-radius:50%; padding:10px; border:none; font-size:1.5rem; cursor:pointer;}
+    .theme-toggle:hover { background:var(--accent); color:var(--fg);}
+    #profileSelectOverlay {
+      position:fixed; top:0; left:0; width:100vw; height:100vh;
+      background: var(--bg);
+      display: flex; flex-direction:column; align-items:center; justify-content:center;
+      z-index:99999; transition:opacity .35s;
     }
-
-    /* ------------------------------
-       Base Styles
-    ------------------------------ */
-    *{box-sizing:border-box}
-    body{
-      margin:0; font:var(--font); color:var(--fg);
-      background:
-        radial-gradient(60vw 60vw at 10% -10%, rgba(74,144,226,.10), transparent 40%),
-        radial-gradient(70vw 70vw at 110% 10%, rgba(74,144,226,.08), transparent 40%),
-        var(--bg);
-      background-attachment: fixed;
+    .profile-select-title {
+      color:var(--fg); font-size:2.6rem; font-weight:700; margin-bottom:38px; letter-spacing:2px; text-align:center;
     }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--wrap); margin-inline:auto; padding:var(--space-6) var(--space-4)}
-
-    /* Header */
-    header{position:sticky; top:0; z-index:10; backdrop-filter:saturate(140%) blur(8px); background:linear-gradient(to bottom, color-mix(in srgb, var(--bg), transparent 40%), color-mix(in srgb, var(--bg), transparent 10%)); border-bottom:1px solid var(--line)}
-    .nav{display:flex; align-items:center; justify-content:space-between; gap:var(--space-3)}
-    .brand{display:flex; align-items:center; gap:var(--space-2); font-weight:700; letter-spacing:.2px}
-    .brand-badge{width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent), white 20%)); box-shadow:0 2px 12px color-mix(in srgb, var(--accent), black 70%)}
-    .menu{display:flex; gap:var(--space-4); flex-wrap:wrap}
-    .menu a{opacity:.9; position:relative}
-    .menu a:hover{opacity:1}
-    .menu a::after{content:""; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:var(--accent); transition:width .25s ease}
-    .menu a:hover::after{width:100%}
-
-    .actions{display:flex; gap:var(--space-2); align-items:center}
-    .btn{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line); background:var(--card); color:var(--fg); padding:8px 12px; border-radius:999px; cursor:pointer; box-shadow:var(--shadow); transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
-    .btn:hover{transform:translateY(-2px); box-shadow:0 18px 40px rgba(0,0,0,.25); border-color:color-mix(in srgb, var(--accent), var(--line))}
-    .btn-ghost{background:transparent}
-
-    .menu-toggle{display:none; background:none; border:1px solid var(--line); color:var(--fg); font-size:1.15rem; border-radius:12px; padding:6px 10px; cursor:pointer}
-
-    /* Hero + Sections */
-    .hero{padding:64px 0 28px}
-    .eyebrow{display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; color:var(--muted); font-size:.9rem}
-    h1{font-size:clamp(36px, 6vw, 68px); line-height:1.05; margin:16px 0 6px}
-    h3{font-size:28px; margin:0 0 14px}
-    .lead{color:var(--muted); max-width:65ch}
-
-    .section, .hero{background:color-mix(in srgb, var(--bg), transparent 65%); border-radius:var(--radius); padding:var(--space-5)}
-
-    /* Cards / Grids */
-    .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--space-3); margin:30px 0}
-    .stat{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease}
-    .stat:hover{transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.45)}
-    .stat h2{font-size:40px; margin:0}
-    .stat p{margin:6px 0 0; color:var(--muted)}
-
-    .year{border:1px solid var(--line); border-radius:var(--radius); padding:16px; background:linear-gradient(180deg, color-mix(in srgb, var(--card), transparent 0%), transparent); box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease}
-    .year:hover{transform:translateY(-4px); box-shadow:0 18px 40px rgba(0,0,0,0.45)}
-    .year + .year{margin-top:12px}
-    .year-header{display:flex; align-items:center; justify-content:space-between; cursor:pointer}
-
-    .pill{font-size:12px; text-transform:uppercase; color:var(--bg); background:var(--accent); border-radius:999px; padding:6px 10px; letter-spacing:.8px; border:none; cursor:pointer; transition:filter .2s ease}
-    .pill:hover{filter:brightness(0.95)}
-
-    .entries{margin-top:10px; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px}
-    .entry{border:1px solid var(--line); border-radius:14px; padding:16px; background:var(--card); transition:transform .25s ease, box-shadow .25s ease}
-    .entry:hover{transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.45)}
-    .entry small{display:block; color:var(--muted)}
-
-    .brands{display:grid; grid-template-columns:repeat(5,1fr); gap:12px}
-    .brandcard{aspect-ratio:5/3; border:1px solid var(--line); border-radius:16px; background:var(--card); display:grid; place-items:center; color:var(--muted); font-weight:600; transition:transform .25s ease, box-shadow .25s ease}
-    .brandcard:hover{transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.45)}
-
-    /* Scroll-in animations, respecting reduced motion */
-    .reveal{opacity:0; transform:translateY(18px)}
-    .reveal.show{opacity:1; transform:none; transition:opacity .6s ease, transform .6s ease}
-
-    /* Footer */
-    footer{border-top:1px solid var(--line); padding-top:var(--space-4); margin-top:var(--space-4); color:var(--muted)}
-
-    /* Responsive */
-    @media (max-width: 920px){
-      .stats{grid-template-columns:repeat(2,1fr)}
-      .entries{grid-template-columns:1fr}
-      .brands{grid-template-columns:repeat(2,1fr)}
+    .profiles-row {
+      display:flex; gap:42px; justify-content:center; margin-bottom:38px; flex-wrap:wrap;
     }
-    @media (max-width: 600px){
-      h1{font-size:clamp(28px, 8vw, 48px)}
-      h3{font-size:22px}
-      .lead{font-size:.95rem}
-      .stats{grid-template-columns:1fr}
-      .entries{grid-template-columns:1fr}
-      .brands{grid-template-columns:1fr}
-      .menu{display:none; position:absolute; left:0; right:0; top:60px; flex-direction:column; background:var(--card); padding:10px 20px; border-top:1px solid var(--line)}
-      .menu.show{display:flex}
-      .menu a{padding:10px 0}
-      .menu-toggle{display:inline-block}
+    .profile-card {
+      display:flex; flex-direction:column; align-items:center; gap:12px;
+      cursor:pointer; transition:transform .2s;
     }
-
-    /* Focus styles for accessibility */
-    :where(a,button,[role="button"]) {outline:none}
-    :where(a,button,[role="button"]):focus-visible{box-shadow:0 0 0 3px color-mix(in srgb, var(--accent), transparent 60%); border-radius:10px}
+    .profile-card:hover { transform:scale(1.05);}
+    .profile-avatar {
+      width:120px; height:120px; border-radius:22px;
+      background:linear-gradient(135deg, #181818 70%, #e50914 150%);
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 6px 24px rgba(0,0,0,.35);
+      font-size:4.2rem; color:var(--accent); border:3px solid var(--accent);
+      /* Cartoony avatar as SVG (DiceBear) */
+      background-image:url('https://avatars.dicebear.com/api/avataaars/santhosh.svg');
+      background-size:cover;
+      background-position:center;
+    }
+    .profile-name {
+      color:var(--fg); font-size:1.18rem; font-weight:700; letter-spacing:.5px;
+    }
+    .profile-add {
+      width:120px; height:120px; border-radius:22px;
+      background:#222; border:3px dashed var(--accent);
+      display:flex; align-items:center; justify-content:center;
+      font-size:4rem; color:var(--accent); transition:background .2s;
+    }
+    .profile-add:hover { background:var(--accent); color:var(--fg);}
+    .profile-add-name { color:var(--muted); font-size:1rem; font-weight:600; }
+    .manage-profiles-link {
+      color:var(--muted); margin-top:20px; font-size:1rem; cursor:pointer; text-align:center; display:inline-block;
+      transition:color .2s;
+    }
+    .manage-profiles-link:hover { color:var(--accent);}
   </style>
 </head>
 <body>
-<!-- Enhancer: background container, modal container, and enhancer assets -->
-<div id="enhancer-bg" aria-hidden="true"></div>
-<div id="section-modal" aria-hidden="true"></div>
-<link rel="stylesheet" href="enhancements.css">
-<script src="enhancements.js" defer></script>
+<!-- Profile Selection Overlay -->
+<div id="profileSelectOverlay">
+  <div class="profile-select-title">Who’s watching?</div>
+  <div class="profiles-row">
+    <div class="profile-card" onclick="selectProfile('Santhosh')">
+      <!-- Cartoony male avatar -->
+      <div class="profile-avatar"></div>
+      <div class="profile-name">Santhosh</div>
+    </div>
+    <div class="profile-card" onclick="addProfile()">
+      <div class="profile-add">+</div>
+      <div class="profile-add-name">Add Profile</div>
+    </div>
+  </div>
+  <span class="manage-profiles-link" onclick="alert('Profile management coming soon!')">Manage Profiles</span>
+</div>
 
+<!-- Main Portfolio Content -->
+<div id="mainPortfolio" style="display:none">
 <header>
-  <div class="wrap nav">
-    <button class="menu-toggle" aria-label="Toggle menu">☰</button>
-    <div class="brand"><span aria-hidden="true" class="brand-badge"></span><span>SANTHOSH SURESH</span></div>
-    <nav aria-label="Primary" class="menu">
-      <a href="#SUMMARYS">SUMMARY</a>
-      <a href="#EXPERIENCE">EXPERIENCE</a>
-      <a href="#CORECOMPETENCIES">CORE COMPETENCIES</a>
-      <a href="#TECHNICAL-SKILLS">TECHNICAL SKILLS</a>
-      <a href="#PROJECTS">PROJECTS</a>
-      <a href="#ACHIEVEMENT">ACHIEVEMENTS</a>
-      <a href="#CERTIFICATION">CERTIFICATIONS</a>
-      <a href="#EDUCATION">EDUCATION</a>
-      <a href="#contact">CONTACT</a>
+  <div class="nav">
+    <div class="brand">
+      <!-- Netflix-style SVG logo, but says PORTFOLIO -->
+      <svg width="180" height="48" viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+        <defs>
+          <linearGradient id="netflixRed" x1="0" y1="0" x2="0" y2="48" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#E50914"/>
+            <stop offset="1" stop-color="#B0060F"/>
+          </linearGradient>
+          <filter id="netflixShadow" x="0" y="0" width="180" height="48" filterUnits="userSpaceOnUse">
+            <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.55"/>
+          </filter>
+        </defs>
+        <text
+          x="9"
+          y="37"
+          font-family="Bebas Neue, Arial Black, Impact, sans-serif"
+          font-size="40"
+          font-weight="bold"
+          fill="url(#netflixRed)"
+          filter="url(#netflixShadow)"
+          letter-spacing="2"
+        >PORTFOLIO</text>
+      </svg>
+    </div>
+    <nav class="menu" id="mainMenu">
+      <a href="#SUMMARYS" class="selected">Home</a>
+      <a href="#EXPERIENCE">Experience</a>
+      <a href="#PROJECTS">Projects</a>
+      <a href="#ACHIEVEMENT">Achievements</a>
+      <a href="#CERTIFICATION">Certifications</a>
+      <a href="#EDUCATION">Education</a>
+      <a href="#contact">Contact</a>
     </nav>
     <div class="actions">
-      <button id="themeToggle" class="btn btn-ghost" aria-label="Toggle color theme" title="Toggle theme">🌙</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+      <button class="switch-profile-btn" onclick="switchProfile()" aria-label="Switch profile">Switch Profile</button>
     </div>
   </div>
 </header>
 
-<main class="wrap">
-  <!-- Hero -->
-  <section id="SUMMARYS" class="hero">
-    <span class="eyebrow">About</span>
-    <h1 id="Portfolio-title" class="reveal">SUMMARY</h1>
-    <p class="lead reveal">Analyst with 3 years of experience in operational support, process optimization, and reporting automation across IT and business service functions. Adept at transforming raw data into meaningful business insights using Excel, Power BI, and SharePoint, aligned with client-specific requirements. Skilled in streamlining workflows through Power Automate to reduce manual effort and enhance accuracy. Experienced in stakeholder coordination, SOP documentation, and delivering timely, insight-driven reports that support data-informed decision-making.</p>
-
-    <div class="stats" role="list">
-      <div class="stat reveal" role="listitem">
-        <h2 data-counter target="3">0</h2>
-        <p>Years of Experience</p>
-      </div>
-      <div class="stat reveal" role="listitem">
-        <h2 data-counter target="5">0</h2>
-        <p>Certification</p>
-      </div>
-      <div class="stat reveal" role="listitem">
-        <h2 data-counter target="2">0</h2>
-        <p>Project</p>
-      </div>
-      <div class="stat reveal" role="listitem">
-        <h2 data-counter target="2">0</h2>
-        <p>Degrees</p>
-      </div>
+<!-- Cover/Hero Netflix Style -->
+<section class="cover" id="SUMMARYS">
+  <div class="cover-content">
+    <div class="cover-title">Santhosh Suresh</div>
+    <div class="cover-lead">Analyst | 3+ Years | Excel & Power BI Automation | BFSI Domain</div>
+    <div>
+      <span class="btn">Download Resume</span>
+      <span class="btn" style="background:var(--card); color:var(--accent); margin-left:12px;">Contact</span>
     </div>
-  </section>
-
-
-
-<!-- Experience -->
-<section id="EXPERIENCE" class="section">
-  <h3 id="EXPERIENCE-title" class="reveal">EXPERIENCE</h3>
-  <details class="year reveal" open>
-    <summary class="year-header"><strong>2022–2025</strong> <button class="pill" type="button" onclick="toggleById('profSummary')">HIGHLIGHTS</button></summary>
-    <div class="entries" style="gap: 20px;">
-      <div class="entry">
-        <strong style="font-size:1.1em;">Designation</strong>
-        <div><small>Process Associate</small></div>
-      </div>
-      <div class="entry">
-        <strong style="font-size:1.1em;">Industry</strong>
-        <div><small>BFSI</small></div>
-        <div><small>(Banking, Financial Services &amp; Insurance)</small></div>
-      </div>
-    </div>
-
-    <div id="profSummary" style="display:none; margin-top: 20px;">
-      <div class="entry">
-        <strong style="font-size:1.05em; display:block; margin-bottom:10px;">PROFESSIONAL EXPERIENCE</strong>
-        <ul style="margin:0; padding-left:20px;">
-          <li>
-            <strong>Analyst | Oct 2023 – Sep 2025</strong>
-            <ul style="margin:6px 0 12px 20px; padding:0;">
-              <li>Delivered 98% SLA/ESL/MSL compliance by ensuring accurate and timely client reporting.</li>
-              <li>Extracted and transformed raw CSV data from FTP (FileZilla) using SQL scripts and internal automation tools to generate business-ready insights.</li>
-              <li>Designed Excel dashboards (Power Query, PivotTables) and Power BI reports (DAX, KPIs, data visualizations) for senior management decision-making.</li>
-              <li>Authored and maintained SOPs and knowledge repositories, ensuring process continuity, compliance, and audit readiness.</li>
-              <li>Acted as SME, leading quality reviews, mentoring new joiners, and conducting knowledge-sharing sessions.</li>
-              <li>Collaborated with global stakeholders by integrating SharePoint &amp; Salesforce workflows, optimizing task management and reporting efficiency.</li>
-            </ul>
-          </li>
-
-          <li>
-            <strong>Analyst Trainee | Oct 2022 – Sep 2023</strong>
-            <ul style="margin:6px 0 0 20px; padding:0;">
-              <li>Trained in BFSI processes, compliance requirements, and SLA/ESL standards.</li>
-              <li>Supported senior analysts with Excel trackers, SLA monitoring, and report validation.</li>
-              <li>Built strong foundations in data reporting, Excel automation, and knowledge documentation.</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </details>
+  </div>
+  <img src="https://assets.nflxext.com/ffe/siteui/vlv3/0e3e0e8a-8c1e-4c2b-8f1f-9f8f1e1a0e0e/4e4e4e7a-7e7e-4e4e-8e8e-7e7e4e4e4e4e/IN-en-20221010-popsignuptwoweeks-perspective_alpha_website_large.jpg" class="cover-img" alt="Netflix BG"/>
 </section>
 
-  <!-- Core Competencies -->
-  <section id="CORECOMPETENCIES" class="section">
-    <h3 class="reveal">CORE COMPETENCIES</h3>
-    <div class="entry reveal">
-      <ul style="list-style:none; padding:0; margin:0;">
-        <li><strong>Process Coordination</strong> | <strong>Workflow Optimization</strong> | <strong>SOP Documentation</strong></li>
-        <li>● <strong>Excel Automation</strong> | <strong>Power Automate</strong> | <strong>KPI Tracking &amp; Dashboards (Excel/Power BI)</strong></li>
-        <li>● <strong>Cross-functional Collaboration</strong> | <strong>Stakeholder Engagement</strong> | <strong>SharePoint Documentation</strong></li>
-        <li>● <strong>Team Support</strong> | <strong>Knowledge Sharing</strong> | <strong>Strong Communication &amp; Adaptability</strong></li>
-      </ul>
-    </div>
-  </section>
-
-<!-- Technical Skills -->
-<section id="TECHNICAL-SKILLS" class="section">
-  <h3 class="reveal">TECHNICAL SKILLS</h3>
-  <div class="entry reveal" style="background:transparent; border:none; padding:0">
-
-    <!-- Excel -->
-    <div class="entry" style="margin-bottom:12px">
-      <span style="font-weight:700">Excel</span>
-      <button class="pill" type="button" onclick="toggleById('excelSkill')">HIGHLIGHT</button>
-      <div id="excelSkill" style="display:none; margin-top:12px;" class="entry">
-        (Advanced): VLOOKUP, XLOOKUP, HLOOKUP, INDEX-MATCH, SUBSTITUTE, TRIM, COUNTA, 
-        COUNTIF/COUNTIFS, IF/IFS, FILTER, PivotTables, Pivot Charts, Power Query, Macros.
+<!-- Experience Row -->
+<section class="section-row" id="EXPERIENCE">
+  <div class="row-title">Experience</div>
+  <div class="carousel">
+    <div class="card">
+      <div class="card-img" style="background:#e50914;"></div>
+      <div class="card-content">
+        <div class="card-title">Process Associate</div>
+        <div class="card-meta">2022–2025 | BFSI (TCS)</div>
+        <div class="card-desc">Analyst with 3 years in operational support, automation, and reporting for IT/business services.</div>
       </div>
     </div>
-
-    <!-- Data Visualization -->
-    <div class="entry" style="margin-bottom:12px">
-      <span style="font-weight:700">Data Visualization</span>
-      <button class="pill" type="button" onclick="toggleById('dataVisSkill')">HIGHLIGHT</button>
-      <div id="dataVisSkill" style="display:none; margin-top:12px;" class="entry">
-        Power BI (DAX, KPIs, Dashboards, Visualizations), Excel-based Dashboards. 
+    <div class="card">
+      <div class="card-img" style="background:#181818;"></div>
+      <div class="card-content">
+        <div class="card-title">Analyst | Oct 2023–Sep 2025</div>
+        <div class="card-meta">Client Reporting</div>
+        <div class="card-desc">98% SLA compliance, Excel/Power BI dashboards, SOP documentation, stakeholder management.</div>
       </div>
     </div>
-
-    <!-- Automation & Tools -->
-    <div class="entry" style="margin-bottom:12px">
-      <span style="font-weight:700">Automation & Tools</span>
-      <button class="pill" type="button" onclick="toggleById('automationSkill')">HIGHLIGHT</button>
-      <div id="automationSkill" style="display:none; margin-top:12px;" class="entry">
-        Power Automate (Task Automation, Notifications), SharePoint (Document Management, Workflow 
-        Integration), Salesforce (Task Tracking, Reporting).
+    <div class="card">
+      <div class="card-img" style="background:#e50914;"></div>
+      <div class="card-content">
+        <div class="card-title">Analyst Trainee</div>
+        <div class="card-meta">Oct 2022–Sep 2023</div>
+        <div class="card-desc">Excel automation, SLA monitoring, report validation, knowledge documentation.</div>
       </div>
     </div>
-
-    <!-- Databases -->
-    <div class="entry" style="margin-bottom:12px">
-      <span style="font-weight:700">Databases</span>
-      <button class="pill" type="button" onclick="toggleById('dbSkill')">HIGHLIGHT</button>
-      <div id="dbSkill" style="display:none; margin-top:12px;" class="entry">
-        SQL (Data Cleaning, Transformation). 
-      </div>
-    </div>
-
-    <!-- Other Tools -->
-    <div class="entry">
-      <span style="font-weight:700">Other Tools</span>
-      <button class="pill" type="button" onclick="toggleById('otherToolsSkill')">HIGHLIGHT</button>
-      <div id="otherToolsSkill" style="display:none; margin-top:12px;" class="entry">
-        FileZilla (FTP), Microsoft Word, PowerPoint, Outlook. 
-      </div>
-    </div>
-
   </div>
 </section>
 
-
-  <!-- Projects -->
-  <section id="PROJECTS" class="section">
-    <h3 class="reveal">PROJECTS</h3>
-    <div class="entry reveal" style="background:transparent; border:none; padding:0">
-      <div style="font-size:1.05em; letter-spacing:.5px; color:var(--muted); margin-bottom:12px;">2022–2025</div>
-      <div class="entry" style="margin-bottom:12px">
-        <span style="font-weight:700">Employee Activity Tracker Automation</span>
-        <button class="pill" type="button" onclick="toggleById('activityTracker')">HIGHLIGHT</button>
-        <div id="activityTracker" style="display:none; margin-top:12px;" class="entry">
-          Built an Excel macro-based activity tracker to log and monitor employee tasks throughout the day, enabling visibility into work patterns, accurate calculation of extra working hours, and individual performance assessment—reducing manual effort by 50% and increasing reporting accuracy.
-        </div>
-      </div>
-      <div class="entry">
-        <span style="font-weight:700">File Converter Macro Tool</span>
-        <button class="pill" type="button" onclick="toggleById('fileConverter')">HIGHLIGHT</button>
-        <div id="fileConverter" style="display:none; margin-top:12px;" class="entry">
-          Developed an Excel VBA automation tool that allows opening and converting multiple files across various formats simultaneously with a single click—streamlining document processing, reducing manual effort, and saving 25+ hours per month.
-        </div>
+<!-- Projects Row -->
+<section class="section-row" id="PROJECTS">
+  <div class="row-title">Projects</div>
+  <div class="carousel">
+    <div class="card">
+      <div class="card-img" style="background:#222 url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80') center/cover;"></div>
+      <div class="card-content">
+        <div class="card-title">Employee Activity Tracker Automation</div>
+        <div class="card-desc">Excel macro tracker to log, monitor, and assess employee tasks, saving 50% manual effort.</div>
       </div>
     </div>
-  </section>
-
-  <!-- Achievements -->
-  <section id="ACHIEVEMENT" class="section">
-    <h3 class="reveal">ACHIEVEMENTS</h3>
-    <div class="entry reveal" style="background:transparent; border:none; padding:0">
-      <div style="font-size:1.05em; letter-spacing:.5px; color:var(--muted); margin-bottom:12px;">2022–2025 @TCS</div>
-      <div class="entry" style="margin-bottom:12px">
-        <span style="font-weight:700">ON SPOT AWARD</span>
-        <button class="pill" type="button" onclick="toggleById('spotAward')">HIGHLIGHT</button>
-        <div id="spotAward" style="display:none; margin-top:12px;" class="entry">
-          Received On-the-Spot Excellence Award during probation for outstanding performance and rapid understanding of processes, achieving ESL within defined SLA targets.
-        </div>
-      </div>
-      <div class="entry" style="margin-bottom:12px">
-        <span style="font-weight:700">CLIENT APPRECIATION</span>
-        <button class="pill" type="button" onclick="toggleById('clientAppreciation')">HIGHLIGHT</button>
-        <div id="clientAppreciation" style="display:none; margin-top:12px;" class="entry">
-          Appreciated by client for maintaining consistent SLA performance during high-volume operations.
-        </div>
-      </div>
-      <div class="entry">
-        <span style="font-weight:700">SPOC</span>
-        <button class="pill" type="button" onclick="toggleById('spoc')">HIGHLIGHT</button>
-        <div id="spoc" style="display:none; margin-top:12px;" class="entry">
-          Led onboarding sessions and improved team ramp-up time and process adherence.
-        </div>
+    <div class="card">
+      <div class="card-img" style="background:#222 url('https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=400&q=80') center/cover;"></div>
+      <div class="card-content">
+        <div class="card-title">File Converter Macro Tool</div>
+        <div class="card-desc">Excel VBA tool for batch file conversion, streamlining documents and saving 25+ hours/month.</div>
       </div>
     </div>
-  </section>
-
- <!-- Certifications -->
-<section id="CERTIFICATION" class="section">
-  <h3 class="reveal">CERTIFICATIONS</h3>
-  <div class="entry reveal" style="background:transparent; border:none; padding:0">
-
-<!-- Certifications -->
-<section id="CERTIFICATION" class="section">
-  <h3 class="reveal">CERTIFICATIONS</h3>
-  <div class="entry reveal" style="background:transparent; border:none; padding:0">
-
-    <!-- Excel -->
-    <div class="entry" style="margin-bottom:20px">
-      <span style="font-weight:700">Microsoft Excel Advanced</span>
-      <button class="pill" type="button" onclick="toggleById('certExcel')">VIEW</button>
-      <div id="certExcel" style="display:none; margin-top:12px;" class="entry">
-        <p>Demonstrates expertise in advanced Excel functions, macros, automation, and business reporting.</p>
-        <div class="cert-gallery">
-          <img src="assets/EXCEL.jpg" alt="Excel Certificate" onclick="openLightbox(this)">
-        </div>
-      </div>
-    </div>
-
-    <!-- Power BI -->
-    <div class="entry" style="margin-bottom:20px">
-      <span style="font-weight:700">Power BI</span>
-      <button class="pill" type="button" onclick="toggleById('certPowerBI')">VIEW</button>
-      <div id="certPowerBI" style="display:none; margin-top:12px;" class="entry">
-        <p>Validates skills in Power BI, data visualization, and turning data into actionable insights.</p>
-        <div class="cert-gallery">
-          <img src="assets/POWER BI.jpg" alt="Power BI Certificate" onclick="openLightbox(this)">
-        </div>
-      </div>
-    </div>
-
-    <!-- Power Automate -->
-    <div class="entry" style="margin-bottom:20px">
-      <span style="font-weight:700">Power Automate Fundamentals</span>
-      <button class="pill" type="button" onclick="toggleById('certPowerAutomate')">VIEW</button>
-      <div id="certPowerAutomate" style="display:none; margin-top:12px;" class="entry">
-        <p>Certified in automating repetitive tasks and workflows using Microsoft Power Automate.</p>
-        <div class="cert-gallery">
-          <img src="assets/Power automate.jpg" alt="Power Automate Certificate" onclick="openLightbox(this)">
-        </div>
-      </div>
-    </div>
-
-    <!-- PGDCA -->
-    <div class="entry" style="margin-bottom:20px">
-      <span style="font-weight:700">Post Graduate Diploma in Computer Application (PGDCA)</span>
-      <button class="pill" type="button" onclick="toggleById('certPGDCA')">VIEW</button>
-      <div id="certPGDCA" style="display:none; margin-top:12px;" class="entry">
-        <p>Completed PGDCA covering computer applications, databases, and programming fundamentals.</p>
-        <div class="cert-gallery">
-          <img src="assets/PGDCA.jpg" alt="PGDCA Certificate" onclick="openLightbox(this)">
-        </div>
-      </div>
-    </div>
-
-    <!-- EY Audit PDF -->
-    <div class="entry">
-      <span style="font-weight:700">EY Audit Job Simulation</span>
-      <button class="pill" type="button" onclick="toggleById('certEY')">VIEW</button>
-      <div id="certEY" style="display:none; margin-top:12px;" class="entry">
-        <p>Completed EY Audit simulation showcasing real-world casework and financial audit skills.</p>
-        <div class="cert-gallery">
-          <img src="assets/pdf-placeholder.png" alt="EY Audit Certificate" onclick="openLightbox(this)">
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<!-- Lightbox -->
-<div id="lightbox" class="lightbox">
-  <span class="close" onclick="closeLightbox()">&times;</span>
-  <img id="lightbox-img" src="" alt="Certificate">
+<!-- Achievements Row -->
+<section class="section-row" id="ACHIEVEMENT">
+  <div class="row-title">Achievements</div>
+  <div class="carousel">
+    <div class="card">
+      <div class="card-img" style="background:#e50914;"></div>
+      <div class="card-content">
+        <div class="card-title">On Spot Award</div>
+        <div class="card-desc">Excellence Award for outstanding performance and rapid process understanding.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#181818;"></div>
+      <div class="card-content">
+        <div class="card-title">Client Appreciation</div>
+        <div class="card-desc">Maintained consistent SLA performance during high-volume periods.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#e50914;"></div>
+      <div class="card-content">
+        <div class="card-title">SPOC</div>
+        <div class="card-desc">Led onboarding sessions and improved team ramp-up time and adherence.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Certifications Row -->
+<section class="section-row" id="CERTIFICATION">
+  <div class="row-title">Certifications</div>
+  <div class="carousel">
+    <div class="card">
+      <div class="card-img" style="background:#222 url('assets/EXCEL.jpg') center/cover;"></div>
+      <div class="card-content">
+        <div class="card-title">Microsoft Excel Advanced</div>
+        <div class="card-desc">Advanced Excel functions, macros, automation, reporting.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#222 url('assets/POWER BI.jpg') center/cover;"></div>
+      <div class="card-content">
+        <div class="card-title">Power BI</div>
+        <div class="card-desc">BI, visualization, actionable insights.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#222 url('assets/Power automate.jpg') center/cover;"></div>
+      <div class="card-content">
+        <div class="card-title">Power Automate Fundamentals</div>
+        <div class="card-desc">Automating tasks and workflows.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#222 url('assets/PGDCA.jpg') center/cover;"></div>
+      <div class="card-content">
+        <div class="card-title">PGDCA</div>
+        <div class="card-desc">Computer applications fundamentals.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#222 url('assets/pdf-placeholder.png') center/cover;"></div>
+      <div class="card-content">
+        <div class="card-title">EY Audit Simulation</div>
+        <div class="card-desc">Real-world casework and audit skills.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education Row -->
+<section class="section-row" id="EDUCATION">
+  <div class="row-title">Education</div>
+  <div class="carousel">
+    <div class="card">
+      <div class="card-img" style="background:#181818;"></div>
+      <div class="card-content">
+        <div class="card-title">Bachelor’s Degree</div>
+        <div class="card-desc">Business Administration, Bharathiar University</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#181818;"></div>
+      <div class="card-content">
+        <div class="card-title">PGDCA</div>
+        <div class="card-desc">Browzone Infotech</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Row -->
+<section class="section-row" id="contact">
+  <div class="row-title">Contact</div>
+  <div class="carousel">
+    <div class="card">
+      <div class="card-img" style="background:#e50914;"></div>
+      <div class="card-content">
+        <div class="card-title">Santhosh Suresh</div>
+        <div class="card-desc">Email: <a href="mailto:santhosh02516@gmail.com">santhosh02516@gmail.com</a><br>
+        Phone: <a href="tel:9543158080">9543158080</a><br>
+        <a href="https://www.linkedin.com/in/santhosh-suresh-1b7577291" target="_blank">LinkedIn Profile</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#181818;"></div>
+      <div class="card-content">
+        <div class="card-title">Quick Email</div>
+        <form onsubmit="sendMail(event)" style="display:flex; flex-direction:column; gap:8px;">
+          <input type="text" id="subject" name="subject" placeholder="Subject" required style="padding:8px; border-radius:6px; border:1px solid var(--line); background:#222; color:var(--fg);">
+          <textarea id="body" name="body" placeholder="Body" rows="4" required style="padding:8px; border-radius:6px; border:1px solid var(--line); background:#222; color:var(--fg);"></textarea>
+          <button type="submit" class="btn" style="margin-top:6px;">Send Draft</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© <span id="year"></span> Santhosh Suresh |Portfolio</footer>
 </div>
 
-<style>
-.cert-gallery img {
-  max-width: 220px;
-  border-radius: 12px;
-  margin-top: 10px;
-  cursor: zoom-in;
-  transition: transform .3s ease;
-}
-.cert-gallery img:hover {
-  transform: scale(1.05);
-}
-
-/* Lightbox */
-.lightbox {
-  display:none;
-  position:fixed;
-  z-index:9999;
-  padding-top:60px;
-  left:0; top:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.9);
-}
-.lightbox img {
-  display:block;
-  max-width:80%;
-  max-height:80%;
-  margin:auto;
-  border-radius:12px;
-  box-shadow:0 0 25px rgba(0,0,0,.6);
-}
-.lightbox .close {
-  position:absolute;
-  top:20px; right:40px;
-  font-size:40px; font-weight:bold;
-  color:white;
-  cursor:pointer;
-}
-</style>
-
 <script>
-function openLightbox(el){
-  document.getElementById("lightbox").style.display = "block";
-  document.getElementById("lightbox-img").src = el.src;
-}
-function closeLightbox(){
-  document.getElementById("lightbox").style.display = "none";
-}
-</script>
-
-  <!-- Education -->
-  <section id="EDUCATION" class="section">
-    <h3 class="reveal">EDUCATION</h3>
-    <div class="entry reveal">
-      <ul style="list-style:none; padding:0; margin:0;">
-        <li>● <strong>Bachelor’s Degree in Business Administration</strong> – Bharathiar University</li>
-        <li>● <strong>Post Graduate Diploma in Computer Application</strong> – Browzone Infotech</li>
-      </ul>
-    </div>
-  </section>
-
-<!-- Contact -->
-<section id="contact" class="section">
-  <h3 class="reveal">Contact</h3>
-  <div class="entry contact-card reveal" style="max-width:600px; display:flex; flex-direction:column; gap:20px;">
-    <div>
-      <p class="lead" style="margin:0 0 8px; font-size:1.05em; font-weight:bold;">SANTHOSH SURESH</p>
-      <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap">
-        <a class="pill" aria-label="Send Email" href="mailto:santhosh02516@gmail.com">EMAIL</a>
-        <a class="pill" aria-label="Call Phone" href="tel:9543158080">CALL</a>
-        <a class="pill" aria-label="LinkedIn" href="https://www.linkedin.com/in/santhosh-suresh-1b7577291" rel="noopener" target="_blank">LINKEDIN</a>
-      </div>
-    </div>
-
-    <div>
-      <h4 style="margin:0 0 8px">Quick Email Draft</h4>
-      <form id="quickEmailForm" style="display:flex; flex-direction:column; gap:10px;" onsubmit="sendMail(event)">
-        <input id="ccEmail" type="text" name="cc" placeholder="CC (optional)"
-               style="padding:10px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;">
-        <input id="bccEmail" type="text" name="bcc" placeholder="BCC (optional)"
-               style="padding:10px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;">
-        <input id="subject" type="text" name="subject" placeholder="Subject" required
-               style="padding:10px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;">
-        <textarea id="body" name="body" placeholder="Body" rows="6" required
-                  style="padding:12px; border-radius:12px; border:1px solid var(--line); background:color-mix(in srgb, var(--bg), white 2%); color:inherit;"></textarea>
-        <button type="submit" class="btn" style="align-self:flex-start; background:var(--accent); color:#fff; border:none">Send Draft</button>
-        <p style="font-size:.9rem; color:var(--muted); margin:4px 0 0;">
-          By using above feature you can send mail to this id <strong>santhosh02516@gmail.com</strong> (If not, you can send mail by clicking EMAIL above).
-        </p>
-      </form>
-    </div>
-  </div>
-</section>
-
-<script>
-function sendMail(event) {
-  event.preventDefault(); // prevent actual form submission
-  const subject = encodeURIComponent(document.getElementById('subject').value);
-  const body = encodeURIComponent(document.getElementById('body').value);
-  const cc = encodeURIComponent(document.getElementById('ccEmail').value);
-  const bcc = encodeURIComponent(document.getElementById('bccEmail').value);
-
-  let mailtoLink = `mailto:santhosh02516@gmail.com?subject=${subject}&body=${body}`;
-  if (cc) mailtoLink += `&cc=${cc}`;
-  if (bcc) mailtoLink += `&bcc=${bcc}`;
-
-  window.location.href = mailtoLink; // opens default mail client
-}
-</script>
-
-
-<footer class="wrap">© <span id="year"></span> Santhosh Suresh</footer>
-
-<script>
-  // Helper: toggle show/hide blocks by id
-  function toggleById(id){
-    const el = document.getElementById(id);
-    const show = el.style.display === 'none' || !el.style.display;
-    el.style.display = show ? 'block' : 'none';
+  function selectProfile(profileName){
+    document.getElementById('profileSelectOverlay').style.display = 'none';
+    document.getElementById('mainPortfolio').style.display = 'block';
+    localStorage.setItem('selectedProfile', profileName);
   }
-
-  // Count-up animation for stats (respects reduced motion)
-  (function(){
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    document.querySelectorAll('[data-counter]').forEach(el=>{
-      const target = Number(el.getAttribute('target')||0);
-      if(prefersReduced || target === 0){ el.textContent = target; return; }
-      const duration = 1200; const start = performance.now();
-      const step = (t)=>{
-        const p = Math.min(1, (t-start)/duration);
-        el.textContent = Math.floor(p*target).toLocaleString();
-        if(p<1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
+  function addProfile(){
+    alert('Add Profile functionality coming soon!');
+  }
+  function switchProfile(){
+    document.getElementById('mainPortfolio').style.display = 'none';
+    document.getElementById('profileSelectOverlay').style.display = 'flex';
+    localStorage.removeItem('selectedProfile');
+  }
+  document.querySelectorAll('.menu a').forEach(a=>{
+    a.addEventListener('click',function(e){
+      document.querySelectorAll('.menu a').forEach(x=>x.classList.remove('selected'));
+      a.classList.add('selected');
+      const href = a.getAttribute('href');
+      if(href && href.startsWith('#')){
+        e.preventDefault();
+        document.querySelector(href).scrollIntoView({behavior:'smooth'});
+      }
     });
-  })();
-
-  // Footer year
+  });
   document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Mobile menu
-  document.querySelector('.menu-toggle').addEventListener('click',()=>{
-    document.querySelector('header .menu').classList.toggle('show');
-  });
-
-  // Scroll-in reveal
-  (function(){
-    const els = document.querySelectorAll('.reveal, .stat, .entry, .brandcard, .year, section ul');
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(reduce){ els.forEach(el=>el.classList.add('show')); return; }
-    els.forEach(el => el.classList.add('reveal'));
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(({isIntersecting, target})=>{
-        if(isIntersecting){ target.classList.add('show'); io.unobserve(target); }
-      });
-    }, { threshold: 0.12 });
-    els.forEach(el => io.observe(el));
-  })();
-
-  // Quick email draft builder
-  document.getElementById('quickEmailForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    const to = 'santhosh02516@gmail.com';
-    const from = document.getElementById('fromEmail').value.trim();
-    const cc = document.getElementById('ccEmail').value.trim();
-    const bcc = document.getElementById('bccEmail').value.trim();
-    const subject = encodeURIComponent(document.getElementById('subject').value.trim());
-    const bodyRaw = document.getElementById('body').value.trim();
-    const body = encodeURIComponent(`From: ${from}\n\n${bodyRaw}`);
-    let mailto = `mailto:${to}?subject=${subject}&body=${body}`;
-    if(cc) mailto += `&cc=${encodeURIComponent(cc)}`;
-    if(bcc) mailto += `&bcc=${encodeURIComponent(bcc)}`;
-    window.location.href = mailto;
-  });
-
-  // ------------------------------
-  // Theme: system + manual toggle
-  // ------------------------------
-  (function(){
+  document.getElementById('themeToggle').addEventListener('click',()=>{
     const root = document.documentElement;
-    const btn = document.getElementById('themeToggle');
-    const THEME_KEY = 'theme-preference'; // 'light' | 'dark' | 'system'
-
-    // Apply preferred theme on load
-    const saved = localStorage.getItem(THEME_KEY) || 'system';
-    applyTheme(saved);
-
-    // Update icon
-    updateIcon();
-
-    btn.addEventListener('click', () => {
-      const current = root.getAttribute('data-theme') || 'system';
-      // cycle: system -> light -> dark -> system
-      const next = current === 'system' ? 'light' : current === 'light' ? 'dark' : 'system';
-      localStorage.setItem(THEME_KEY, next);
-      applyTheme(next);
-      updateIcon();
-    });
-
-    function applyTheme(mode){
-      if(mode === 'system') root.setAttribute('data-theme', 'system');
-      else if(mode === 'light') root.setAttribute('data-theme', 'light');
-      else root.setAttribute('data-theme', 'dark');
-    }
-    function updateIcon(){
-      const mode = root.getAttribute('data-theme');
-      btn.textContent = mode === 'light' ? '☀️' : mode === 'dark' ? '🌙' : '🖥️';
-      btn.title = `Theme: ${mode}`;
-      btn.setAttribute('aria-label', `Theme: ${mode}`);
-    }
-
-    // If user uses system and their OS theme changes, reflect it
-    const mql = window.matchMedia('(prefers-color-scheme: dark)');
-    mql.addEventListener?.('change', () => { if((localStorage.getItem(THEME_KEY)||'system')==='system') applyTheme('system'); });
-  })();
+    const isDark = root.getAttribute('data-theme')==='dark';
+    root.setAttribute('data-theme',isDark?'light':'dark');
+    document.getElementById('themeToggle').textContent = isDark?'☀️':'🌙';
+  });
+  function sendMail(event) {
+    event.preventDefault();
+    const subject = encodeURIComponent(document.getElementById('subject').value);
+    const body = encodeURIComponent(document.getElementById('body').value);
+    let mailtoLink = `mailto:santhosh02516@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = mailtoLink;
+  }
+  window.onload = function(){
+    document.getElementById('profileSelectOverlay').style.display = 'flex';
+    document.getElementById('mainPortfolio').style.display = 'none';
+  }
 </script>
-
-  <!--
-    DUPLICATE ENHANCER BLOCK (commented out to avoid breaking the page)
-
-    <div id="enhancer-bg" aria-hidden="true"></div>
-    <div id="section-modal" aria-hidden="true"></div>
-    <link rel="stylesheet" href="enhancements.css">
-    <script src="enhancements.js" defer></script>
-
-    [Any duplicate CSS or JS text you pasted here is intentionally left inside this comment so nothing is deleted]
-  -->
-
 </body>
 </html>

@@ -37,8 +37,10 @@
     header { background:rgba(20,20,20,0.95); padding:0; position:sticky; top:0; z-index:100; box-shadow:var(--shadow);}
     .nav { max-width: 1400px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:20px 40px;}
     .brand { height:48px; display:flex; align-items:center; }
+    /* SWITCH PROFILE BUTTON - DESKTOP */
     .switch-profile-btn { background:var(--card); color:var(--accent); border:1.5px solid var(--accent); padding:8px 18px; border-radius:999px; font-weight:600; margin-left:10px; cursor:pointer; transition:background .2s, color .2s;}
     .switch-profile-btn:hover { background:var(--accent); color:var(--fg);}
+    /* MENU */
     .menu { display:flex; gap:32px; }
     .menu a { color:var(--fg); font-weight:600; letter-spacing:1px; font-size:1.05rem; opacity:.85; position:relative; transition:.2s;}
     .menu a.selected, .menu a:hover { color:var(--accent); opacity:1;}
@@ -187,6 +189,114 @@
     [data-theme="light"] .carousel::-webkit-scrollbar-thumb {
       background:var(--accent);
     }
+
+    /* --- MOBILE NAV (HAMBURGER) --- */
+    .mobile-nav-toggle {
+      display: none;
+      background: var(--card);
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--accent);
+      cursor: pointer;
+      margin-left: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0;
+        padding: 14px;
+        position: relative;
+      }
+      .mobile-nav-toggle {
+        display: flex;
+      }
+      .menu {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        background: var(--card);
+        width: 100vw;
+        flex-direction: column;
+        gap: 0;
+        z-index: 1000;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      }
+      .menu.menu-open {
+        display: flex;
+      }
+      .menu a {
+        padding: 16px 24px;
+        border-bottom: 1px solid var(--line);
+        font-size: 1.05rem;
+        opacity: 1;
+      }
+      .menu a.selected::after, .menu a:hover::after {
+        display: none;
+      }
+      .actions {
+        align-self: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      /* Switch Profile as Avatar Circle */
+      .switch-profile-btn {
+        display: none !important;
+      }
+      .switch-profile-avatar {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #181818 70%, #e50914 150%);
+        border: 2px solid var(--accent);
+        cursor: pointer;
+        margin-left: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      }
+      .switch-profile-avatar img,
+      .switch-profile-avatar .icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: block;
+      }
+      .switch-profile-avatar .icon {
+        font-size: 2rem;
+        color: var(--accent);
+        text-align: center;
+        line-height: 30px;
+      }
+    }
+    @media (max-width: 480px) {
+      .nav {
+        padding: 10px;
+      }
+      .mobile-nav-toggle {
+        width: 36px;
+        height: 36px;
+        font-size: 1.4rem;
+        margin-left: 4px;
+      }
+      .menu a {
+        padding: 12px 18px;
+        font-size: .98rem;
+      }
+      .switch-profile-avatar {
+        width: 36px; height: 36px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -235,6 +345,14 @@
         >PORTFOLIO</text>
       </svg>
     </div>
+    <!-- Hamburger for Mobile Nav -->
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">
+      <span style="display:block; width:28px; height:28px; position:relative;">
+        <span style="position:absolute;top:6px;left:0;width:100%;height:4px;background:var(--accent);border-radius:2px;"></span>
+        <span style="position:absolute;top:14px;left:0;width:100%;height:4px;background:var(--accent);border-radius:2px;"></span>
+        <span style="position:absolute;top:22px;left:0;width:100%;height:4px;background:var(--accent);border-radius:2px;"></span>
+      </span>
+    </button>
     <nav class="menu" id="mainMenu">
       <a href="#SUMMARYS" class="selected">Home</a>
       <a href="#EXPERIENCE">Experience</a>
@@ -247,6 +365,10 @@
     <div class="actions">
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
       <button class="switch-profile-btn" onclick="switchProfile()" aria-label="Switch profile">Switch Profile</button>
+      <!-- MOBILE: Switch Profile as Avatar Circle (hidden on desktop) -->
+      <div class="switch-profile-avatar" id="switchProfileAvatar" onclick="switchProfile()" title="Switch Profile" style="display:none;">
+        <span class="icon">👤</span>
+      </div>
     </div>
   </div>
 </header>
@@ -277,7 +399,6 @@
   position: relative;
   display: inline-block;
 }
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -289,7 +410,6 @@
   overflow: hidden;
   animation: fadeIn 0.3s ease-in-out;
 }
-
 .dropdown-content a {
   color: var(--accent);
   padding: 10px 16px;
@@ -297,15 +417,34 @@
   display: block;
   transition: background 0.2s;
 }
-
 .dropdown-content a:hover {
   background: var(--accent);
   color: var(--bg);
 }
-
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+/* Mobile: dropdown always visible, stacked */
+@media (max-width: 768px) {
+  .dropdown-content {
+    position: static;
+    display: block;
+    margin-top: 10px;
+    background: none;
+    box-shadow: none;
+    min-width: 100%;
+    border-radius: 0;
+    animation: none;
+  }
+  .dropdown-content a {
+    background: var(--card);
+    border-radius: 10px;
+    margin: 4px 0;
+    color: var(--accent);
+    font-size: 1rem;
+    border-bottom: none;
+  }
 }
 </style>
 
@@ -314,7 +453,6 @@ function toggleContactMenu() {
   const menu = document.getElementById("contactMenu");
   menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
-
 // Optional: click outside to close
 document.addEventListener("click", (e) => {
   const menu = document.getElementById("contactMenu");
@@ -323,7 +461,6 @@ document.addEventListener("click", (e) => {
   }
 });
 </script>
-
     </div>
   </div>
 </section>
@@ -525,6 +662,10 @@ document.addEventListener("click", (e) => {
         e.preventDefault();
         document.querySelector(href).scrollIntoView({behavior:'smooth'});
       }
+      // On mobile, close menu after selection
+      if(window.innerWidth <= 768) {
+        document.getElementById('mainMenu').classList.remove('menu-open');
+      }
     });
   });
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -552,6 +693,28 @@ document.addEventListener("click", (e) => {
 
     document.getElementById('profileSelectOverlay').style.display = 'flex';
     document.getElementById('mainPortfolio').style.display = 'none';
+
+    // Mobile nav toggle
+    const mobileNavToggle = document.getElementById('mobileNavToggle');
+    const mainMenu = document.getElementById('mainMenu');
+    mobileNavToggle.addEventListener('click', function() {
+      mainMenu.classList.toggle('menu-open');
+    });
+
+    // Show/hide switch profile avatar on mobile
+    function handleMobileAvatar() {
+      const avatar = document.getElementById('switchProfileAvatar');
+      const btn = document.querySelector('.switch-profile-btn');
+      if(window.innerWidth <= 768){
+        avatar.style.display = 'flex';
+        btn.style.display = 'none';
+      } else {
+        avatar.style.display = 'none';
+        btn.style.display = '';
+      }
+    }
+    handleMobileAvatar();
+    window.addEventListener('resize', handleMobileAvatar);
   });
 
   function sendMail(event) {
@@ -566,22 +729,76 @@ document.addEventListener("click", (e) => {
 <style>
 /* Extra responsiveness for better mobile scaling */
 @media (max-width: 768px) {
-  /* NAV & HEADER */
   .nav {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 16px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+    padding: 14px;
+    position: relative;
+  }
+  .mobile-nav-toggle {
+    display: flex;
   }
   .menu {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 18px;
+    display: none;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    background: var(--card);
+    width: 100vw;
+    flex-direction: column;
+    gap: 0;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  }
+  .menu.menu-open {
+    display: flex;
+  }
+  .menu a {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--line);
+    font-size: 1.05rem;
+    opacity: 1;
+  }
+  .menu a.selected::after, .menu a:hover::after {
+    display: none;
   }
   .actions {
     align-self: center;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 10px;
+  }
+  /* Switch Profile as Avatar Circle */
+  .switch-profile-btn {
+    display: none !important;
+  }
+  .switch-profile-avatar {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #181818 70%, #e50914 150%);
+    border: 2px solid var(--accent);
+    cursor: pointer;
+    margin-left: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+  .switch-profile-avatar img,
+  .switch-profile-avatar .icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: block;
+  }
+  .switch-profile-avatar .icon {
+    font-size: 2rem;
+    color: var(--accent);
+    text-align: center;
+    line-height: 30px;
   }
 
   /* HERO SECTION */
@@ -672,8 +889,18 @@ document.addEventListener("click", (e) => {
   .nav {
     padding: 12px;
   }
-  .menu {
-    gap: 12px;
+  .mobile-nav-toggle {
+    width: 36px;
+    height: 36px;
+    font-size: 1.4rem;
+    margin-left: 4px;
+  }
+  .menu a {
+    padding: 12px 18px;
+    font-size: .98rem;
+  }
+  .switch-profile-avatar {
+    width: 36px; height: 36px;
   }
   .cover-title {
     font-size: 1.7rem;
@@ -888,10 +1115,5 @@ document.addEventListener("click", (e) => {
   }
 })();
 </script>
-
 </body>
 </html>
-
-
-
-

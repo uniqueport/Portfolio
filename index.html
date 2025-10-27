@@ -678,8 +678,206 @@ document.addEventListener("click", (e) => {
   }
 }
 </style>
+<!-- 🔧 Enhanced Portfolio Experience Script (v2.0) -->
+<script>
+(() => {
+  // ✅ Prevent double initialization
+  if (window.__UXUIFLOW_BOUND__) return;
+  window.__UXUIFLOW_BOUND__ = true;
+
+  /* ─────────────────────────────────────────────
+     🎯 1. Right-Click & Shortcut Protection
+  ───────────────────────────────────────────── */
+  const restrictedCombos = [
+    { key: 'I', ctrl: true, shift: true },
+    { key: 'J', ctrl: true, shift: true },
+    { key: 'C', ctrl: true, shift: true },
+    { key: 'U', ctrl: true },
+    { key: 'S', ctrl: true },
+    { key: 'F12' }
+  ];
+
+  const isEditable = (el) =>
+    el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable);
+
+  document.addEventListener(
+    'keydown',
+    (e) => {
+      if (isEditable(e.target)) return;
+      if (e.key === 'F12') e.preventDefault();
+      for (const combo of restrictedCombos) {
+        if (
+          e.key.toUpperCase() === combo.key &&
+          (!!combo.ctrl === e.ctrlKey) &&
+          (!!combo.shift === e.shiftKey)
+        ) {
+          e.preventDefault();
+          return false;
+        }
+      }
+    },
+    { passive: false }
+  );
+
+  document.addEventListener('contextmenu', (e) => {
+    if (!isEditable(e.target)) e.preventDefault();
+  });
+
+  /* ─────────────────────────────────────────────
+     🎬 2. Dynamic Modal Interaction
+  ───────────────────────────────────────────── */
+  const modal = document.createElement('div');
+  modal.id = 'dynamicModal';
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+  modal.style.cssText = `
+    display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(0,0,0,0.85);z-index:9999;justify-content:center;
+    align-items:center;padding:20px;backdrop-filter:blur(6px);
+  `;
+  modal.innerHTML = `
+    <div id="modalContent" style="max-width:800px;width:90%;background:var(--card);color:var(--text);padding:2rem;border-radius:1rem;overflow:auto;max-height:90vh;box-shadow:0 0 30px rgba(0,0,0,0.4);">
+      <button id="closeModal" style="background:var(--accent);color:#fff;border:none;padding:0.6rem 1.2rem;border-radius:8px;cursor:pointer;float:right;">Close ✕</button>
+      <div id="modalBody"></div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  const closeModal = () => {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  };
+
+  document.getElementById('closeModal').addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+  });
+
+  window.showEnhancedSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      const clone = section.cloneNode(true);
+      clone.removeAttribute('id');
+      modal.querySelector('#modalBody').innerHTML = '';
+      modal.querySelector('#modalBody').appendChild(clone);
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      modal.focus();
+    }
+  };
+
+  /* ─────────────────────────────────────────────
+     🎥 3. 3D Title Tilt Animation
+  ───────────────────────────────────────────── */
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reducedMotion) {
+    const titles = document.querySelectorAll('h1, h3');
+    titles.forEach((title) => {
+      title.style.transformOrigin = 'center';
+      title.style.transition = 'transform 0.15s ease-out';
+      title.addEventListener('mousemove', (e) => {
+        const rect = title.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -7;
+        const rotateY = ((x - centerX) / centerX) * 7;
+        requestAnimationFrame(() => {
+          title.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+        });
+      });
+      title.addEventListener('mouseleave', () => {
+        requestAnimationFrame(() => {
+          title.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+        });
+      });
+    });
+  }
+
+  /* ─────────────────────────────────────────────
+     🌌 4. Particle Background Animation
+  ───────────────────────────────────────────── */
+  const enhancerBg = document.getElementById('enhancer-bg');
+  if (enhancerBg) {
+    const ctx = enhancerBg.getContext('2d');
+    let particles = [];
+    const dpr = window.devicePixelRatio || 1;
+    const particleCount = Math.min(100, Math.floor(window.innerWidth / 16));
+
+    const resizeCanvas = () => {
+      enhancerBg.width = window.innerWidth * dpr;
+      enhancerBg.height = window.innerHeight * dpr;
+      ctx.scale(dpr, dpr);
+    };
+    resizeCanvas();
+
+    const initParticles = () => {
+      particles = Array.from({ length: particleCount }, () => ({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        r: Math.random() * 1.8 + 0.5,
+        dx: (Math.random() - 0.5) * 0.7,
+        dy: (Math.random() - 0.5) * 0.7
+      }));
+    };
+    initParticles();
+
+    const draw = () => {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      for (const p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.fill();
+
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > window.innerWidth) p.dx *= -1;
+        if (p.y < 0 || p.y > window.innerHeight) p.dy *= -1;
+
+        for (const q of particles) {
+          const dist = (p.x - q.x) ** 2 + (p.y - q.y) ** 2;
+          if (dist < 130 ** 2) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(255,255,255,${0.12 - dist / (130 ** 2 * 0.12)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    };
+
+    requestAnimationFrame(draw);
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        resizeCanvas();
+        initParticles();
+      }, 220);
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) cancelAnimationFrame(draw);
+      else requestAnimationFrame(draw);
+    });
+  } else {
+    console.warn('enhancer-bg element not found; particle background skipped.');
+  }
+})();
+</script>
 
 </body>
 </html>
+
 
 

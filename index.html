@@ -195,21 +195,25 @@
      
     </section>
 
-<!-- Process Associate Netflix-Style Card -->
-<div class="netflix-tile" id="processAssociateTile">
-  <img src="assets/img/process-associate-poster.jpg" alt="Process Associate">
-  <div class="play-overlay">
-    <div class="play-button">▶</div>
+<section class="continue-watching">
+  <h2>Continue Watching Experience</h2>
+  <div class="netflix-carousel">
+    
+    <!-- Process Associate Tile -->
+    <div class="netflix-card" onclick="playExperience()">
+      <div class="tcs-logo">TCS</div>
+      <img src="assets/img/tcs-thumbnail.jpg" alt="Process Associate Poster" class="poster">
+      <div class="play-overlay">
+        <i class="play-icon">▶</i>
+      </div>
+      <div class="card-info">
+        <h3>Process Associate</h3>
+        <p>2022–2025 | BFSI (TCS)</p>
+      </div>
+    </div>
   </div>
-  <div class="show-title">Process Associate</div>
-  <div class="show-meta">2022–2025 | BFSI (TCS)</div>
-</div>
+</section>
 
-<script>
-  document.getElementById("processAssociateTile").addEventListener("click", () => {
-    window.location.href = "experience-player.html";
-  });
-</script>
 
 
 
@@ -416,8 +420,15 @@
     // expose small helpers for debugging
     window.__SAN_DEBUG__ = { selectProfile, toggleProfileOverlay };
   </script>
+  <script>
+function playExperience() {
+  window.location.href = "experience-player.html";
+}
+</script>
+
 </body>
 </html>
+
 
 
 

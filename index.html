@@ -549,6 +549,137 @@ document.addEventListener("click", (e) => {
     window.location.href = mailtoLink;
   }
 </script>
+  <!-- 🔧 Mobile Enhancement Styles -->
+<style>
+/* Extra responsiveness for better mobile scaling */
+@media (max-width: 768px) {
+  /* NAV & HEADER */
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+  }
+  .menu {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+  }
+  .actions {
+    align-self: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* HERO SECTION */
+  .cover {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    padding: 32px 18px;
+  }
+  .cover-title {
+    font-size: clamp(1.8rem, 6vw, 3rem);
+  }
+  .cover-lead {
+    font-size: 1rem;
+    margin-bottom: 24px;
+  }
+  .cover-content {
+    max-width: 100%;
+  }
+
+  /* CARDS & CAROUSELS */
+  .carousel {
+    padding: 0 12px 20px;
+    gap: 18px;
+    scroll-snap-type: x mandatory;
+  }
+  .card {
+    flex: 0 0 80%;
+    max-width: 80%;
+    scroll-snap-align: start;
+  }
+  .card-content {
+    padding: 14px;
+  }
+  .row-title {
+    text-align: center;
+    font-size: 1.3rem;
+  }
+
+  /* PROFILE SELECTION SCREEN */
+  #profileSelectOverlay {
+    padding: 24px;
+  }
+  .profiles-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .profile-avatar, .profile-add {
+    width: 90px;
+    height: 90px;
+    font-size: 3rem;
+  }
+  .profile-name, .profile-add-name {
+    font-size: 0.95rem;
+  }
+
+  /* DROPDOWN CONTACT FIX */
+  .dropdown-content {
+    position: static;
+    display: block;
+    margin-top: 10px;
+    background: none;
+    box-shadow: none;
+    min-width: 100%;
+  }
+  .dropdown-content a {
+    background: var(--card);
+    border-radius: 10px;
+    margin: 4px 0;
+  }
+
+  /* CONTACT FORM */
+  form input, form textarea {
+    width: 100%;
+    font-size: 1rem;
+  }
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Even tighter layouts for small phones */
+  .nav {
+    padding: 12px;
+  }
+  .menu {
+    gap: 12px;
+  }
+  .cover-title {
+    font-size: 1.7rem;
+  }
+  .cover-lead {
+    font-size: 0.9rem;
+  }
+  .card {
+    flex: 0 0 90%;
+    max-width: 90%;
+  }
+  footer {
+    font-size: 0.85rem;
+    padding: 18px 0;
+  }
+}
+</style>
+
 </body>
 </html>
+
 

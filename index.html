@@ -195,23 +195,19 @@
      
     </section>
 
-<!-- Card 1 (Netflix-style button) -->
-<article class="n-card" id="processAssociateCard">
-  <div class="n-thumb" style="background-image:url('https://images.unsplash.com/photo-1556767576-5ec41e3239f2?auto=format&fit=crop&w=600&q=60');">
-    <div class="n-overlay">
-      <div class="n-play">&#9658;</div>
-    </div>
-    <div class="n-progress"><span style="width:90%"></span></div>
+<!-- Process Associate Netflix-Style Card -->
+<div class="netflix-tile" id="processAssociateTile">
+  <img src="assets/img/process-associate-poster.jpg" alt="Process Associate">
+  <div class="play-overlay">
+    <div class="play-button">▶</div>
   </div>
-  <div class="n-info">
-    <div class="n-title">Process Associate</div>
-    <div class="n-sub">2022–2025 | BFSI (TCS)</div>
-  </div>
-</article>
+  <div class="show-title">Process Associate</div>
+  <div class="show-meta">2022–2025 | BFSI (TCS)</div>
+</div>
 
 <script>
-  document.getElementById('processAssociateCard').addEventListener('click', () => {
-    window.location.href = 'experience-player.html';
+  document.getElementById("processAssociateTile").addEventListener("click", () => {
+    window.location.href = "experience-player.html";
   });
 </script>
 
@@ -422,4 +418,5 @@
   </script>
 </body>
 </html>
+
 

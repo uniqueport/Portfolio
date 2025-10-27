@@ -6,8 +6,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio</title>
+
   <!-- Main CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
+
   <!-- UX/UI Enhancement Layer -->
   <link rel="stylesheet" href="assets/css/enhancements.css">
 </head>
@@ -35,8 +37,10 @@
     header { background:rgba(20,20,20,0.95); padding:0; position:sticky; top:0; z-index:100; box-shadow:var(--shadow);}
     .nav { max-width: 1400px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:20px 40px;}
     .brand { height:48px; display:flex; align-items:center; }
+    /* SWITCH PROFILE BUTTON - DESKTOP */
     .switch-profile-btn { background:var(--card); color:var(--accent); border:1.5px solid var(--accent); padding:8px 18px; border-radius:999px; font-weight:600; margin-left:10px; cursor:pointer; transition:background .2s, color .2s;}
     .switch-profile-btn:hover { background:var(--accent); color:var(--fg);}
+    /* MENU */
     .menu { display:flex; gap:32px; }
     .menu a { color:var(--fg); font-weight:600; letter-spacing:1px; font-size:1.05rem; opacity:.85; position:relative; transition:.2s;}
     .menu a.selected, .menu a:hover { color:var(--accent); opacity:1;}
@@ -185,124 +189,113 @@
     [data-theme="light"] .carousel::-webkit-scrollbar-thumb {
       background:var(--accent);
     }
-    /* Hamburger for mobile */
-    .hamburger {
+
+    /* --- MOBILE NAV (HAMBURGER) --- */
+    .mobile-nav-toggle {
       display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      background: var(--card);
+      border: none;
+      border-radius: 50%;
       width: 44px;
       height: 44px;
-      cursor: pointer;
-      z-index: 999;
-      margin-left: 20px;
-    }
-    .hamburger span {
-      height: 4px;
-      width: 28px;
-      background: var(--fg);
-      margin: 4px 0;
-      border-radius: 3px;
-      transition: 0.3s;
-      display: block;
-    }
-    /* Mobile menu modal */
-    #mobileMenuModal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(20,20,20,0.97);
-      z-index: 99999;
-      justify-content: center;
-      align-items: flex-start;
-      flex-direction: column;
-      padding-top: 68px;
-      animation: fadeInMenu 0.3s;
-    }
-    @keyframes fadeInMenu {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    .mobile-menu-content {
-      width: 100%;
-      padding: 20px;
-    }
-    .mobile-menu-list {
-      list-style: none;
-      padding: 0; margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .mobile-menu-list li {
-      font-size: 1.1rem;
-      color: var(--fg);
-      padding: 12px 0;
-      text-align: left;
-      border-bottom: 1px solid var(--line);
-    }
-    .mobile-menu-list li a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.15rem;
-    }
-    .mobile-menu-actions {
-      margin-top: 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-    .mobile-avatar {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #181818 70%, #e50914 150%);
-      border: 2px solid var(--accent);
-      display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.5rem;
+      font-size: 2rem;
       color: var(--accent);
-      margin-bottom: 10px;
       cursor: pointer;
+      margin-left: 12px;
     }
-    .mobile-theme-toggle {
-      background: var(--card);
-      color: var(--accent);
-      border-radius: 50%;
-      padding: 10px;
-      border: none;
-      font-size: 1.7rem;
-      cursor: pointer;
-      align-self: flex-start;
-    }
-    .mobile-menu-close {
-      position: absolute;
-      top: 24px; right: 28px;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 999px;
-      padding: 8px 16px;
-      font-size: 1.1rem;
-      cursor: pointer;
-      z-index: 100001;
-    }
+
     @media (max-width: 768px) {
-      .nav { display:none; }
-      .hamburger { display:flex; }
-      header { padding: 0 8px;}
-    }
-    @media (max-width: 768px) {
-      .mobile-menu-list li {
+      .nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0;
+        padding: 14px;
+        position: relative;
+      }
+      .mobile-nav-toggle {
+        display: flex;
+      }
+      .menu {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        background: var(--card);
+        width: 100vw;
+        flex-direction: column;
+        gap: 0;
+        z-index: 1000;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      }
+      .menu.menu-open {
+        display: flex;
+      }
+      .menu a {
+        padding: 16px 24px;
         border-bottom: 1px solid var(--line);
-        font-size: 1.08rem;
+        font-size: 1.05rem;
+        opacity: 1;
       }
-      .mobile-avatar {
-        width: 48px; height: 48px; font-size: 2rem;
+      .menu a.selected::after, .menu a:hover::after {
+        display: none;
       }
-      .mobile-theme-toggle { font-size: 1.4rem; }
+      .actions {
+        align-self: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      /* Switch Profile as Avatar Circle */
+      .switch-profile-btn {
+        display: none !important;
+      }
+      .switch-profile-avatar {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #181818 70%, #e50914 150%);
+        border: 2px solid var(--accent);
+        cursor: pointer;
+        margin-left: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      }
+      .switch-profile-avatar img,
+      .switch-profile-avatar .icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: block;
+      }
+      .switch-profile-avatar .icon {
+        font-size: 2rem;
+        color: var(--accent);
+        text-align: center;
+        line-height: 30px;
+      }
+    }
+    @media (max-width: 480px) {
+      .nav {
+        padding: 10px;
+      }
+      .mobile-nav-toggle {
+        width: 36px;
+        height: 36px;
+        font-size: 1.4rem;
+        margin-left: 4px;
+      }
+      .menu a {
+        padding: 12px 18px;
+        font-size: .98rem;
+      }
+      .switch-profile-avatar {
+        width: 36px; height: 36px;
+      }
     }
   </style>
 </head>
@@ -323,36 +316,6 @@
   </div>
   <span class="manage-profiles-link" onclick="alert('Profile management coming soon!')">Manage Profiles</span>
 </div>
-
-<!-- Hamburger icon for mobile -->
-<div class="hamburger" id="hamburgerMenu" aria-label="Open menu" tabindex="0">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
-
-<!-- Mobile menu modal -->
-<div id="mobileMenuModal" tabindex="-1">
-  <button class="mobile-menu-close" id="closeMobileMenu">Close ✕</button>
-  <div class="mobile-menu-content">
-    <ul class="mobile-menu-list">
-      <li><a href="#SUMMARYS" onclick="closeMobileMenu(); document.querySelector('#SUMMARYS').scrollIntoView({behavior:'smooth'});">Home</a></li>
-      <li><a href="#EXPERIENCE" onclick="closeMobileMenu(); document.querySelector('#EXPERIENCE').scrollIntoView({behavior:'smooth'});">Experience</a></li>
-      <li><a href="#PROJECTS" onclick="closeMobileMenu(); document.querySelector('#PROJECTS').scrollIntoView({behavior:'smooth'});">Projects</a></li>
-      <li><a href="#ACHIEVEMENT" onclick="closeMobileMenu(); document.querySelector('#ACHIEVEMENT').scrollIntoView({behavior:'smooth'});">Achievements</a></li>
-      <li><a href="#CERTIFICATION" onclick="closeMobileMenu(); document.querySelector('#CERTIFICATION').scrollIntoView({behavior:'smooth'});">Certifications</a></li>
-      <li><a href="#EDUCATION" onclick="closeMobileMenu(); document.querySelector('#EDUCATION').scrollIntoView({behavior:'smooth'});">Education</a></li>
-      <li><a href="#contact" onclick="closeMobileMenu(); document.querySelector('#contact').scrollIntoView({behavior:'smooth'});">Contact</a></li>
-    </ul>
-    <div class="mobile-menu-actions">
-      <!-- Avatar for user account, no name, Netflix style -->
-      <div class="mobile-avatar" title="Switch User" onclick="switchProfileMobile()"></div>
-      <!-- Theme selection (toggle) -->
-      <button class="mobile-theme-toggle" id="mobileThemeToggle" aria-label="Toggle theme">🌙</button>
-    </div>
-  </div>
-</div>
-<!-- End mobile menu modal -->
 
 <!-- Main Portfolio Content -->
 <div id="mainPortfolio" style="display:none">
@@ -382,6 +345,14 @@
         >PORTFOLIO</text>
       </svg>
     </div>
+    <!-- Hamburger for Mobile Nav -->
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">
+      <span style="display:block; width:28px; height:28px; position:relative;">
+        <span style="position:absolute;top:6px;left:0;width:100%;height:4px;background:var(--accent);border-radius:2px;"></span>
+        <span style="position:absolute;top:14px;left:0;width:100%;height:4px;background:var(--accent);border-radius:2px;"></span>
+        <span style="position:absolute;top:22px;left:0;width:100%;height:4px;background:var(--accent);border-radius:2px;"></span>
+      </span>
+    </button>
     <nav class="menu" id="mainMenu">
       <a href="#SUMMARYS" class="selected">Home</a>
       <a href="#EXPERIENCE">Experience</a>
@@ -394,43 +365,275 @@
     <div class="actions">
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
       <button class="switch-profile-btn" onclick="switchProfile()" aria-label="Switch profile">Switch Profile</button>
+      <!-- MOBILE: Switch Profile as Avatar Circle (hidden on desktop) -->
+      <div class="switch-profile-avatar" id="switchProfileAvatar" onclick="switchProfile()" title="Switch Profile" style="display:none;">
+        <span class="icon">👤</span>
+      </div>
     </div>
   </div>
 </header>
 
 <!-- Cover/Hero Netflix Style -->
 <section class="cover" id="SUMMARYS">
-  <!-- ... (rest unchanged) ... -->
+  <div class="cover-content">
+    <div class="cover-title">Santhosh Suresh</div>
+    <div class="cover-lead">Analyst | 3+ Years | Excel & Power BI Automation | BFSI Domain</div>
+    <div>
+      <a href="assets/Santhosh_RESUME.pdf" download="Santhosh_RESUME.pdf" class="btn" id="downloadResumeBtn">
+        Download Resume
+      </a>
+     <!-- CONTACT BUTTON + DROPDOWN -->
+<div class="contact-dropdown">
+  <button class="btn" style="background:var(--card); color:var(--accent); margin-left:12px;" onclick="toggleContactMenu()">
+    Contact
+  </button>
+  <div id="contactMenu" class="dropdown-content">
+    <a href="tel:+919543158080">📞 Phone</a>
+    <a href="mailto:santhosh02516@gmail.com">📧 Gmail</a>
+    <a href="https://www.linkedin.com/in/santhosh-suresh-1b7577291/" target="_blank">💼 LinkedIn</a>
+  </div>
+</div>
+
+<style>
+.contact-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--card);
+  min-width: 160px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  border-radius: 12px;
+  z-index: 99;
+  overflow: hidden;
+  animation: fadeIn 0.3s ease-in-out;
+}
+.dropdown-content a {
+  color: var(--accent);
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  transition: background 0.2s;
+}
+.dropdown-content a:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Mobile: dropdown always visible, stacked */
+@media (max-width: 768px) {
+  .dropdown-content {
+    position: static;
+    display: block;
+    margin-top: 10px;
+    background: none;
+    box-shadow: none;
+    min-width: 100%;
+    border-radius: 0;
+    animation: none;
+  }
+  .dropdown-content a {
+    background: var(--card);
+    border-radius: 10px;
+    margin: 4px 0;
+    color: var(--accent);
+    font-size: 1rem;
+    border-bottom: none;
+  }
+}
+</style>
+
+<script>
+function toggleContactMenu() {
+  const menu = document.getElementById("contactMenu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+// Optional: click outside to close
+document.addEventListener("click", (e) => {
+  const menu = document.getElementById("contactMenu");
+  if (!e.target.closest(".contact-dropdown")) {
+    menu.style.display = "none";
+  }
+});
+</script>
+    </div>
+  </div>
 </section>
 
 <!-- Experience Row -->
 <section class="section-row" id="EXPERIENCE">
-  <!-- ... (rest unchanged) ... -->
+  <div class="row-title">Experience</div>
+  <div class="carousel">
+    <div class="card">
+      <div class="card-img" style="background:#e50914;"></div>
+      <div class="card-content">
+        <div class="card-title">Process Associate</div>
+        <div class="card-meta">2022–2025 | BFSI (TCS)</div>
+        <div class="card-desc">Analyst with 3 years in operational support, automation, and reporting for IT/business services.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#181818;"></div>
+      <div class="card-content">
+        <div class="card-title">Analyst | Oct 2023–Sep 2025</div>
+        <div class="card-meta">Client Reporting</div>
+        <div class="card-desc">98% SLA compliance, Excel/Power BI dashboards, SOP documentation, stakeholder management.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#e50914;"></div>
+      <div class="card-content">
+        <div class="card-title">Analyst Trainee</div>
+        <div class="card-meta">Oct 2022–Sep 2023</div>
+        <div class="card-desc">Excel automation, SLA monitoring, report validation, knowledge documentation.</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- Projects Row -->
 <section class="section-row" id="PROJECTS">
-  <!-- ... (rest unchanged) ... -->
+  <div class="row-title">Projects</div>
+  <div class="carousel">
+    <div class="card">
+      <div class="card-img" style="background:#222 url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80') center/cover;"></div>
+      <div class="card-content">
+        <div class="card-title">Employee Activity Tracker Automation</div>
+        <div class="card-desc">Excel macro tracker to log, monitor, and assess employee tasks, saving 50% manual effort.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#222 url('https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=400&q=80') center/cover;"></div>
+      <div class="card-content">
+        <div class="card-title">File Converter Macro Tool</div>
+        <div class="card-desc">Excel VBA tool for batch file conversion, streamlining documents and saving 25+ hours/month.</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- Achievements Row -->
 <section class="section-row" id="ACHIEVEMENT">
-  <!-- ... (rest unchanged) ... -->
+  <div class="row-title">Achievements</div>
+  <div class="carousel">
+    <div class="card">
+      <div class="card-img" style="background:#e50914;"></div>
+      <div class="card-content">
+        <div class="card-title">On Spot Award</div>
+        <div class="card-desc">Excellence Award for outstanding performance and rapid process understanding.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#181818;"></div>
+      <div class="card-content">
+        <div class="card-title">Client Appreciation</div>
+        <div class="card-desc">Maintained consistent SLA performance during high-volume periods.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#e50914;"></div>
+      <div class="card-content">
+        <div class="card-title">SPOC</div>
+        <div class="card-desc">Led onboarding sessions and improved team ramp-up time and adherence.</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- Certifications Row -->
 <section class="section-row" id="CERTIFICATION">
-  <!-- ... (rest unchanged) ... -->
+  <div class="row-title">Certifications</div>
+  <div class="carousel">
+    <div class="card">
+      <div class="card-img" style="background:#222 url('assets/EXCEL.jpg') center/cover;"></div>
+      <div class="card-content">
+        <div class="card-title">Microsoft Excel Advanced</div>
+        <div class="card-desc">Advanced Excel functions, macros, automation, reporting.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#222 url('assets/POWER BI.jpg') center/cover;"></div>
+      <div class="card-content">
+        <div class="card-title">Power BI</div>
+        <div class="card-desc">BI, visualization, actionable insights.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#222 url('assets/Power automate.jpg') center/cover;"></div>
+      <div class="card-content">
+        <div class="card-title">Power Automate Fundamentals</div>
+        <div class="card-desc">Automating tasks and workflows.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#222 url('assets/PGDCA.jpg') center/cover;"></div>
+      <div class="card-content">
+        <div class="card-title">PGDCA</div>
+        <div class="card-desc">Computer applications fundamentals.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#222 url('assets/pdf-placeholder.png') center/cover;"></div>
+      <div class="card-content">
+        <div class="card-title">EY Audit Simulation</div>
+        <div class="card-desc">Real-world casework and audit skills.</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- Education Row -->
 <section class="section-row" id="EDUCATION">
-  <!-- ... (rest unchanged) ... -->
+  <div class="row-title">Education</div>
+  <div class="carousel">
+    <div class="card">
+      <div class="card-img" style="background:#181818;"></div>
+      <div class="card-content">
+        <div class="card-title">Bachelor’s Degree</div>
+        <div class="card-desc">Business Administration, Bharathiar University</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#181818;"></div>
+      <div class="card-content">
+        <div class="card-title">PGDCA</div>
+        <div class="card-desc">Browzone Infotech</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- Contact Row -->
 <section class="section-row" id="contact">
-  <!-- ... (rest unchanged) ... -->
+  <div class="row-title">Contact</div>
+  <div class="carousel">
+    <div class="card">
+      <div class="card-img" style="background:#e50914;"></div>
+      <div class="card-content">
+        <div class="card-title">Santhosh Suresh</div>
+        <div class="card-desc">Email: <a href="mailto:santhosh02516@gmail.com">santhosh02516@gmail.com</a><br>
+        Phone: <a href="tel:9543158080">9543158080</a><br>
+        <a href="https://www.linkedin.com/in/santhosh-suresh-1b7577291" target="_blank">LinkedIn Profile</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img" style="background:#181818;"></div>
+      <div class="card-content">
+        <div class="card-title">Quick Email</div>
+        <form onsubmit="sendMail(event)" style="display:flex; flex-direction:column; gap:8px;">
+          <input type="text" id="subject" name="subject" placeholder="Subject" required style="padding:8px; border-radius:6px; border:1px solid var(--line); background:#222; color:var(--fg);">
+          <textarea id="body" name="body" placeholder="Body" rows="4" required style="padding:8px; border-radius:6px; border:1px solid var(--line); background:#222; color:var(--fg);"></textarea>
+          <button type="submit" class="btn" style="margin-top:6px;">Send Draft</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer>© <span id="year"></span> Santhosh Suresh |Portfolio</footer>
@@ -459,6 +662,10 @@
         e.preventDefault();
         document.querySelector(href).scrollIntoView({behavior:'smooth'});
       }
+      // On mobile, close menu after selection
+      if(window.innerWidth <= 768) {
+        document.getElementById('mainMenu').classList.remove('menu-open');
+      }
     });
   });
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -468,7 +675,6 @@
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
     document.getElementById('themeToggle').textContent = theme === 'dark' ? '🌙' : '☀️';
-    document.getElementById('mobileThemeToggle').textContent = theme === 'dark' ? '🌙' : '☀️';
   }
   document.getElementById('themeToggle').addEventListener('click',()=>{
     const current = document.documentElement.getAttribute('data-theme');
@@ -487,6 +693,28 @@
 
     document.getElementById('profileSelectOverlay').style.display = 'flex';
     document.getElementById('mainPortfolio').style.display = 'none';
+
+    // Mobile nav toggle
+    const mobileNavToggle = document.getElementById('mobileNavToggle');
+    const mainMenu = document.getElementById('mainMenu');
+    mobileNavToggle.addEventListener('click', function() {
+      mainMenu.classList.toggle('menu-open');
+    });
+
+    // Show/hide switch profile avatar on mobile
+    function handleMobileAvatar() {
+      const avatar = document.getElementById('switchProfileAvatar');
+      const btn = document.querySelector('.switch-profile-btn');
+      if(window.innerWidth <= 768){
+        avatar.style.display = 'flex';
+        btn.style.display = 'none';
+      } else {
+        avatar.style.display = 'none';
+        btn.style.display = '';
+      }
+    }
+    handleMobileAvatar();
+    window.addEventListener('resize', handleMobileAvatar);
   });
 
   function sendMail(event) {
@@ -496,58 +724,83 @@
     let mailtoLink = `mailto:santhosh02516@gmail.com?subject=${subject}&body=${body}`;
     window.location.href = mailtoLink;
   }
-  // --- MOBILE MENU LOGIC ---
-  function openMobileMenu() {
-    document.getElementById('mobileMenuModal').style.display = 'flex';
-    document.getElementById('mobileMenuModal').focus();
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMobileMenu() {
-    document.getElementById('mobileMenuModal').style.display = 'none';
-    document.body.style.overflow = '';
-  }
-  document.getElementById('hamburgerMenu').addEventListener('click', openMobileMenu);
-  document.getElementById('closeMobileMenu').addEventListener('click', closeMobileMenu);
-  document.getElementById('mobileThemeToggle').addEventListener('click',()=>{
-    const current = document.documentElement.getAttribute('data-theme');
-    setTheme(current === 'dark' ? 'light' : 'dark');
-  });
-  function switchProfileMobile() {
-    closeMobileMenu();
-    switchProfile();
-  }
-  // Close mobile menu on outside click or ESC
-  document.addEventListener('keydown', function(e) {
-    if (e.key === "Escape" && document.getElementById('mobileMenuModal').style.display === 'flex') {
-      closeMobileMenu();
-    }
-  });
-  document.getElementById('mobileMenuModal').addEventListener('click', function(e) {
-    if (e.target === this) closeMobileMenu();
-  });
-
 </script>
   <!-- 🔧 Mobile Enhancement Styles -->
 <style>
 /* Extra responsiveness for better mobile scaling */
 @media (max-width: 768px) {
-  /* NAV & HEADER */
   .nav {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 16px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+    padding: 14px;
+    position: relative;
+  }
+  .mobile-nav-toggle {
+    display: flex;
   }
   .menu {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 18px;
+    display: none;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    background: var(--card);
+    width: 100vw;
+    flex-direction: column;
+    gap: 0;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  }
+  .menu.menu-open {
+    display: flex;
+  }
+  .menu a {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--line);
+    font-size: 1.05rem;
+    opacity: 1;
+  }
+  .menu a.selected::after, .menu a:hover::after {
+    display: none;
   }
   .actions {
     align-self: center;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 10px;
   }
+  /* Switch Profile as Avatar Circle */
+  .switch-profile-btn {
+    display: none !important;
+  }
+  .switch-profile-avatar {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #181818 70%, #e50914 150%);
+    border: 2px solid var(--accent);
+    cursor: pointer;
+    margin-left: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+  .switch-profile-avatar img,
+  .switch-profile-avatar .icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: block;
+  }
+  .switch-profile-avatar .icon {
+    font-size: 2rem;
+    color: var(--accent);
+    text-align: center;
+    line-height: 30px;
+  }
+
   /* HERO SECTION */
   .cover {
     flex-direction: column;
@@ -567,6 +820,7 @@
   .cover-content {
     max-width: 100%;
   }
+
   /* CARDS & CAROUSELS */
   .carousel {
     padding: 0 12px 20px;
@@ -585,6 +839,7 @@
     text-align: center;
     font-size: 1.3rem;
   }
+
   /* PROFILE SELECTION SCREEN */
   #profileSelectOverlay {
     padding: 24px;
@@ -602,6 +857,7 @@
   .profile-name, .profile-add-name {
     font-size: 0.95rem;
   }
+
   /* DROPDOWN CONTACT FIX */
   .dropdown-content {
     position: static;
@@ -616,6 +872,7 @@
     border-radius: 10px;
     margin: 4px 0;
   }
+
   /* CONTACT FORM */
   form input, form textarea {
     width: 100%;
@@ -632,8 +889,18 @@
   .nav {
     padding: 12px;
   }
-  .menu {
-    gap: 12px;
+  .mobile-nav-toggle {
+    width: 36px;
+    height: 36px;
+    font-size: 1.4rem;
+    margin-left: 4px;
+  }
+  .menu a {
+    padding: 12px 18px;
+    font-size: .98rem;
+  }
+  .switch-profile-avatar {
+    width: 36px; height: 36px;
   }
   .cover-title {
     font-size: 1.7rem;

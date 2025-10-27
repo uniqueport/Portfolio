@@ -1,550 +1,255 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
 <head>
-  <link rel="stylesheet" href="assets/css/enhancements.css">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio</title>
-
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="assets/css/style.css">
-
-  <!-- UX/UI Enhancement Layer -->
-  <link rel="stylesheet" href="assets/css/enhancements.css">
-</head>
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Santhosh Suresh Portfolio</title>
-  <!-- Netflix font style for logo -->
+  <title>Santhosh Suresh — Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #141414;
-      --fg: #fff;
-      --muted: #b3b3b3;
-      --accent: #E50914;
-      --card: #181818;
-      --line: #222;
-      --radius: 10px;
-      --shadow: 0 4px 24px rgba(0,0,0,.7);
-      --font: 16px/1.5 'Montserrat', 'Roboto', Arial, sans-serif;
-      --cover-h: 400px;
+    :root{
+      --bg:#141414; --fg:#fff; --muted:#b3b3b3; --accent:#E50914; --card:#181818; --line:#222; --radius:10px; --shadow:0 4px 24px rgba(0,0,0,.7); --font:16px/1.5 'Montserrat', Arial, sans-serif; --cover-h:420px;
     }
-    html, body { background: var(--bg); color: var(--fg); font: var(--font); margin: 0; min-height: 100vh;}
-    a { color: var(--accent); text-decoration: none; }
-    header { background:rgba(20,20,20,0.95); padding:0; position:sticky; top:0; z-index:100; box-shadow:var(--shadow);}
-    .nav { max-width: 1400px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:20px 40px;}
-    .brand { height:48px; display:flex; align-items:center; }
-    /* SWITCH PROFILE BUTTON - DESKTOP */
-    .switch-profile-btn { background:var(--card); color:var(--accent); border:1.5px solid var(--accent); padding:8px 18px; border-radius:999px; font-weight:600; margin-left:10px; cursor:pointer; transition:background .2s, color .2s;}
-    .switch-profile-btn:hover { background:var(--accent); color:var(--fg);}
-    /* MENU */
-    .menu { display:flex; gap:32px; }
-    .menu a { color:var(--fg); font-weight:600; letter-spacing:1px; font-size:1.05rem; opacity:.85; position:relative; transition:.2s;}
-    .menu a.selected, .menu a:hover { color:var(--accent); opacity:1;}
-    .menu a.selected::after, .menu a:hover::after { content:""; display:block; height:3px; background:var(--accent); width:100%; position:absolute; left:0; bottom:-6px; border-radius:2px;}
-    .actions { display:flex; gap:18px;}
-    .btn { background:var(--accent); color:var(--fg); border:none; border-radius:999px; padding:10px 22px; font-weight:700; cursor:pointer; transition:background .2s;}
-    .btn:hover { background:#b0060f;}
-    .cover { width:100%; height:var(--cover-h); background:linear-gradient(120deg, #181818 60%, var(--accent) 110%); display:flex; align-items:center; padding:0 40px; position:relative;}
-    .cover-content { max-width:700px; z-index:2;}
-    .cover-title { font-size:clamp(2.5rem, 6vw, 4.5rem); font-weight:700; margin-bottom:18px;}
-    .cover-lead { color:var(--muted); font-size:1.25rem; margin-bottom:32px;}
-    .cover-img { position:absolute; right:5vw; bottom:0; height:280px; opacity:0.15; pointer-events:none;}
-    .section-row { margin:60px auto 0; max-width:1400px; }
-    .row-title { color:var(--fg); font-size:1.5rem; font-weight:700; margin-bottom:18px; letter-spacing:1px;}
-    .carousel { display:flex; overflow-x:auto; gap:32px; padding-bottom:10px; scroll-behavior:smooth;}
-    .carousel::-webkit-scrollbar { height:8px; background:var(--card);}
-    .carousel::-webkit-scrollbar-thumb { background:var(--accent); border-radius:8px;}
-    .card { background:var(--card); border-radius:var(--radius); min-width:310px; max-width:310px; flex:0 0 310px; box-shadow:var(--shadow); color:var(--fg); transition:transform .2s, box-shadow .2s; border:1.5px solid var(--line);}
-    .card:hover { transform:scale(1.06); box-shadow:0 8px 32px rgba(229,9,20,.18);}
-    .card-img { width:100%; height:140px; object-fit:cover; border-radius:var(--radius) var(--radius) 0 0; background:#222;}
-    .card-content { padding:18px; }
-    .card-title { font-size:1.1rem; font-weight:700; margin-bottom:8px;}
-    .card-meta { color:var(--accent); font-size:.98rem; margin-bottom:10px;}
-    .card-desc { color:var(--muted); font-size:.98rem; margin-bottom:8px;}
-    @media (max-width:900px){
-      .nav, .cover, .section-row {padding:20px;}
-      .cover-img {display:none;}
-      .card, .carousel {min-width:220px; max-width:220px;}
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font:var(--font);-webkit-font-smoothing:antialiased;}
+    a{color:var(--accent);text-decoration:none}
+    header{position:sticky;top:0;z-index:60;background:linear-gradient(rgba(20,20,20,0.88), rgba(20,20,20,0.75));backdrop-filter:blur(4px);}
+    .nav{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:18px 28px;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand svg{display:block}
+    .menu{display:flex;gap:28px;align-items:center}
+    .menu a{color:var(--fg);font-weight:700;letter-spacing:0.6px;font-size:1.02rem;opacity:.95;padding:6px 0;position:relative;transition:color .18s,opacity .18s}
+    .menu a.selected,.menu a:hover{color:var(--accent);opacity:1}
+    .menu a.selected::after,.menu a:hover::after{content:'';position:absolute;left:0;bottom:-8px;height:3px;width:100%;background:var(--accent);border-radius:3px}
+    .actions{display:flex;align-items:center;gap:12px}
+    .btn{background:var(--accent);color:var(--fg);border:none;padding:10px 18px;border-radius:999px;font-weight:800;cursor:pointer;transition:transform .15s,opacity .15s}
+    .btn.secondary{background:transparent;color:var(--accent);border:1.4px solid rgba(229,9,20,.12);font-weight:700}
+    .btn:active{transform:translateY(1px)}
+    .switch-profile-btn{background:var(--card);color:var(--accent);border:1.5px solid rgba(229,9,20,.14);padding:8px 16px;border-radius:999px;font-weight:700;cursor:pointer}
+    .switch-profile-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#181818 70%, #e50914 150%);border:2px solid var(--accent);cursor:pointer}
+
+    .cover{height:var(--cover-h);display:flex;align-items:center;padding:0 40px;position:relative;overflow:hidden;background:linear-gradient(120deg,#181818 60%, rgba(229,9,20,.06) 100%)}
+    .cover-content{max-width:820px;z-index:3}
+    .cover-title{font-size:clamp(2.2rem,6vw,4rem);font-weight:800;margin:0 0 8px;color:var(--fg);cursor:default}
+    .cover-title.clickable{cursor:pointer}
+    .cover-lead{color:var(--muted);font-size:1.12rem;margin-bottom:20px}
+    .cover-cta{display:flex;gap:12px;align-items:center}
+    .cover-hero-img{position:absolute;right:4vw;bottom:0;height:320px;opacity:.12;pointer-events:none;background:url('https://avatars.dicebear.com/api/avataaars/santhosh.svg') center/cover no-repeat;width:360px;border-radius:12px}
+
+    .section-row{margin:52px auto;max-width:1400px;padding:0 20px}
+    .row-title{font-size:1.3rem;font-weight:800;margin-bottom:18px}
+    .carousel{display:flex;gap:24px;overflow-x:auto;padding-bottom:6px;scroll-behavior:smooth}
+    .carousel::-webkit-scrollbar{height:8px;background:var(--card)}
+    .carousel::-webkit-scrollbar-thumb{background:var(--accent);border-radius:8px}
+    .card{background:var(--card);border-radius:12px;min-width:310px;max-width:310px;flex:0 0 310px;box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden}
+    .card-img{height:140px;background:#222;background-size:cover;background-position:center}
+    .card-content{padding:16px}
+    .card-title{font-weight:800;margin-bottom:6px}
+    .card-desc{color:var(--muted);font-size:.98rem}
+
+    footer{text-align:center;color:var(--muted);background:transparent;padding:28px 0;margin-top:44px}
+
+    /* Contact dropdown */
+    .contact-dropdown{position:relative}
+    .contact-menu{display:none;position:absolute;right:0;top:54px;min-width:200px;background:var(--card);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.45);overflow:hidden;border:1px solid var(--line);z-index:90}
+    .contact-menu a{display:block;padding:10px 14px;color:var(--accent);font-weight:700}
+    .contact-menu a:hover{background:var(--accent);color:var(--bg)}
+
+    /* Profile overlay */
+    #profileSelectOverlay{position:fixed;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.85));display:flex;align-items:center;justify-content:center;z-index:9999}
+    .overlay-card{background:var(--card);padding:28px;border-radius:14px;max-width:900px;width:92%;box-shadow:0 12px 48px rgba(0,0,0,.6);border:1px solid var(--line)}
+    .profile-grid{display:flex;gap:28px;flex-wrap:wrap;justify-content:center}
+    .profile-card{display:flex;flex-direction:column;align-items:center;gap:12px;padding:12px;cursor:pointer}
+    .profile-avatar{width:120px;height:120px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;border:3px solid var(--accent);background:linear-gradient(135deg,#182022 60%, rgba(229,9,20,.08) 150%);color:var(--accent)}
+    .profile-add{width:120px;height:120px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:3rem;border:3px dashed rgba(229,9,20,.18);color:var(--accent)}
+    .profile-name{font-weight:800}
+    .manage-profiles-link{display:block;text-align:center;margin-top:12px;color:var(--muted);cursor:pointer}
+
+    /* Tiny modal used for enhanced sections */
+    #dynamicModal{display:none}
+
+    /* particles canvas */
+    #enhancer-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.06}
+
+    /* Mobile */
+    .mobile-nav-toggle{display:none}
+    @media (max-width:900px){.cover-hero-img{display:none}}
+    @media (max-width:768px){
+      .nav{padding:12px 14px}
+      .menu{display:none;position:absolute;left:0;right:0;top:64px;background:var(--card);flex-direction:column;padding:8px;border-top:1px solid var(--line)}
+      .menu.menu-open{display:flex}
+      .mobile-nav-toggle{display:flex;background:var(--card);border-radius:50%;width:44px;height:44px;align-items:center;justify-content:center;border:2px solid rgba(229,9,20,.12);color:var(--accent);cursor:pointer}
+      .switch-profile-btn{display:none}
+      .switch-profile-avatar{display:flex}
+      .card{min-width:80%;max-width:80%}
+      .carousel{padding-left:12px}
+      .cover{padding:36px 18px;height:auto;text-align:center;flex-direction:column}
+      .cover-content{max-width:100%}
+      .section-row{padding:0 8px}
+      .contact-menu{position:static;top:auto;right:auto;display:none}
     }
-    @media (max-width:600px){
-      .nav {flex-direction:column; gap:10px;}
-      .menu {gap:16px; font-size:.98rem;}
-      .cover {padding:10px;}
-      .cover-title {font-size:2rem;}
-      .card, .carousel {min-width:100vw; max-width:100vw;}
-      .section-row {padding:8px;}
-    }
-    footer {text-align:center; color:var(--muted); background:var(--card); padding:24px 0; margin-top:60px;}
-    .theme-toggle { background:var(--card); color:var(--accent); border-radius:50%; padding:10px; border:none; font-size:1.5rem; cursor:pointer;}
-    .theme-toggle:hover { background:var(--accent); color:var(--fg);}
-    #profileSelectOverlay {
-      position:fixed; top:0; left:0; width:100vw; height:100vh;
-      background: var(--bg);
-      display: flex; flex-direction:column; align-items:center; justify-content:center;
-      z-index:99999; transition:opacity .35s;
-    }
-    .profile-select-title {
-      color:var(--fg); font-size:2.6rem; font-weight:700; margin-bottom:38px; letter-spacing:2px; text-align:center;
-    }
-    .profiles-row {
-      display:flex; gap:42px; justify-content:center; margin-bottom:38px; flex-wrap:wrap;
-    }
-    .profile-card {
-      display:flex; flex-direction:column; align-items:center; gap:12px;
-      cursor:pointer; transition:transform .2s;
-    }
-    .profile-card:hover { transform:scale(1.05);}
-    .profile-avatar {
-      width:120px; height:120px; border-radius:22px;
-      background:linear-gradient(135deg, #181818 70%, #e50914 150%);
-      display:flex; align-items:center; justify-content:center;
-      box-shadow:0 6px 24px rgba(0,0,0,.35);
-      font-size:4.2rem; color:var(--accent); border:3px solid var(--accent);
-      background-size:cover;
-      background-position:center;
-    }
-    .profile-name {
-      color:var(--fg); font-size:1.18rem; font-weight:700; letter-spacing:.5px;
-    }
-    .profile-add {
-      width:120px; height:120px; border-radius:22px;
-      background:#222; border:3px dashed var(--accent);
-      display:flex; align-items:center; justify-content:center;
-      font-size:4rem; color:var(--accent); transition:background .2s;
-    }
-    .profile-add:hover { background:var(--accent); color:var(--fg);}
-    .profile-add-name { color:var(--muted); font-size:1rem; font-weight:600; }
-    .manage-profiles-link {
-      color:var(--muted); margin-top:20px; font-size:1rem; cursor:pointer; text-align:center; display:inline-block;
-      transition:color .2s;
-    }
-    .manage-profiles-link:hover { color:var(--accent);}
-    /* --- LIGHT THEME --- */
-    [data-theme='light'] {
-      --bg: #f7f7f7;
-      --fg: #141414;
-      --muted: #555;
-      --accent: #E50914;
-      --card: #fff;
-      --line: #ccc;
-      --shadow: 0 4px 24px rgba(200,200,200,.19);
-    }
-    [data-theme="light"] header {
-      background:rgba(255,255,255,0.95);
-    }
-    [data-theme="light"] .card {
-      border:1.5px solid var(--line);
-      box-shadow:0 4px 24px rgba(200,200,200,.08);
-    }
-    [data-theme="light"] .btn, [data-theme="light"] .switch-profile-btn {
-      color:#fff;
-      background:var(--accent);
-      border-color:var(--accent);
-    }
-    [data-theme="light"] .btn:hover, [data-theme="light"] .switch-profile-btn:hover {
-      background:#B0060F;
-      color:#fff;
-    }
-    [data-theme="light"] .menu a {
-      color:var(--fg);
-    }
-    [data-theme="light"] .menu a.selected, [data-theme="light"] .menu a:hover {
-      color:var(--accent);
-    }
-    [data-theme="light"] .theme-toggle {
-      background:var(--card);
-      color:var(--accent);
-    }
-    [data-theme="light"] .theme-toggle:hover {
-      background:var(--accent);
-      color:var(--fg);
-    }
-    [data-theme="light"] .profile-avatar {
-      background:linear-gradient(135deg, #fff 70%, #e50914 150%);
-      color:var(--accent);
-      border-color:var(--accent);
-    }
-    [data-theme="light"] .profile-add {
-      background:#fff;
-      border-color:var(--accent);
-      color:var(--accent);
-    }
-    [data-theme="light"] .profile-add:hover {
-      background:var(--accent);
-      color:#fff;
-    }
-    [data-theme="light"] .card-desc, [data-theme="light"] .manage-profiles-link, [data-theme="light"] .profile-add-name, [data-theme="light"] footer {
-      color:var(--muted);
-    }
-    [data-theme="light"] .cover {
-      background:linear-gradient(120deg, #fff 60%, var(--accent) 110%);
-    }
-    [data-theme="light"] .carousel::-webkit-scrollbar {
-      background:var(--card);
-    }
-    [data-theme="light"] .carousel::-webkit-scrollbar-thumb {
-      background:var(--accent);
+    @media (max-width:480px){
+      .brand svg{width:140px}
+      .profile-avatar,.profile-add{width:88px;height:88px}
     }
 
-    /* --- MOBILE NAV (HAMBURGER) --- */
-    .mobile-nav-toggle {
-      display: none;
-      background: var(--card);
-      border: none;
-      border-radius: 50%;
-      width: 44px;
-      height: 44px;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: var(--accent);
-      cursor: pointer;
-      margin-left: 12px;
-    }
-
-    @media (max-width: 768px) {
-      .nav {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0;
-        padding: 14px;
-        position: relative;
-      }
-      .mobile-nav-toggle {
-        display: flex;
-      }
-      .menu {
-        display: none;
-        position: absolute;
-        top: 68px;
-        left: 0;
-        background: var(--card);
-        width: 100vw;
-        flex-direction: column;
-        gap: 0;
-        z-index: 1000;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-      }
-      .menu.menu-open {
-        display: flex;
-      }
-      .menu a {
-        padding: 16px 24px;
-        border-bottom: 1px solid var(--line);
-        font-size: 1.05rem;
-        opacity: 1;
-      }
-      .menu a.selected::after, .menu a:hover::after {
-        display: none;
-      }
-      .actions {
-        align-self: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      /* Switch Profile as Avatar Circle */
-      .switch-profile-btn {
-        display: none !important;
-      }
-      .switch-profile-avatar {
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #181818 70%, #e50914 150%);
-        border: 2px solid var(--accent);
-        cursor: pointer;
-        margin-left: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-      }
-      .switch-profile-avatar img,
-      .switch-profile-avatar .icon {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        display: block;
-      }
-      .switch-profile-avatar .icon {
-        font-size: 2rem;
-        color: var(--accent);
-        text-align: center;
-        line-height: 30px;
-      }
-    }
-    @media (max-width: 480px) {
-      .nav {
-        padding: 10px;
-      }
-      .mobile-nav-toggle {
-        width: 36px;
-        height: 36px;
-        font-size: 1.4rem;
-        margin-left: 4px;
-      }
-      .menu a {
-        padding: 12px 18px;
-        font-size: .98rem;
-      }
-      .switch-profile-avatar {
-        width: 36px; height: 36px;
-      }
-    }
+    /* subtle interactions */
+    .card:hover{transform:translateY(-6px);transition:transform .22s}
+    .profile-card:hover .profile-avatar{transform:translateY(-6px);transition:transform .18s}
   </style>
 </head>
 <body>
-<!-- Profile Selection Overlay -->
-<div id="profileSelectOverlay">
-  <div class="profile-select-title">Who’s watching?</div>
-  <div class="profiles-row">
-    <div class="profile-card" onclick="selectProfile('Recruiter')">
-      <!-- Cartoony male avatar -->
-      <div class="profile-avatar"></div>
-      <div class="profile-name">Recruiter</div>
-    </div>
-    <div class="profile-card" onclick="addProfile()">
-      <div class="profile-add">+</div>
-      <div class="profile-add-name">Add Profile</div>
-    </div>
-  </div>
-  <span class="manage-profiles-link" onclick="alert('Profile management coming soon!')">Manage Profiles</span>
-</div>
+  <canvas id="enhancer-bg" aria-hidden="true"></canvas>
 
-<!-- Main Portfolio Content -->
-<div id="mainPortfolio" style="display:none">
-<header>
-  <div class="nav">
-    <div class="brand">
-      <!-- Netflix-style SVG logo, but says PORTFOLIO -->
-      <svg width="180" height="48" viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
-        <defs>
-          <linearGradient id="netflixRed" x1="0" y1="0" x2="0" y2="48" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#E50914"/>
-            <stop offset="1" stop-color="#B0060F"/>
-          </linearGradient>
-          <filter id="netflixShadow" x="0" y="0" width="180" height="48" filterUnits="userSpaceOnUse">
-            <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.55"/>
-          </filter>
-        </defs>
-        <text
-          x="9"
-          y="37"
-          font-family="Bebas Neue, Arial Black, Impact, sans-serif"
-          font-size="40"
-          font-weight="bold"
-          fill="url(#netflixRed)"
-          filter="url(#netflixShadow)"
-          letter-spacing="2"
-        >PORTFOLIO</text>
-      </svg>
-    </div>
-    <!-- Hamburger for Mobile Nav -->
-    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">
-      <span style="display:block; width:28px; height:28px; position:relative;">
-        <span style="position:absolute;top:6px;left:0;width:100%;height:4px;background:var(--accent);border-radius:2px;"></span>
-        <span style="position:absolute;top:14px;left:0;width:100%;height:4px;background:var(--accent);border-radius:2px;"></span>
-        <span style="position:absolute;top:22px;left:0;width:100%;height:4px;background:var(--accent);border-radius:2px;"></span>
-      </span>
-    </button>
-    <nav class="menu" id="mainMenu">
-      <a href="#SUMMARYS" class="selected">Home</a>
-      <a href="#EXPERIENCE">Experience</a>
-      <a href="#PROJECTS">Projects</a>
-      <a href="#ACHIEVEMENT">Achievements</a>
-      <a href="#CERTIFICATION">Certifications</a>
-      <a href="#EDUCATION">Education</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div class="actions">
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
-      <button class="switch-profile-btn" onclick="switchProfile()" aria-label="Switch profile">Switch Profile</button>
-      <!-- MOBILE: Switch Profile as Avatar Circle (hidden on desktop) -->
-      <div class="switch-profile-avatar" id="switchProfileAvatar" onclick="switchProfile()" title="Switch Profile" style="display:none;">
-        <span class="icon">👤</span>
+ <!-- Profile selection overlay (shows only when no selectedProfile) -->
+<div id="profileSelectOverlay" role="dialog" aria-modal="true" style="display:none">
+  <div class="overlay-card">
+    <h2 style="margin:0 0 8px;font-family:'Bebas Neue',sans-serif;font-size:2.4rem;letter-spacing:1px">
+      Who's watching?
+    </h2>
+    <div class="profile-grid">
+      <div class="profile-card" role="button" tabindex="0" onclick="selectProfile('Recruiter')">
+        <div class="profile-avatar"
+          style="background-image:url('https://avatars.dicebear.com/api/identicon/recruiter.svg');
+                 background-size:cover;background-position:center;">
+        </div>
+        <div class="profile-name">Recruiter</div>
+      </div>
+
+      <div class="profile-card" role="button" tabindex="0" onclick="addProfile()">
+        <div class="profile-add">+</div>
+        <div class="profile-name">Add Profile</div>
       </div>
     </div>
-  </div>
-</header>
 
-<!-- Cover/Hero Netflix Style -->
-<section class="cover" id="SUMMARYS">
-  <div class="cover-content">
-    <div class="cover-title">Santhosh Suresh</div>
-    <div class="cover-lead">Analyst | 3+ Years | Excel & Power BI Automation | BFSI Domain</div>
-    <div>
-      <a href="assets/Santhosh_RESUME.pdf" download="Santhosh_RESUME.pdf" class="btn" id="downloadResumeBtn">
-        Download Resume
-      </a>
-     <!-- CONTACT BUTTON + DROPDOWN -->
-<div class="contact-dropdown">
-  <button class="btn" style="background:var(--card); color:var(--accent); margin-left:12px;" onclick="toggleContactMenu()">
-    Contact
-  </button>
-  <div id="contactMenu" class="dropdown-content">
-    <a href="tel:+919543158080">📞 Phone</a>
-    <a href="mailto:santhosh02516@gmail.com">📧 Gmail</a>
-    <a href="https://www.linkedin.com/in/santhosh-suresh-1b7577291/" target="_blank">💼 LinkedIn</a>
+    <div style="text-align:center;margin-top:14px">
+      <button class="btn secondary" onclick="closeProfileOverlay()">Continue as Guest</button>
+    </div>
+    <div class="manage-profiles-link" onclick="alert('Profile management coming soon!')">
+      Manage Profiles
+    </div>
   </div>
 </div>
 
-<style>
-.contact-dropdown {
-  position: relative;
-  display: inline-block;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: var(--card);
-  min-width: 160px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  border-radius: 12px;
-  z-index: 99;
-  overflow: hidden;
-  animation: fadeIn 0.3s ease-in-out;
-}
-.dropdown-content a {
-  color: var(--accent);
-  padding: 10px 16px;
-  text-decoration: none;
-  display: block;
-  transition: background 0.2s;
-}
-.dropdown-content a:hover {
-  background: var(--accent);
-  color: var(--bg);
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-/* Mobile: dropdown always visible, stacked */
-@media (max-width: 768px) {
-  .dropdown-content {
-    position: static;
-    display: block;
-    margin-top: 10px;
-    background: none;
-    box-shadow: none;
-    min-width: 100%;
-    border-radius: 0;
-    animation: none;
-  }
-  .dropdown-content a {
-    background: var(--card);
-    border-radius: 10px;
-    margin: 4px 0;
-    color: var(--accent);
-    font-size: 1rem;
-    border-bottom: none;
-  }
-}
-</style>
+
+  <!-- Main content (hidden until profile selected) -->
+  <div id="mainPortfolio" style="display:none;position:relative;z-index:2">
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <svg width="170" height="44" viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#E50914"/><stop offset="1" stop-color="#B0060F"/></linearGradient>
+            </defs>
+            <text x="6" y="36" font-family="Bebas Neue, Arial Black, Impact" font-size="36" fill="url(#g1)">PORTFOLIO</text>
+          </svg>
+        </div>
+
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle menu">☰</button>
+
+        <nav class="menu" id="mainMenu" aria-label="Primary">
+          <a href="#SUMMARYS" class="selected">Home</a>
+          <a href="#EXPERIENCE">Experience</a>
+          <a href="#PROJECTS">Projects</a>
+          <a href="#ACHIEVEMENT">Achievements</a>
+          <a href="#CERTIFICATION">Certifications</a>
+          <a href="#EDUCATION">Education</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+     
+                <!-- Desktop profile dropdown -->
+          <div style="position:relative">
+            <button id="profileBtn" class="switch-profile-btn" aria-haspopup="true" aria-expanded="false">Switch Profile ▾</button>
+           <div id="profileDropdown" class="contact-menu" style="right:0;left:auto;">
+  <a href="#" onclick="selectProfile('Recruiter')">👤 Recruiter</a>
+  <a href="#" onclick="showProfileOptions(event, 'exit')">⎋ Exit</a>
+</div>
+
+          </div>
+
+          <!-- mobile avatar -->
+          <div id="switchProfileAvatar" class="switch-profile-avatar" title="Switch Profile" style="display:none" onclick="toggleProfileOverlay()">
+            <img src="https://avatars.dicebear.com/api/avataaars/santhosh.svg" alt="avatar" style="width:36px;height:36px;border-radius:50%;display:block">
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- cover -->
+    <section class="cover" id="SUMMARYS">
+      <div class="cover-content">
+        <h1 class="cover-title clickable" id="mainName">Santhosh Suresh</h1>
+        <div class="cover-lead">Analyst | 3+ Years | Excel & Power BI Automation | BFSI Domain</div>
+        <div class="cover-cta">
+          <a class="btn" id="downloadResumeBtn" href="assets/Santhosh_RESUME.pdf" download="Santhosh_RESUME.pdf">Download Resume</a>
+
+          <div class="contact-dropdown" style="position:relative">
+            <button class="btn secondary" id="contactBtn" aria-haspopup="true" aria-expanded="false">Contact</button>
+            <div id="contactMenu" class="contact-menu" role="menu" aria-label="Contact menu">
+              <a href="tel:+919543158080">📞 Phone</a>
+              <a href="mailto:santhosh02516@gmail.com">📧 Gmail</a>
+              <a href="https://www.linkedin.com/in/santhosh-suresh-1b7577291/" target="_blank" rel="noopener">💼 LinkedIn</a>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+    </section>
+
+<!-- Card 1 -->
+<article class="n-card" id="processAssociateCard">
+  <div class="n-thumb" style="background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=60');">
+    <div class="n-overlay">
+      <div class="n-play">&#9658;</div>
+    </div>
+    <div class="n-progress"><span style="width:90%"></span></div>
+  </div>
+  <div class="n-info">
+    <div class="n-title">Process Associate</div>
+    <div class="n-sub">2022–2025 | BFSI (TCS)</div>
+  </div>
+</article>
 
 <script>
-function toggleContactMenu() {
-  const menu = document.getElementById("contactMenu");
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
-}
-// Optional: click outside to close
-document.addEventListener("click", (e) => {
-  const menu = document.getElementById("contactMenu");
-  if (!e.target.closest(".contact-dropdown")) {
-    menu.style.display = "none";
-  }
-});
+  // When Process Associate clicked → open Experience Player
+  document.getElementById('processAssociateCard').addEventListener('click', () => {
+    window.location.href = 'experience-player.html';
+  });
 </script>
-    </div>
-  </div>
-</section>
 
-<!-- Experience Row -->
-<section class="section-row" id="EXPERIENCE">
-  <div class="row-title">Experience</div>
-  <div class="carousel">
-    <div class="card">
-      <div class="card-img" style="background:#e50914;"></div>
-      <div class="card-content">
-        <div class="card-title">Process Associate</div>
-        <div class="card-meta">2022–2025 | BFSI (TCS)</div>
-        <div class="card-desc">Analyst with 3 years in operational support, automation, and reporting for IT/business services.</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-img" style="background:#181818;"></div>
-      <div class="card-content">
-        <div class="card-title">Analyst | Oct 2023–Sep 2025</div>
-        <div class="card-meta">Client Reporting</div>
-        <div class="card-desc">98% SLA compliance, Excel/Power BI dashboards, SOP documentation, stakeholder management.</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-img" style="background:#e50914;"></div>
-      <div class="card-content">
-        <div class="card-title">Analyst Trainee</div>
-        <div class="card-meta">Oct 2022–Sep 2023</div>
-        <div class="card-desc">Excel automation, SLA monitoring, report validation, knowledge documentation.</div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- Projects Row -->
-<section class="section-row" id="PROJECTS">
-  <div class="row-title">Projects</div>
-  <div class="carousel">
-    <div class="card">
-      <div class="card-img" style="background:#222 url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80') center/cover;"></div>
-      <div class="card-content">
-        <div class="card-title">Employee Activity Tracker Automation</div>
-        <div class="card-desc">Excel macro tracker to log, monitor, and assess employee tasks, saving 50% manual effort.</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-img" style="background:#222 url('https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=400&q=80') center/cover;"></div>
-      <div class="card-content">
-        <div class="card-title">File Converter Macro Tool</div>
-        <div class="card-desc">Excel VBA tool for batch file conversion, streamlining documents and saving 25+ hours/month.</div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- Achievements Row -->
-<section class="section-row" id="ACHIEVEMENT">
-  <div class="row-title">Achievements</div>
-  <div class="carousel">
-    <div class="card">
-      <div class="card-img" style="background:#e50914;"></div>
-      <div class="card-content">
-        <div class="card-title">On Spot Award</div>
-        <div class="card-desc">Excellence Award for outstanding performance and rapid process understanding.</div>
+    <!-- PROJECTS -->
+    <section class="section-row" id="PROJECTS">
+      <div class="row-title">Projects</div>
+      <div class="carousel">
+        <div class="card">
+          <div class="card-img" style="background:#222 url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=60') center/cover"></div>
+          <div class="card-content">
+            <div class="card-title">Employee Activity Tracker Automation</div>
+            <div class="card-desc">Excel macro tracker to log and assess tasks, saving ~50% manual effort.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background:#222 url('https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=800&q=60') center/cover"></div>
+          <div class="card-content">
+            <div class="card-title">File Converter Macro Tool</div>
+            <div class="card-desc">Excel VBA tool for batch file conversion, streamlining documents and saving hours/month.</div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-img" style="background:#181818;"></div>
-      <div class="card-content">
-        <div class="card-title">Client Appreciation</div>
-        <div class="card-desc">Maintained consistent SLA performance during high-volume periods.</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-img" style="background:#e50914;"></div>
-      <div class="card-content">
-        <div class="card-title">SPOC</div>
-        <div class="card-desc">Led onboarding sessions and improved team ramp-up time and adherence.</div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
+    <!-- ACHIEVEMENT -->
+    <section class="section-row" id="ACHIEVEMENT">
+      <div class="row-title">Achievements</div>
+      <div class="carousel">
+        <div class="card"><div class="card-img" style="background:#e50914"></div><div class="card-content"><div class="card-title">On Spot Award</div><div class="card-desc">Excellence award for rapid process understanding.</div></div></div>
+        <div class="card"><div class="card-img" style="background:#181818"></div><div class="card-content"><div class="card-title">Client Appreciation</div><div class="card-desc">Consistent SLA performance during high-volume periods.</div></div></div>
+        <div class="card"><div class="card-img" style="background:#e50914"></div><div class="card-content"><div class="card-title">SPOC</div><div class="card-desc">Led onboarding sessions improving ramp-up time.</div></div></div>
+      </div>
+    </section>
+
+   
 <!-- Certifications Row -->
 <section class="section-row" id="CERTIFICATION">
   <div class="row-title">Certifications</div>
@@ -586,534 +291,135 @@ document.addEventListener("click", (e) => {
     </div>
   </div>
 </section>
+    <!-- EDUCATION -->
+    <section class="section-row" id="EDUCATION">
+      <div class="row-title">Education</div>
+      <div class="carousel">
+        <div class="card"><div class="card-img" style="background:#181818"></div><div class="card-content"><div class="card-title">Bachelor’s Degree</div><div class="card-desc">Business Administration, Bharathiar University</div></div></div>
+        <div class="card"><div class="card-img" style="background:#181818"></div><div class="card-content"><div class="card-title">PGDCA</div><div class="card-desc">Browzone Infotech</div></div></div>
+      </div>
+    </section>
 
-<!-- Education Row -->
-<section class="section-row" id="EDUCATION">
-  <div class="row-title">Education</div>
-  <div class="carousel">
-    <div class="card">
-      <div class="card-img" style="background:#181818;"></div>
-      <div class="card-content">
-        <div class="card-title">Bachelor’s Degree</div>
-        <div class="card-desc">Business Administration, Bharathiar University</div>
+    <!-- CONTACT -->
+    <section class="section-row" id="contact">
+      <div class="row-title">Contact</div>
+      <div class="carousel">
+        <div class="card"><div class="card-img" style="background:#e50914"></div><div class="card-content"><div class="card-title">Santhosh Suresh</div><div class="card-desc">Email: <a href="mailto:santhosh02516@gmail.com">santhosh02516@gmail.com</a><br>Phone: <a href="tel:+919543158080">9543158080</a><br><a href="https://www.linkedin.com/in/santhosh-suresh-1b7577291" target="_blank" rel="noopener">LinkedIn Profile</a></div></div></div>
+
+        <div class="card"><div class="card-img" style="background:#181818"></div><div class="card-content"><div class="card-title">Quick Email</div>
+          <form onsubmit="sendMail(event)" style="display:flex;flex-direction:column;gap:8px">
+            <input id="subject" required placeholder="Subject" style="padding:8px;border-radius:8px;border:1px solid var(--line);background:#222;color:var(--fg)">
+            <textarea id="body" rows="4" required placeholder="Body" style="padding:8px;border-radius:8px;border:1px solid var(--line);background:#222;color:var(--fg)"></textarea>
+            <button type="submit" class="btn">Send Draft</button>
+          </form>
+        </div></div>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-img" style="background:#181818;"></div>
-      <div class="card-content">
-        <div class="card-title">PGDCA</div>
-        <div class="card-desc">Browzone Infotech</div>
-      </div>
-    </div>
+    </section>
+
+    <footer>© <span id="year"></span> Santhosh Suresh | Portfolio</footer>
   </div>
-</section>
 
-<!-- Contact Row -->
-<section class="section-row" id="contact">
-  <div class="row-title">Contact</div>
-  <div class="carousel">
-    <div class="card">
-      <div class="card-img" style="background:#e50914;"></div>
-      <div class="card-content">
-        <div class="card-title">Santhosh Suresh</div>
-        <div class="card-desc">Email: <a href="mailto:santhosh02516@gmail.com">santhosh02516@gmail.com</a><br>
-        Phone: <a href="tel:9543158080">9543158080</a><br>
-        <a href="https://www.linkedin.com/in/santhosh-suresh-1b7577291" target="_blank">LinkedIn Profile</a>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-img" style="background:#181818;"></div>
-      <div class="card-content">
-        <div class="card-title">Quick Email</div>
-        <form onsubmit="sendMail(event)" style="display:flex; flex-direction:column; gap:8px;">
-          <input type="text" id="subject" name="subject" placeholder="Subject" required style="padding:8px; border-radius:6px; border:1px solid var(--line); background:#222; color:var(--fg);">
-          <textarea id="body" name="body" placeholder="Body" rows="4" required style="padding:8px; border-radius:6px; border:1px solid var(--line); background:#222; color:var(--fg);"></textarea>
-          <button type="submit" class="btn" style="margin-top:6px;">Send Draft</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
+  <!-- dynamic modal (hidden) -->
+  <div id="dynamicModal" aria-hidden="true" style="display:none"></div>
 
-<footer>© <span id="year"></span> Santhosh Suresh |Portfolio</footer>
-</div>
+  <script>
+    // ---- Initialization & helpers ----
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => Array.from(document.querySelectorAll(sel));
 
-<script>
-  function selectProfile(profileName){
-    document.getElementById('profileSelectOverlay').style.display = 'none';
-    document.getElementById('mainPortfolio').style.display = 'block';
-    localStorage.setItem('selectedProfile', profileName);
-  }
-  function addProfile(){
-    alert('Add Profile functionality coming soon!');
-  }
-  function switchProfile(){
-    document.getElementById('mainPortfolio').style.display = 'none';
-    document.getElementById('profileSelectOverlay').style.display = 'flex';
-    localStorage.removeItem('selectedProfile');
-  }
-  document.querySelectorAll('.menu a').forEach(a=>{
-    a.addEventListener('click',function(e){
-      document.querySelectorAll('.menu a').forEach(x=>x.classList.remove('selected'));
-      a.classList.add('selected');
+    // persist selected profile
+    function selectProfile(name){
+      localStorage.setItem('selectedProfile', name);
+      document.getElementById('profileSelectOverlay').style.display='none';
+      showMain();
+    }
+    function addProfile(){ alert('Add Profile coming soon!'); }
+    function closeProfileOverlay(){ document.getElementById('profileSelectOverlay').style.display='none'; showMain(); }
+    function toggleProfileOverlay(){ const o = document.getElementById('profileSelectOverlay'); o.style.display = (o.style.display==='flex'||o.style.display==='block')? 'none' : 'flex'; }
+
+    function showMain(){ document.getElementById('mainPortfolio').style.display='block'; updateHeaderAvatar(); }
+
+    function updateHeaderAvatar(){ const name = localStorage.getItem('selectedProfile') || 'Guest'; const btn = $('#profileBtn'); btn.textContent = name + ' ▾'; }
+
+    function showProfileOptions(e, action){ e.preventDefault(); if(action==='switch'){ toggleProfileOverlay(); } else if(action==='exit'){ localStorage.removeItem('selectedProfile'); location.reload(); } }
+
+  
+
+    // menu selection + smooth scroll
+    $$('.menu a').forEach(a=>a.addEventListener('click', e=>{
+      $$('.menu a').forEach(x=>x.classList.remove('selected')); a.classList.add('selected');
       const href = a.getAttribute('href');
-      if(href && href.startsWith('#')){
-        e.preventDefault();
-        document.querySelector(href).scrollIntoView({behavior:'smooth'});
-      }
-      // On mobile, close menu after selection
-      if(window.innerWidth <= 768) {
-        document.getElementById('mainMenu').classList.remove('menu-open');
-      }
-    });
-  });
-  document.getElementById('year').textContent = new Date().getFullYear();
+      if (href && href.startsWith('#')){ e.preventDefault(); document.querySelector(href).scrollIntoView({behavior:'smooth'}); }
+      if(window.innerWidth <= 768) $('#mainMenu').classList.remove('menu-open');
+    }));
 
-  // --- THEME TOGGLE FEATURE ---
-  function setTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    document.getElementById('themeToggle').textContent = theme === 'dark' ? '🌙' : '☀️';
-  }
-  document.getElementById('themeToggle').addEventListener('click',()=>{
-    const current = document.documentElement.getAttribute('data-theme');
-    setTheme(current === 'dark' ? 'light' : 'dark');
-  });
-
-  // Set theme on load based on localStorage or system preference
-  window.addEventListener('DOMContentLoaded', function(){
-    let theme = localStorage.getItem('theme');
-    if (!theme) {
-      // Prefer system theme if available
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) theme = 'dark';
-      else theme = 'light';
-    }
-    setTheme(theme);
-
-    document.getElementById('profileSelectOverlay').style.display = 'flex';
-    document.getElementById('mainPortfolio').style.display = 'none';
-
-    // Mobile nav toggle
+    // mobile menu toggle
     const mobileNavToggle = document.getElementById('mobileNavToggle');
-    const mainMenu = document.getElementById('mainMenu');
-    mobileNavToggle.addEventListener('click', function() {
-      mainMenu.classList.toggle('menu-open');
+    mobileNavToggle.addEventListener('click', ()=> $('#mainMenu').classList.toggle('menu-open'));
+
+    // contact dropdown
+    $('#contactBtn').addEventListener('click', (e)=>{ e.stopPropagation(); const m = $('#contactMenu'); const expanded = $('#contactBtn').getAttribute('aria-expanded') === 'true'; m.style.display = expanded ? 'none' : 'block'; $('#contactBtn').setAttribute('aria-expanded', (!expanded)); });
+    document.addEventListener('click', (e)=>{ if(!e.target.closest('.contact-dropdown') && !e.target.closest('#contactMenu')){ $('#contactMenu').style.display='none'; $('#contactBtn').setAttribute('aria-expanded','false'); } });
+
+    // profile dropdown (desktop)
+    $('#profileBtn').addEventListener('click', (e)=>{ e.stopPropagation(); const dd = $('#profileDropdown'); const open = dd.style.display === 'block'; dd.style.display = open? 'none' : 'block'; $('#profileBtn').setAttribute('aria-expanded', String(!open)); });
+    document.addEventListener('click', (e)=>{ if(!e.target.closest('#profileBtn') && !e.target.closest('#profileDropdown')){ $('#profileDropdown').style.display='none'; $('#profileBtn').setAttribute('aria-expanded','false'); } });
+
+    // make main name clickable: toggles color briefly to accent (white->red on click)
+    document.getElementById('mainName').addEventListener('click', ()=>{
+      const el = document.getElementById('mainName'); el.style.transition = 'color .18s'; el.style.color = 'var(--accent)'; setTimeout(()=> el.style.color = '', 350);
     });
 
-    // Show/hide switch profile avatar on mobile
-    function handleMobileAvatar() {
-      const avatar = document.getElementById('switchProfileAvatar');
-      const btn = document.querySelector('.switch-profile-btn');
-      if(window.innerWidth <= 768){
-        avatar.style.display = 'flex';
-        btn.style.display = 'none';
-      } else {
-        avatar.style.display = 'none';
-        btn.style.display = '';
+    // send mail
+    function sendMail(e){ e.preventDefault(); const s = encodeURIComponent($('#subject').value); const b = encodeURIComponent($('#body').value); window.location.href = `mailto:santhosh02516@gmail.com?subject=${s}&body=${b}`; }
+    window.sendMail = sendMail;
+
+    // year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // show overlay on first load if no profile
+    window.addEventListener('DOMContentLoaded', ()=>{
+      const sel = localStorage.getItem('selectedProfile');
+      if(!sel) { document.getElementById('profileSelectOverlay').style.display = 'flex'; }
+      else { showMain(); }
+      // mobile avatar visibility
+      function handleMobileAvatar(){ if(window.innerWidth <= 768){ $('#switchProfileAvatar').style.display='flex'; } else { $('#switchProfileAvatar').style.display='none'; } }
+      handleMobileAvatar(); window.addEventListener('resize', handleMobileAvatar);
+    });
+
+    // small dynamic modal implementation (for viewing sections)
+    (function(){ const modal = document.createElement('div'); modal.id='dynamicModal'; modal.style.cssText='display:none;position:fixed;inset:0;z-index:9998;align-items:center;justify-content:center;background:rgba(0,0,0,.75);padding:20px'; modal.setAttribute('role','dialog'); modal.setAttribute('aria-hidden','true'); modal.innerHTML=`<div style="max-width:900px;width:100%;background:var(--card);padding:20px;border-radius:12px;position:relative;max-height:90vh;overflow:auto;"><button id="closeDynamicModal" style="position:absolute;right:14px;top:14px;padding:8px 10px;border:none;background:var(--accent);color:#fff;border-radius:8px;cursor:pointer">Close</button><div id="dynamicModalBody"></div></div>`; document.body.appendChild(modal);
+      document.getElementById('closeDynamicModal').addEventListener('click', ()=>{ modal.style.display='none'; modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; });
+      modal.addEventListener('click', (ev)=>{ if(ev.target===modal){ modal.style.display='none'; modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; } });
+      window.showEnhancedSection = (id)=>{
+        const sec = document.getElementById(id); if(!sec) return; const body = document.getElementById('dynamicModalBody'); body.innerHTML = ''; body.appendChild(sec.cloneNode(true)); modal.style.display='flex'; modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+      };
+    })();
+
+    // Lightweight particle background (performance conscious)
+    (function(){ const c = document.getElementById('enhancer-bg'); if(!c) return; const ctx = c.getContext('2d'); let raf; const DPR = window.devicePixelRatio || 1;
+      function resize(){ c.width = innerWidth * DPR; c.height = innerHeight * DPR; c.style.width = innerWidth+'px'; c.style.height = innerHeight+'px'; ctx.setTransform(DPR,0,0,DPR,0,0); }
+      let particles = [];
+      function init(){ particles = Array.from({length: Math.min(80, Math.floor(innerWidth/12))}, ()=>({ x: Math.random()*innerWidth, y: Math.random()*innerHeight, r: Math.random()*1.6+0.3, dx:(Math.random()-0.5)*0.6, dy:(Math.random()-0.5)*0.6 })); }
+      function draw(){ ctx.clearRect(0,0,innerWidth,innerHeight); for(const p of particles){ ctx.beginPath(); ctx.fillStyle='rgba(255,255,255,0.14)'; ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); p.x+=p.dx; p.y+=p.dy; if(p.x<0||p.x>innerWidth) p.dx*=-1; if(p.y<0||p.y>innerHeight) p.dy*=-1; }
+        raf = requestAnimationFrame(draw);
       }
-    }
-    handleMobileAvatar();
-    window.addEventListener('resize', handleMobileAvatar);
-  });
+      resize(); init(); draw(); window.addEventListener('resize', ()=>{ resize(); init(); }); document.addEventListener('visibilitychange', ()=>{ if(document.hidden) cancelAnimationFrame(raf); else draw(); });
+    })();
 
-  function sendMail(event) {
-    event.preventDefault();
-    const subject = encodeURIComponent(document.getElementById('subject').value);
-    const body = encodeURIComponent(document.getElementById('body').value);
-    let mailtoLink = `mailto:santhosh02516@gmail.com?subject=${subject}&body=${body}`;
-    window.location.href = mailtoLink;
-  }
-</script>
-  <!-- 🔧 Mobile Enhancement Styles -->
-<style>
-/* Extra responsiveness for better mobile scaling */
-@media (max-width: 768px) {
-  .nav {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0;
-    padding: 14px;
-    position: relative;
-  }
-  .mobile-nav-toggle {
-    display: flex;
-  }
-  .menu {
-    display: none;
-    position: absolute;
-    top: 68px;
-    left: 0;
-    background: var(--card);
-    width: 100vw;
-    flex-direction: column;
-    gap: 0;
-    z-index: 1000;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-  }
-  .menu.menu-open {
-    display: flex;
-  }
-  .menu a {
-    padding: 16px 24px;
-    border-bottom: 1px solid var(--line);
-    font-size: 1.05rem;
-    opacity: 1;
-  }
-  .menu a.selected::after, .menu a:hover::after {
-    display: none;
-  }
-  .actions {
-    align-self: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  /* Switch Profile as Avatar Circle */
-  .switch-profile-btn {
-    display: none !important;
-  }
-  .switch-profile-avatar {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #181818 70%, #e50914 150%);
-    border: 2px solid var(--accent);
-    cursor: pointer;
-    margin-left: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-  }
-  .switch-profile-avatar img,
-  .switch-profile-avatar .icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: block;
-  }
-  .switch-profile-avatar .icon {
-    font-size: 2rem;
-    color: var(--accent);
-    text-align: center;
-    line-height: 30px;
-  }
-
-  /* HERO SECTION */
-  .cover {
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    height: auto;
-    padding: 32px 18px;
-  }
-  .cover-title {
-    font-size: clamp(1.8rem, 6vw, 3rem);
-  }
-  .cover-lead {
-    font-size: 1rem;
-    margin-bottom: 24px;
-  }
-  .cover-content {
-    max-width: 100%;
-  }
-
-  /* CARDS & CAROUSELS */
-  .carousel {
-    padding: 0 12px 20px;
-    gap: 18px;
-    scroll-snap-type: x mandatory;
-  }
-  .card {
-    flex: 0 0 80%;
-    max-width: 80%;
-    scroll-snap-align: start;
-  }
-  .card-content {
-    padding: 14px;
-  }
-  .row-title {
-    text-align: center;
-    font-size: 1.3rem;
-  }
-
-  /* PROFILE SELECTION SCREEN */
-  #profileSelectOverlay {
-    padding: 24px;
-  }
-  .profiles-row {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 24px;
-  }
-  .profile-avatar, .profile-add {
-    width: 90px;
-    height: 90px;
-    font-size: 3rem;
-  }
-  .profile-name, .profile-add-name {
-    font-size: 0.95rem;
-  }
-
-  /* DROPDOWN CONTACT FIX */
-  .dropdown-content {
-    position: static;
-    display: block;
-    margin-top: 10px;
-    background: none;
-    box-shadow: none;
-    min-width: 100%;
-  }
-  .dropdown-content a {
-    background: var(--card);
-    border-radius: 10px;
-    margin: 4px 0;
-  }
-
-  /* CONTACT FORM */
-  form input, form textarea {
-    width: 100%;
-    font-size: 1rem;
-  }
-  .btn {
-    width: 100%;
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  /* Even tighter layouts for small phones */
-  .nav {
-    padding: 12px;
-  }
-  .mobile-nav-toggle {
-    width: 36px;
-    height: 36px;
-    font-size: 1.4rem;
-    margin-left: 4px;
-  }
-  .menu a {
-    padding: 12px 18px;
-    font-size: .98rem;
-  }
-  .switch-profile-avatar {
-    width: 36px; height: 36px;
-  }
-  .cover-title {
-    font-size: 1.7rem;
-  }
-  .cover-lead {
-    font-size: 0.9rem;
-  }
-  .card {
-    flex: 0 0 90%;
-    max-width: 90%;
-  }
-  footer {
-    font-size: 0.85rem;
-    padding: 18px 0;
-  }
-}
-</style>
-<!-- 🔧 Enhanced Portfolio Experience Script (v2.0) -->
-<script>
-(() => {
-  // ✅ Prevent double initialization
-  if (window.__UXUIFLOW_BOUND__) return;
-  window.__UXUIFLOW_BOUND__ = true;
-
-  /* ─────────────────────────────────────────────
-     🎯 1. Right-Click & Shortcut Protection
-  ───────────────────────────────────────────── */
-  const restrictedCombos = [
-    { key: 'I', ctrl: true, shift: true },
-    { key: 'J', ctrl: true, shift: true },
-    { key: 'C', ctrl: true, shift: true },
-    { key: 'U', ctrl: true },
-    { key: 'S', ctrl: true },
-    { key: 'F12' }
-  ];
-
-  const isEditable = (el) =>
-    el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable);
-
-  document.addEventListener(
-    'keydown',
-    (e) => {
-      if (isEditable(e.target)) return;
-      if (e.key === 'F12') e.preventDefault();
-      for (const combo of restrictedCombos) {
-        if (
-          e.key.toUpperCase() === combo.key &&
-          (!!combo.ctrl === e.ctrlKey) &&
-          (!!combo.shift === e.shiftKey)
-        ) {
-          e.preventDefault();
-          return false;
-        }
+    // Gentle keyboard accessibility: allow Enter to select overlay profiles
+    document.addEventListener('keydown', (e)=>{
+      if(e.key==='Enter' && document.getElementById('profileSelectOverlay').style.display==='flex'){
+        const focus = document.activeElement; if(focus && focus.dataset && focus.dataset.profile){ selectProfile(focus.dataset.profile); }
       }
-    },
-    { passive: false }
-  );
-
-  document.addEventListener('contextmenu', (e) => {
-    if (!isEditable(e.target)) e.preventDefault();
-  });
-
-  /* ─────────────────────────────────────────────
-     🎬 2. Dynamic Modal Interaction
-  ───────────────────────────────────────────── */
-  const modal = document.createElement('div');
-  modal.id = 'dynamicModal';
-  modal.setAttribute('role', 'dialog');
-  modal.setAttribute('aria-modal', 'true');
-  modal.style.cssText = `
-    display:none;position:fixed;top:0;left:0;width:100%;height:100%;
-    background:rgba(0,0,0,0.85);z-index:9999;justify-content:center;
-    align-items:center;padding:20px;backdrop-filter:blur(6px);
-  `;
-  modal.innerHTML = `
-    <div id="modalContent" style="max-width:800px;width:90%;background:var(--card);color:var(--text);padding:2rem;border-radius:1rem;overflow:auto;max-height:90vh;box-shadow:0 0 30px rgba(0,0,0,0.4);">
-      <button id="closeModal" style="background:var(--accent);color:#fff;border:none;padding:0.6rem 1.2rem;border-radius:8px;cursor:pointer;float:right;">Close ✕</button>
-      <div id="modalBody"></div>
-    </div>
-  `;
-  document.body.appendChild(modal);
-
-  const closeModal = () => {
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
-  };
-
-  document.getElementById('closeModal').addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
-  });
-
-  window.showEnhancedSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      const clone = section.cloneNode(true);
-      clone.removeAttribute('id');
-      modal.querySelector('#modalBody').innerHTML = '';
-      modal.querySelector('#modalBody').appendChild(clone);
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-      modal.focus();
-    }
-  };
-
-  /* ─────────────────────────────────────────────
-     🎥 3. 3D Title Tilt Animation
-  ───────────────────────────────────────────── */
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!reducedMotion) {
-    const titles = document.querySelectorAll('h1, h3');
-    titles.forEach((title) => {
-      title.style.transformOrigin = 'center';
-      title.style.transition = 'transform 0.15s ease-out';
-      title.addEventListener('mousemove', (e) => {
-        const rect = title.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -7;
-        const rotateY = ((x - centerX) / centerX) * 7;
-        requestAnimationFrame(() => {
-          title.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
-        });
-      });
-      title.addEventListener('mouseleave', () => {
-        requestAnimationFrame(() => {
-          title.style.transform = 'rotateX(0) rotateY(0) scale(1)';
-        });
-      });
-    });
-  }
-
-  /* ─────────────────────────────────────────────
-     🌌 4. Particle Background Animation
-  ───────────────────────────────────────────── */
-  const enhancerBg = document.getElementById('enhancer-bg');
-  if (enhancerBg) {
-    const ctx = enhancerBg.getContext('2d');
-    let particles = [];
-    const dpr = window.devicePixelRatio || 1;
-    const particleCount = Math.min(100, Math.floor(window.innerWidth / 16));
-
-    const resizeCanvas = () => {
-      enhancerBg.width = window.innerWidth * dpr;
-      enhancerBg.height = window.innerHeight * dpr;
-      ctx.scale(dpr, dpr);
-    };
-    resizeCanvas();
-
-    const initParticles = () => {
-      particles = Array.from({ length: particleCount }, () => ({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        r: Math.random() * 1.8 + 0.5,
-        dx: (Math.random() - 0.5) * 0.7,
-        dy: (Math.random() - 0.5) * 0.7
-      }));
-    };
-    initParticles();
-
-    const draw = () => {
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-      for (const p of particles) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255,255,255,0.3)';
-        ctx.fill();
-
-        p.x += p.dx;
-        p.y += p.dy;
-
-        if (p.x < 0 || p.x > window.innerWidth) p.dx *= -1;
-        if (p.y < 0 || p.y > window.innerHeight) p.dy *= -1;
-
-        for (const q of particles) {
-          const dist = (p.x - q.x) ** 2 + (p.y - q.y) ** 2;
-          if (dist < 130 ** 2) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = `rgba(255,255,255,${0.12 - dist / (130 ** 2 * 0.12)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      }
-      requestAnimationFrame(draw);
-    };
-
-    requestAnimationFrame(draw);
-
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        resizeCanvas();
-        initParticles();
-      }, 220);
+      // do not block developer tools — keep ctrl+shift+i and F12 allowed; we will not block them
     });
 
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) cancelAnimationFrame(draw);
-      else requestAnimationFrame(draw);
-    });
-  } else {
-    console.warn('enhancer-bg element not found; particle background skipped.');
-  }
-})();
-</script>
+    // avoid accidental text selection on double tap
+    document.addEventListener('touchstart', ()=>{}, {passive:true});
+
+    // expose small helpers for debugging
+    window.__SAN_DEBUG__ = { selectProfile, toggleProfileOverlay };
+  </script>
 </body>
 </html>

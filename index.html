@@ -183,7 +183,70 @@
       <a href="assets/Santhosh_RESUME.pdf" download="Santhosh_RESUME.pdf" class="btn" id="downloadResumeBtn">
         Download Resume
       </a>
-      <span class="btn" style="background:var(--card); color:var(--accent); margin-left:12px;">Contact</span>
+     <!-- CONTACT BUTTON + DROPDOWN -->
+<div class="contact-dropdown">
+  <button class="btn" style="background:var(--card); color:var(--accent); margin-left:12px;" onclick="toggleContactMenu()">
+    Contact
+  </button>
+  <div id="contactMenu" class="dropdown-content">
+    <a href="tel:+919876543210">📞 Phone</a>
+    <a href="mailto:santhosh.suresh@gmail.com">📧 Gmail</a>
+    <a href="https://www.linkedin.com/in/santhosh-suresh" target="_blank">💼 LinkedIn</a>
+  </div>
+</div>
+
+<style>
+.contact-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--card);
+  min-width: 160px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  border-radius: 12px;
+  z-index: 99;
+  overflow: hidden;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.dropdown-content a {
+  color: var(--accent);
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  transition: background 0.2s;
+}
+
+.dropdown-content a:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+<script>
+function toggleContactMenu() {
+  const menu = document.getElementById("contactMenu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+// Optional: click outside to close
+document.addEventListener("click", (e) => {
+  const menu = document.getElementById("contactMenu");
+  if (!e.target.closest(".contact-dropdown")) {
+    menu.style.display = "none";
+  }
+});
+</script>
+
     </div>
   </div>
   <img src="https://assets.nflxext.com/ffe/siteui/vlv3/0e3e0e8a-8c1e-4c2b-8f1f-9f8f1e1a0e0e/4e4e4e7a-7e7e-4e4e-8e8e-7e7e4e4e4e4e/IN-en-20221010-popsignuptwoweeks-perspective_alpha_website_large.jpg" class="cover-img" alt="Netflix BG"/>
@@ -409,4 +472,5 @@
 </script>
 </body>
 </html>
+
 

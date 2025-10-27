@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experience Player — Santhosh Suresh</title>
+  <style>
+    body {
+      margin:0;
+      background:#000;
+      color:#fff;
+      font-family: 'Montserrat', sans-serif;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      flex-direction:column;
+      text-align:left;
+      padding:20px;
+      transition: all 0.8s ease;
+    }
+    .experience-box {
+      max-width:800px;
+      line-height:1.6;
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity 1s ease, transform 1s ease;
+    }
+    .experience-box.active {
+      opacity:1;
+      transform:none;
+    }
+    h1 {
+      font-size:1.8rem;
+      color:#e50914;
+      margin-bottom:10px;
+    }
+    h2 {
+      font-size:1.2rem;
+      color:#fff;
+      margin-top:5px;
+    }
+    ul { margin:10px 0 0 20px; }
+    li { margin:6px 0; }
+    .fade-out {
+      opacity:0;
+      transform:translateY(-20px);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="analyst" class="experience-box">
+    <h1>Analyst | Oct 2023 – Sep 2025</h1>
+    <h2>Client: Cotality (formerly CoreLogic, subsidiary of First American Corporation)</h2>
+    <ul>
+      <li>Delivered 98% SLA/ESL/MSL compliance, improving client satisfaction by 15%.</li>
+      <li>Extracted and transformed 10M+ records via SQL and ETL tools.</li>
+      <li>Designed 15+ Excel dashboards and 5+ Power BI reports, reducing turnaround by 25%.</li>
+      <li>Served as SME for audits, RCA, and onboarding.</li>
+      <li>Collaborated with U.S. clients for escalations and reporting.</li>
+      <li>Customized Salesforce workflows and maintained documentation for audit readiness.</li>
+    </ul>
+    <h2>Key Achievements</h2>
+    <ul>
+      <li>Automated workflows, cutting manual effort by 30%.</li>
+      <li>Developed macros saving 25+ hours/month.</li>
+      <li>Received On-the-Spot Excellence Award for SLA compliance.</li>
+    </ul>
+  </div>
+
+  <div id="trainee" class="experience-box">
+    <h1>Analyst Trainee | Oct 2022 – Sep 2023</h1>
+    <ul>
+      <li>Trained in Corporate Tax Return Preparation, Tax Research, and U.S. Property Tax Compliance.</li>
+      <li>Computed property taxes across all U.S. states.</li>
+      <li>Supported analysts with Excel trackers, SLA monitoring, and validation reports.</li>
+      <li>Built expertise in workflow automation, MS Access reporting, and documentation.</li>
+    </ul>
+  </div>
+
+  <script>
+    const analyst = document.getElementById('analyst');
+    const trainee = document.getElementById('trainee');
+
+    // Step 1: Show Analyst
+    setTimeout(() => {
+      analyst.classList.add('active');
+    }, 300);
+
+    // Step 2: After 15s, fade out Analyst & show Trainee
+    setTimeout(() => {
+      analyst.classList.remove('active');
+      analyst.classList.add('fade-out');
+      trainee.classList.add('active');
+    }, 15000);
+
+    // Step 3: After 30s total, return to main page
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 30000);
+  </script>
+
+</body>
+</html>

@@ -193,3 +193,27 @@ h1.reveal:hover .title-card, h3.reveal:hover .title-card, h1:hover .title-card, 
   #section-modal { padding: 20px; }
   #section-modal .modal-card{ padding: 18px; border-radius: 14px; }
 }
+@media (max-width:600px){
+  .nav {flex-direction:column; gap:10px; padding:10px;}
+  .menu {gap:10px; font-size:.97rem; flex-wrap:wrap; justify-content:center;}
+  .cover {padding:8px 4px; flex-direction:column; align-items:flex-start;}
+  .cover-title {font-size:2rem;}
+  .cover-lead {font-size:1rem;}
+  .card, .carousel {min-width:90vw; max-width:90vw;}
+  .carousel {gap:12px; padding-bottom:16px;}
+  .card-img {height:110px;}
+  .section-row {padding:4px;}
+  .actions {flex-direction:row; gap:8px;}
+  .row-title {font-size:1.12rem; padding-left:2px;}
+  .cover-img {display:none;}
+  .profiles-row {gap:16px;}
+  .profile-avatar, .profile-add {width:80px; height:80px; font-size:2rem;}
+  .profile-select-title {font-size:1.3rem;}
+  .profile-name {font-size:.95rem;}
+  .profile-add-name {font-size:.85rem;}
+}
+.carousel {
+  /* Existing styles... */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}

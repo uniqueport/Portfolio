@@ -199,27 +199,19 @@
   <h2>Continue Watching Experience</h2>
 
   <div class="carousel">
-    <!-- Process Associate Netflix-style tile -->
-    <div class="netflix-tile" id="processAssociateTile">
+    <!-- Experience Card -->
+    <div class="experience-card" onclick="window.location.href='experience-player.html'">
       <img src="assets/img/tcs-logo.jpg" alt="Process Associate Poster">
-      <div class="play-overlay">
-        <div class="play-button">▶</div>
+      <div class="overlay">
+        <div class="play-btn">▶</div>
       </div>
-      <div class="show-title">Process Associate</div>
-      <div class="show-meta">2022–2025 | BFSI (TCS)</div>
+      <div class="bottom-bar">
+        <div class="show-title">Process Associate</div>
+        <div class="show-ep">2022–2025 | BFSI (TCS)</div>
+      </div>
     </div>
   </div>
 </section>
-
-<script>
-  // on click -> open experience player
-  document.getElementById("processAssociateTile").addEventListener("click", () => {
-    window.location.href = "experience-player.html";
-  });
-</script>
-
-
-
 
     <!-- PROJECTS -->
     <section class="section-row" id="PROJECTS">
@@ -432,6 +424,7 @@ function playExperience() {
 
 </body>
 </html>
+
 
 
 

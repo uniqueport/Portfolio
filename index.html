@@ -2,18 +2,13 @@
 <html lang="en" data-theme="dark">
 <head>
   <link rel="stylesheet" href="assets/css/enhancements.css">
-<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio</title>
-
   <!-- Main CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
-
   <!-- UX/UI Enhancement Layer -->
   <link rel="stylesheet" href="assets/css/enhancements.css">
-</head>
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Santhosh Suresh Portfolio</title>
@@ -37,10 +32,8 @@
     header { background:rgba(20,20,20,0.95); padding:0; position:sticky; top:0; z-index:100; box-shadow:var(--shadow);}
     .nav { max-width: 1400px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:20px 40px;}
     .brand { height:48px; display:flex; align-items:center; }
-    /* SWITCH PROFILE BUTTON - DESKTOP */
     .switch-profile-btn { background:var(--card); color:var(--accent); border:1.5px solid var(--accent); padding:8px 18px; border-radius:999px; font-weight:600; margin-left:10px; cursor:pointer; transition:background .2s, color .2s;}
     .switch-profile-btn:hover { background:var(--accent); color:var(--fg);}
-    /* MENU */
     .menu { display:flex; gap:32px; }
     .menu a { color:var(--fg); font-weight:600; letter-spacing:1px; font-size:1.05rem; opacity:.85; position:relative; transition:.2s;}
     .menu a.selected, .menu a:hover { color:var(--accent); opacity:1;}
@@ -189,112 +182,75 @@
     [data-theme="light"] .carousel::-webkit-scrollbar-thumb {
       background:var(--accent);
     }
-
-    /* --- MOBILE NAV (HAMBURGER) --- */
-    .mobile-nav-toggle {
-      display: none;
-      background: var(--card);
-      border: none;
-      border-radius: 50%;
-      width: 44px;
-      height: 44px;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: var(--accent);
-      cursor: pointer;
-      margin-left: 12px;
-    }
-
+    /* --- MOBILE NAV REBUILD --- */
     @media (max-width: 768px) {
       .nav {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+        flex-direction:column;
+        align-items: stretch;
         gap: 0;
-        padding: 14px;
-        position: relative;
+        padding: 12px;
       }
-      .mobile-nav-toggle {
-        display: flex;
+      .nav .brand {
+        justify-content: center;
+        margin-bottom: 10px;
       }
-      .menu {
-        display: none;
-        position: absolute;
-        top: 68px;
-        left: 0;
-        background: var(--card);
-        width: 100vw;
+      .nav .menu {
         flex-direction: column;
         gap: 0;
-        z-index: 1000;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        margin-bottom: 12px;
+        align-items: stretch;
+        width: 100%;
       }
-      .menu.menu-open {
+      .nav .actions {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+        width: 100%;
+      }
+      .nav .action-btn-mobile {
+        width: 100%;
         display: flex;
-      }
-      .menu a {
-        padding: 16px 24px;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 10px 0;
         border-bottom: 1px solid var(--line);
-        font-size: 1.05rem;
-        opacity: 1;
+        background: none;
+        font-size: 1.06rem;
       }
-      .menu a.selected::after, .menu a:hover::after {
-        display: none;
+      .nav .action-btn-mobile:last-child{
+        border-bottom: none;
       }
-      .actions {
-        align-self: center;
-        justify-content: center;
-        flex-wrap: wrap;
+      .switch-profile-btn,
+      .theme-toggle {
+        width: 100%;
+        border-radius: 8px;
+        margin: 0;
+        padding: 12px 0;
+        font-size: 1rem;
+        text-align: left;
+        display: flex;
+        align-items: center;
         gap: 10px;
       }
-      /* Switch Profile as Avatar Circle */
+      /* "Switch Profile" as Netflix style user account */
+      .switch-profile-btn::before {
+        content: "👤";
+        font-size: 1.3em;
+        margin-right: 7px;
+      }
       .switch-profile-btn {
-        display: none !important;
+        font-weight: 700;
       }
-      .switch-profile-avatar {
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #181818 70%, #e50914 150%);
-        border: 2px solid var(--accent);
-        cursor: pointer;
-        margin-left: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      .switch-profile-btn span {
+        display: inline-block;
       }
-      .switch-profile-avatar img,
-      .switch-profile-avatar .icon {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        display: block;
+      .theme-toggle::before {
+        content: "🌙";
+        font-size: 1.3em;
+        margin-right: 7px;
       }
-      .switch-profile-avatar .icon {
-        font-size: 2rem;
-        color: var(--accent);
-        text-align: center;
-        line-height: 30px;
-      }
-    }
-    @media (max-width: 480px) {
-      .nav {
-        padding: 10px;
-      }
-      .mobile-nav-toggle {
-        width: 36px;
-        height: 36px;
-        font-size: 1.4rem;
-        margin-left: 4px;
-      }
-      .menu a {
-        padding: 12px 18px;
-        font-size: .98rem;
-      }
-      .switch-profile-avatar {
-        width: 36px; height: 36px;
+      .theme-toggle.light::before {
+        content: "☀️";
       }
     }
   </style>
@@ -303,7 +259,7 @@
 <!-- Profile Selection Overlay -->
 <div id="profileSelectOverlay">
   <div class="profile-select-title">Who’s watching?</div>
-  <div class="profiles-row">
+  <div class="profiles-row" id="profilesRow">
     <div class="profile-card" onclick="selectProfile('Recruiter')">
       <!-- Cartoony male avatar -->
       <div class="profile-avatar"></div>
@@ -345,14 +301,6 @@
         >PORTFOLIO</text>
       </svg>
     </div>
-    <!-- Hamburger for Mobile Nav -->
-    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">
-      <span style="display:block; width:28px; height:28px; position:relative;">
-        <span style="position:absolute;top:6px;left:0;width:100%;height:4px;background:var(--accent);border-radius:2px;"></span>
-        <span style="position:absolute;top:14px;left:0;width:100%;height:4px;background:var(--accent);border-radius:2px;"></span>
-        <span style="position:absolute;top:22px;left:0;width:100%;height:4px;background:var(--accent);border-radius:2px;"></span>
-      </span>
-    </button>
     <nav class="menu" id="mainMenu">
       <a href="#SUMMARYS" class="selected">Home</a>
       <a href="#EXPERIENCE">Experience</a>
@@ -362,13 +310,10 @@
       <a href="#EDUCATION">Education</a>
       <a href="#contact">Contact</a>
     </nav>
-    <div class="actions">
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
-      <button class="switch-profile-btn" onclick="switchProfile()" aria-label="Switch profile">Switch Profile</button>
-      <!-- MOBILE: Switch Profile as Avatar Circle (hidden on desktop) -->
-      <div class="switch-profile-avatar" id="switchProfileAvatar" onclick="switchProfile()" title="Switch Profile" style="display:none;">
-        <span class="icon">👤</span>
-      </div>
+    <div class="actions" id="actionsNav">
+      <!-- For mobile, these buttons are stacked, with Netflix-style icons/labels -->
+      <button class="switch-profile-btn action-btn-mobile" onclick="switchProfile()" aria-label="Switch profile"><span id="profileBtnText">Account Change</span></button>
+      <button class="theme-toggle action-btn-mobile" id="themeToggle" aria-label="Toggle theme"></button>
     </div>
   </div>
 </header>
@@ -399,6 +344,7 @@
   position: relative;
   display: inline-block;
 }
+
 .dropdown-content {
   display: none;
   position: absolute;
@@ -410,6 +356,7 @@
   overflow: hidden;
   animation: fadeIn 0.3s ease-in-out;
 }
+
 .dropdown-content a {
   color: var(--accent);
   padding: 10px 16px;
@@ -417,34 +364,15 @@
   display: block;
   transition: background 0.2s;
 }
+
 .dropdown-content a:hover {
   background: var(--accent);
   color: var(--bg);
 }
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
-}
-/* Mobile: dropdown always visible, stacked */
-@media (max-width: 768px) {
-  .dropdown-content {
-    position: static;
-    display: block;
-    margin-top: 10px;
-    background: none;
-    box-shadow: none;
-    min-width: 100%;
-    border-radius: 0;
-    animation: none;
-  }
-  .dropdown-content a {
-    background: var(--card);
-    border-radius: 10px;
-    margin: 4px 0;
-    color: var(--accent);
-    font-size: 1rem;
-    border-bottom: none;
-  }
 }
 </style>
 
@@ -453,7 +381,6 @@ function toggleContactMenu() {
   const menu = document.getElementById("contactMenu");
   menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
-// Optional: click outside to close
 document.addEventListener("click", (e) => {
   const menu = document.getElementById("contactMenu");
   if (!e.target.closest(".contact-dropdown")) {
@@ -461,6 +388,7 @@ document.addEventListener("click", (e) => {
   }
 });
 </script>
+
     </div>
   </div>
 </section>
@@ -662,10 +590,6 @@ document.addEventListener("click", (e) => {
         e.preventDefault();
         document.querySelector(href).scrollIntoView({behavior:'smooth'});
       }
-      // On mobile, close menu after selection
-      if(window.innerWidth <= 768) {
-        document.getElementById('mainMenu').classList.remove('menu-open');
-      }
     });
   });
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -674,7 +598,8 @@ document.addEventListener("click", (e) => {
   function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
-    document.getElementById('themeToggle').textContent = theme === 'dark' ? '🌙' : '☀️';
+    document.getElementById('themeToggle').className = `theme-toggle action-btn-mobile${theme === 'light' ? " light" : ""}`;
+    document.getElementById('themeToggle').textContent = theme === 'dark' ? 'Dark Theme' : 'Light Theme';
   }
   document.getElementById('themeToggle').addEventListener('click',()=>{
     const current = document.documentElement.getAttribute('data-theme');
@@ -685,36 +610,25 @@ document.addEventListener("click", (e) => {
   window.addEventListener('DOMContentLoaded', function(){
     let theme = localStorage.getItem('theme');
     if (!theme) {
-      // Prefer system theme if available
       if (window.matchMedia('(prefers-color-scheme: dark)').matches) theme = 'dark';
       else theme = 'light';
     }
     setTheme(theme);
-
     document.getElementById('profileSelectOverlay').style.display = 'flex';
     document.getElementById('mainPortfolio').style.display = 'none';
-
-    // Mobile nav toggle
-    const mobileNavToggle = document.getElementById('mobileNavToggle');
-    const mainMenu = document.getElementById('mainMenu');
-    mobileNavToggle.addEventListener('click', function() {
-      mainMenu.classList.toggle('menu-open');
-    });
-
-    // Show/hide switch profile avatar on mobile
-    function handleMobileAvatar() {
-      const avatar = document.getElementById('switchProfileAvatar');
-      const btn = document.querySelector('.switch-profile-btn');
-      if(window.innerWidth <= 768){
-        avatar.style.display = 'flex';
-        btn.style.display = 'none';
-      } else {
-        avatar.style.display = 'none';
-        btn.style.display = '';
-      }
+    // Set profile button text for mobile
+    if(window.innerWidth <= 768){
+      document.getElementById('profileBtnText').textContent = "Account Change";
+    }else{
+      document.getElementById('profileBtnText').textContent = "Switch Profile";
     }
-    handleMobileAvatar();
-    window.addEventListener('resize', handleMobileAvatar);
+  });
+  window.addEventListener('resize', function(){
+    if(window.innerWidth <= 768){
+      document.getElementById('profileBtnText').textContent = "Account Change";
+    }else{
+      document.getElementById('profileBtnText').textContent = "Switch Profile";
+    }
   });
 
   function sendMail(event) {
@@ -725,80 +639,75 @@ document.addEventListener("click", (e) => {
     window.location.href = mailtoLink;
   }
 </script>
-  <!-- 🔧 Mobile Enhancement Styles -->
+<!-- 🔧 Mobile Enhancement Styles -->
 <style>
-/* Extra responsiveness for better mobile scaling */
 @media (max-width: 768px) {
   .nav {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: stretch;
     gap: 0;
-    padding: 14px;
-    position: relative;
+    padding: 12px;
   }
-  .mobile-nav-toggle {
-    display: flex;
+  .brand {
+    justify-content: center;
+    margin-bottom: 10px;
   }
   .menu {
-    display: none;
-    position: absolute;
-    top: 68px;
-    left: 0;
-    background: var(--card);
-    width: 100vw;
     flex-direction: column;
     gap: 0;
-    z-index: 1000;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-  }
-  .menu.menu-open {
-    display: flex;
-  }
-  .menu a {
-    padding: 16px 24px;
-    border-bottom: 1px solid var(--line);
-    font-size: 1.05rem;
-    opacity: 1;
-  }
-  .menu a.selected::after, .menu a:hover::after {
-    display: none;
+    margin-bottom: 12px;
+    align-items: stretch;
+    width: 100%;
   }
   .actions {
-    align-self: center;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+    width: 100%;
+  }
+  .action-btn-mobile {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    background: none;
+    font-size: 1.06rem;
+  }
+  .action-btn-mobile:last-child{
+    border-bottom: none;
+  }
+  .switch-profile-btn,
+  .theme-toggle {
+    width: 100%;
+    border-radius: 8px;
+    margin: 0;
+    padding: 12px 0;
+    font-size: 1rem;
+    text-align: left;
+    display: flex;
+    align-items: center;
     gap: 10px;
   }
-  /* Switch Profile as Avatar Circle */
+  .switch-profile-btn::before {
+    content: "👤";
+    font-size: 1.3em;
+    margin-right: 7px;
+  }
   .switch-profile-btn {
-    display: none !important;
+    font-weight: 700;
   }
-  .switch-profile-avatar {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #181818 70%, #e50914 150%);
-    border: 2px solid var(--accent);
-    cursor: pointer;
-    margin-left: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  .switch-profile-btn span {
+    display: inline-block;
   }
-  .switch-profile-avatar img,
-  .switch-profile-avatar .icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: block;
+  .theme-toggle::before {
+    content: "🌙";
+    font-size: 1.3em;
+    margin-right: 7px;
   }
-  .switch-profile-avatar .icon {
-    font-size: 2rem;
-    color: var(--accent);
-    text-align: center;
-    line-height: 30px;
+  .theme-toggle.light::before {
+    content: "☀️";
   }
 
   /* HERO SECTION */
@@ -820,8 +729,6 @@ document.addEventListener("click", (e) => {
   .cover-content {
     max-width: 100%;
   }
-
-  /* CARDS & CAROUSELS */
   .carousel {
     padding: 0 12px 20px;
     gap: 18px;
@@ -839,8 +746,6 @@ document.addEventListener("click", (e) => {
     text-align: center;
     font-size: 1.3rem;
   }
-
-  /* PROFILE SELECTION SCREEN */
   #profileSelectOverlay {
     padding: 24px;
   }
@@ -857,8 +762,6 @@ document.addEventListener("click", (e) => {
   .profile-name, .profile-add-name {
     font-size: 0.95rem;
   }
-
-  /* DROPDOWN CONTACT FIX */
   .dropdown-content {
     position: static;
     display: block;
@@ -872,8 +775,6 @@ document.addEventListener("click", (e) => {
     border-radius: 10px;
     margin: 4px 0;
   }
-
-  /* CONTACT FORM */
   form input, form textarea {
     width: 100%;
     font-size: 1rem;
@@ -883,24 +784,12 @@ document.addEventListener("click", (e) => {
     text-align: center;
   }
 }
-
 @media (max-width: 480px) {
-  /* Even tighter layouts for small phones */
   .nav {
     padding: 12px;
   }
-  .mobile-nav-toggle {
-    width: 36px;
-    height: 36px;
-    font-size: 1.4rem;
-    margin-left: 4px;
-  }
-  .menu a {
-    padding: 12px 18px;
-    font-size: .98rem;
-  }
-  .switch-profile-avatar {
-    width: 36px; height: 36px;
+  .menu {
+    gap: 12px;
   }
   .cover-title {
     font-size: 1.7rem;
@@ -921,13 +810,8 @@ document.addEventListener("click", (e) => {
 <!-- 🔧 Enhanced Portfolio Experience Script (v2.0) -->
 <script>
 (() => {
-  // ✅ Prevent double initialization
   if (window.__UXUIFLOW_BOUND__) return;
   window.__UXUIFLOW_BOUND__ = true;
-
-  /* ─────────────────────────────────────────────
-     🎯 1. Right-Click & Shortcut Protection
-  ───────────────────────────────────────────── */
   const restrictedCombos = [
     { key: 'I', ctrl: true, shift: true },
     { key: 'J', ctrl: true, shift: true },
@@ -936,10 +820,8 @@ document.addEventListener("click", (e) => {
     { key: 'S', ctrl: true },
     { key: 'F12' }
   ];
-
   const isEditable = (el) =>
     el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable);
-
   document.addEventListener(
     'keydown',
     (e) => {
@@ -958,14 +840,9 @@ document.addEventListener("click", (e) => {
     },
     { passive: false }
   );
-
   document.addEventListener('contextmenu', (e) => {
     if (!isEditable(e.target)) e.preventDefault();
   });
-
-  /* ─────────────────────────────────────────────
-     🎬 2. Dynamic Modal Interaction
-  ───────────────────────────────────────────── */
   const modal = document.createElement('div');
   modal.id = 'dynamicModal';
   modal.setAttribute('role', 'dialog');
@@ -982,12 +859,10 @@ document.addEventListener("click", (e) => {
     </div>
   `;
   document.body.appendChild(modal);
-
   const closeModal = () => {
     modal.style.display = 'none';
     document.body.style.overflow = '';
   };
-
   document.getElementById('closeModal').addEventListener('click', closeModal);
   modal.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
@@ -995,7 +870,6 @@ document.addEventListener("click", (e) => {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
   });
-
   window.showEnhancedSection = (id) => {
     const section = document.getElementById(id);
     if (section) {
@@ -1008,10 +882,6 @@ document.addEventListener("click", (e) => {
       modal.focus();
     }
   };
-
-  /* ─────────────────────────────────────────────
-     🎥 3. 3D Title Tilt Animation
-  ───────────────────────────────────────────── */
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!reducedMotion) {
     const titles = document.querySelectorAll('h1, h3');
@@ -1037,24 +907,18 @@ document.addEventListener("click", (e) => {
       });
     });
   }
-
-  /* ─────────────────────────────────────────────
-     🌌 4. Particle Background Animation
-  ───────────────────────────────────────────── */
   const enhancerBg = document.getElementById('enhancer-bg');
   if (enhancerBg) {
     const ctx = enhancerBg.getContext('2d');
     let particles = [];
     const dpr = window.devicePixelRatio || 1;
     const particleCount = Math.min(100, Math.floor(window.innerWidth / 16));
-
     const resizeCanvas = () => {
       enhancerBg.width = window.innerWidth * dpr;
       enhancerBg.height = window.innerHeight * dpr;
       ctx.scale(dpr, dpr);
     };
     resizeCanvas();
-
     const initParticles = () => {
       particles = Array.from({ length: particleCount }, () => ({
         x: Math.random() * window.innerWidth,
@@ -1065,21 +929,17 @@ document.addEventListener("click", (e) => {
       }));
     };
     initParticles();
-
     const draw = () => {
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      ctx.clearRect(0, window.innerWidth, window.innerHeight);
       for (const p of particles) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(255,255,255,0.3)';
         ctx.fill();
-
         p.x += p.dx;
         p.y += p.dy;
-
         if (p.x < 0 || p.x > window.innerWidth) p.dx *= -1;
         if (p.y < 0 || p.y > window.innerHeight) p.dy *= -1;
-
         for (const q of particles) {
           const dist = (p.x - q.x) ** 2 + (p.y - q.y) ** 2;
           if (dist < 130 ** 2) {
@@ -1094,9 +954,7 @@ document.addEventListener("click", (e) => {
       }
       requestAnimationFrame(draw);
     };
-
     requestAnimationFrame(draw);
-
     let resizeTimeout;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
@@ -1105,7 +963,6 @@ document.addEventListener("click", (e) => {
         initParticles();
       }, 220);
     });
-
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) cancelAnimationFrame(draw);
       else requestAnimationFrame(draw);

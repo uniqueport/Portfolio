@@ -458,74 +458,63 @@ function playExperience() {
 }
 </script>
 <script>
-  // === Hero Background Slideshow ===
-  const hero = document.querySelector('.cover');
+  // === Hero Background Slideshow (Netflix-style) ===
+  const coverEl = document.querySelector('.cover');
+
+  // Background image cycle (ensure all paths exist)
   const images = [
-     'assets/img/tcs-logo.png',
+    'assets/images/tcs-logo.png',
     'assets/EXCEL.jpg',
-    'assets/PGDCA.jpg',
     'assets/POWER BI.jpg',
-    'assets/Power automate.jpg'
-       'assets/EY-Audit job simulation.pdf'
+    'assets/Power automate.jpg',
+    'assets/PGDCA.jpg'
   ];
 
   let current = 0;
-  const imgLayer = document.createElement('div');
-  imgLayer.className = 'cover-bg';
-  hero.prepend(imgLayer);
 
-  function setHeroBackground() {
-    const nextImage = images[current % images.length];
-    hero.style.setProperty('--bg-img', `url('${nextImage}')`);
-    hero.style.backgroundImage = `url('${nextImage}')`;
-    const before = hero.querySelector('::before');
-  }
-
-  // Use pseudo-element manipulation via JS
-  const cover = document.querySelector('.cover');
-  const updateBackground = () => {
-    cover.style.setProperty('--cover-bg', `url(${images[current]})`);
-    cover.style.setProperty('--cover-next-bg', `url(${images[(current + 1) % images.length]})`);
-  };
-
-  // Alternate fade effect
-  const coverEl = document.querySelector('.cover');
+  // Create two background layers for fade effect
   const bg1 = document.createElement('div');
   const bg2 = document.createElement('div');
+
   [bg1, bg2].forEach(el => {
     el.style.cssText = `
-      position:absolute;inset:0;
-      background-size:cover;background-position:center;
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center;
       transition:opacity 2s ease-in-out;
       z-index:1;
     `;
-    coverEl.appendChild(el);
+    coverEl.prepend(el);
   });
 
-  let showingFirst = true;
   bg1.style.backgroundImage = `url(${images[0]})`;
   bg1.style.opacity = 1;
   bg2.style.opacity = 0;
-  let i = 1;
 
+  // Background fading logic
   setInterval(() => {
-    const nextImg = images[i % images.length];
-    if (showingFirst) {
-      bg2.style.backgroundImage = `url(${nextImg})`;
+    const nextIndex = (current + 1) % images.length;
+    const nextImage = images[nextIndex];
+
+    if (current % 2 === 0) {
+      bg2.style.backgroundImage = `url(${nextImage})`;
       bg2.style.opacity = 1;
       bg1.style.opacity = 0;
     } else {
-      bg1.style.backgroundImage = `url(${nextImg})`;
+      bg1.style.backgroundImage = `url(${nextImage})`;
       bg1.style.opacity = 1;
       bg2.style.opacity = 0;
     }
-    showingFirst = !showingFirst;
-    i++;
-  }, 6000); // every 6s
+
+    current = nextIndex;
+  }, 5000); // change every 5 seconds
 </script>
+
 
 </body>
 </html>
+
 
 
 

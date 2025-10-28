@@ -1,349 +1,749 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Santhosh Suresh — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg-dark: #0f0f0f;
-  --bg-card: rgba(255,255,255,0.05);
-  --accent: #e50914;
-  --text: #fff;
-  --muted: #b3b3b3;
-  --transition: 0.3s ease;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{
-  font-family:'Inter',sans-serif;
-  background:var(--bg-dark);
-  color:var(--text);
-  overflow-x:hidden;
-}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Santhosh Suresh — Cinematic Portfolio (Netflix-style)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-900:#04060b; --bg-800:#061526; --accent:#e50914; --muted:#bcd7ff;
+      --glass:rgba(255,255,255,0.04); --glass-2:rgba(255,255,255,0.02); --blur:10px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;font-family:Inter,Montserrat,system-ui;color:#e6f3ff;background:var(--bg-900);-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
 
-/* =====================
-   USER SELECTION SCREEN
-   ===================== */
-#userSelection{
-  position:fixed;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  background:radial-gradient(circle at top,#111 0%,#000 90%);
-  z-index:9999;
-  transition:opacity var(--transition);
-}
-#userSelection.hidden{opacity:0;pointer-events:none;}
-#userSelection h1{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:3rem;
-  margin-bottom:2rem;
-}
-.user-card{
-  cursor:pointer;
-  transition:transform var(--transition);
-  text-align:center;
-}
-.user-card:hover{transform:scale(1.08);}
-.user-avatar{
-  width:150px;height:150px;
-  border-radius:10px;
-  background-size:cover;
-  background-position:center;
-  border:3px solid transparent;
-}
-.user-card:hover .user-avatar{border-color:var(--accent);}
-.user-name{margin-top:0.75rem;font-weight:600;}
+    /* Background / cinematic layers */
+    .bg-wrap{position:fixed;inset:0;z-index:-5;overflow:hidden}
+    .bg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(6px) brightness(.45);transform:scale(1.02)}
+    .bg-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,8,20,0.35),rgba(2,8,20,0.6));pointer-events:none}
+    .bg-overlay::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 30%, rgba(255,255,255,0.02), transparent 25%), linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.65));}
 
-/* =====================
-   HEADER / NAVBAR
-   ===================== */
-header{
-  position:sticky;
-  top:0;
-  left:0;
-  right:0;
-  z-index:1000;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:1rem 2rem;
-  background:rgba(0,0,0,0.85);
-  backdrop-filter:blur(10px);
-}
-.logo{
-  font-family:'Bebas Neue',sans-serif;
-  color:var(--accent);
-  font-size:2rem;
-  letter-spacing:2px;
-}
-nav ul{list-style:none;display:flex;gap:1.5rem;}
-nav a{
-  text-decoration:none;
-  color:var(--text);
-  transition:color var(--transition);
-  font-weight:500;
-}
-nav a:hover{color:var(--accent);}
+    /* Page entrance */
+    body{opacity:0;transform:scale(1.01);animation:fadeInZoom .7s ease forwards .05s}
+    @keyframes fadeInZoom{to{opacity:1;transform:scale(1)}}
 
-/* =====================
-   LOGOUT / AVATAR
-   ===================== */
-.user-menu{position:relative;cursor:pointer;}
-.avatar{
-  width:42px;height:42px;border-radius:6px;
-  background-size:cover;background-position:center;
-  border:2px solid #fff;
-}
-.dropdown{
-  position:absolute;top:55px;right:0;
-  background:rgba(0,0,0,0.9);
-  border-radius:6px;display:none;
-  flex-direction:column;min-width:120px;overflow:hidden;
-}
-.dropdown a{
-  color:var(--text);
-  text-decoration:none;
-  padding:0.75rem 1rem;
-  transition:background var(--transition);
-}
-.dropdown a:hover{background:var(--accent);}
-.user-menu.active .dropdown{display:flex;}
+    /* Who's Watching */
+    .who-wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:120;background:rgba(2,6,12,0.7);transition:opacity .45s ease,visibility .45s ease}
+    .who-card{display:flex;gap:36px;align-items:center;padding:36px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));backdrop-filter:blur(8px);box-shadow:0 30px 80px rgba(2,6,23,0.7)}
+    .who-avatar{width:160px;height:160px;border-radius:12px;background:linear-gradient(125deg,#071227,#0b2b44);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease}
+    .who-avatar:hover{transform:translateY(-8px);box-shadow:0 18px 48px rgba(0,0,0,0.6)}
+    .who-avatar .icon{font-size:48px;margin-bottom:8px}
+    .who-avatar .label{font-size:18px;font-weight:600}
+    .who-title{position:absolute;top:8vh;left:50%;transform:translateX(-50%);font-size:22px;color:var(--muted)}
 
-/* =====================
-   HERO SECTION
-   ===================== */
-.hero{
-  position:relative;
-  height:70vh;
-  background:url('https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
-  display:flex;align-items:flex-end;
-  padding:4rem 2rem;color:#fff;
-}
-.hero-content{
-  max-width:600px;
-  backdrop-filter:blur(4px);
-}
-.hero h1{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:3.5rem;
-  margin-bottom:1rem;
-}
-.hero p{
-  font-size:1.2rem;
-  color:var(--muted);
-}
-.hero button{
-  background:var(--accent);
-  border:none;color:#fff;
-  padding:0.75rem 1.5rem;
-  margin-top:1rem;
-  border-radius:4px;
-  cursor:pointer;
-  transition:background var(--transition);
-}
-.hero button:hover{background:#b0060e;}
+    /* Header */
+    header{position:fixed;top:0;left:0;right:0;height:72px;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;z-index:100}
+    .logo{display:flex;gap:12px;align-items:center}
+    .logo .mark{width:52px;height:52px;border-radius:8px;background:linear-gradient(135deg,#0b2b44,#102e46);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent);font-size:20px}
+    .logo h1{font-size:16px}
+    .logo p{font-size:12px;color:var(--muted)}
 
-/* =====================
-   SECTIONS
-   ===================== */
-section{padding:2rem;max-width:1100px;margin:auto;}
-.section-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:2rem;
-  color:var(--accent);
-  margin-bottom:1rem;
-}
-p,li{color:var(--muted);line-height:1.5;}
-.card-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:1rem;
-}
-.card{
-  background:var(--bg-card);
-  border-radius:10px;
-  padding:1rem;
-  transition:transform var(--transition);
-}
-.card:hover{transform:translateY(-5px);}
-ul{padding-left:1.5rem;}
-@media(max-width:768px){
-  .hero h1{font-size:2.5rem;}
-  nav ul{flex-wrap:wrap;}
-}
-</style>
+    .top-right{display:flex;gap:12px;align-items:center;position:relative}
+    .search{padding:8px 12px;border-radius:12px;background:var(--glass);border:1px solid rgba(255,255,255,0.02);font-size:14px}
+    .avatar-mini{width:42px;height:42px;border-radius:8px;background:linear-gradient(90deg,#0b2b44,#083044);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;font-weight:700}
+    .dropdown{position:absolute;right:0;top:60px;min-width:160px;background:rgba(15,25,35,0.85);border-radius:10px;padding:8px 0;box-shadow:0 8px 28px rgba(0,0,0,0.6);backdrop-filter:blur(var(--blur));display:none;flex-direction:column;z-index:99}
+    .dropdown button{background:none;border:none;color:#fff;text-align:left;padding:10px 16px;width:100%;cursor:pointer;font-size:14px;transition:background .2s}
+    .dropdown button:hover{background:rgba(255,255,255,0.05)}
+
+    /* Hero */
+    main{padding-top:92px}
+    .hero{display:flex;gap:28px;padding:28px 48px;align-items:flex-end}
+    .hero-poster{width:65%;min-height:340px;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 30px 80px rgba(2,6,23,0.7)}
+    .hero-poster img{width:100%;height:100%;object-fit:cover;display:block}
+    .hero-info{width:35%;padding:18px;background:linear-gradient(180deg,rgba(0,0,0,0.25),rgba(0,0,0,0.45));border-radius:12px}
+    .hero-info h2{margin:0 0 8px;font-size:26px}
+    .hero-info p{color:var(--muted);line-height:1.4}
+    .hero-ctas{margin-top:14px;display:flex;gap:12px}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#ff3b2f);padding:12px 16px;border-radius:10px;border:none;cursor:pointer;font-weight:700;box-shadow:0 8px 24px rgba(229,9,20,0.12)}
+    .btn-watch{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:12px 14px;border-radius:10px;color:var(--muted)}
+
+    /* Rows & cards */
+    .rows{display:block;padding:6px 24px 120px}
+    .row{margin:18px 0}
+    .row-header{display:flex;justify-content:space-between;align-items:center;padding:0 24px}
+    .row-header h3{font-size:18px}
+    .row-track{margin-top:10px;padding:8px 24px;display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x proximity;align-items:flex-start;padding-bottom:14px}
+    .card{min-width:240px;height:160px;border-radius:12px;overflow:hidden;background:#071227;position:relative;transition:transform .22s,box-shadow .22s;scroll-snap-align:center;cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
+    .card img{width:100%;height:100%;object-fit:cover;display:block}
+    .card:hover{transform:translateY(-12px) scale(1.04);box-shadow:0 30px 60px rgba(2,6,23,0.6);filter:brightness(1.03)}
+    .meta{position:absolute;left:0;right:0;bottom:0;padding:12px;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.75));font-size:13px}
+    .meta small{display:block;color:var(--muted);font-size:12px;margin-top:6px}
+
+    /* Inline expanded detail (accordion) */
+    .expanded-area{width:100%;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));border-radius:10px;margin-top:10px;padding:18px;box-shadow:0 18px 40px rgba(2,6,23,0.5);overflow:hidden;transition:all .36s cubic-bezier(.2,.9,.2,1)}
+    .accordion-content{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 0}
+    .accordion-content.open{padding-top:12px}
+    .accordion-body{color:var(--muted);line-height:1.45;font-size:14px}
+    .read-more{margin-top:12px;display:inline-block;background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 12px;border-radius:8px;color:var(--muted);cursor:pointer}
+    .small-label{font-size:13px;color:#e6f3ff;opacity:.9}
+
+    /* Modal cinematic */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:220;padding:28px}
+    .modal.visible{display:flex}
+    .modal-backdrop{position:absolute;inset:0;background:rgba(6,10,16,0.55);backdrop-filter:blur(6px);pointer-events:none}
+    .modal-card{position:relative;max-width:1100px;width:100%;max-height:86vh;background:linear-gradient(180deg, rgba(10,18,30,0.96), rgba(6,10,16,0.95));border-radius:14px;padding:22px;overflow:auto;box-shadow:0 40px 140px rgba(2,6,23,0.8);border:1px solid rgba(255,255,255,0.03);animation:popUp .28s ease}
+    @keyframes popUp{from{transform:scale(.98) translateY(8px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+    .modal-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:8px}
+    .modal-title{font-size:20px}
+    .modal-close{background:transparent;border:none;color:var(--muted);font-size:22px;cursor:pointer}
+    .modal-body{color:var(--muted);font-size:14px;line-height:1.5}
+    .modal-body h4{margin-top:12px;margin-bottom:6px;color:#fff}
+    .modal-body ul{margin-left:18px;margin-bottom:8px}
+    .modal-footer{margin-top:18px;display:flex;gap:12px;align-items:center;justify-content:flex-end}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:10px;color:var(--muted);cursor:pointer}
+
+    /* Resume full-screen view (triggered by main View Resume) */
+    .resume-full{position:fixed;inset:0;padding:44px;z-index:210;display:none;align-items:flex-start;justify-content:center;overflow:auto}
+    .resume-panel{width:min(1100px,96%);background:linear-gradient(180deg, rgba(8,14,22,0.98), rgba(6,10,16,0.95));border-radius:12px;padding:28px;color:var(--muted);box-shadow:0 40px 120px rgba(2,6,23,0.8)}
+    .resume-close{float:right;background:transparent;border:none;color:var(--muted);font-size:20px;cursor:pointer}
+
+    /* small screens */
+    @media(max-width:980px){
+      .hero{flex-direction:column}.hero-poster,.hero-info{width:100%}.card{min-width:180px;height:140px}
+      .modal-card{max-width:94%;margin:12px}
+    }
+    /* subtle focus styles */
+    .card:focus, .read-more:focus, .btn-primary:focus, .btn-watch:focus, .avatar-mini:focus {outline:2px solid rgba(229,9,20,0.18);outline-offset:2px}
+  </style>
 </head>
 <body>
-
-<!-- ================
-     USER SELECTION
-     ================ -->
-<div id="userSelection">
-  <h1>Who's Watching?</h1>
-  <div class="user-card" id="recruiterCard">
-    <div class="user-avatar" style="background-image:url('https://i.pinimg.com/736x/57/ab/d5/57abd51b22ecb6f85b86fa6d189be756.jpg');"></div>
-    <div class="user-name">Recruiter</div>
+  <div class="bg-wrap" aria-hidden="true">
+    <video class="bg-video" autoplay muted loop playsinline crossorigin>
+      <source src="assets/bg-dashboard.mp4" type="video/mp4">
+    </video>
+    <div class="bg-overlay"></div>
   </div>
-</div>
 
-<!-- ================
-     MAIN CONTENT
-     ================ -->
-<header>
-  <div class="logo">PORTFOLIO</div>
-  <nav>
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#achievements">Achievements</a></li>
-      <li><a href="#certifications">Certifications</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-  <div class="user-menu">
-    <div class="avatar" id="userAvatar"></div>
-    <div class="dropdown"><a href="#" id="logoutBtn">Logout</a></div>
+  <!-- Who's watching -->
+  <div class="who-wrap" id="whoScreen" role="dialog" aria-modal="true">
+    <div class="who-card" aria-hidden="false">
+      <div style="text-align:center">
+        <div class="who-avatar" data-mode="recruiter"><div class="icon">👔</div><div class="label">Recruiter</div></div>
+        <div style="margin-top:10px;color:var(--muted);font-size:13px;max-width:160px">Curated for hiring managers</div>
+      </div>
+      <div style="width:1px;height:120px;background:rgba(255,255,255,0.05)"></div>
+      <div style="text-align:center">
+        <div class="who-avatar" data-mode="visitor"><div class="icon">🎯</div><div class="label">Visitor</div></div>
+        <div style="margin-top:10px;color:var(--muted);font-size:13px;max-width:160px">General portfolio view</div>
+      </div>
+    </div>
+    <div class="who-title">Who's watching?</div>
   </div>
-</header>
 
-<main>
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <h1>Santhosh Suresh</h1>
-      <p>Analyst | 3+ Years in BFSI & Property Tax Domain | Power BI, Excel & Workflow Automation</p>
-      <button>View Resume</button>
+  <header>
+    <div class="logo">
+      <div class="mark">SS</div>
+      <div><h1>Santhosh Suresh</h1><p>Analyst & Presentation Designer</p></div>
     </div>
-  </section>
+    <div class="top-right">
+      <input class="search" placeholder="Search projects, skills...">
+      <div class="avatar-mini" id="avatarMini" tabindex="0">S</div>
+      <div class="dropdown" id="profileDropdown" aria-hidden="true">
+        <button id="switchProfile">Switch Profile</button>
+        <button id="logoutBtn">Logout</button>
+      </div>
+    </div>
+  </header>
 
-  <section id="experience">
-    <h2 class="section-title">Professional Experience</h2>
-    <div class="card-grid">
-      <div class="card">
-        <h4>Tata Consultancy Services (TCS) – BFSI Domain</h4>
-        <p><strong>Analyst | Oct 2023 – Sep 2025</strong></p>
-        <ul>
-          <li>Delivered 98% SLA/ESL/MSL compliance, improving client satisfaction by 15%.</li>
-          <li>Extracted and transformed 10M+ records via SQL scripts and ETL tools.</li>
-          <li>Developed 15+ Excel dashboards & 5+ Power BI reports, reducing turnaround time by 25%.</li>
-          <li>Customized Salesforce workflows to enhance tax compliance efficiency.</li>
-        </ul>
+  <main>
+    <section class="hero">
+      <div class="hero-poster" aria-hidden="true"><img src="assets/hero-poster.jpg" alt="Hero poster"></div>
+      <div class="hero-info">
+        <h2>Designing clarity. Automating impact.</h2>
+        <p>Analyst with 3 years of BFSI & Property Tax domain experience. Skilled in Power BI, Excel automation, and presentation design.</p>
+        <div class="hero-ctas">
+          <button class="btn-primary" id="primaryCTA">Hire / Contact</button>
+          <button class="btn-watch" id="viewResumeBtn">Resume</button>
+        </div>
       </div>
-      <div class="card">
-        <p><strong>Analyst Trainee | Oct 2022 – Sep 2023</strong></p>
-        <ul>
-          <li>Trained in Corporate Tax Return Preparation and Property Tax Compliance.</li>
-          <li>Validated property taxes across all U.S. states.</li>
-          <li>Supported analysts with SLA monitoring and workflow documentation.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="projects">
-    <h2 class="section-title">Process Improvements & Key Projects</h2>
-    <div class="card-grid">
-      <div class="card"><strong>Employee Activity Tracker Automation</strong><p>Excel macro-based tracker reduced manual effort by 50%.</p></div>
-      <div class="card"><strong>File Converter Macro Tool</strong><p>Automated bulk file conversions, saving 25+ hours/month.</p></div>
-      <div class="card"><strong>Salesforce Reporting Optimization</strong><p>Improved process visibility & accuracy by 20% through dashboards.</p></div>
-    </div>
-  </section>
+    <section class="rows" id="contentRows">
+      <div class="row" id="row-experience">
+        <div class="row-header"><h3>Experience</h3></div>
+        <div class="row-track" id="expTrack">
+          <!-- Experience card: Analyst (TCS) -->
+          <div class="card" data-key="tcs-analyst" tabindex="0" role="button" aria-expanded="false">
+            <img src="assets/project-powerbi-thumb.jpg" alt="TCS — Analyst">
+            <div class="meta">
+              TCS — Analyst (2023–2025)
+              <small>Process automation, Power BI dashboards</small>
+            </div>
+          </div>
 
-  <section id="achievements">
-    <h2 class="section-title">Achievements</h2>
-    <ul>
-      <li>On-the-Spot Excellence Award for SLA/ESL compliance during client transition.</li>
-      <li>Appreciated by client leadership for accuracy in reporting and automation.</li>
-      <li>Reduced ramp-up time by 30% through structured training programs.</li>
-    </ul>
-  </section>
+          <!-- Experience card: Analyst Trainee -->
+          <div class="card" data-key="tcs-trainee" tabindex="0" role="button" aria-expanded="false">
+            <img src="assets/project-automation.jpg" alt="Analyst Trainee">
+            <div class="meta">
+              Analyst Trainee (2022–2023)
+              <small>Property Tax computations & audits</small>
+            </div>
+          </div>
+        </div>
 
- <!-- Certifications Row -->
-<section class="section-row" id="CERTIFICATION">
-  <div class="row-title">Certifications</div>
-  <div class="carousel">
-    <div class="card">
-      <div class="card-img" style="background:#222 url('assets/EXCEL.jpg') center/cover;"></div>
-      <div class="card-content">
-        <div class="card-title">Microsoft Excel Advanced</div>
-        <div class="card-desc">Advanced Excel functions, macros, automation, reporting.</div>
+        <!-- Inline expanded containers (will be toggled) -->
+        <div id="expExpandedContainer" style="padding:0 24px;margin-top:8px"></div>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-img" style="background:#222 url('assets/POWER BI.jpg') center/cover;"></div>
-      <div class="card-content">
-        <div class="card-title">Power BI</div>
-        <div class="card-desc">BI, visualization, actionable insights.</div>
+
+      <div class="row" id="row-certifications">
+        <div class="row-header"><h3>Certifications</h3></div>
+        <div class="row-track" id="certTrack">
+          <div class="card" data-key="cert-excel" tabindex="0" role="button" aria-expanded="false">
+            <img src="assets/EXCEL.jpg" alt="Advanced Excel Certification">
+            <div class="meta">Advanced Excel</div>
+          </div>
+          <div class="card" data-key="cert-powerbi" tabindex="0" role="button" aria-expanded="false">
+            <img src="assets/powerbi.jpg" alt="Power BI Certification">
+            <div class="meta">Power BI</div>
+          </div>
+          <div class="card" data-key="cert-powerautomate" tabindex="0" role="button" aria-expanded="false">
+            <img src="assets/powerautomate.jpg" alt="Power Automate Certification">
+            <div class="meta">Power Automate</div>
+          </div>
+          <div class="card" data-key="cert-ba" tabindex="0" role="button" aria-expanded="false">
+            <img src="assets/cert-ba.jpg" alt="Business Analyst Certification" onerror="this.style.opacity=.35">
+            <div class="meta">Business Analyst (IIBA & PMI Aligned)</div>
+          </div>
+          <div class="card" data-key="cert-ey" tabindex="0" role="button" aria-expanded="false">
+            <img src="assets/cert-ey.jpg" alt="EY Audit Simulation" onerror="this.style.opacity=.35">
+            <div class="meta">EY Audit Job Simulation — Forage</div>
+          </div>
+        </div>
+
+        <!-- Inline expanded containers (certs) -->
+        <div id="certExpandedContainer" style="padding:0 24px;margin-top:8px"></div>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-img" style="background:#222 url('assets/Power automate.jpg') center/cover;"></div>
-      <div class="card-content">
-        <div class="card-title">Power Automate Fundamentals</div>
-        <div class="card-desc">Automating tasks and workflows.</div>
+    </section>
+  </main>
+
+  <!-- Cinematic modal (for "Read more" full detail) -->
+  <div class="modal" id="detailModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true"></div>
+    <div class="modal-card" role="document" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <div>
+          <div id="modalTitle" class="modal-title">Details</div>
+          <div class="small-label" id="modalSubtitle"></div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="btn-ghost" id="downloadResumeBtn" title="Download (not wired)">Download</button>
+          <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-img" style="background:#222 url('assets/PGDCA.jpg') center/cover;"></div>
-      <div class="card-content">
-        <div class="card-title">PGDCA</div>
-        <div class="card-desc">Computer applications fundamentals.</div>
+      <div class="modal-body" id="modalBody" tabindex="0">
+        <!-- Content populated by JS -->
       </div>
-    </div>
-    <div class="card">
-      <div class="card-img" style="background:#222 url('assets/pdf-placeholder.png') center/cover;"></div>
-      <div class="card-content">
-        <div class="card-title">EY Audit Simulation</div>
-        <div class="card-desc">Real-world casework and audit skills.</div>
+      <div class="modal-footer">
+        <button class="btn-ghost" id="modalCloseFooter">Close</button>
       </div>
     </div>
   </div>
-</section>
 
-  <section id="education">
-    <h2 class="section-title">Education</h2>
-    <p><strong>BBA</strong> – Bharathiar University<br>
-    <strong>PGDCA</strong> – Browzone Infotech</p>
-  </section>
+  <!-- Full resume cinematic panel (View Resume) -->
+  <div class="resume-full" id="resumeFull" aria-hidden="true">
+    <div class="resume-panel" role="document" aria-labelledby="resumeTitle">
+      <button class="resume-close" id="resumeClose" aria-label="Close resume">&times;</button>
+      <h2 id="resumeTitle">Santhosh Suresh — Resume</h2>
+      <div style="margin-top:8px;color:var(--muted)">santhosh02516@gmail.com | 9543158080 | <a href="https://www.linkedin.com/in/santhosh-suresh-1b7577291/" target="_blank" rel="noopener">LinkedIn</a></div>
+      <div style="margin-top:18px" id="resumeContent">
+        <!-- Full resume content inserted by JS for readability -->
+      </div>
+    </div>
+  </div>
 
-  <section id="contact">
-    <h2 class="section-title">Contact</h2>
-    <p>Email: <a href="mailto:santhosh02516@gmail.com" style="color:var(--accent);text-decoration:none;">santhosh02516@gmail.com</a></p>
-    <p>Phone: 9543158080</p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/santhosh-suresh-1b7577291/" target="_blank" style="color:var(--accent);text-decoration:none;">linkedin.com/in/santhosh-suresh-1b7577291</a></p>
-  </section>
-</main>
+  <script>
+    /**********************
+     * Resume data source *
+     **********************/
+    // We'll store summary (for inline) and fullText (for modal/full resume) for each key.
+    const resumeContent = {
+      // Experience - Analyst (TCS)
+      'tcs-analyst': {
+        title: 'Tata Consultancy Services (TCS) — Analyst (BFSI Domain)',
+        subtitle: 'Client: Cotality (formerly CoreLogic) | Chennai, India | Oct 2023 – Sep 2025',
+        inline: `
+          <div class="small-label">Analyst — Oct 2023 – Sep 2025</div>
+          <div class="accordion-body">
+            Delivered 98% SLA/ESL/MSL compliance, improved client satisfaction by 15%. Designed 15+ Excel dashboards and 5+ Power BI reports, reducing turnaround time by 25%. SME for quality audits, onboarding, and escalations.
+            <div style="margin-top:8px"><strong>Key achievements:</strong></div>
+            <ul>
+              <li>Automated tax data workflows — reduced manual effort by 30%.</li>
+              <li>Macro-based Excel tools saved 25+ hours/month.</li>
+              <li>Received On-the-Spot Excellence Award for SLA compliance during client transition.</li>
+            </ul>
+            <button class="read-more" data-key="tcs-analyst" aria-label="View full details">View Full Details</button>
+          </div>
+        `,
+        fullText: `
+          <h4>Professional Summary</h4>
+          <p>Detail-oriented Analyst with 3 years of experience in the BFSI and Property Tax domain, specializing in process excellence, workflow automation, and business reporting. Skilled in Advanced Excel, Power BI, SQL, ETL processes, Salesforce, and MS Access. Proven track record in ensuring SLA/ESL compliance, tax compliance, global reporting delivery, and client engagement.</p>
 
-<script>
-const userSelection=document.getElementById('userSelection');
-const recruiterCard=document.getElementById('recruiterCard');
-const userAvatar=document.getElementById('userAvatar');
-const userMenu=document.querySelector('.user-menu');
-const logoutBtn=document.getElementById('logoutBtn');
+          <h4>Role — Analyst (Oct 2023 – Sep 2025)</h4>
+          <p><strong>Client:</strong> Cotality (formerly CoreLogic, subsidiary of First American Corporation)</p>
+          <ul>
+            <li>Delivered 98% SLA/ESL/MSL compliance, improving client satisfaction by 15%.</li>
+            <li>Extracted and transformed 10M+ records via SQL scripts and ETL tools for property tax and compliance data.</li>
+            <li>Designed 15+ Excel dashboards (Power Query, PivotTables) and 5+ Power BI reports, reducing report turnaround time by 25%.</li>
+            <li>Served as SME — conducted quality audits, root-cause analysis, and onboarding sessions for new joiners.</li>
+            <li>Collaborated with U.S. clients via calls, emails, and IMs to resolve escalations and reporting requirements.</li>
+            <li>Customized Salesforce workflows, validation rules, and page layouts to improve tax compliance efficiency.</li>
+            <li>Maintained knowledge repositories, SLA trackers, and documentation to ensure audit readiness.</li>
+          </ul>
 
-recruiterCard.addEventListener('click',()=>{
-  const avatarUrl=recruiterCard.querySelector('.user-avatar').style.backgroundImage;
-  userAvatar.style.backgroundImage=avatarUrl;
-  userSelection.classList.add('hidden');
-  document.body.style.overflow='auto';
-});
+          <h4>Key Achievements</h4>
+          <ul>
+            <li>Automated tax data workflows — cut manual effort by 30%.</li>
+            <li>Developed macro-based Excel tools saving 25+ hours per month.</li>
+            <li>Received On-the-Spot Excellence Award for high SLA compliance during client transition.</li>
+          </ul>
+        `
+      },
 
-userMenu.addEventListener('click',()=>{userMenu.classList.toggle('active');});
+      // Experience - Analyst Trainee
+      'tcs-trainee': {
+        title: 'Tata Consultancy Services (TCS) — Analyst Trainee',
+        subtitle: 'Chennai, India | Oct 2022 – Sep 2023',
+        inline: `
+          <div class="small-label">Analyst Trainee — Oct 2022 – Sep 2023</div>
+          <div class="accordion-body">
+            Trained in Corporate Tax Return Preparation and U.S. Property Tax Compliance. Computed property taxes across all U.S. states and supported senior analysts with trackers and validation reports.
+            <div style="margin-top:8px"><strong>Focus areas:</strong></div>
+            <ul>
+              <li>Property tax computation & validation</li>
+              <li>MS Access reporting & process documentation</li>
+            </ul>
+            <button class="read-more" data-key="tcs-trainee" aria-label="View full details">View Full Details</button>
+          </div>
+        `,
+        fullText: `
+          <h4>Analyst Trainee (Oct 2022 – Sep 2023)</h4>
+          <p>Trained in Corporate Tax Return Preparation, Tax Research, and U.S. Property Tax Compliance. Computed and validated property taxes across all U.S. states (City, County, State, School, Municipal). Supported senior analysts with Excel trackers, SLA monitoring, and data validation reports. Built foundational expertise in workflow automation, MS Access reporting, and process documentation.</p>
+          <h4>Responsibilities</h4>
+          <ul>
+            <li>Computed property and delinquent taxes across all U.S. jurisdictions.</li>
+            <li>Analyzed Tax Bills, Parcel Data, Tax IDs, and Legal Descriptions for compliance.</li>
+            <li>Prepared Tax Rate Tables using district codes to ensure calculation accuracy.</li>
+            <li>Handled millions of property records from FTP/CSV sources and transformed them for reporting.</li>
+          </ul>
+        `
+      },
 
-logoutBtn.addEventListener('click',(e)=>{
-  e.preventDefault();
-  userSelection.classList.remove('hidden');
-  document.body.style.overflow='hidden';
-  userMenu.classList.remove('active');
-  window.scrollTo(0,0);
-});
-</script>
+      // Certifications
+      'cert-excel': {
+        title: 'Advanced Excel — Udemy',
+        subtitle: 'Certification',
+        inline: `
+          <div class="small-label">Advanced Excel — Udemy</div>
+          <div class="accordion-body">Skills: PivotTables, Power Query, Macros. Practical tools developed include macro-based trackers and file converter macro tools.
+            <br><button class="read-more" data-key="cert-excel">View Full Details</button>
+          </div>
+        `,
+        fullText: `
+          <h4>Advanced Excel — Udemy</h4>
+          <p>Practical mastery of PivotTables, Power Query, formula optimization, and VBA macros. Built automation tools: Employee Activity Tracker and File Converter Macro Tool — both saved significant manual effort (25–50% reductions).</p>
+        `
+      },
 
+      'cert-powerbi': {
+        title: 'Power BI — Udemy',
+        subtitle: 'Certification',
+        inline: `
+          <div class="small-label">Power BI — Udemy</div>
+          <div class="accordion-body">Skills: DAX, KPI design, dashboards. Implemented 5+ interactive reports for client delivery.
+            <br><button class="read-more" data-key="cert-powerbi">View Full Details</button>
+          </div>
+        `,
+        fullText: `
+          <h4>Power BI — Udemy</h4>
+          <p>Experience building interactive dashboards, DAX measures for KPIs, and report storytelling for executive stakeholders. Delivered reports that reduced manual work and improved visibility for reporting stakeholders.</p>
+        `
+      },
+
+      'cert-powerautomate': {
+        title: 'Power Automate — Udemy',
+        subtitle: 'Certification',
+        inline: `
+          <div class="small-label">Power Automate — Udemy</div>
+          <div class="accordion-body">Focused on workflow automation, triggers, and integrations with SharePoint and Salesforce.
+            <br><button class="read-more" data-key="cert-powerautomate">View Full Details</button>
+          </div>
+        `,
+        fullText: `
+          <h4>Power Automate — Udemy</h4>
+          <p>Built flows for routine file movement, notifications, and integration with SharePoint—helped reduce time spent on repetitive tasks and improved SLA adherence.</p>
+        `
+      },
+
+      'cert-ba': {
+        title: 'Business Analyst (IIBA & PMI Aligned) — LinkedIn Learning',
+        subtitle: 'Certification',
+        inline: `
+          <div class="small-label">Business Analyst — LinkedIn Learning</div>
+          <div class="accordion-body">Training aligned to IIBA & PMI principles. Focus on requirements elicitation, stakeholder communication, and documentation.
+            <br><button class="read-more" data-key="cert-ba">View Full Details</button>
+          </div>
+        `,
+        fullText: `
+          <h4>Business Analyst (IIBA & PMI Aligned)</h4>
+          <p>Training covering requirement gathering, stakeholder management and process improvement frameworks. Applied learning to reduce ramp-up time for new joiners by 30% through structured training & mentoring.</p>
+        `
+      },
+
+      'cert-ey': {
+        title: 'EY Audit Job Simulation — Forage',
+        subtitle: 'Certification',
+        inline: `
+          <div class="small-label">EY Audit Job Simulation — Forage</div>
+          <div class="accordion-body">Simulated audit tasks to improve understanding of controls and audit workflows.
+            <br><button class="read-more" data-key="cert-ey">View Full Details</button>
+          </div>
+        `,
+        fullText: `
+          <h4>EY Audit Job Simulation — Forage</h4>
+          <p>Hands-on simulation focusing on audit workflows, documentation, and testing. Strengthened audit-readiness and documentation practices used in real client delivery contexts.</p>
+        `
+      },
+
+      // Full resume for "View Resume" — we will also use this in modal when requested
+      'full-resume': {
+        title: 'Full Resume — Santhosh Suresh',
+        subtitle: 'Analyst (BFSI & Property Tax) — Chennai, India',
+        inline: '',
+        fullText: `
+          <h3>Santhosh Suresh</h3>
+          <div>santhosh02516@gmail.com | 9543158080 | LinkedIn: https://www.linkedin.com/in/santhosh-suresh-1b7577291/</div>
+
+          <h4 style="margin-top:12px">PROFESSIONAL SUMMARY</h4>
+          <p>Detail-oriented Analyst with 3 years of experience in the BFSI and Property Tax domain, specializing in process excellence, workflow automation, and business reporting. Skilled in Advanced Excel, Power BI, SQL, ETL processes, Salesforce, and MS Access. Proven track record in ensuring SLA/ESL compliance, tax compliance, global reporting delivery, and client engagement. Experienced in knowledge management, stakeholder collaboration, quality assurance, and training delivery. Recognized for driving process improvements, reducing manual effort through automation, and ensuring audit readiness.</p>
+
+          <h4>PROFESSIONAL EXPERIENCE</h4>
+          <h4>Tata Consultancy Services (TCS) – BFSI Domain | Chennai, India</h4>
+          <h5>Analyst | Oct 2023 – Sep 2025</h5>
+          <ul>
+            <li>Delivered 98% SLA/ESL/MSL compliance, improving client satisfaction by 15%.</li>
+            <li>Extracted and transformed 10M+ records via SQL scripts and ETL tools for property tax and compliance data.</li>
+            <li>Designed 15+ Excel dashboards (Power Query, PivotTables) and 5+ Power BI reports, reducing report turnaround time by 25%.</li>
+            <li>Served as Subject-Matter Expert (SME), conducting quality audits, root-cause analysis, and onboarding sessions for new joiners.</li>
+            <li>Collaborated with U.S. clients to resolve escalations and requirements.</li>
+            <li>Customized Salesforce workflows and maintained documentation and SLA trackers to ensure audit readiness.</li>
+          </ul>
+
+          <h5>Analyst Trainee | Oct 2022 – Sep 2023</h5>
+          <ul>
+            <li>Trained in Corporate Tax Return Preparation, Tax Research, and U.S. Property Tax Compliance.</li>
+            <li>Computed and validated property taxes across all U.S. states.</li>
+            <li>Supported senior analysts with Excel trackers, SLA monitoring, and data validation reports.</li>
+            <li>Built foundational expertise in workflow automation, MS Access reporting, and process documentation.</li>
+          </ul>
+
+          <h4>TAX EXPOSURE</h4>
+          <ul>
+            <li>Computation of property and delinquent taxes across all U.S. jurisdictions.</li>
+            <li>Analysis of Tax Bills, Parcel Data, Tax IDs, and Legal Descriptions for compliance.</li>
+            <li>Preparation of Tax Rate Tables using district codes to ensure calculation accuracy.</li>
+            <li>Handling and transformation of millions of property records from FTP/CSV data sources.</li>
+          </ul>
+
+          <h4>KEY STRENGTHS</h4>
+          <ul>
+            <li>Strong understanding of deadlines, schedules, and compliance requirements.</li>
+            <li>Excellent prioritization, organization, and analytical problem-solving.</li>
+            <li>Skilled in stakeholder communication and client engagement.</li>
+            <li>Enthusiastic team player focused on continuous improvement and results.</li>
+          </ul>
+
+          <h4>SKILLS</h4>
+          <ul>
+            <li>ETL Tools: Client-provided Internal Tool</li>
+            <li>Databases: SQL (Data Cleaning, Transformation), MS Access</li>
+            <li>Data Visualization: Power BI (DAX, KPIs, Dashboards), Excel (PivotTables, Power Query, Macros)</li>
+            <li>Automation & Tools: Power Automate, Citrix, FileZilla (FTP), Salesforce (Customization, Reporting), SharePoint</li>
+            <li>MS Office Suite: Advanced Excel, Word, PowerPoint, Outlook</li>
+          </ul>
+
+          <h4>PROCESS IMPROVEMENTS & KEY PROJECTS</h4>
+          <ul>
+            <li>Employee Activity Tracker Automation: Developed Excel macro tracker, reducing manual effort by 50%.</li>
+            <li>File Converter Macro Tool: Automated bulk file conversions, saving 25+ hours per month.</li>
+            <li>Salesforce Reporting Optimization: Created dashboards and validation rules, improving process visibility and accuracy by 20%.</li>
+          </ul>
+
+          <h4>ACHIEVEMENTS</h4>
+          <ul>
+            <li>On-the-Spot Excellence Award for SLA/ESL compliance during client transition.</li>
+            <li>Appreciated by client leadership for accuracy in reporting and process improvements.</li>
+            <li>Reduced ramp-up time by 30% for new joiners through structured training and mentoring.</li>
+          </ul>
+
+          <h4>CERTIFICATIONS</h4>
+          <ul>
+            <li>Advanced Excel – Udemy</li>
+            <li>Power BI – Udemy</li>
+            <li>Power Automate – Udemy</li>
+            <li>Business Analyst (IIBA & PMI Aligned) – LinkedIn Learning</li>
+            <li>EY Audit Job Simulation – Forage</li>
+          </ul>
+
+          <h4>EDUCATION</h4>
+          <ul>
+            <li>Bachelor’s Degree in Business Administration – Bharathiar University</li>
+            <li>Post Graduate Diploma in Computer Applications (PGDCA) – Browzone Infotech</li>
+          </ul>
+        `
+      }
+    };
+
+    /*******************************
+     * Helper: create inline blocks *
+     *******************************/
+    function createExpandedBlock(key) {
+      const data = resumeContent[key];
+      const wrapper = document.createElement('div');
+      wrapper.className = 'expanded-area';
+      wrapper.setAttribute('data-target', key);
+
+      // header row (title + buttons)
+      const header = document.createElement('div');
+      header.style.display = 'flex';
+      header.style.justifyContent = 'space-between';
+      header.style.alignItems = 'flex-start';
+      header.style.gap = '12px';
+      header.innerHTML = `
+        <div>
+          <div style="font-weight:700;color:#fff">${data.title}</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px">${data.subtitle || ''}</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="read-more" data-key="${key}" style="white-space:nowrap">View Full Details</button>
+          <button class="btn-ghost close-inline" aria-label="Close">Close</button>
+        </div>
+      `;
+
+      const accordion = document.createElement('div');
+      accordion.className = 'accordion-content open';
+      accordion.style.maxHeight = '1000px'; // opened by default when created
+      accordion.innerHTML = `<div class="accordion-body">${data.inline || ''}</div>`;
+
+      wrapper.appendChild(header);
+      wrapper.appendChild(accordion);
+      return wrapper;
+    }
+
+    /**************************************
+     * Mount inline containers & listeners *
+     **************************************/
+    const expContainer = document.getElementById('expExpandedContainer');
+    const certContainer = document.getElementById('certExpandedContainer');
+    const allCards = document.querySelectorAll('.card');
+
+    // Map keys to which container they belong to (experience vs cert)
+    const expKeys = ['tcs-analyst','tcs-trainee'];
+    const certKeys = ['cert-excel','cert-powerbi','cert-powerautomate','cert-ba','cert-ey'];
+
+    // Pre-create DOM blocks but hidden until triggered (improves animation)
+    const createdBlocks = {};
+
+    function openInline(key, anchorCard) {
+      // If an inline block is already open for a different key, close it first
+      const existingOpen = document.querySelector('.expanded-area[data-open="true"]');
+      if (existingOpen && existingOpen.getAttribute('data-target') !== key) {
+        closeInline(existingOpen.getAttribute('data-target'));
+      }
+      if (!createdBlocks[key]) {
+        const block = createExpandedBlock(key);
+        createdBlocks[key] = block;
+        // append to correct container
+        if (expKeys.includes(key)) expContainer.appendChild(block);
+        else if (certKeys.includes(key)) certContainer.appendChild(block);
+      }
+
+      const block = createdBlocks[key];
+      block.setAttribute('data-open','true');
+      // set accordion open
+      const acc = block.querySelector('.accordion-content');
+      acc.classList.add('open');
+      acc.style.maxHeight = acc.scrollHeight + 'px';
+      // focus
+      const firstButton = block.querySelector('.read-more') || block.querySelector('.close-inline');
+      if (firstButton) firstButton.focus();
+
+      // set aria-expanded on the originating card if available
+      if (anchorCard) anchorCard.setAttribute('aria-expanded','true');
+
+      // attach close handler for inline close button
+      block.querySelectorAll('.close-inline').forEach(btn=>{
+        btn.onclick = () => closeInline(key);
+      });
+
+      // attach read-more inside inline
+      block.querySelectorAll('.read-more').forEach(btn=>{
+        btn.onclick = (e)=> {
+          const k = e.currentTarget.getAttribute('data-key');
+          openModal(k);
+        };
+      });
+
+      // smooth scroll into view
+      setTimeout(()=> block.scrollIntoView({behavior:'smooth', block:'center'}), 120);
+    }
+
+    function closeInline(key) {
+      const block = createdBlocks[key];
+      if (!block) return;
+      block.setAttribute('data-open','false');
+      const acc = block.querySelector('.accordion-content');
+      acc.style.maxHeight = '0px';
+      acc.classList.remove('open');
+      // update card aria-expanded
+      const card = document.querySelector(`.card[data-key="${key}"]`);
+      if (card) card.setAttribute('aria-expanded','false');
+      // remove DOM after animation completes
+      setTimeout(()=> {
+        try { block.remove(); delete createdBlocks[key]; } catch(e){}
+      }, 360);
+    }
+
+    // Click/keyboard handlers for cards
+    allCards.forEach(card => {
+      const key = card.getAttribute('data-key');
+      card.addEventListener('click', (e) => {
+        // toggle inline expansion
+        if (createdBlocks[key]) closeInline(key);
+        else openInline(key, card);
+      });
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.click();
+        }
+      });
+    });
+
+    /********************************
+     * Modal logic (cinematic modal)
+     ********************************/
+    const modal = document.getElementById('detailModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalSubtitle = document.getElementById('modalSubtitle');
+    const modalBody = document.getElementById('modalBody');
+    const modalClose = document.getElementById('modalClose');
+    const modalCloseFooter = document.getElementById('modalCloseFooter');
+    const modalBackdrop = document.getElementById('modalBackdrop');
+
+    function openModal(key) {
+      const data = resumeContent[key] || resumeContent['full-resume'];
+      modalTitle.textContent = data.title || 'Details';
+      modalSubtitle.textContent = data.subtitle || '';
+      modalBody.innerHTML = data.fullText || '<p>No details available.</p>';
+      // show modal
+      modal.classList.add('visible');
+      modal.setAttribute('aria-hidden','false');
+      // keep video playing behind; modal backdrop dims
+      document.body.style.overflow = 'hidden';
+      // focus trap: focus modal body
+      setTimeout(()=> modalBody.focus(), 80);
+    }
+
+    function closeModal() {
+      modal.classList.remove('visible');
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow = 'auto';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalCloseFooter.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    // delegate "View Full Details" buttons (cards and inline)
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.read-more[data-key]');
+      if (btn) {
+        const key = btn.getAttribute('data-key');
+        openModal(key);
+      }
+    });
+
+    /**************************************
+     * Full Resume view (triggered by hero)
+     **************************************/
+    const resumeFull = document.getElementById('resumeFull');
+    const resumeContentPanel = document.getElementById('resumeContent');
+    const viewResumeBtn = document.getElementById('viewResumeBtn');
+    const resumeCloseBtn = document.getElementById('resumeClose');
+
+    viewResumeBtn.addEventListener('click', ()=> {
+      resumeContentPanel.innerHTML = resumeContent['full-resume'].fullText;
+      resumeFull.style.display = 'flex';
+      resumeFull.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      // keep video visible behind (dimmed by resume panel's overlay)
+    });
+    resumeCloseBtn.addEventListener('click', ()=> {
+      resumeFull.style.display = 'none';
+      resumeFull.setAttribute('aria-hidden','true');
+      document.body.style.overflow = 'auto';
+    });
+
+    /*******************************
+     * Dropdown / Who screen logic *
+     *******************************/
+    const whoScreen = document.getElementById('whoScreen');
+    document.querySelectorAll('.who-avatar').forEach(a => {
+      a.addEventListener('click', () => {
+        whoScreen.style.opacity = 0;
+        whoScreen.style.visibility = 'hidden';
+        document.body.style.overflow = 'auto';
+      });
+    });
+
+    const avatarMini = document.getElementById('avatarMini');
+    const dropdown = document.getElementById('profileDropdown');
+    const switchProfile = document.getElementById('switchProfile');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    avatarMini.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+      dropdown.style.flexDirection = 'column';
+    });
+    document.addEventListener('click', (e) => {
+      if (!avatarMini.contains(e.target)) dropdown.style.display = 'none';
+    });
+    function showWho(){ whoScreen.style.opacity=1; whoScreen.style.visibility='visible'; document.body.style.overflow='hidden'; }
+    switchProfile.addEventListener('click', ()=> { dropdown.style.display='none'; showWho(); });
+    logoutBtn.addEventListener('click', ()=> { dropdown.style.display='none'; showWho(); });
+
+    /************************
+     * Initialize experience *
+     ************************/
+    // Optionally open the first experience by default for recruiters
+    document.addEventListener('DOMContentLoaded', () => {
+      // show who's-watching initially; users tap to continue (existing behavior)
+      // prepopulate modal download button (not wired)
+      const downloadBtn = document.getElementById('downloadResumeBtn');
+      downloadBtn.addEventListener('click', ()=> {
+        // placeholder: if you want to implement download, wire this to a file.
+        alert('Download action not wired. Attach a resume file to implement download.');
+      });
+
+      // For convenience: auto-create small summary inline for each card when hovered (no)
+      // Nothing else by default.
+    });
+
+    /*******************************
+     * Accessibility / small fixes *
+     *******************************/
+    // Ensure focus returns after closing modal - capture last focused element
+    let lastFocused = null;
+    document.addEventListener('focusin', (e) => { lastFocused = e.target; });
+    function openModalWithFocus(key, fromElement) {
+      lastFocused = fromElement || document.activeElement;
+      openModal(key);
+    }
+    // We replace openModal usage where needed (not mandatory)
+  </script>
 </body>
 </html>

@@ -458,12 +458,10 @@ function playExperience() {
 }
 </script>
 <script>
-  // === Hero Background Slideshow (Netflix-style) ===
-  const coverEl = document.querySelector('.cover');
-
-  // Background image cycle (ensure all paths exist)
+  // === Netflix-Style Hero Background Slideshow with Manual Navigation ===
+  const hero = document.querySelector('.cover');
   const images = [
-    'assets/images/tcs-logo.png',
+    'assets/img/tcs-logo.png',
     'assets/EXCEL.jpg',
     'assets/POWER BI.jpg',
     'assets/Power automate.jpg',
@@ -471,49 +469,106 @@ function playExperience() {
   ];
 
   let current = 0;
+  let autoSlide;
 
-  // Create two background layers for fade effect
+  // Create background layers
   const bg1 = document.createElement('div');
   const bg2 = document.createElement('div');
-
   [bg1, bg2].forEach(el => {
     el.style.cssText = `
       position:absolute;
       inset:0;
       background-size:cover;
       background-position:center;
-      transition:opacity 2s ease-in-out;
+      opacity:0;
+      transition:opacity 1.8s ease-in-out;
       z-index:1;
     `;
-    coverEl.prepend(el);
+    hero.appendChild(el);
   });
 
   bg1.style.backgroundImage = `url(${images[0]})`;
   bg1.style.opacity = 1;
-  bg2.style.opacity = 0;
 
-  // Background fading logic
-  setInterval(() => {
-    const nextIndex = (current + 1) % images.length;
-    const nextImage = images[nextIndex];
+  // === Navigation Buttons ===
+  const leftBtn = document.createElement('button');
+  const rightBtn = document.createElement('button');
+  [leftBtn, rightBtn].forEach(btn => {
+    btn.style.cssText = `
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      background:rgba(0,0,0,0.4);
+      border:none;
+      color:white;
+      font-size:2rem;
+      padding:0.5rem 0.9rem;
+      border-radius:50%;
+      cursor:pointer;
+      z-index:5;
+      transition:background 0.3s;
+    `;
+    btn.onmouseenter = () => btn.style.background = 'rgba(255,255,255,0.2)';
+    btn.onmouseleave = () => btn.style.background = 'rgba(0,0,0,0.4)';
+    hero.appendChild(btn);
+  });
 
-    if (current % 2 === 0) {
-      bg2.style.backgroundImage = `url(${nextImage})`;
+  leftBtn.innerHTML = '‹';
+  rightBtn.innerHTML = '›';
+  leftBtn.style.left = '1.5rem';
+  rightBtn.style.right = '1.5rem';
+
+  let showingA = true;
+
+  function showImage(index) {
+    const next = images[index];
+    if (showingA) {
+      bg2.style.backgroundImage = `url(${next})`;
       bg2.style.opacity = 1;
       bg1.style.opacity = 0;
     } else {
-      bg1.style.backgroundImage = `url(${nextImage})`;
+      bg1.style.backgroundImage = `url(${next})`;
       bg1.style.opacity = 1;
       bg2.style.opacity = 0;
     }
+    showingA = !showingA;
+    current = index;
+  }
 
-    current = nextIndex;
-  }, 5000); // change every 5 seconds
+  function nextImage() {
+    const nextIndex = (current + 1) % images.length;
+    showImage(nextIndex);
+  }
+
+  function prevImage() {
+    const prevIndex = (current - 1 + images.length) % images.length;
+    showImage(prevIndex);
+  }
+
+  rightBtn.addEventListener('click', () => {
+    clearInterval(autoSlide);
+    nextImage();
+    restartAuto();
+  });
+
+  leftBtn.addEventListener('click', () => {
+    clearInterval(autoSlide);
+    prevImage();
+    restartAuto();
+  });
+
+  function restartAuto() {
+    autoSlide = setInterval(nextImage, 6000);
+  }
+
+  restartAuto();
 </script>
+
 
 
 </body>
 </html>
+
 
 
 

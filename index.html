@@ -461,11 +461,11 @@ function playExperience() {
   // === Netflix-Style Hero Background Slideshow with Manual Navigation ===
   const hero = document.querySelector('.cover');
   const images = [
-    'assets/img/tcs-logo.png',
     'assets/EXCEL.jpg',
     'assets/POWER BI.jpg',
     'assets/Power automate.jpg',
     'assets/PGDCA.jpg'
+    'assets/img/tcs-logo.png',
   ];
 
   let current = 0;
@@ -506,7 +506,8 @@ function playExperience() {
       border-radius:50%;
       cursor:pointer;
       z-index:5;
-      transition:background 0.3s;
+      transition:background 0.3s, opacity 0.3s;
+      opacity:0.5;
     `;
     btn.onmouseenter = () => btn.style.background = 'rgba(255,255,255,0.2)';
     btn.onmouseleave = () => btn.style.background = 'rgba(0,0,0,0.4)';
@@ -517,6 +518,14 @@ function playExperience() {
   rightBtn.innerHTML = '›';
   leftBtn.style.left = '1.5rem';
   rightBtn.style.right = '1.5rem';
+
+  // Optional Netflix-style hover visibility
+  hero.addEventListener('mouseenter', () => {
+    leftBtn.style.opacity = rightBtn.style.opacity = '1';
+  });
+  hero.addEventListener('mouseleave', () => {
+    leftBtn.style.opacity = rightBtn.style.opacity = '0.5';
+  });
 
   let showingA = true;
 
@@ -565,9 +574,9 @@ function playExperience() {
 </script>
 
 
-
 </body>
 </html>
+
 
 
 

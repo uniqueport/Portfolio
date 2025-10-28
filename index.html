@@ -487,10 +487,49 @@ document.addEventListener("DOMContentLoaded", () => {
   slider.addEventListener("mouseleave", () => interval = setInterval(nextSlide, 5000));
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const slider = document.querySelector(".cover-slider");
+  const slides = document.querySelectorAll(".slide");
+  const dotsContainer = document.querySelector(".dots");
+  let current = 0;
+  const total = slides.length;
+
+  // Create dots dynamically
+  slides.forEach((_, i) => {
+    const dot = document.createElement("span");
+    if (i === 0) dot.classList.add("active");
+    dot.addEventListener("click", () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = dotsContainer.querySelectorAll("span");
+
+  function goToSlide(index) {
+    current = index;
+    slider.style.transform = `translateX(-${index * 100}%)`;
+    updateDots();
+  }
+
+  function updateDots() {
+    dots.forEach((dot, i) => dot.classList.toggle("active", i === current));
+  }
+
+  function nextSlide() {
+    current = (current + 1) % total;
+    goToSlide(current);
+  }
+
+  let interval = setInterval(nextSlide, 5000);
+  slider.addEventListener("mouseenter", () => clearInterval(interval));
+  slider.addEventListener("mouseleave", () => interval = setInterval(nextSlide, 5000));
+});
+</script>
 
 
 </body>
 </html>
+
 
 
 

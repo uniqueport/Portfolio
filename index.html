@@ -6,43 +6,40 @@
   <title>Santhosh Suresh — Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
-<section class="cover">
-  <div class="cover-slider">
-    <div class="slide"><img src="assets/images/tcs-logo.png" alt="Slide 1"></div>
-    <div class="slide"><img src="assets/EXCEL.jpg" alt="Slide 2"></div>
-    <div class="slide"><img src="assets/PGDCA.jpg" alt="Slide 3"></div>
-    <div class="slide"><img src="assets/POWER BI.jpg" alt="Slide 4"></div>
-    <div class="slide"><img src="assets/Power automate.jpg" alt="Slide 5"></div>
-  </div>
+    /* Hero slideshow background */
+.cover {
+  position: relative;
+  height: var(--cover-h);
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  overflow: hidden;
+  background: #000;
+}
 
-  <div class="cover-overlay"></div>
+.cover::before,
+.cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+  z-index: 1;
+}
 
-  <div class="cover-content">
-    <h1>Santhosh Suresh</h1>
-    <p>Data Analyst | Visualization | Automation</p>
-    <div class="hero-buttons">
-      <button>Download Resume</button>
-      <button>Contact</button>
-    </div>
-  </div>
+/* Overlay gradient for readability */
+.cover::after {
+  background: linear-gradient(120deg, rgba(0,0,0,0.6) 0%, rgba(20,20,20,0.9) 100%);
+  opacity: 1;
+  z-index: 2;
+}
 
-  <div class="dots"></div>
-</section>
-
-  <div class="cover-overlay"></div>
-
-  <div class="cover-content">
-    <h1>Santhosh Suresh</h1>
-    <p>Data Analyst | Visualization | Automation</p>
-    <div class="hero-buttons">
-      <button>Download Resume</button>
-      <button>Contact</button>
-    </div>
-  </div>
-
-  <div class="dots"></div>
-</section>
-
+.cover-content {
+  position: relative;
+  z-index: 3;
+}
     :root{
       --bg:#141414; --fg:#fff; --muted:#b3b3b3; --accent:#E50914; --card:#181818; --line:#222; --radius:10px; --shadow:0 4px 24px rgba(0,0,0,.7); --font:16px/1.5 'Montserrat', Arial, sans-serif; --cover-h:420px;
     }
@@ -461,173 +458,74 @@ function playExperience() {
 }
 </script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const slider = document.querySelector(".cover-slider");
-  const slides = document.querySelectorAll(".slide");
-  const dotsContainer = document.querySelector(".dots");
-  let current = 0;
-  const total = slides.length;
+  // === Hero Background Slideshow ===
+  const hero = document.querySelector('.cover');
+  const images = [
+     'assets/img/tcs-logo.png',
+    'assets/EXCEL.jpg',
+    'assets/PGDCA.jpg',
+    'assets/POWER BI.jpg',
+    'assets/Power automate.jpg'
+       'assets/EY-Audit job simulation.pdf'
+  ];
 
-  // Create dots dynamically
-  slides.forEach((_, i) => {
-    const dot = document.createElement("span");
-    if (i === 0) dot.classList.add("active");
-    dot.addEventListener("click", () => goToSlide(i));
-    dotsContainer.appendChild(dot);
+  let current = 0;
+  const imgLayer = document.createElement('div');
+  imgLayer.className = 'cover-bg';
+  hero.prepend(imgLayer);
+
+  function setHeroBackground() {
+    const nextImage = images[current % images.length];
+    hero.style.setProperty('--bg-img', `url('${nextImage}')`);
+    hero.style.backgroundImage = `url('${nextImage}')`;
+    const before = hero.querySelector('::before');
+  }
+
+  // Use pseudo-element manipulation via JS
+  const cover = document.querySelector('.cover');
+  const updateBackground = () => {
+    cover.style.setProperty('--cover-bg', `url(${images[current]})`);
+    cover.style.setProperty('--cover-next-bg', `url(${images[(current + 1) % images.length]})`);
+  };
+
+  // Alternate fade effect
+  const coverEl = document.querySelector('.cover');
+  const bg1 = document.createElement('div');
+  const bg2 = document.createElement('div');
+  [bg1, bg2].forEach(el => {
+    el.style.cssText = `
+      position:absolute;inset:0;
+      background-size:cover;background-position:center;
+      transition:opacity 2s ease-in-out;
+      z-index:1;
+    `;
+    coverEl.appendChild(el);
   });
 
-  const dots = dotsContainer.querySelectorAll("span");
+  let showingFirst = true;
+  bg1.style.backgroundImage = `url(${images[0]})`;
+  bg1.style.opacity = 1;
+  bg2.style.opacity = 0;
+  let i = 1;
 
-  function goToSlide(index) {
-    current = index;
-    slider.style.transform = `translateX(-${index * 100}%)`;
-    updateDots();
-  }
-
-  function updateDots() {
-    dots.forEach((dot, i) => dot.classList.toggle("active", i === current));
-  }
-
-  // Auto slide every 5s
-  function nextSlide() {
-    current = (current + 1) % total;
-    goToSlide(current);
-  }
-
-  let interval = setInterval(nextSlide, 5000);
-
-  // Pause on hover
-  slider.addEventListener("mouseenter", () => clearInterval(interval));
-  slider.addEventListener("mouseleave", () => interval = setInterval(nextSlide, 5000));
-});
+  setInterval(() => {
+    const nextImg = images[i % images.length];
+    if (showingFirst) {
+      bg2.style.backgroundImage = `url(${nextImg})`;
+      bg2.style.opacity = 1;
+      bg1.style.opacity = 0;
+    } else {
+      bg1.style.backgroundImage = `url(${nextImg})`;
+      bg1.style.opacity = 1;
+      bg2.style.opacity = 0;
+    }
+    showingFirst = !showingFirst;
+    i++;
+  }, 6000); // every 6s
 </script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const slider = document.querySelector(".cover-slider");
-  const slides = document.querySelectorAll(".slide");
-  const dotsContainer = document.querySelector(".dots");
-  let current = 0;
-  const total = slides.length;
-
-  // Create dots dynamically
-  slides.forEach((_, i) => {
-    const dot = document.createElement("span");
-    if (i === 0) dot.classList.add("active");
-    dot.addEventListener("click", () => goToSlide(i));
-    dotsContainer.appendChild(dot);
-  });
-
-  const dots = dotsContainer.querySelectorAll("span");
-
-  function goToSlide(index) {
-    current = index;
-    slider.style.transform = `translateX(-${index * 100}%)`;
-    updateDots();
-  }
-
-  function updateDots() {
-    dots.forEach((dot, i) => dot.classList.toggle("active", i === current));
-  }
-
-  function nextSlide() {
-    current = (current + 1) % total;
-    goToSlide(current);
-  }
-
-  let interval = setInterval(nextSlide, 5000);
-  slider.addEventListener("mouseenter", () => clearInterval(interval));
-  slider.addEventListener("mouseleave", () => interval = setInterval(nextSlide, 5000));
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const slider = document.querySelector(".cover-slider");
-  const slides = document.querySelectorAll(".slide");
-  const dotsContainer = document.querySelector(".dots");
-  let current = 0;
-  const total = slides.length;
-
-  // Create dots dynamically
-  slides.forEach((_, i) => {
-    const dot = document.createElement("span");
-    if (i === 0) dot.classList.add("active");
-    dot.addEventListener("click", () => goToSlide(i));
-    dotsContainer.appendChild(dot);
-  });
-
-  const dots = dotsContainer.querySelectorAll("span");
-
-  function goToSlide(index) {
-    current = index;
-    slider.style.transform = `translateX(-${index * 100}%)`;
-    updateDots();
-  }
-
-  function updateDots() {
-    dots.forEach((dot, i) => dot.classList.toggle("active", i === current));
-  }
-
-  function nextSlide() {
-    current = (current + 1) % total;
-    goToSlide(current);
-  }
-
-  let interval = setInterval(nextSlide, 5000);
-
-  // Pause on hover
-  slider.addEventListener("mouseenter", () => clearInterval(interval));
-  slider.addEventListener("mouseleave", () => interval = setInterval(nextSlide, 5000));
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const slider = document.querySelector(".cover-slider");
-  const slides = document.querySelectorAll(".slide");
-  const dotsContainer = document.querySelector(".dots");
-  let current = 0;
-  const total = slides.length;
-
-  // Create dots dynamically
-  slides.forEach((_, i) => {
-    const dot = document.createElement("span");
-    if (i === 0) dot.classList.add("active");
-    dot.addEventListener("click", () => goToSlide(i));
-    dotsContainer.appendChild(dot);
-  });
-
-  const dots = dotsContainer.querySelectorAll("span");
-
-  function goToSlide(index) {
-    current = index;
-    slider.style.transform = `translateX(-${index * 100}%)`;
-    updateDots();
-  }
-
-  function updateDots() {
-    dots.forEach((dot, i) => dot.classList.toggle("active", i === current));
-  }
-
-  function nextSlide() {
-    current = (current + 1) % total;
-    goToSlide(current);
-  }
-
-  let interval = setInterval(nextSlide, 5000);
-
-  // Pause on hover
-  slider.addEventListener("mouseenter", () => clearInterval(interval));
-  slider.addEventListener("mouseleave", () => interval = setInterval(nextSlide, 5000));
-});
-</script>
-
 
 </body>
 </html>
-
-
-
-
-
 
 
 

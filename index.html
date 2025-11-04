@@ -183,14 +183,20 @@
         </div>
       </section>
 
-      <!-- Projects / rows (keep content from user's file) -->
+    <!-- Projects / rows (Recruiter) -->
       <section class="row" id="PROJECTS">
-        <div class="row-title">Projects</div>
-        <div class="carousel row-thumbs" aria-label="Recruiter projects">
-          <div class="thumb" role="listitem"><img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=60" alt="Employee Activity Tracker"><div class="meta">Employee Activity Tracker Automation</div></div>
-          <div class="thumb" role="listitem"><img src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=800&q=60" alt="File Converter"><div class="meta">File Converter Macro Tool</div></div>
+        <div class="row-header"><div class="row-title">Projects</div></div>
+        <div class="row-thumbs" aria-label="Recruiter projects">
+          <!-- project cards with data-image and data-description pointing to asset/ files -->
+          <div class="thumb project-card" tabindex="0" role="button" data-image="asset/Employee Activity Tracker.jpg" data-title="Employee Activity Tracker" data-description="Excel macro tracker to log and assess tasks, saving ~50% manual effort."> <img src="asset/EXCEL.jpg" alt="Employee Activity Tracker"><div class="meta">Employee Activity Tracker</div></div>
+
+          <div class="thumb project-card" tabindex="0" role="button" data-image="asset/POWER BI.jpg" data-title="Dashboard" data-description="Interactive Power BI dashboards with drill-downs and automated refreshes."> <img src="asset/POWER BI.jpg" alt="Power BI Dash"><div class="meta">Power BI Dashboard</div></div>
+
+          <div class="thumb project-card" tabindex="0" role="button" data-image="asset/TAB_FILE_CONVERTER.png" data-title="TAB_FILE_CONVERTER" data-description="Power Automate flows to reduce manual steps and improve SLA compliance."> <img src="asset/Power automate.jpg" alt="Automation"><div class="meta">Power Automate</div></div>
+
         </div>
       </section>
+
 
       <section class="row" id="ACHIEVEMENT">
         <div class="row-title">Achievements</div>
@@ -388,5 +394,6 @@
   </script>
 </body>
 </html>
+
 
 

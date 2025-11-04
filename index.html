@@ -3,39 +3,74 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Santhosh Suresh — Netflix-style Homepage (Custom)</title>
+  <title>Santhosh Suresh — Portfolio (Recruiter / Visitor)</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#141414; --fg:#fff; --muted:#b3b3b3; --accent:#E50914; --card:#181818; --line:#222; --radius:10px; --shadow:0 4px 24px rgba(0,0,0,.7); --font:16px/1.5 'Montserrat', Arial, sans-serif; --cover-h:520px;
+      --bg:#0f0f10; --fg:#eaeaea; --muted:#a8a8a8; --accent:#E50914; --card:#141414; --line:#1e1e1e; --radius:12px; --shadow:0 10px 40px rgba(0,0,0,.6); --font:16px/1.5 'Montserrat',system-ui,Arial,sans-serif; --cover-h:520px;
     }
+    *{box-sizing:border-box}
     html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font:var(--font);-webkit-font-smoothing:antialiased}
     a{color:var(--accent);text-decoration:none}
     button{font:inherit}
 
-    /* Header / Nav */
-    header{position:sticky;top:0;z-index:60;background:linear-gradient(rgba(20,20,20,0.92), rgba(20,20,20,0.78));backdrop-filter:blur(4px);}
-    .nav{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;gap:12px}
+    /* Header */
+    header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(10,10,10,.88),rgba(10,10,10,.7));backdrop-filter:blur(6px)}
+    .nav{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:12px}
     .brand{display:flex;align-items:center;gap:12px}
+    .logo-text{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--accent);letter-spacing:1px}
     .menu{display:flex;gap:18px;align-items:center}
-    .menu a{color:var(--fg);font-weight:700;letter-spacing:0.6px;font-size:0.98rem;opacity:.95;padding:6px 0;position:relative;transition:color .18s,opacity .18s}
-    .menu a:hover{color:var(--accent);opacity:1}
-    .actions{display:flex;align-items:center;gap:12px}
-    .signin-btn{background:transparent;color:var(--fg);border:1px solid rgba(255,255,255,0.06);padding:8px 14px;border-radius:6px;cursor:pointer}
-    .lang-toggle{background:transparent;color:var(--muted);border:none;padding:8px;cursor:pointer}
-    .switch-profile-small{display:none;background:var(--card);border-radius:999px;padding:8px 12px;border:1px solid rgba(255,255,255,0.04);cursor:pointer}
+    .menu a{color:var(--fg);font-weight:700;opacity:.95}
+    .actions{display:flex;align-items:center;gap:10px}
+    .signin-btn{background:transparent;color:var(--fg);border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:8px}
+    .switch-profile{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:999px;cursor:pointer}
 
-    /* Fullscreen profile selection */
-    .profile-selection{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(0,0,0,.9),rgba(0,0,0,.98));z-index:9999;padding:24px}
-    .profile-card-wrap{max-width:960px;width:100%;display:flex;flex-direction:column;align-items:center;gap:18px}
-    .profiles{display:flex;gap:28px;align-items:center;justify-content:center;flex-wrap:wrap}
-    .profile-card{width:160px;height:160px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid var(--line);cursor:pointer;transition:transform .22s,box-shadow .18s}
-    .profile-card:focus{outline:3px solid rgba(229,9,20,.18)}
-    .profile-card:hover{transform:translateY(-8px);box-shadow:0 14px 40px rgba(0,0,0,.6)}
-    .profile-avatar{width:84px;height:84px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:1.9rem;border:3px solid rgba(255,255,255,0.04)}
-    .profile-name{font-weight:800}
-    .profile-sub{color:var(--muted);font-size:.95rem}
-    .manage-profiles{margin-top:6px;color:var(--muted);cursor:pointer}
+    /* Profile selection overlay */
+    .overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(0,0,0,.9),rgba(0,0,0,.98));z-index:9999;padding:20px}
+    .picker{width:100%;max-width:960px;background:transparent;text-align:center}
+    .picker h1{font-family:'Bebas Neue';font-size:36px;margin:0 0 18px}
+    .profiles{display:flex;gap:28px;justify-content:center;flex-wrap:wrap}
+    .profile{width:160px;padding:14px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid var(--line);cursor:pointer;transition:transform .18s,box-shadow .18s}
+    .profile:focus{outline:3px solid rgba(229,9,20,.12)}
+    .profile:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+    .avatar{width:88px;height:88px;border-radius:999px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:28px;border:3px solid rgba(255,255,255,0.04)}
+    .pname{font-weight:800}
+    .psub{color:var(--muted);font-size:0.95rem}
+
+    /* main content */
+    main{max-width:1400px;margin:28px auto;padding:0 20px}
+    .hero{position:relative;height:var(--cover-h);display:flex;align-items:flex-end;padding:36px 20px;border-radius:14px;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.48);z-index:0;transition:background-image .45s ease}
+    .hero-inner{position:relative;z-index:2;display:flex;align-items:flex-end;gap:24px;width:100%;max-width:1200px;margin:0 auto}
+    .hero-left{max-width:700px}
+    .title{font-family:'Bebas Neue';font-size:clamp(2.2rem,6vw,3.6rem);margin:0}
+    .lead{color:var(--muted);margin:8px 0 18px}
+    .hero-cta{display:flex;gap:12px}
+
+    /* rows */
+    .section{margin:28px 0}
+    .section .title-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .section h2{margin:0;font-size:1.05rem}
+    .row{display:flex;gap:14px;overflow:auto;padding-bottom:6px;scroll-behavior:smooth}
+    .card{flex:0 0 220px;border-radius:8px;overflow:hidden;background:var(--card);border:1px solid var(--line);cursor:pointer;transition:transform .18s}
+    .card img{width:100%;height:130px;object-fit:cover;display:block}
+    .card .meta{padding:10px;font-weight:700}
+    .card:focus{outline:3px solid rgba(229,9,20,.12)}
+    .card:hover{transform:translateY(-8px)}
+
+    /* modal */
+    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.7);z-index:11000;padding:20px;opacity:0;pointer-events:none;transition:opacity .22s}
+    .modal.open{opacity:1;pointer-events:auto}
+    .modal-card{max-width:980px;width:100%;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.6);position:relative}
+    .modal-media{width:100%;height:480px;background:#000 center/contain no-repeat}
+    .modal-info{padding:16px}
+    .modal-title{margin:0 0 8px;font-weight:800}
+    .modal-desc{color:var(--muted)}
+    .modal-close{position:absolute;right:20px;top:18px;background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;cursor:pointer}
+
+    /* footer */
+    footer{color:var(--muted);padding:30px 0}
+    .footer-grid{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;gap:12px}
 
     /* Fade helpers */
     .hidden{display:none !important;}
@@ -44,356 +79,261 @@
     @keyframes fadeIn{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:scale(1)}}
     @keyframes fadeOut{from{opacity:1;transform:scale(1)}to{opacity:0;transform:scale(.98)}}
 
-    /* HERO - Netflix style */
-    .hero{position:relative;height:var(--cover-h);display:flex;align-items:flex-end;overflow:hidden;background:#000}
-    .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 30%, rgba(20,20,20,0.92) 85%);z-index:2}
-    .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.56);z-index:0;transition:transform 0.6s ease}
-    .hero-inner{position:relative;z-index:3;max-width:1200px;margin:0 auto;padding:36px 24px;display:flex;align-items:flex-end;gap:28px}
-    .hero-left{max-width:640px}
-    .title-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.6rem,6vw,4.4rem);margin:0 0 12px}
-    .tagline{color:var(--muted);font-size:1.05rem;margin-bottom:18px}
-
-    /* Sign-in panel on the right inside hero */
-    .signin-panel{margin-left:auto;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid var(--line);padding:18px;border-radius:10px;min-width:280px;backdrop-filter:blur(6px)}
-    .signin-panel h3{margin:0 0 6px;font-size:1.05rem}
-    .signin-panel p{margin:0 0 12px;color:var(--muted);font-size:.95rem}
-    .field{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
-    .field input{padding:10px;border-radius:8px;border:1px solid var(--line);background:#111;color:var(--fg)}
-    .panel-actions{display:flex;gap:8px}
-    .btn-cta{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;border:none;cursor:pointer}
-    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--fg);padding:10px 12px;border-radius:8px}
-
-    /* Rows (feature carousels) */
-    main{max-width:1400px;margin:24px auto;padding:0 18px}
-    .row{margin-bottom:22px}
-    .row-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-    .row-title{font-size:1.1rem;font-weight:800}
-    .row-thumbs{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scroll-behavior:smooth}
-    .thumb{flex:0 0 180px;height:100px;border-radius:6px;position:relative;overflow:hidden;background:#222;cursor:pointer;border:1px solid var(--line)}
-    .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s ease}
-    .thumb .meta{position:absolute;left:8px;bottom:8px;font-weight:700;font-size:.88rem;text-shadow:0 2px 8px rgba(0,0,0,.7)}
-    .thumb:hover{transform:scale(1.06);z-index:6}
-    .thumb:hover img{transform:scale(1.1)}
-
-    /* Footer */
-    footer{color:var(--muted);padding:36px 0;margin-top:18px}
-    .footer-grid{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
-    .footer-links{display:flex;flex-wrap:wrap;gap:12px;max-width:800px}
-    .footer-links a{color:var(--muted);font-size:.95rem}
-    .lang-select{display:flex;align-items:center;gap:8px}
-
-    /* utility */
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     /* responsive */
-    @media (max-width:1000px){
-      .hero-inner{flex-direction:column;align-items:flex-start;padding:28px}
-      .signin-panel{width:100%;min-width:auto}
-      .thumb{flex:0 0 42%;height:110px}
+    @media (max-width:900px){
+      .card{flex:0 0 46%}
+      .hero{height:420px}
+      .modal-media{height:320px}
     }
-    @media (max-width:640px){
+    @media (max-width:540px){
       .menu{display:none}
-      .switch-profile-small{display:block}
-      .hero{height:480px}
-      .thumb{flex:0 0 64%;height:120px}
-      .profile-card{width:140px;height:140px}
+      .card{flex:0 0 78%}
+      .profile{width:140px}
+      .avatar{width:68px;height:68px}
+      .modal-media{height:220px}
     }
-
   </style>
 </head>
 <body>
 
-  <!-- PROFILE SELECTION (initial screen) -->
-  <div id="profileSelection" class="profile-selection fade-in" role="dialog" aria-modal="true" aria-label="Choose profile">
-    <div class="profile-card-wrap">
-      <h1 style="font-family:'Bebas Neue',sans-serif;font-size:2.6rem;margin:0;color:var(--fg)">Who's watching?</h1>
-      <div class="profiles" role="list" aria-label="Profiles">
-        <button class="profile-card" role="listitem" data-profile="recruiter" aria-label="Recruiter profile" onclick="chooseProfile('recruiter')" onkeydown="profileKey(event,'recruiter')">
-          <div class="profile-avatar" aria-hidden="true" style="background:linear-gradient(135deg,#1f2933, rgba(229,9,20,.06));color:var(--accent)">👔</div>
-          <div class="profile-name">Recruiter</div>
-          <div class="profile-sub">View highlights & metrics</div>
+  <!-- PROFILE PICKER (shows first unless a profile saved) -->
+  <div id="profilePicker" class="overlay" role="dialog" aria-modal="true" aria-label="Choose profile">
+    <div class="picker">
+      <h1>Who's watching?</h1>
+      <div class="profiles" role="list">
+        <button class="profile" data-profile="recruiter" aria-label="Recruiter profile" onclick="selectProfile('recruiter')">
+          <div class="avatar">👔</div>
+          <div class="pname">Recruiter</div>
+          <div class="psub">View highlights & metrics</div>
         </button>
 
-        <button class="profile-card" role="listitem" data-profile="visitor" aria-label="Visitor profile" onclick="chooseProfile('visitor')" onkeydown="profileKey(event,'visitor')">
-          <div class="profile-avatar" aria-hidden="true" style="background:linear-gradient(135deg,#112027, rgba(229,9,20,.02));color:var(--accent)">🌐</div>
-          <div class="profile-name">Visitor</div>
-          <div class="profile-sub">Explore projects & experiments</div>
+        <button class="profile" data-profile="visitor" aria-label="Visitor profile" onclick="selectProfile('visitor')">
+          <div class="avatar">🌐</div>
+          <div class="pname">Visitor</div>
+          <div class="psub">Explore projects & experiments</div>
         </button>
       </div>
-
-      <div style="text-align:center;margin-top:12px">
-        <button class="btn-ghost" onclick="continueAsGuest()">Continue as Guest</button>
-      </div>
-      <div class="manage-profiles" onclick="alert('Manage profiles — demo')">Manage Profiles</div>
+      <div style="margin-top:14px"><button class="signin-btn" onclick="selectProfile('visitor')">Continue as Guest</button></div>
     </div>
   </div>
 
-  <!-- MAIN APP (hidden until selection) -->
-  <div id="appRoot" class="hidden" aria-live="polite">
+  <!-- APP ROOT (hidden until profile chosen) -->
+  <div id="app" class="hidden" aria-live="polite">
     <header>
-      <div class="nav" role="navigation" aria-label="Primary">
-        <div class="brand">
-          <div class="logo" aria-hidden="true">
-            <svg width="140" height="36" viewBox="0 0 200 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <defs><linearGradient id="lg2" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#E50914"/><stop offset="1" stop-color="#B0060F"/></linearGradient></defs>
-              <rect width="200" height="36" fill="transparent"></rect>
-              <text x="2" y="26" font-family="Bebas Neue, Arial" font-size="28" fill="url(#lg2)">STREAMFY</text>
-            </svg>
-          </div>
-        </div>
-
-        <nav class="menu" aria-label="Main menu">
-          <a href="#" aria-current="page">Home</a>
-          <a href="#trending">Trending</a>
-          <a href="#mylist">My List</a>
-          <a href="#new">New & Popular</a>
-        </nav>
-
+      <div class="nav">
+        <div class="brand"><div class="logo-text">STREAMFY</div></div>
+        <nav class="menu" aria-label="Primary navigation"><a href="#">Home</a><a href="#projects">Projects</a><a href="#contact">Contact</a></nav>
         <div class="actions">
-          <button class="lang-toggle" aria-haspopup="true" aria-expanded="false" id="langBtn">EN ▾</button>
-          <button id="switchProfileBtn" class="switch-profile-small" onclick="openProfileSelection()">Switch Profile</button>
-          <button class="signin-btn" id="openSignin">Sign In</button>
+          <button id="langBtn" class="signin-btn" aria-haspopup="true" aria-expanded="false">EN ▾</button>
+          <button id="switchBtn" class="switch-profile" title="Switch profile" aria-haspopup="true">Switch Profile</button>
+          <button id="signinBtn" class="signin-btn">Sign In</button>
         </div>
       </div>
     </header>
 
-    <!-- RECRUITER HOME (your existing Netflix-style content) -->
-    <main id="recruiterHome" class="fade-in">
-      <!-- HERO -->
-      <section class="hero" aria-label="Featured" id="featured">
-        <div class="hero-bg" id="heroBgRecruiter" style="background-image: url('https://images.unsplash.com/photo-1502139214988-4ecd52d0d0a9?auto=format&fit=crop&w=1600&q=60')" role="img" aria-label="Featured background"></div>
-
+    <!-- HERO (shared layout) -->
+    <main>
+      <section id="hero" class="hero" aria-label="Featured">
+        <div id="heroBg" class="hero-bg" style="background-image:url('asset/EXCEL.jpg')"></div>
         <div class="hero-inner">
           <div class="hero-left">
-            <h1 class="title-h1">Santhosh Suresh</h1>
-            <div class="tagline">Analyst | 3+ Years | Excel & Power BI Automation | BFSI Domain</div>
-            <div style="display:flex;gap:12px;align-items:center">
-              <button class="btn-cta" id="playNowRecruiter">Play</button>
-              <button class="btn-ghost" onclick="showEnhancedSection('PROJECTS')">More Info</button>
+            <h1 id="heroTitle" class="title">Santhosh Suresh</h1>
+            <p id="heroLead" class="lead">Analyst | 3+ Years | Excel & Power BI Automation | BFSI Domain</p>
+            <div class="hero-cta">
+              <button id="heroPrimary" class="btn-cta">Play</button>
+              <button class="btn-ghost" onclick="scrollTo('projects')">View Projects</button>
             </div>
           </div>
-
-          <aside class="signin-panel" aria-labelledby="signinTitleR">
-            <h3 id="signinTitleR">Quick actions</h3>
-            <p>Download resume or contact directly.</p>
-            <div style="display:flex;flex-direction:column;gap:8px">
-              <a class="btn-cta" id="downloadResumeBtn" href="assets/Santhosh_RESUME.pdf" download="Santhosh_RESUME.pdf">Download Resume</a>
-              <button class="btn-ghost" onclick="scrollToSection('PROJECTS')">View Projects</button>
-            </div>
-          </aside>
         </div>
       </section>
 
-    <!-- Projects / rows (Recruiter) -->
-      <section class="row" id="PROJECTS">
-        <div class="row-header"><div class="row-title">Projects</div></div>
-        <div class="row-thumbs" aria-label="Recruiter projects">
-          <!-- project cards with data-image and data-description pointing to asset/ files -->
-          <div class="thumb project-card" tabindex="0" role="button" data-image="asset/Employee Activity Tracker.jpg" data-title="Employee Activity Tracker" data-description="Excel macro tracker to log and assess tasks, saving ~50% manual effort."> <img src="asset/EXCEL.jpg" alt="Employee Activity Tracker"><div class="meta">Employee Activity Tracker</div></div>
-
-          <div class="thumb project-card" tabindex="0" role="button" data-image="asset/POWER BI.jpg" data-title="Dashboard" data-description="Interactive Power BI dashboards with drill-downs and automated refreshes."> <img src="asset/POWER BI.jpg" alt="Power BI Dash"><div class="meta">Power BI Dashboard</div></div>
-
-          <div class="thumb project-card" tabindex="0" role="button" data-image="asset/TAB_FILE_CONVERTER.png" data-title="TAB_FILE_CONVERTER" data-description="Power Automate flows to reduce manual steps and improve SLA compliance."> <img src="asset/Power automate.jpg" alt="Automation"><div class="meta">Power Automate</div></div>
-
+      <!-- Projects row (cards use asset/ files) -->
+      <section id="projects" class="section">
+        <div class="title-row"><h2>Projects</h2></div>
+        <div id="projectsRow" class="row" aria-label="Projects carousel" tabindex="0">
+          <!-- Cards generated by JS -->
         </div>
       </section>
 
-
-      <section class="row" id="ACHIEVEMENT">
-        <div class="row-title">Achievements</div>
-        <div class="carousel row-thumbs">
-          <div class="thumb"><div style="height:100%;background:#e50914"></div><div class="meta">On Spot Award</div></div>
-          <div class="thumb"><div style="height:100%;background:#181818"></div><div class="meta">Client Appreciation</div></div>
-        </div>
+      <section class="section" id="certifications">
+        <div class="title-row"><h2>Certifications</h2></div>
+        <div class="row" id="certRow" aria-label="Certifications row"></div>
       </section>
 
-   <section class="row" id="CERTIFICATION">
-        <div class="row-title">Certifications</div>
-        <div class="carousel row-thumbs">
-          <div class="thumb"><img src="assets/EXCEL.jpg" alt="Excel"></div>
-          <div class="thumb"><img src="assets/POWER BI.jpg" alt="Power BI"></div>
-          <div class="thumb"><img src="assets/Power automate.jpg" alt="Power Automate"></div>
-<div class="thumb"><img src="assets/PGDCA.jpg" alt="PGDCA"></div>
-
-<div class="thumb"><img src="assets/EY-Audit job simulation.png" alt="EY-Audit job simulation"></div>
-
-
-        </div>
+      <section class="section" id="achievements">
+        <div class="title-row"><h2>Achievements</h2></div>
+        <div class="row" id="achRow" aria-label="Achievements row"></div>
       </section>
-
-
-      <section class="row" id="EDUCATION">
-        <div class="row-title">Education</div>
-        <div class="carousel row-thumbs">
-          <div class="thumb"><div style="height:100%;background:#181818"></div><div class="meta">Bachelor’s Degree</div></div>
-        </div>
-      </section>
-
-      <footer>
-        <div class="footer-grid">
-          <div class="footer-links">
-            <a href="#">Home</a>
-            <a href="#">Terms of Use</a>
-            <a href="#">Privacy</a>
-            <a href="#">Help Center</a>
-          </div>
-          <div class="lang-select">
-            <select id="langRecruiter" aria-label="Select language"><option>English</option><option>हिन्दी</option><option>தமிழ்</option></select>
-          </div>
-        </div>
-        <div style="max-width:1100px;margin:18px auto;color:var(--muted);font-size:.95rem">© <span id="yearR"></span> Santhosh Suresh — Recruiter View</div>
-      </footer>
     </main>
 
-    <!-- VISITOR HOME (same layout, different content placeholders) -->
-    <main id="visitorHome" class="hidden fade-in">
-      <section class="hero" aria-label="Featured visitor">
-        <div class="hero-bg" id="heroBgVisitor" style="background-image: url('https://images.unsplash.com/photo-1502767089025-6572583495b0?auto=format&fit=crop&w=1600&q=60')" role="img"></div>
-        <div class="hero-inner">
-          <div class="hero-left">
-            <h1 class="title-h1">Welcome, Visitor</h1>
-            <div class="tagline">Explore creative projects, experiments and demos.</div>
-            <div style="display:flex;gap:12px;align-items:center">
-              <button class="btn-cta" id="exploreVisitor">Explore</button>
-              <button class="btn-ghost" onclick="showEnhancedSection('visitor-projects')">See Projects</button>
-            </div>
-          </div>
-
-          <aside class="signin-panel" aria-hidden="true">
-            <h3>Quick links</h3>
-            <p>Jump straight to projects or contact.</p>
-            <div style="display:flex;flex-direction:column;gap:8px">
-              <button class="btn-cta" onclick="scrollToSection('visitor-projects')">View Projects</button>
-              <a class="btn-ghost" href="mailto:santhosh02516@gmail.com">Contact</a>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <section class="row" id="visitor-projects">
-        <div class="row-title">Creative Projects</div>
-        <div class="carousel row-thumbs">
-          <div class="thumb"><img src="https://images.unsplash.com/photo-1505678261036-a3fcc5e884ee?auto=format&fit=crop&w=800&q=60" alt="Creative A"><div class="meta">Interactive Dashboard</div></div>
-          <div class="thumb"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=60" alt="Creative B"><div class="meta">Data Viz Experiments</div></div>
-          <div class="thumb"><img src="https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?auto=format&fit=crop&w=800&q=60" alt="Creative C"><div class="meta">Tooling & Macros</div></div>
-        </div>
-      </section>
-
-      <section class="row">
-        <div class="row-title">Visual Experiments</div>
-        <div class="carousel row-thumbs">
-          <div class="thumb"><img src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=60" alt="Experiment A"></div>
-          <div class="thumb"><img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=800&q=60" alt="Experiment B"></div>
-        </div>
-      </section>
-
-      <footer>
-        <div class="footer-grid">
-          <div class="footer-links">
-            <a href="#">Home</a>
-            <a href="#">Projects</a>
-            <a href="#">Contact</a>
-          </div>
-          <div class="lang-select">
-            <select id="langVisitor" aria-label="Select language"><option>English</option><option>हिन्दी</option></select>
-          </div>
-        </div>
-        <div style="max-width:1100px;margin:18px auto;color:var(--muted);font-size:.95rem">© <span id="yearV"></span> Santhosh Suresh — Visitor View</div>
-      </footer>
-    </main>
-
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-left">&copy; <span id="year"></span> Santhosh Suresh</div>
+        <div class="footer-right"><select id="langSelect" aria-label="Language select"><option>English</option><option>हिन्दी</option></select></div>
+      </div>
+    </footer>
   </div>
 
-  <!-- small modal (re-used) -->
-  <div id="dynamicModal" aria-hidden="true" style="display:none"></div>
+  <!-- Project modal -->
+  <div id="projectModal" class="modal" role="dialog" aria-hidden="true" aria-label="Project preview dialog">
+    <div class="modal-card" role="document">
+      <button id="modalClose" class="modal-close" aria-label="Close preview">✕</button>
+      <div id="modalMedia" class="modal-media" role="img" aria-label="Project preview image"></div>
+      <div class="modal-info">
+        <h3 id="modalTitle" class="modal-title"></h3>
+        <p id="modalDesc" class="modal-desc"></p>
+      </div>
+    </div>
+  </div>
 
   <script>
-    // helpers
-    const $ = s => document.querySelector(s);
-    const $$ = s => Array.from(document.querySelectorAll(s));
-
-    // initial flow: profile selection then show proper home
-    function chooseProfile(profile){
-      // add aria-live message
-      document.getElementById('profileSelection').classList.add('fade-out');
-      setTimeout(()=>{
-        document.getElementById('profileSelection').style.display='none';
-        document.getElementById('appRoot').classList.remove('hidden');
-        applyProfile(profile);
-      },420);
-      localStorage.setItem('selectedProfile', profile);
-    }
-
-    function continueAsGuest(){ chooseProfile('visitor'); }
-
-    function applyProfile(profile){
-      // hide both, then show chosen
-      const recruiter = $('#recruiterHome');
-      const visitor = $('#visitorHome');
-      recruiter.classList.add('hidden'); visitor.classList.add('hidden');
-
-      if(profile === 'recruiter'){
-        recruiter.classList.remove('hidden'); recruiter.classList.add('fade-in');
-        visitor.classList.remove('fade-in');
-        // set banner or greeting
-        document.title = 'Santhosh Suresh — Recruiter View';
-        $('#yearR').textContent = new Date().getFullYear();
-      } else {
-        visitor.classList.remove('hidden'); visitor.classList.add('fade-in');
-        document.title = 'Santhosh Suresh — Visitor View';
-        $('#yearV').textContent = new Date().getFullYear();
+    // ---------- DATA (uses asset/ files) ----------
+    const DATA = {
+      recruiter: {
+        hero: { title: 'Santhosh Suresh', lead: 'Analyst | 3+ Years | Excel & Power BI Automation | BFSI Domain', bg: 'asset/EXCEL.jpg' },
+        projects: [
+          { title: 'Employee Activity Tracker', img: 'asset/EXCEL.jpg', desc: 'Excel macro tracker to log and assess tasks, saving ~50% manual effort.' },
+          { title: 'Power BI Dashboard', img: 'asset/POWER BI.jpg', desc: 'Interactive Power BI dashboards with drill-downs and automated refreshes.' },
+          { title: 'TAB File Converter', img: 'asset/TAB_FILE_CONVERTER.png', desc: 'Macro tool to batch convert files and standardize formats.' }
+        ],
+        certs: [ 'asset/EXCEL.jpg','asset/POWER BI.jpg','asset/Power automate.jpg','asset/PGDCA.jpg','asset/EY-Audit job simulation.png' ],
+        achievements: ['On Spot Award','Client Appreciation']
+      },
+      visitor: {
+        hero: { title: 'Welcome, Visitor', lead: 'Explore creative projects, experiments and demos.', bg: 'asset/Power automate.jpg' },
+        projects: [
+          { title: 'Interactive Dashboard', img: 'asset/EXCEL.jpg', desc: 'Interactive Excel/Power BI demo combining visuals and macros.' },
+          { title: 'Data Viz Experiments', img: 'asset/POWER BI.jpg', desc: 'Small experiments with charts and storytelling.' },
+          { title: 'Tooling & Macros', img: 'asset/PGDCA.jpg', desc: 'Macro tools and automation for productivity.' }
+        ],
+        certs: ['asset/PGDCA.jpg'],
+        achievements: ['Experiment Showcase']
       }
-      // show switch profile button for all sizes
-      $('#switchProfileBtn').style.display = 'inline-block';
+    };
 
-      // small mobile avatar visibility handled via CSS
+    // ---------- ELEMENT REFERENCES ----------
+    const picker = document.getElementById('profilePicker');
+    const app = document.getElementById('app');
+    const switchBtn = document.getElementById('switchBtn');
+    const heroBg = document.getElementById('heroBg');
+    const heroTitle = document.getElementById('heroTitle');
+    const heroLead = document.getElementById('heroLead');
+    const projectsRow = document.getElementById('projectsRow');
+    const certRow = document.getElementById('certRow');
+    const achRow = document.getElementById('achRow');
+    const modal = document.getElementById('projectModal');
+    const modalMedia = document.getElementById('modalMedia');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalClose = document.getElementById('modalClose');
+
+    // small element helper
+    function el(tag, attrs={}, children=[]){ const e=document.createElement(tag); for(const k in attrs){ if(k==='class') e.className=attrs[k]; else if(k.startsWith('on')) e.addEventListener(k.slice(2), attrs[k]); else e.setAttribute(k, attrs[k]); } children.forEach(c=> typeof c==='string' ? e.appendChild(document.createTextNode(c)) : e.appendChild(c)); return e; }
+
+    // ---------- PROFILE PICK / APP INITIALIZATION ----------
+    function selectProfile(profile){
+      localStorage.setItem('profile', profile);
+      showApp(profile);
+      // animate fade out
+      picker.classList.add('fade-out');
+      setTimeout(()=> picker.style.display='none', 420);
     }
 
-    function openProfileSelection(){
-      // show overlay again
-      const sel = $('#profileSelection'); sel.style.display='flex'; sel.classList.remove('fade-out'); sel.classList.add('fade-in');
-      // hide app root visually (but keep in DOM)
-      $('#appRoot').classList.add('hidden');
-      localStorage.removeItem('selectedProfile');
+    function showApp(profile){
+      const data = DATA[profile] || DATA.visitor;
+      app.classList.remove('hidden');
+      // hero
+      heroTitle.textContent = data.hero.title;
+      heroLead.textContent = data.hero.lead;
+      heroBg.style.backgroundImage = `url('${data.hero.bg}')`;
+      // lists
+      populateProjects(data.projects);
+      populateCerts(data.certs);
+      populateAchievements(data.achievements);
+      // switch visible
+      switchBtn.style.display = 'inline-block';
+      document.getElementById('year').textContent = new Date().getFullYear();
     }
 
-    // keyboard support for selection buttons
-    function profileKey(e, profile){ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); chooseProfile(profile); } }
+    function openPicker(){
+      picker.style.display = 'flex';
+      picker.classList.remove('fade-out');
+      app.classList.add('hidden');
+      localStorage.removeItem('profile');
+      // focus first profile for keyboard
+      setTimeout(()=> { const first = picker.querySelector('.profile'); if(first) first.focus(); }, 120);
+    }
 
-    // persist if already selected
+    // ---------- POPULATE ROWS ----------
+    function populateProjects(list){
+      projectsRow.innerHTML = '';
+      list.forEach(item=>{
+        const card = el('button',{class:'card project-card',tabindex:0,'aria-label':item.title});
+        const img = el('img',{src:item.img,alt:item.title,loading:'lazy'});
+        const meta = el('div',{class:'meta'},[item.title]);
+        card.appendChild(img); card.appendChild(meta);
+        card.dataset.img = item.img; card.dataset.title = item.title; card.dataset.desc = item.desc;
+        card.addEventListener('click', ()=> openModal(card));
+        card.addEventListener('keydown', e=>{ if(e.key==='Enter') openModal(card); });
+        projectsRow.appendChild(card);
+      });
+    }
+
+    function populateCerts(list){
+      certRow.innerHTML = '';
+      list.forEach(src=>{
+        const c = el('div',{class:'card'});
+        const img = el('img',{src,alt:'cert',loading:'lazy'});
+        c.appendChild(img);
+        certRow.appendChild(c);
+      });
+    }
+
+    function populateAchievements(list){
+      achRow.innerHTML = '';
+      list.forEach(t=>{
+        const c = el('div',{class:'card'});
+        const meta = el('div',{class:'meta'},[t]);
+        c.appendChild(meta);
+        achRow.appendChild(c);
+      });
+    }
+
+    // ---------- MODAL ----------
+    function openModal(card){
+      const img = card.dataset.img || card.querySelector('img')?.src;
+      const title = card.dataset.title || '';
+      const desc = card.dataset.desc || '';
+      modalMedia.style.backgroundImage = `url('${img}')`;
+      modalTitle.textContent = title;
+      modalDesc.textContent = desc;
+      modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+      // focus close for accessibility
+      modalClose.focus();
+    }
+    function closeModal(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', e=>{ if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeModal(); });
+
+    // ---------- SWITCH PROFILE ----------
+    switchBtn.addEventListener('click', openPicker);
+
+    // ---------- UTILITIES ----------
+    function scrollTo(id){ const el = document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth'}); }
+
+    // ---------- INITIAL LOAD ----------
     window.addEventListener('DOMContentLoaded', ()=>{
-      const sel = localStorage.getItem('selectedProfile');
-      if(sel){
-        // directly apply profile without showing selection
-        document.getElementById('profileSelection').style.display='none';
-        document.getElementById('appRoot').classList.remove('hidden');
-        applyProfile(sel);
-      }
-
-      // mobile show small switch-profile
-      function handleResize(){ if(window.innerWidth <= 640) $('.switch-profile-small').style.display='inline-block'; else $('.switch-profile-small').style.display='none'; }
-      handleResize(); window.addEventListener('resize', handleResize);
-
-      // basic hero slideshow for recruiter/visitor
-      (function(){ const bgR = document.getElementById('heroBgRecruiter'); const bgV = document.getElementById('heroBgVisitor'); if(bgR){ const imgsR = [bgR.style.backgroundImage.replace(/url\(|\)|"/g, ''), 'https://images.unsplash.com/photo-1505682634904-d7c64c8f7a6b?auto=format&fit=crop&w=1600&q=60']; let i=0; setInterval(()=>{ i=(i+1)%imgsR.length; bgR.style.backgroundImage = `url(${imgsR[i]})`; },7000); } if(bgV){ const imgsV = [bgV.style.backgroundImage.replace(/url\(|\)|"/g, ''), 'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=1600&q=60']; let j=0; setInterval(()=>{ j=(j+1)%imgsV.length; bgV.style.backgroundImage = `url(${imgsV[j]})`; },7000); } })();
-
-      // make images lazy
+      const saved = localStorage.getItem('profile');
+      if(saved){ picker.style.display = 'none'; showApp(saved); } else { picker.style.display = 'flex'; }
+      // small hero slideshow (subtle)
+      (function(){ const heroEl = heroBg; if(!heroEl) return; const imgs = [heroEl.style.backgroundImage.replace(/url\(|\)|"/g,''), 'asset/Power automate.jpg']; let i=0; setInterval(()=>{ i=(i+1)%imgs.length; heroEl.style.backgroundImage = `url(${imgs[i]})`; },8000); })();
+      // lazy images flag already set on creation; set for any static imgs
       document.querySelectorAll('img').forEach(img=>img.loading='lazy');
-
     });
 
-    // small helpers used by UI
-    function showEnhancedSection(id){ const el = document.getElementById(id); if(!el) return; el.scrollIntoView({behavior:'smooth'}); }
-    function scrollToSection(id){ const el = document.getElementById(id); if(!el) return; el.scrollIntoView({behavior:'smooth'}); }
-
-    // sign-in (demo) and mobile modal omitted; keep previous behaviour
-    document.getElementById('openSignin').addEventListener('click', ()=>{ if(window.innerWidth <= 640){ alert('Open mobile sign-in (demo)'); } else { const target = document.querySelector('.signin-panel'); if(target) target.scrollIntoView({behavior:'smooth', block:'center'}); } });
-
-    // row keyboard navigation
-    document.querySelectorAll('.row-thumbs').forEach(row=>{ row.addEventListener('keydown', (e)=>{ if(e.key === 'ArrowRight'){ row.scrollBy({left:220,behavior:'smooth'});} if(e.key === 'ArrowLeft'){ row.scrollBy({left:-220,behavior:'smooth'}); } }); });
-
+    // Expose small API for debugging
+    window.__APP = { selectProfile, openPicker, openModal, closeModal };
   </script>
 </body>
 </html>
-
-
-
